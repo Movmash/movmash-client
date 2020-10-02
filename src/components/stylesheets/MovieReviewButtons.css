@@ -1,0 +1,37 @@
+.movieReviewButtons_container {
+    background-color: transparent;
+    max-width: fit-content;
+    border-radius: 14px;
+    border: 1px solid #C4C4C4;
+    object-fit: contain;
+    display: flex;
+    padding: 10px;
+
+}
+
+.movieReviewButton {
+    width: 219.49px;
+    height: 172.1px;
+    background: #3F414A;
+    border-radius: 17px;
+    /* margin: 10px; */
+    transition: 450ms;
+}
+
+.oneo,
+.twoo,
+.threeo {
+    margin-bottom: 10px;
+}
+
+.oneo,
+.twoo {
+    margin-right: 10px;
+}
+
+.movieReviewButton:hover {
+    transform: scale(1.05);
+    background: #2aa44f;
+    cursor: pointer;
+    /* margin: 10px; */
+}

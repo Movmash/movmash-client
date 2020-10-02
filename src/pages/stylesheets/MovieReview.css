@@ -1,0 +1,33 @@
+.movieReview__content {
+  margin-top: 60px;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.movieReview__content--basicInfo {
+  margin: 0px 100px 0px 100px;
+}
+
+.movieReview__content--buttons {
+  margin-top: 90px;
+}
+
+.movieReview__content--highlyRated {
+  margin-top: 100px;
+}
+
+.movieReview__content--movieCrew {
+  margin-top: 100px;
+}
+
+.movieReview__content--allreview {
+  margin-top: 100px;
+
+  display: flex;
+  flex-flow: column;
+  width: 1300px;
+}

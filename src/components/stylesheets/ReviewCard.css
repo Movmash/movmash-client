@@ -1,0 +1,78 @@
+.reviewCard {
+    width: 1290px;
+    height: fit-content;
+    border: 1px solid #C4C4C4;
+    box-sizing: border-box;
+}
+
+.reviewCard__heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.reviewCard__heading--userInfo {
+    display: flex;
+
+}
+
+.reviewCard__heading--userInfo--nameUser {
+    margin-left: 20px;
+}
+
+.reviewCard__heading--userInfo--name>h3 {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    /* identical to box height */
+
+    letter-spacing: 0.05em;
+
+    color: lightGray;
+}
+
+.reviewCard__heading--tags>h4 {
+    color: white;
+    font-weight: bold;
+}
+
+.reviewCard__heading--userInfo--userName>h4 {
+
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 21px;
+    /* identical to box height */
+
+    letter-spacing: 0.05em;
+    /* margin-top: px; */
+    color: #adadad;
+}
+
+.reviewCard__button>.MuiButtonBase-root>.MuiIconButton-label>.MuiSvgIcon-root {
+    font-size: 30px !important;
+    color: white;
+}
+
+/* .MuiAvatar-root .MuiAvatar-circle */
+.reviewCard__content {
+    margin-top: 25px;
+}
+
+.reviewCard__content>h3 {
+    color: lightgray;
+    font-weight: normal;
+}
+
+.reviewCard__heading,
+.reviewCard__content {
+    margin: 30px 50px 0px 50px;
+    margin-left: 50px;
+}
+
+.reviewCard__buttons {
+    display: flex;
+    margin: 25px 0 20px 0;
+    justify-content: space-around;
+}

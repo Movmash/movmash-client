@@ -1,0 +1,57 @@
+.movieCrewList {
+    display: flex;
+    overflow-x: scroll;
+    /* border: 1px solid white; */
+    /* justify-content: center; */
+    width: 1290px;
+    /* padding: 10px; */
+}
+
+.movieCrewList__container {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    margin: 10px;
+    padding-bottom: 5px;
+}
+
+.movieCrewList__poster>img {
+    object-fit: contain;
+    max-width: 164px;
+    border-radius: 10px;
+}
+
+.movieCrewList__info {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.movieCrewList__info--crewMember-name>h4 {
+    color: #FFF3F3;
+}
+
+.movieCrewList__info--crewMember-work>h5 {
+    margin-top: 5px;
+    font-weight: lighter;
+
+    letter-spacing: 0.05em;
+
+    color: #FFF3F3;
+}
+
+
+.movieCrewList::-webkit-scrollbar {
+    height: 8px;
+    border-radius: 13px;
+    background: transparent;
+}
+
+
+
+.movieCrewList::-webkit-scrollbar-thumb {
+    background: #2aa44f;
+    border-radius: 13px;
+
+}

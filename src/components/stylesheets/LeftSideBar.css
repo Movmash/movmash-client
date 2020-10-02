@@ -1,0 +1,52 @@
+.leftSideBar__container {
+    height: 60vh;
+    background-color: #3F414A;
+    width: 90px;
+    left: 0;
+    margin-top: auto;
+    margin-bottom: auto;
+    border-top-right-radius: 73px;
+    border-bottom-right-radius: 73px;
+    position: fixed;
+    transform: translate(0, 15%);
+    display: flex;
+    flex-flow: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+/* .leftSideBar__container:hover {
+    width: 190px;
+
+} */
+
+.leftSideBar__container__icon>.MuiButtonBase-root>.MuiIconButton-label>.MuiSvgIcon-root {
+    font-size: 40px !important;
+    color: white;
+}
+
+.leftSideBar__container__icon>.MuiAvatar-root {
+    width: 45px !important;
+    height: 45px !important;
+}
+
+.leftSideBar__container__icons--add {
+    background: linear-gradient(46.77deg, #0066FF 15.68%, rgba(169, 85, 183, 0.911342) 70.66%);
+    border-radius: 100px;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    filter: drop-shadow(-1px 1px 4px rgba(121, 121, 121, 0.25));
+    transition: 450ms;
+}
+
+.leftSideBar__container__icons--add>.MuiButtonBase-root>.MuiIconButton-label>.MuiSvgIcon-root {
+    font-size: 40px !important;
+    color: white;
+}
+
+.leftSideBar__container__icons--add:hover {
+    transform: scale(1.08);
+}

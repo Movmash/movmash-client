@@ -1,0 +1,127 @@
+.movieInfoCard {
+    display: flex;
+    /* flex-wrap: wrap; */
+}
+
+.movieInfoCard__poster {
+    object-fit: contain;
+
+}
+
+.movieInfoCard__info {
+    margin-left: 50px;
+}
+
+.movieInfoCard__info--heading {
+    display: flex;
+    align-items: baseline;
+
+}
+
+
+.movieInfoCard__info--heading-releaseYear {
+    margin-left: 25px;
+}
+
+.movieInfoCard__info--subHeading--duration-genre {
+    display: flex;
+}
+
+.movieInfoCard__info--subHeading {
+    display: flex;
+}
+
+.movieInfoCard__info--subHeading--slogan {
+    margin-top: 15px;
+}
+
+.movieInfoCard__info--crewMembers {
+    margin-right: 500px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+}
+
+.movieInfoCard__info--crewMember {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+
+
+.movieInfoCard__info--crewMember-name>h4 {
+
+
+
+    color: #FFF3F3;
+}
+
+.movieInfoCard__info--crewMember-work>h5 {
+    margin-top: 5px;
+    font-weight: lighter;
+
+    letter-spacing: 0.05em;
+
+    color: #FFF3F3;
+
+}
+
+.movieInfoCard__info--overview-content>h5 {
+    margin-top: 10px;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 23px;
+    letter-spacing: 0.05em;
+    /* margin-right: 500px; */
+    color: #FFF3F3;
+}
+
+.movieInfoCard__info--overview-heading>h4 {
+    margin-top: 20px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+    letter-spacing: 0.05em;
+    color: #C4C4C4;
+}
+
+.movieInfoCard__info--subHeading--slogan>h4 {
+
+    font-style: italic;
+    font-weight: 200;
+    font-size: 20px;
+    line-height: 28px;
+    letter-spacing: 0.05em;
+
+    color: #FFF3F3;
+}
+
+.movieInfoCard__info--subHeading--duration-genre>h5 {
+    color: #C4C4C4;
+    font-weight: normal;
+    padding-top: 5px;
+    margin-right: 15px;
+
+
+}
+
+.movieInfoCard__info--heading-releaseYear>h3 {
+    color: lightgray;
+    font-size: 20px;
+
+}
+
+
+.movieInfoCard__poster-image__poster {
+    max-height: 332px;
+    object-fit: contain;
+    border-radius: 6px;
+}
+
+.movieInfoCard__info--heading-movieName>h2 {
+    color: white;
+    font-size: 34px;
+}

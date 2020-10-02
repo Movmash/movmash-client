@@ -1,0 +1,82 @@
+@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #272531;
+  height: 8.5vh;
+}
+
+.navbar__left>.navbar__leftLogo {
+  font-family: "Permanent Marker", cursive;
+  font-size: 20px;
+  color: white;
+}
+
+/* h4 {
+  color: white;
+  font-size: 13px;
+  padding: 10px;
+} */
+
+.navbar__center {
+  display: flex;
+  /* margin-right: 10px */
+}
+
+.navbar__center>.navbar__center__icon {
+  margin-left: 50px;
+  margin-right: 20px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+
+  justify-content: center;
+
+}
+
+.navbar__right {
+  display: flex;
+}
+
+.navbar__right {
+  margin-right: 30px;
+}
+
+.navbar__left {
+  margin-left: 30px;
+}
+
+.navbar__center__iconStyle .MuiSvgIcon-root {
+  font-size: 2rem !important;
+  color: white !important;
+}
+
+
+
+.navbar__center__icon:hover>.navbar__center__iconStyle {
+  background-color: #2aa44f;
+  border-radius: 50px;
+  border: 1px solid lightgray;
+  transition: 450ms;
+}
+
+/* .navbar__center__icon:hover>h4 {
+  color: #2aa44f;
+} */
+
+.navbar__center__icon>.navbar__center__iconStyle.active {
+  background-color: #2aa44f;
+  border-radius: 50px;
+  border: 1px solid lightgray;
+}
+
+.navbar__center__icon>.navbar__center__iconStyle {
+  /* background-color: #2aa44f; */
+  border-radius: 50px;
+  border: 1px solid #272531;
+}
