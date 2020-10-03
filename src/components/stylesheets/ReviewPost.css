@@ -1,0 +1,85 @@
+.reviewPost {
+    width: 627px;
+    border: 1px solid lightgray;
+    border-radius: 7px;
+}
+
+.reviewPost__contentPoster>img {
+    object-fit: contain;
+    max-width: 180px;
+    border-radius: 10px;
+}
+
+.reviewPost__mainPost {
+    display: flex;
+    padding: 0px 20px 0px 20px;
+    margin: 40px 5px 0px 5px;
+}
+
+.reviewPost__contentInfo {
+    margin-left: 30px;
+}
+
+.reviewPost__contentInfo--heading,
+.reviewPost__contentInfo--durationGenre,
+.reviewPost__contentInfo--numericRating {
+    display: flex;
+    align-items: baseline;
+}
+
+.reviewPost__contentInfo--durationGenre {
+    margin-top: 5px;
+}
+
+/* .reviewPost__contentInfo--numericRating {
+    display: flex;
+    align-items: baseline;
+} */
+
+.reviewPost__contentInfo--heading--ReleaseYear,
+.reviewPost__contentInfo--numericRating--outOff {
+    margin-left: 10px;
+}
+
+.reviewPost__contentInfo--durationGenre--genre {
+    margin-left: 15px;
+}
+
+.reviewPost__contentInfo--numericRating,
+.reviewPost__contentInfo--reviewContent {
+    margin-top: 20px;
+}
+
+.reviewPost__contentInfo--reviewContent>p {
+    color: lightgray;
+    line-height: 25px;
+    letter-spacing: 0.01em;
+}
+
+.reviewPost__contentInfo--numericRating--rateValue>h2 {
+    color: white;
+    font-size: 27px;
+
+}
+
+.reviewPost__contentInfo--numericRating--outOff>h3 {
+    color: lightgray;
+}
+
+.reviewPost__contentInfo--durationGenre--genre,
+.reviewPost__contentInfo--durationGenre--duration {
+    color: lightgray;
+    font-size: 15px;
+    font-weight: normal;
+}
+
+.reviewPost__contentInfo--heading--movieName>h2 {
+    color: white;
+
+}
+
+.reviewPost__contentInfo--heading--ReleaseYear>h3 {
+    color: lightgray;
+    font-size: 15px;
+    font-weight: normal;
+}

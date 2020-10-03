@@ -1,0 +1,32 @@
+.postIconButtons {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    margin: 10px 30px 5px 30px;
+}
+
+.postIconButtons--BookNow {
+    color: #499E4C;
+    display: flex;
+    align-items: center;
+}
+
+.postIconButtons--schedule {
+    display: flex;
+    align-items: center;
+    font-weight: lighter;
+    color: lightgray;
+}
+
+.postIconButtons--BookNow>.MuiButtonBase-root>.MuiIconButton-label>.MuiSvgIcon-root {
+    color: #499E4C;
+    font-size: 30px !important;
+}
+
+.postIconButtons--schedule>.MuiButtonBase-root>.MuiIconButton-label>.MuiSvgIcon-root,
+.postIconButtons--share>.MuiButtonBase-root>.MuiIconButton-label>.MuiSvgIcon-root,
+.postIconButtons--likeButton>.MuiButtonBase-root>.MuiIconButton-label>.MuiSvgIcon-root,
+.postIconButtons--comment>.MuiButtonBase-root>.MuiIconButton-label>.MuiSvgIcon-root {
+    color: lightgray;
+    font-size: 30px;
+}

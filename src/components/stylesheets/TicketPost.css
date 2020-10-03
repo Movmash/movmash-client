@@ -1,0 +1,135 @@
+.ticketPost {
+    width: 627px;
+    border: 1px solid lightgray;
+    border-radius: 7px;
+    margin-top: 100px;
+}
+
+
+
+
+
+.ticketPost__container__showDetails--dateRange--from,
+.ticketPost__container__showDetails--dateRange--to {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+
+
+
+
+
+.ticketPost__container__showDetails--dateRange {
+    display: flex;
+}
+
+
+
+
+
+.ticketPost__container__showDetails--showTiming {
+    flex: 0.4;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+.ticketPost__container__showDetails--movieDetails--info {
+    margin-left: 10px;
+    max-width: 100%;
+    margin-right: 10px;
+}
+
+.ticketPost__container__showDetails--moviePoster>img {
+    width: 120px;
+    height: 177.57px;
+    border-radius: 10px;
+}
+
+/* .ticketPost__container__showDetails--movieDetails--name {
+    max-width: fit-content;
+} */
+
+.ticketPost__container__showDetails--movieDetail {
+    display: flex;
+    flex: 0.6;
+
+}
+
+.ticketPost__container__showDetails {
+    display: flex;
+    margin-top: 20px;
+    justify-content: space-between;
+}
+
+.ticketPost__container__mainContent {
+    margin: 0px 25px 0px 25px;
+}
+
+.ticketPost__container__showDetails--movieDetails--year-genre {
+    display: flex;
+    /* max-width: fit-content; */
+}
+
+.ticketPost__container__showDetails__movieDetails--overview {
+    /* width: 50%; */
+    margin-top: 20px;
+}
+
+.ticketPost__container__paragraph>p,
+.ticketPost__container__showDetails__movieDetails--overview>p {
+    color: lightgray;
+    line-height: 25px;
+    letter-spacing: 0.01em;
+}
+
+.ticketPost__container__showDetails--movieDetails--genre {
+    margin-left: 10px;
+}
+
+.ticketPost__container__showDetails--movieDetails--genre,
+.ticketPost__container__showDetails--movieDetails--year {
+    color: lightgray;
+    font-size: 13px;
+    font-weight: lighter;
+    margin-top: 10px;
+}
+
+.ticketPost__container__showDetails--movieDetails--name {
+    color: white;
+}
+
+.ticketPost__container__showDetails--time-range>h2 {
+    font-family: Righteous;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 26px;
+    line-height: 32px;
+
+    color: #D6D6D6;
+}
+
+.ticketPost__container__showDetails--dateRange-from--date>h1,
+.ticketPost__container__showDetails--dateRange>h1 {
+    font-family: Righteous;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 64px;
+    line-height: 79px;
+
+    color: #FF0000;
+}
+
+.ticketPost__container__showDetails--dateRange-from--month>h2 {
+    font-family: Righteous;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 30px;
+    /* identical to box height */
+
+
+    color: #FF0000;
+}
