@@ -1,33 +1,72 @@
 import React from "react";
 import "./stylesheets/MovieInfoCard.css";
-function MovieInfoCard() {
+function MovieInfoCard({
+  title,
+  poster,
+  releaseDate,
+  genres,
+  overview,
+  tagline,
+  duration,
+}) {
+  let releaseYear;
+  let movieGenres;
+  if (releaseDate !== undefined && genres !== undefined) {
+    releaseYear = releaseDate.split("-")[0];
+    console.log(releaseYear);
+
+    for (let i = 0; i < genres.length; i++) {
+      if (genres.length === 2) {
+        if (i === 0) {
+          movieGenres = `${genres[i].name} `;
+        } else if (i === genres.length - 1) {
+          movieGenres = movieGenres + `| ${genres[i].name}`;
+        }
+      } else {
+        if (i === 0) {
+          movieGenres = `${genres[i].name} |`;
+        } else if (i === genres.length - 1) {
+          movieGenres = movieGenres + ` ${genres[i].name}`;
+        } else {
+          movieGenres = movieGenres + ` ${genres[i].name} |`;
+        }
+      }
+    }
+  }
+  // for (let i = 0; i <= crew.length; i++) {
+  //   console.log(crew[i]);
+  //   // if (crew[i].job === "Producer" || crew[i].job === "Director") {
+  //   //   crews.push(crew[i]);
+  //   // }
+  // }
+  // console.log(crew[0].job);
   return (
     <div className="movieInfoCard">
       <div className="movieInfoCard__poster">
         <img
           className="movieInfoCard__poster-image__poster"
-          src="https://i.pinimg.com/originals/5f/7d/94/5f7d941cd12e39b15ad99a175e1d4858.jpg"
-          alt="fight Club"
+          src={`https://image.tmdb.org/t/p/w300/${poster}`}
+          alt={title}
         />
       </div>
       <div className="movieInfoCard__info">
         <div className="movieInfoCard__info--heading">
           <div className="movieInfoCard__info--heading-movieName">
-            <h2>Fight Club</h2>
+            <h2>{title}</h2>
           </div>
           <div className="movieInfoCard__info--heading-releaseYear">
-            <h3>(1999)</h3>
+            <h3>({releaseYear})</h3>
           </div>
         </div>
         <div className="movieInfoCard__info--subHeading">
           <div className="movieInfoCard__info--subHeading--info">
             {" "}
             <div className="movieInfoCard__info--subHeading--duration-genre">
-              <h5>2h 19m</h5>
-              <h5>Drama | Mystery</h5>
+              <h5>{duration} m</h5>
+              <h5>{movieGenres}</h5>
             </div>
             <div className="movieInfoCard__info--subHeading--slogan">
-              <h4>Mischief. Mayhem. Soap.</h4>
+              <h4>{tagline}</h4>
             </div>
           </div>
           <div className="movieInfoCard__info--subHeading--tagButton"></div>
@@ -37,35 +76,13 @@ function MovieInfoCard() {
             <h4>Overview</h4>
           </div>
           <div className="movieInfoCard__info--overview-content">
-            <h5>
-              A ticking-time-bomb insomniac and a slippery soap salesman channel
-              primal male aggression into a shocking new form of therapy. Their
-              concept catches on, with underground "fight clubs" forming in
-              every town, until an eccentric gets in the way and ignites an
-              out-of-control spiral toward oblivion.
-            </h5>
+            <h5>{overview}</h5>
           </div>
         </div>
         <div className="movieInfoCard__info--crewMembers">
           <div className="movieInfoCard__info--crewMember">
             <div className="movieInfoCard__info--crewMember-name">
-              <h4>David Fincher</h4>
-            </div>
-            <div className="movieInfoCard__info--crewMember-work">
-              <h5>Director</h5>
-            </div>
-          </div>
-          <div className="movieInfoCard__info--crewMember">
-            <div className="movieInfoCard__info--crewMember-name">
-              <h4>David Fincher</h4>
-            </div>
-            <div className="movieInfoCard__info--crewMember-work">
-              <h5>Director</h5>
-            </div>
-          </div>
-          <div className="movieInfoCard__info--crewMember">
-            <div className="movieInfoCard__info--crewMember-name">
-              <h4>David Fincher</h4>
+              <h4>Elon</h4>
             </div>
             <div className="movieInfoCard__info--crewMember-work">
               <h5>Director</h5>

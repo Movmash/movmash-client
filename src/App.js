@@ -8,23 +8,28 @@ import LiveShow from "./pages/LiveShow";
 import Search from "./pages/Search";
 import Explore from "./pages/Explore";
 import MovieReview from "./pages/MovieReview";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 function App() {
   return (
-    <div className="app">
-      <Router>
-        <Navbar />
-        <div className="app__container">
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/movies" component={Movies} />
-            <Route exact path="/live" component={LiveShow} />
-            <Route exact path="/search" component={Search} />
-            <Route exact path="/explore" component={Explore} />
-            <Route exact path="/movie/:id" component={MovieReview} />
-          </Switch>
-        </div>
-      </Router>
-    </div>
+    <Provider store={store}>
+      {" "}
+      <div className="app">
+        <Router>
+          <Navbar />
+          <div className="app__container">
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/movies" component={Movies} />
+              <Route exact path="/live" component={LiveShow} />
+              <Route exact path="/search" component={Search} />
+              <Route exact path="/explore" component={Explore} />
+              <Route exact path="/movie/:id" component={MovieReview} />
+            </Switch>
+          </div>
+        </Router>
+      </div>
+    </Provider>
   );
 }
 

@@ -1,9 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./stylesheets/MovieRow.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-function MovieRow({ title }) {
+import axios from "axios";
+// import { connect } from "react-redux";
+// import { getMovieDetail } from "../redux/actions/movieAction";
+import { useHistory } from "react-router-dom";
+function MovieRow({ title, getMovieDetail }) {
+  const [movies, setMovies] = useState([]);
+  const [loading, isLoading] = useState(true);
+  const history = useHistory();
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8000/api/v1/movie/genre/${title}/1`)
+      .then((res) => {
+        setMovies(res.data.results);
+        isLoading(false);
+        return res;
+      })
+      .catch((e) => {
+        isLoading(true);
+        console.log(e);
+      });
+  }, [title]);
   const settings = {
     infinite: false,
     speed: 500,
@@ -52,169 +72,44 @@ function MovieRow({ title }) {
       },
     ],
   };
+
+  const clickHandler = (id) => {
+    history.push(`/movie/${id}`);
+  };
+
   return (
     <div className="movieRow">
-      <h1 className="movieRow__titleText">{title}</h1>
-      <div className="movieRow__slider">
-        <Slider {...settings}>
-          <div className="movieRow__poster">
-            <img
-              className="movieRow__slider--image"
-              src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/movie-poster-template-design-21a1c803fe4ff4b858de24f5c91ec57f_screen.jpg?ts=1574144362"
-              alt="sasd"
-            />
+      {!loading ? (
+        <>
+          <h1 className="movieRow__titleText">{title}</h1>
+          <div className="movieRow__slider">
+            <Slider {...settings}>
+              {movies.map((movie) => (
+                <div key={movie.id} className="movieRow__poster">
+                  <img
+                    onClick={() => {
+                      clickHandler(movie.id);
+                    }}
+                    className="movieRow__slider--image"
+                    src={`https://image.tmdb.org/t/p/w185/${movie.poster_path}`}
+                    alt="sasd"
+                  />
+                </div>
+              ))}
+            </Slider>
           </div>
-          <div className="movieRow__poster">
-            <img
-              className="movieRow__slider--image"
-              src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/movie-poster-template-design-21a1c803fe4ff4b858de24f5c91ec57f_screen.jpg?ts=1574144362"
-              alt="sasd"
-            />
-          </div>
-          <div className="movieRow__poster">
-            <img
-              className="movieRow__slider--image"
-              src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/movie-poster-template-design-21a1c803fe4ff4b858de24f5c91ec57f_screen.jpg?ts=1574144362"
-              alt="sasd"
-            />
-          </div>
-          <div className="movieRow__poster">
-            <img
-              className="movieRow__slider--image"
-              src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/movie-poster-template-design-21a1c803fe4ff4b858de24f5c91ec57f_screen.jpg?ts=1574144362"
-              alt="sasd"
-            />
-          </div>
-          <div className="movieRow__poster">
-            <img
-              className="movieRow__slider--image"
-              src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/movie-poster-template-design-21a1c803fe4ff4b858de24f5c91ec57f_screen.jpg?ts=1574144362"
-              alt="sasd"
-            />
-          </div>
-          <div className="movieRow__poster">
-            <img
-              className="movieRow__slider--image"
-              src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/movie-poster-template-design-21a1c803fe4ff4b858de24f5c91ec57f_screen.jpg?ts=1574144362"
-              alt="sasd"
-            />
-          </div>
-          <div className="movieRow__poster">
-            <img
-              className="movieRow__slider--image"
-              src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/movie-poster-template-design-21a1c803fe4ff4b858de24f5c91ec57f_screen.jpg?ts=1574144362"
-              alt="sasd"
-            />
-          </div>
-          <div className="movieRow__poster">
-            <img
-              className="movieRow__slider--image"
-              src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/movie-poster-template-design-21a1c803fe4ff4b858de24f5c91ec57f_screen.jpg?ts=1574144362"
-              alt="sasd"
-            />
-          </div>
-          <div className="movieRow__poster">
-            <img
-              className="movieRow__slider--image"
-              src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/movie-poster-template-design-21a1c803fe4ff4b858de24f5c91ec57f_screen.jpg?ts=1574144362"
-              alt="sasd"
-            />
-          </div>
-          <div className="movieRow__poster">
-            <img
-              className="movieRow__slider--image"
-              src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/movie-poster-template-design-21a1c803fe4ff4b858de24f5c91ec57f_screen.jpg?ts=1574144362"
-              alt="sasd"
-            />
-          </div>
-          <div className="movieRow__poster">
-            <img
-              className="movieRow__slider--image"
-              src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/movie-poster-template-design-21a1c803fe4ff4b858de24f5c91ec57f_screen.jpg?ts=1574144362"
-              alt="sasd"
-            />
-          </div>
-          <div className="movieRow__poster">
-            <img
-              className="movieRow__slider--image"
-              src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/movie-poster-template-design-21a1c803fe4ff4b858de24f5c91ec57f_screen.jpg?ts=1574144362"
-              alt="sasd"
-            />
-          </div>
-          <div className="movieRow__poster">
-            <img
-              className="movieRow__slider--image"
-              src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/movie-poster-template-design-21a1c803fe4ff4b858de24f5c91ec57f_screen.jpg?ts=1574144362"
-              alt="sasd"
-            />
-          </div>
-          <div className="movieRow__poster">
-            <img
-              className="movieRow__slider--image"
-              src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/movie-poster-template-design-21a1c803fe4ff4b858de24f5c91ec57f_screen.jpg?ts=1574144362"
-              alt="sasd"
-            />
-          </div>
-          <div className="movieRow__poster">
-            <img
-              className="movieRow__slider--image"
-              src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/movie-poster-template-design-21a1c803fe4ff4b858de24f5c91ec57f_screen.jpg?ts=1574144362"
-              alt="sasd"
-            />
-          </div>
-          <div className="movieRow__poster">
-            <img
-              className="movieRow__slider--image"
-              src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/movie-poster-template-design-21a1c803fe4ff4b858de24f5c91ec57f_screen.jpg?ts=1574144362"
-              alt="sasd"
-            />
-          </div>
-          <div className="movieRow__poster">
-            <img
-              className="movieRow__slider--image"
-              src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/movie-poster-template-design-21a1c803fe4ff4b858de24f5c91ec57f_screen.jpg?ts=1574144362"
-              alt="sasd"
-            />
-          </div>
-          <div className="movieRow__poster">
-            <img
-              className="movieRow__slider--image"
-              src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/movie-poster-template-design-21a1c803fe4ff4b858de24f5c91ec57f_screen.jpg?ts=1574144362"
-              alt="sasd"
-            />
-          </div>
-          <div className="movieRow__poster">
-            <img
-              className="movieRow__slider--image"
-              src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/movie-poster-template-design-21a1c803fe4ff4b858de24f5c91ec57f_screen.jpg?ts=1574144362"
-              alt="sasd"
-            />
-          </div>
-          <div className="movieRow__poster">
-            <img
-              className="movieRow__slider--image"
-              src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/movie-poster-template-design-21a1c803fe4ff4b858de24f5c91ec57f_screen.jpg?ts=1574144362"
-              alt="sasd"
-            />
-          </div>
-          <div className="movieRow__poster">
-            <img
-              className="movieRow__slider--image"
-              src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/movie-poster-template-design-21a1c803fe4ff4b858de24f5c91ec57f_screen.jpg?ts=1574144362"
-              alt="sasd"
-            />
-          </div>
-          <div className="movieRow__poster">
-            <img
-              className="movieRow__slider--image"
-              src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/movie-poster-template-design-21a1c803fe4ff4b858de24f5c91ec57f_screen.jpg?ts=1574144362"
-              alt="sasd"
-            />
-          </div>
-        </Slider>
-      </div>
+        </>
+      ) : (
+        <h1>loading ... </h1>
+      )}
     </div>
   );
 }
-
+// const mapDispatchTopProps = (dispatch) => {
+//   return {
+//     getMovieDetail: (movieId) => {
+//       dispatch(getMovieDetail(movieId));
+//     },
+//   };
+// };
 export default MovieRow;

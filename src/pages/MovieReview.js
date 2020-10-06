@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./stylesheets/MovieReview.css";
 import BannerReview from "../components/BannerReview";
 import MovieInfoCard from "../components/MovieInfoCard";
@@ -8,7 +8,16 @@ import MovieCrewList from "../components/MovieCrewList";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-function MovieReview() {
+import { connect } from "react-redux";
+import { getMovieDetail } from "../redux/actions/movieAction";
+import { useLocation } from "react-router-dom";
+function MovieReview({ movieDetails, getMovie, loading }) {
+  const location = useLocation();
+  const [unmounted, setUnmounted] = useState(false);
+  const id = location.pathname.split("/")[
+    location.pathname.split("/").length - 1
+  ];
+  console.log(id);
   const settings = {
     infinite: true,
     speed: 500,
@@ -58,36 +67,79 @@ function MovieReview() {
     //   },
     // ],
   };
+  useEffect(() => {
+    if (!unmounted) {
+      getMovie(id);
+    }
+
+    return () => {
+      setUnmounted(true);
+    };
+  }, [unmounted, id, getMovie]);
+  console.log(movieDetails);
+
   return (
     <div className="movieReview">
       {" "}
-      <BannerReview
-        imageUrl="https://lh6.googleusercontent.com/proxy/GtAq7UbwElIK3eMEoGGGCBSJ1lZS6wckYiMDUVKkTEpBDxNwI3_6QPGeAhbI_aUJpcSdWPx_GKUxY70=s0-d"
-        videoSrc="https://www.youtube.com/watch?v=6JnN1DmbqoU"
-      />
-      <div className="movieReview__content">
-        <div className="movieReview__content--basicInfo">
-          <MovieInfoCard />
-        </div>
-        <div className="movieReview__content--buttons">
-          <MovieReviewButtons />
-        </div>
-        <div className="movieReview__content--highlyRated">
-          <ReviewCard />
-        </div>
-        <div className="movieReview__content--movieCrew">
-          <MovieCrewList />
-        </div>
-        <div className="movieReview__content--allreview">
-          <Slider {...settings}>
-            <ReviewCard />
-            <ReviewCard />
-            <ReviewCard />
-          </Slider>
-        </div>
-      </div>
+      {!loading && movieDetails ? (
+        <>
+          <BannerReview
+            imageUrl={`https://image.tmdb.org/t/p/original/${movieDetails.poster_path}`}
+            videoSrc={
+              movieDetails.videos.results.length !== 0 &&
+              `https://www.youtube.com/watch?v=${movieDetails.videos.results[0].key}`
+            }
+          />
+          <div className="movieReview__content">
+            <div className="movieReview__content--basicInfo">
+              <MovieInfoCard
+                title={
+                  movieDetails.title ? movieDetails.title : movieDetails.name
+                }
+                poster={movieDetails.poster_path}
+                releaseDate={movieDetails.release_date}
+                duration={movieDetails.runtime}
+                genres={movieDetails.genres}
+                tagline={movieDetails.tagline}
+                overview={movieDetails.overview}
+              />
+            </div>
+            <div className="movieReview__content--buttons">
+              <MovieReviewButtons />
+            </div>
+            <div className="movieReview__content--highlyRated">
+              <ReviewCard />
+            </div>
+            <div className="movieReview__content--movieCrew">
+              <MovieCrewList casts={movieDetails.credits.cast} />
+            </div>
+            <div className="movieReview__content--allreview">
+              <Slider {...settings}>
+                <ReviewCard />
+                <ReviewCard />
+                <ReviewCard />
+              </Slider>
+            </div>
+          </div>
+        </>
+      ) : (
+        <h1>loading....</h1>
+      )}
     </div>
   );
 }
+const mapStateToProps = (state) => {
+  return {
+    movieDetails: state.movie.movieDetails,
+    loading: state.movie.loading,
+  };
+};
 
-export default MovieReview;
+const mapDispatchTopProps = (dispatch) => {
+  return {
+    getMovie: (movieId) => {
+      dispatch(getMovieDetail(movieId));
+    },
+  };
+};
+export default connect(mapStateToProps, mapDispatchTopProps)(MovieReview);
