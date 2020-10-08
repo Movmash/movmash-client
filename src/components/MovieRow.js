@@ -4,8 +4,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import axios from "axios";
-// import { connect } from "react-redux";
-// import { getMovieDetail } from "../redux/actions/movieAction";
+import { connect } from "react-redux";
+import { getMovieDetail } from "../redux/actions/movieAction";
 import { useHistory } from "react-router-dom";
 function MovieRow({ title, getMovieDetail }) {
   const [movies, setMovies] = useState([]);
@@ -75,6 +75,7 @@ function MovieRow({ title, getMovieDetail }) {
 
   const clickHandler = (id) => {
     history.push(`/movie/${id}`);
+    getMovieDetail(id);
   };
 
   return (
@@ -105,11 +106,11 @@ function MovieRow({ title, getMovieDetail }) {
     </div>
   );
 }
-// const mapDispatchTopProps = (dispatch) => {
-//   return {
-//     getMovieDetail: (movieId) => {
-//       dispatch(getMovieDetail(movieId));
-//     },
-//   };
-// };
-export default MovieRow;
+const mapDispatchTopProps = (dispatch) => {
+  return {
+    getMovieDetail: (movieId) => {
+      dispatch(getMovieDetail(movieId));
+    },
+  };
+};
+export default connect(null, mapDispatchTopProps)(MovieRow);

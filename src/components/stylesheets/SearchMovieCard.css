@@ -1,0 +1,44 @@
+.searchMovieCard {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    transition: 450ms;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    height: 70px;
+}
+
+.searchCard__dropDownImage>img {
+    object-fit: contain;
+    max-width: 45px;
+    border-radius: 5px;
+    margin-left: 2px;
+}
+
+.searchCard__dropDownInfo {
+    margin-left: 30px;
+    font-size: 20px;
+}
+
+.searchMovieCard:hover {
+    background-color: #499E4C;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.searchInput__Loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.searchInput__Loading>* {
+
+    color: #79d70f !important;
+}
+
+.searchInput__NotFound {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

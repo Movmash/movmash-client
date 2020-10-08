@@ -50,3 +50,42 @@
 .leftSideBar__container__icons--add:hover {
     transform: scale(1.08);
 }
+
+.leftSideBar__container__icon--click_away {
+    position: relative;
+    transition: 450ms;
+}
+
+.clickAwayListener--content {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    align-items: baseline;
+    height: 201px;
+    width: 201px;
+    top: -70px;
+    left: 88px;
+    right: 0;
+    /* border: 1px solid; */
+    padding: 8px;
+    z-index: 100;
+    position: absolute;
+    background-color: #3F414A;
+    border-radius: 10px;
+    transition: ease-in;
+}
+
+.clickAwayListener--content>.clickAwayListener--content--menu>h4 {
+    margin-left: 15px;
+    font-size: 20px;
+    color: white;
+    transition: 450ms;
+}
+
+
+.clickAwayListener--content--menu:hover>h4 {
+
+
+    color: #32a036;
+    cursor: pointer;
+}

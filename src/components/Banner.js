@@ -4,8 +4,9 @@ import ReactPlayer from "react-player";
 //................................
 import Dialog from "@material-ui/core/Dialog";
 import { useHistory } from "react-router-dom";
-
-function Banner({ id, imageUrl, videoSrc }) {
+import { connect } from "react-redux";
+import { getMovieDetail } from "../redux/actions/movieAction";
+function Banner({ id, imageUrl, videoSrc, getMovieDetail }) {
   const [open, setOpen] = useState(false);
   const history = useHistory();
   // if (upcomingMovies.length !== 0) {
@@ -37,6 +38,7 @@ function Banner({ id, imageUrl, videoSrc }) {
           <button
             onClick={() => {
               history.push(`/movie/${id}`);
+              getMovieDetail(id);
             }}
             className="banner__button"
           >
@@ -66,4 +68,12 @@ function Banner({ id, imageUrl, videoSrc }) {
   );
 }
 
-export default Banner;
+const mapDispatchTopProps = (dispatch) => {
+  return {
+    getMovieDetail: (movieId) => {
+      dispatch(getMovieDetail(movieId));
+    },
+  };
+};
+
+export default connect(null, mapDispatchTopProps)(Banner);

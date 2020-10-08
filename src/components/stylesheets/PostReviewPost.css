@@ -1,0 +1,183 @@
+.postReviewPost {
+    width: 627px;
+    border: 1px solid lightgray;
+    border-radius: 7px;
+
+
+}
+
+.postReviewPost__container {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.postReviewPost__header {
+    margin-top: 15px;
+    max-width: fit-content;
+}
+
+.postReviewPost__contentPoster>img {
+    object-fit: contain;
+    max-width: 80px;
+    border-radius: 10px;
+}
+
+.postReviewPost__mainPost {
+    display: flex;
+    padding: 0px 20px 0px 20px;
+    margin: 40px 5px 0px 5px;
+}
+
+.postReviewPost__contentInfo {
+    margin-left: 30px;
+}
+
+.postReviewPost__contentInfo--heading,
+.postReviewPost__contentInfo--durationGenre,
+.postReviewPost__contentInfo--numericRating {
+    display: flex;
+    align-items: baseline;
+}
+
+.postReviewPost__contentInfo--durationGenre {
+    margin-top: 5px;
+}
+
+/* .postReviewPost__contentInfo--numericRating {
+    display: flex;
+    align-items: baseline;
+} */
+
+.postReviewPost__contentInfo--heading--ReleaseYear,
+.postReviewPost__contentInfo--numericRating--outOff {
+    margin-left: 10px;
+}
+
+.postReviewPost__contentInfo--durationGenre--genre {
+    margin-left: 15px;
+}
+
+
+.postReviewPost__contentInfo--reviewContent {
+    margin-top: 30px;
+}
+
+.postReviewPost__contentInfo--numericRating {
+    margin-top: 10px;
+}
+
+/* .postReviewPost__contentInfo--reviewContent{
+    color: lightgray;
+    line-height: 25px;
+    letter-spacing: 0.01em;
+} */
+
+.postReviewPost__contentInfo--numericRating--rateValue>h2 {
+    color: white;
+    font-size: 27px;
+
+}
+
+.postReviewPost__contentInfo--numericRating--outOff>h3 {
+    color: lightgray;
+}
+
+.postReviewPost__contentInfo--durationGenre--genre,
+.postReviewPost__contentInfo--durationGenre--duration {
+    color: lightgray;
+    font-size: 15px;
+    font-weight: normal;
+}
+
+.postReviewPost__contentInfo--heading--movieName>h2 {
+    color: white;
+
+}
+
+.postReviewPost__contentInfo--heading--ReleaseYear>h3 {
+    color: lightgray;
+    font-size: 15px;
+    font-weight: normal;
+}
+
+.MuiInputBase-root {
+    color: white !important;
+}
+
+.MuiFormLabel-root {
+    color: white !important;
+}
+
+/* .MuiFormLabel-root.Mui-focused>.MuiOutlinedInput-notchedOutline {
+    color: #499E4C !important;
+} */
+
+.MuiOutlinedInput-notchedOutline {
+    border-color: lightgray !important;
+}
+
+/* .Mui-focused.MuiOutlinedInput-notchedOutline {
+    border-color: #499E4C !important;
+} */
+
+.MuiFormControl-root.MuiTextField-root {
+    width: 52ch;
+}
+
+/* .MuiInputBase-root{
+
+} */
+
+.MuiInput-underline:after {
+    border-bottom: 1px solid white !important
+}
+
+.MuiInput-underline:before {
+    border-bottom: 1px solid lightgray !important
+}
+
+.postReviewPost__bottomIcons {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px 0px 20px 0px;
+}
+
+.postReviewPost__bottomIcon {
+    padding: 0px 30px 0px 30px;
+}
+
+.MuiButton-containedPrimary {
+    background-color: #499E4C !important;
+}
+
+
+.postReview-clickAwayListener--content {
+    /* display: flex; */
+    /* flex-flow: column;
+    justify-content: space-around; */
+    /* align-items: baseline; */
+    max-height: 232px;
+    min-height: 60px;
+    overflow-y: auto;
+    width: 465px;
+    top: 72px;
+    left: 73px;
+    right: 0;
+    /* border: 1px solid; */
+    padding: 8px;
+    z-index: 100;
+    position: absolute;
+    background-color: #3F414A;
+    border-radius: 10px;
+    transition: ease-in;
+}
+
+.postReviewPost__contentInfo--starRating {
+    margin-top: 15px;
+}
+
+.MuiRating-iconEmpty {
+    color: lightgray !important;
+}

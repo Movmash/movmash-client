@@ -75,7 +75,7 @@ function MovieReview({ movieDetails, getMovie, loading }) {
     return () => {
       setUnmounted(true);
     };
-  }, [unmounted, id, getMovie]);
+  });
   console.log(movieDetails);
 
   return (

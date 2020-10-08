@@ -1,6 +1,7 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import movieReducer from "./reducers/movieReducer";
+import userReducer from "./reducers/userReducer";
 // const initialState = {
 //   movie: {},
 // };
@@ -8,6 +9,7 @@ const middleware = [thunk];
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const reducers = combineReducers({
   movie: movieReducer,
+  user: userReducer,
 });
 
 // const store = createStore(

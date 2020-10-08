@@ -1,11 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import "./stylesheets/LeftSideBar.css";
 import { IconButton, Avatar } from "@material-ui/core";
 import TelegramIcon from "@material-ui/icons/Telegram";
 import AddIcon from "@material-ui/icons/Add";
 import NotificationsNoneIcon from "@material-ui/icons/NotificationsNone";
 import SettingsIcon from "@material-ui/icons/Settings";
+import ClickAwayListener from "@material-ui/core/ClickAwayListener";
+import Dialog from "@material-ui/core/Dialog";
+import PostReviewPost from "./PostReviewPost";
 function LeftSideBar() {
+  const [open, setOpen] = useState(false);
+
+  const handleClick = () => {
+    setOpen((prev) => !prev);
+  };
+  const handleClickAway = () => {
+    setOpen(false);
+  };
+  const [openReviewDialog, setOpenReviewDialog] = React.useState(false);
+
+  const handleClickOpenReview = () => {
+    setOpenReviewDialog(true);
+  };
+  const handleCloseReview = () => {
+    setOpenReviewDialog(false);
+  };
   return (
     <div className="leftSideBar">
       <div className="leftSideBar__container">
@@ -18,11 +37,42 @@ function LeftSideBar() {
           </IconButton>
         </div>
         <div className="leftSideBar__container__icon">
-          <div className="leftSideBar__container__icons--add">
-            <IconButton>
-              <AddIcon />
-            </IconButton>
-          </div>
+          <ClickAwayListener onClickAway={handleClickAway}>
+            <div className="leftSideBar__container__icon--click_away">
+              <div className="leftSideBar__container__icons--add">
+                <IconButton onClick={handleClick}>
+                  <AddIcon />
+                </IconButton>
+              </div>
+              {open ? (
+                <div className="clickAwayListener--content">
+                  <div
+                    onClick={() => {
+                      handleClickOpenReview();
+                    }}
+                    className="clickAwayListener--content--menu"
+                  >
+                    <h4>Post your review</h4>
+                  </div>
+                  <Dialog
+                    onClose={handleCloseReview}
+                    aria-labelledby="customized-dialog-title"
+                    open={openReviewDialog}
+                  >
+                    <div className="dialogBox--ReviewPost">
+                      <PostReviewPost closeReview={handleCloseReview} />
+                    </div>
+                  </Dialog>
+                  <div className="clickAwayListener--content--menu">
+                    <h4>Want Suggestions</h4>
+                  </div>
+                  <div className="clickAwayListener--content--menu">
+                    <h4>Create ticket</h4>
+                  </div>
+                </div>
+              ) : null}
+            </div>
+          </ClickAwayListener>
         </div>
         <div className="leftSideBar__container__icon">
           <IconButton>

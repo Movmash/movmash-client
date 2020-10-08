@@ -8,11 +8,11 @@ import SearchIcon from "@material-ui/icons/Search";
 import PeopleIcon from "@material-ui/icons/People";
 import HomeIcon from "@material-ui/icons/Home";
 import { IconButton } from "@material-ui/core";
-function Navbar() {
+import { connect } from "react-redux";
+function Navbar({ loading, profileImage }) {
   const location = useLocation();
   const history = useHistory();
 
-  console.log(location.pathname === "/");
   return (
     <div className="navbar">
       <div className="navbar__left">
@@ -81,10 +81,15 @@ function Navbar() {
         </div>
       </div>
       <div className="navbar__right">
-        <Avatar src="https://scontent.fpat3-1.fna.fbcdn.net/v/t1.0-9/119888019_2142082595936461_2747031401023743310_o.jpg?_nc_cat=109&_nc_sid=09cbfe&_nc_ohc=ItlVljbaaugAX-_LLzl&_nc_ht=scontent.fpat3-1.fna&oh=fbf15e76898631d47711bc0a81f60b01&oe=5F99422C" />
+        {!loading ? <Avatar src={profileImage} /> : <h1>loading</h1>}
       </div>
     </div>
   );
 }
-
-export default Navbar;
+const mapStateToProps = (state) => {
+  return {
+    profileImage: state.user.profileImageUrl,
+    loading: state.user.loading,
+  };
+};
+export default connect(mapStateToProps)(Navbar);
