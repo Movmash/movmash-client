@@ -8,6 +8,8 @@ import SettingsIcon from "@material-ui/icons/Settings";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import Dialog from "@material-ui/core/Dialog";
 import PostReviewPost from "./PostReviewPost";
+import PostSuggestMePost from "./PostSuggestMePost";
+import PostTicketPost from "./PostTicketPost";
 function LeftSideBar() {
   const [open, setOpen] = useState(false);
 
@@ -17,13 +19,29 @@ function LeftSideBar() {
   const handleClickAway = () => {
     setOpen(false);
   };
-  const [openReviewDialog, setOpenReviewDialog] = React.useState(false);
-
+  const [openReviewDialog, setOpenReviewDialog] = useState(false);
+  const [openSuggestMeDialog, setOpenSuggestMeDialog] = useState(false);
+  const [openTicketDialog, setOpenTicketDialog] = useState(false);
+  //..................................................................................[handle review post]
   const handleClickOpenReview = () => {
     setOpenReviewDialog(true);
   };
   const handleCloseReview = () => {
     setOpenReviewDialog(false);
+  };
+  //....................................................................................[handle Suggest me post]
+  const handleClickOpenSuggestMe = () => {
+    setOpenSuggestMeDialog(true);
+  };
+  const handleCloseSuggestMe = () => {
+    setOpenSuggestMeDialog(false);
+  };
+  //....................................................................................[handle ticket post]
+  const handleClickOpenTicket = () => {
+    setOpenTicketDialog(true);
+  };
+  const handleCloseTicket = () => {
+    setOpenTicketDialog(false);
   };
   return (
     <div className="leftSideBar">
@@ -63,12 +81,37 @@ function LeftSideBar() {
                       <PostReviewPost closeReview={handleCloseReview} />
                     </div>
                   </Dialog>
-                  <div className="clickAwayListener--content--menu">
+                  <div
+                    onClick={() => {
+                      handleClickOpenSuggestMe();
+                    }}
+                    className="clickAwayListener--content--menu"
+                  >
                     <h4>Want Suggestions</h4>
                   </div>
-                  <div className="clickAwayListener--content--menu">
+                  <Dialog
+                    onClose={handleCloseSuggestMe}
+                    open={openSuggestMeDialog}
+                  >
+                    <div className="dialogBox--SuggestMePost">
+                      <PostSuggestMePost
+                        closeSuggestMe={handleCloseSuggestMe}
+                      />
+                    </div>
+                  </Dialog>
+                  <div
+                    onClick={() => {
+                      handleClickOpenTicket();
+                    }}
+                    className="clickAwayListener--content--menu"
+                  >
                     <h4>Create ticket</h4>
                   </div>
+                  <Dialog onClose={handleCloseTicket} open={openTicketDialog}>
+                    <div className="dialogBox--TicketPost">
+                      <PostTicketPost closeTicket={handleCloseTicket} />
+                    </div>
+                  </Dialog>
                 </div>
               ) : null}
             </div>

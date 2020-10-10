@@ -1,0 +1,343 @@
+.postTicketPost {
+    width: 627px;
+    border: 1px solid lightgray;
+    border-radius: 7px;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.postTicketPost__searchMovie {
+    margin-top: 20px;
+}
+
+.postTicktPost__header {
+    margin-top: 15px;
+    max-width: fit-content;
+}
+
+.postTicket-clickAwayListener--content {
+    max-height: 232px;
+    min-height: 60px;
+    overflow-y: auto;
+    width: 465px;
+    top: 72px;
+    left: 73px;
+    right: 0;
+    /* border: 1px solid; */
+    padding: 8px;
+    z-index: 100;
+    position: absolute;
+    background-color: #3f414a;
+    border-radius: 10px;
+    transition: ease-in;
+}
+
+.postTicketPost__searchMovie {
+    display: flex;
+    justify-content: center;
+}
+
+.postTicketPost__movieContent {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.postTicketPost__movieContent-subContainer {
+    width: 500px;
+    display: flex;
+}
+
+.postTicketPost__contentPoster>img {
+    border-radius: 10px;
+    object-fit: contain;
+}
+
+.postTicketPost__contentInfo {
+    margin-left: 30px;
+}
+
+.postTicketPost__contentInfo--durationGenre {
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.postTicketPost__contentInfo--durationGenre--genre {
+    margin-left: 15px;
+}
+
+/* .MuiTypography-root MuiTypography-body1 MuiTypography-alignCenter */
+.postTicketPost__schedule {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    max-width: fit-content;
+    margin-top: 20px;
+    margin-left: 7ch;
+}
+
+.postTicketPost__schedule.margin {
+    margin-top: 50px;
+}
+
+/* .postTicketPost__scheduleContent {
+  display: flex;
+  width: 100px;
+  margin-top: 10px;
+  justify-content: space-between;
+} */
+.postTicketPost__scheduleContent__picker>.MuiFormControl-root.MuiTextField-root {
+    width: 22ch;
+}
+
+.postTicketPost__scheduleContent__picker {
+    margin-right: 10px;
+}
+
+.postTicketPost__schedule__heading {
+    max-width: fit-content;
+    max-height: fit-content;
+}
+
+.postTicketPost__scheduleContent-container {
+    margin-top: 10px;
+    margin-left: 30px;
+}
+
+.MuiInputAdornment-root>.MuiButtonBase-root>.MuiIconButton-label>.MuiIconButton-root {
+    color: white !important;
+}
+
+.MuiInputAdornment-root>.MuiIconButton-root {
+    color: white !important;
+}
+
+.MuiTypography-root.MuiTypography-body1.MuiTypography-alignCenter {
+    width: 21ch;
+}
+
+.MuiPickersDatePickerRoot-toolbar {
+    align-items: center !important;
+}
+
+.MuiPickersToolbarText-toolbarTxt {
+    width: 14ch;
+}
+
+.MuiPickersToolbar-toolbar {
+    width: 29ch;
+    background-color: #499e4c !important;
+}
+
+.MuiPickersDay-day {
+    color: white !important;
+}
+
+.MuiPickersDay-dayDisabled {
+    color: rgb(87, 87, 87) !important;
+}
+
+.MuiPickersCalendarHeader-dayLabel {
+    color: white !important;
+}
+
+.MuiPickersCalendarHeader-switchHeader>.MuiIconButton-root {
+    color: rgb(252, 245, 245) !important;
+}
+
+.MuiPickersCalendarHeader-switchHeader>.MuiIconButton-root.Mui-disabled {
+    color: rgb(87, 87, 87) !important;
+}
+
+.MuiPickersCalendarHeader-iconButton {
+    background-color: transparent !important;
+}
+
+.MuiPickersDay-daySelected {
+    background-color: #499e4c !important;
+}
+
+/* .MuiPickersToolbarText-toolbarBtnSelected {
+  display: none;
+} */
+
+.MuiPickersBasePicker-pickerView {
+    align-items: center;
+    width: 100px;
+}
+
+.MuiTypography-colorPrimary {
+    color: green !important;
+}
+
+.MuiPickersYearSelection-container {
+    height: fit-content !important;
+}
+
+.MuiPickersTimePickerToolbar-toolbarAmpmLeftPadding {
+    width: 26ch;
+}
+
+.MuiPickersTimePickerToolbar-separator {
+    width: 15px;
+}
+
+/* .......................................... */
+/* .MuiButton-label > .MuiPickersToolbarText-toolbarBtnSelected {
+  width: 2ch;
+  color: #fff;
+} */
+/* ......................................... */
+.MuiPickersTimePickerToolbar-hourMinuteLabel>.MuiButtonBase-root>.MuiButton-label>.MuiPickersToolbarText-toolbarTxt {
+    width: 3ch;
+    /* color: rgba(255, 255, 255, 0.54); */
+}
+
+/* ........................................... */
+
+/* .MuiPickersToolbarButton-toolbarBtn {
+  width: 8ch;
+} */
+/* ........... */
+
+.MuiPickersClock-pin {
+    background-color: #499e4c !important;
+}
+
+.MuiPickersClockPointer-pointer {
+    background-color: #499e4c !important;
+}
+
+.MuiPickersClockNumber-clockNumber {
+    color: lightgray !important;
+}
+
+.MuiPickersClockPointer-noPoint {
+    background-color: #499e4c !important;
+}
+
+.MuiPickersClockPointer-thumb {
+    border: 14px solid #499e4c !important;
+}
+
+.MuiPickersClock-clock {
+    background-color: #3f414a !important;
+}
+
+.MuiPickersTimePickerToolbar-ampmSelection {
+    margin-left: -38px !important;
+}
+
+.MuiPickersTimePickerToolbar-hourMinuteLabel {
+    width: 172px !important;
+}
+
+
+
+.postTicketPost__scheduleContent-uppercontainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.postTicket__container__showDetails--showTiming {
+    /* flex: 0.4; */
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    margin-left: 2.9vw;
+    width: 12vw;
+
+}
+
+/* .postTicket__container__showDetails--time-range {
+    width: 186px;
+} */
+
+.postTicket__container__showDetails--time-range>h2 {
+    font-family: Righteous;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 26px;
+    line-height: 32px;
+
+    color: #D6D6D6;
+}
+
+.postTicket__container__showDetails--dateRange-from--date>h1,
+.postTicket__container__showDetails--dateRange>h1 {
+    font-family: Righteous;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 64px;
+    line-height: 79px;
+
+    color: #FF0000;
+}
+
+.postTicket__container__showDetails--dateRange-from--month>h2 {
+    font-family: Righteous;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 30px;
+    /* identical to box height */
+
+
+    color: #FF0000;
+}
+
+.postTicket__container__showDetails--dateRange--from,
+.postTicket__container__showDetails--dateRange--to {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+
+
+
+
+
+.postTicket__container__showDetails--dateRange {
+    display: flex;
+}
+
+.postTicket__runtimeRange__content__input {
+    display: flex;
+    justify-content: space-around;
+}
+
+
+
+
+.postTicketPost__caption--container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.postTicketPost__buttons {
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    justify-content: flex-end;
+}
+
+.postTicket__ratingStep__content__input--radioInput_material {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+
+}

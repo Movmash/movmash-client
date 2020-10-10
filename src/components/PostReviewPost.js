@@ -141,6 +141,7 @@ function PostReviewPost({ closeReview }) {
                     // onChangeActive={(e, value) => {
                     //   setRating(value);
                     // }}
+                    name="review post rating"
                     onChange={(e, value) => {
                       setRating(value);
                     }}
@@ -173,6 +174,7 @@ function PostReviewPost({ closeReview }) {
                 multiline
                 rows={5}
                 variant="outlined"
+                inputProps={{ maxLength: 300 }}
               />
             </div>
           </div>
