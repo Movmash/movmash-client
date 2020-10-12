@@ -43,7 +43,8 @@ const genreConverter = (data) => {
       }
     }
   }
-  return movieGenres;
+  // return movieGenres;
+  return currentGenre.join(" | ");
 };
 
 export { genreConverter };

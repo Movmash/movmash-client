@@ -2,6 +2,7 @@
     width: 627px;
     border: 1px solid lightgray;
     border-radius: 7px;
+    margin-top: 100px;
 }
 
 .reviewPost__contentPoster>img {
@@ -82,4 +83,8 @@
     color: lightgray;
     font-size: 15px;
     font-weight: normal;
+}
+
+.reviewPost__contentInfo--starRating {
+    margin-top: 10px;
 }

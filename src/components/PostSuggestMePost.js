@@ -10,8 +10,10 @@ import {
   Button,
 } from "@material-ui/core";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
+import { sendPost } from "../redux/actions/postAction";
+import { connect } from "react-redux";
 
-function PostSuggestMePost({ closeSuggestMe }) {
+function PostSuggestMePost({ closeSuggestMe, sendPost }) {
   const [ratingPreference, setRatingValue] = useState(0);
   const [chooseGenre, setChooseGenre] = useState([]);
   const [selectedRatingAbove, setSelectedRatingAbove] = useState("");
@@ -221,7 +223,18 @@ function PostSuggestMePost({ closeSuggestMe }) {
   const handleDurationPreference = (event) => {
     setDurationPrference(event.target.value);
   };
-
+  const handleSubmit = () => {
+    const suggestMePost = {
+      type: "suggestMe",
+      genreName: chooseGenre.length === 0 ? ["Any Genre"] : chooseGenre,
+      duration: durationPreference,
+      language: languagePrefered,
+      rating: ratingPreference,
+    };
+    console.log(suggestMePost);
+    sendPost(suggestMePost);
+    closeSuggestMe();
+  };
   return (
     <div className="postSuggestMe">
       <div className="postSuggestMe__captionInput"></div>
@@ -660,6 +673,7 @@ function PostSuggestMePost({ closeSuggestMe }) {
         </div>
         <div className="postReviewPost__bottomIcon">
           <Button
+            onClick={handleSubmit}
             disabled={ratingPreference === 0 ? true : false}
             variant="contained"
             color="primary"
@@ -672,4 +686,4 @@ function PostSuggestMePost({ closeSuggestMe }) {
   );
 }
 
-export default PostSuggestMePost;
+export default connect(null, { sendPost })(PostSuggestMePost);

@@ -8,6 +8,7 @@ import ReactPlayer from "react-player";
 import { connect } from "react-redux";
 import { getBannerUpcomingMovies } from "../redux/actions/movieAction";
 import MovieRow from "../components/MovieRow";
+import { BounceLoader } from "react-spinners";
 function Movies({ loading, getUpcomingMovies, upcomingMovies }) {
   const randomNumber = Math.floor(Math.random() * 5);
   const [unmounted, setUnmounted] = useState(false);
@@ -97,7 +98,14 @@ https://image.tmdb.org/t/p/original${upcomingMovies[randomNumber].backdrop_path}
           </div>{" "}
         </>
       ) : (
-        <h1>LOADING ... </h1>
+        <div className="home__bounceloader">
+          <BounceLoader
+            // css={override}
+            size={150}
+            color={"#2aa44f"}
+            loading
+          />
+        </div>
       )}
     </div>
   );

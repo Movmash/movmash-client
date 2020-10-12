@@ -11,6 +11,7 @@ import Slider from "react-slick";
 import { connect } from "react-redux";
 import { getMovieDetail } from "../redux/actions/movieAction";
 import { useLocation } from "react-router-dom";
+import { BounceLoader } from "react-spinners";
 function MovieReview({ movieDetails, getMovie, loading }) {
   const location = useLocation();
   const [unmounted, setUnmounted] = useState(false);
@@ -123,7 +124,14 @@ function MovieReview({ movieDetails, getMovie, loading }) {
           </div>
         </>
       ) : (
-        <h1>loading....</h1>
+        <div className="home__bounceloader">
+          <BounceLoader
+            // css={override}
+            size={150}
+            color={"#499E4C"}
+            loading
+          />
+        </div>
       )}
     </div>
   );

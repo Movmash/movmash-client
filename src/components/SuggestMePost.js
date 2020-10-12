@@ -2,20 +2,21 @@ import React from "react";
 import UserNamePlate from "./UserNamePlate";
 import "./stylesheets/SuggestMePost.css";
 import PostIconButtons from "./PostIconButtons";
-function SuggestMePost() {
+function SuggestMePost({ details }) {
+  const { duration, genreName, postedBy, rating, language } = details;
   return (
     <div className="suggestMePost">
       <div className="suggestMePost__container">
         <div className="suggestMePost__container__heading">
           <UserNamePlate
             name="Ankur Kunal"
-            imageUrl="https://scontent.fpat3-1.fna.fbcdn.net/v/t1.0-9/119888019_2142082595936461_2747031401023743310_o.jpg?_nc_cat=109&_nc_sid=09cbfe&_nc_ohc=ItlVljbaaugAX-_LLzl&_nc_ht=scontent.fpat3-1.fna&oh=fbf15e76898631d47711bc0a81f60b01&oe=5F99422C"
-            username="i.m_ak_4.7"
+            imageUrl={postedBy.profileImageUrl}
+            username={`@${postedBy.userName}`}
             type="Suggest Me"
           />
         </div>
         <div className="suggestMePost__container__mainContent">
-          <div className="suggestMePost__container__paragraph">
+          {/* <div className="suggestMePost__container__paragraph">
             <p>
               This is unlike any kind of adventure movie my eyes have ever seen
               in such a long time, the characters, the musical score for every
@@ -23,14 +24,14 @@ function SuggestMePost() {
               rich variety and uniqueness of the flora and fauna of Pandora, the
               ...
             </p>
-          </div>
+          </div> */}
           <div className="suggestMePost__container__suggestionDetailes">
             <div className="suggestMePost__container__suggestionDetailes--rating">
               <div className="suggestMePost__container__suggestionDetailes--rating--heading">
                 <h4>Rating Above</h4>
               </div>
               <div className="suggestMePost__container__suggestionDetailes--rating--content">
-                <h1>7.1</h1>
+                <h1>{rating}</h1>
               </div>
             </div>
             <div className="suggestMePost__container__suggestionDetailes--genre-language-duration">
@@ -40,7 +41,7 @@ function SuggestMePost() {
                     <h3>Genre</h3>
                   </div>
                   <div className="suggestMePost__container__suggestionDetailes--genre--content">
-                    <h3>Scf-Fi | Action | Thriller</h3>
+                    <h3>{genreName.join(" | ")}</h3>
                   </div>
                 </div>
               </div>
@@ -51,7 +52,7 @@ function SuggestMePost() {
                       <h3>Language</h3>
                     </div>
                     <div className="suggestMePost__container__suggestionDetailes--language--content">
-                      <h3>English | Hindi</h3>
+                      <h3>{language}</h3>
                     </div>
                   </div>
                 </div>
@@ -60,7 +61,7 @@ function SuggestMePost() {
                     <h3>Duration</h3>
                   </div>
                   <div className="suggestMePost__container__suggestionDetailes--duration--content">
-                    <h3>90m-100m</h3>
+                    <h3>{duration}</h3>
                   </div>
                 </div>
               </div>
@@ -70,7 +71,7 @@ function SuggestMePost() {
         <div className="SuggestMePost__container__bottomIcon">
           <PostIconButtons type="suggestMe" />
         </div>
-      </div>{" "}
+      </div>
     </div>
   );
 }

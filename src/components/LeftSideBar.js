@@ -4,13 +4,15 @@ import { IconButton, Avatar } from "@material-ui/core";
 import TelegramIcon from "@material-ui/icons/Telegram";
 import AddIcon from "@material-ui/icons/Add";
 import NotificationsNoneIcon from "@material-ui/icons/NotificationsNone";
-import SettingsIcon from "@material-ui/icons/Settings";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import Dialog from "@material-ui/core/Dialog";
 import PostReviewPost from "./PostReviewPost";
 import PostSuggestMePost from "./PostSuggestMePost";
 import PostTicketPost from "./PostTicketPost";
-function LeftSideBar() {
+import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
+import { connect } from "react-redux";
+import { logoutUser } from "../redux/actions/userAction";
+function LeftSideBar({ logoutUser }) {
   const [open, setOpen] = useState(false);
 
   const handleClick = () => {
@@ -123,8 +125,8 @@ function LeftSideBar() {
           </IconButton>
         </div>
         <div className="leftSideBar__container__icon">
-          <IconButton>
-            <SettingsIcon />
+          <IconButton onClick={() => logoutUser()}>
+            <PowerSettingsNewIcon />
           </IconButton>
         </div>
       </div>
@@ -132,4 +134,4 @@ function LeftSideBar() {
   );
 }
 
-export default LeftSideBar;
+export default connect(null, { logoutUser })(LeftSideBar);

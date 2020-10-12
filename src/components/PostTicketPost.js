@@ -21,12 +21,14 @@ import axios from "axios";
 import { genreConverter } from "../util/genreConverter";
 import stringLimiter from "../util/stringLimiter";
 import getTimeDetails from "../util/getTimeDetails";
-// let eventName = { target: { value: "exact" } };
+import { sendPost } from "../redux/actions/postAction";
+import { connect } from "react-redux";
+// let e ventName = { target: { value: "exact" } };
 let date = new Date();
 let day = date.getDate() + 5;
 let month = date.getMonth();
 let year = date.getFullYear();
-function PostTicketPost({ closeTicket }) {
+function PostTicketPost({ closeTicket, sendPost }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [searchResult, setSearchResult] = useState([]);
@@ -35,6 +37,7 @@ function PostTicketPost({ closeTicket }) {
   const [postMovie, setPostMovie] = useState({});
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [timeRange, setTimeRange] = useState("exact");
+  const [caption, setCaption] = useState("");
   const handleTimeRange = (event) => {
     setTimeRange(event.target.value);
     if (event.target.value === "next2days") {
@@ -106,6 +109,24 @@ function PostTicketPost({ closeTicket }) {
     console.log(result);
     setPostMovie(result);
     console.log(genreConverter(result.genre_ids));
+  };
+
+  const handleSubmit = (movie) => {
+    const ticketPost = {
+      type: "ticket",
+      description: caption,
+      movieId: movie.id,
+      genreId: movie.genre_ids,
+      moviePoster: movie.poster_path,
+      releaseYear: movie.release_date.split("-")[0],
+      movieTitle: movie.title ? movie.title : movie.name,
+      showTimeFrom: selectedDate,
+      showTimeTo: timeRangeValue,
+      overview: movie.overview,
+    };
+    console.log(ticketPost);
+    sendPost(ticketPost);
+    closeTicket();
   };
 
   return (
@@ -317,6 +338,9 @@ function PostTicketPost({ closeTicket }) {
             InputLabelProps={{
               shrink: true,
             }}
+            onChange={(e) => {
+              setCaption(e.target.value);
+            }}
             inputProps={{ maxLength: 200 }}
           />
         </div>
@@ -332,6 +356,9 @@ function PostTicketPost({ closeTicket }) {
             disabled={Object.keys(postMovie).length === 0 ? true : false}
             variant="contained"
             color="primary"
+            onClick={() => {
+              handleSubmit(postMovie);
+            }}
           >
             Create Ticket
           </Button>
@@ -341,4 +368,4 @@ function PostTicketPost({ closeTicket }) {
   );
 }
 
-export default PostTicketPost;
+export default connect(null, { sendPost })(PostTicketPost);
