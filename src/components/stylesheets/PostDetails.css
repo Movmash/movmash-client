@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+
+.postDetails {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+  padding: 5px 0px 5px 0px;
+  width: 90%;
+}
+
+.postDetails__Detail > h5 {
+  font-family: "Roboto", sans-serif;
+  color: lightgray;
+  /* font-size: .91rem; */
+}
+.postDetails__createdAtDetails > h5 {
+  font-family: "Roboto", sans-serif;
+  color: lightgray;
+}
+.postDetails__popularity--details {
+  display: flex;
+}
+.postDetails__popularity--details > * {
+  margin-left: 10px;
+}

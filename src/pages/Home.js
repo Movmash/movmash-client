@@ -22,6 +22,7 @@ function Home({
     }
     return;
   }, [authenticated, getSubcriberPost]);
+
   return (
     <>
       {!loading ? (
@@ -41,11 +42,35 @@ function Home({
                 <div className="home__feed--part">
                   {posts.map((post) => {
                     if (post.type === "review")
-                      return <ReviewPost key={post._id} details={post} />;
+                      return (
+                        <ReviewPost
+                          key={post._id}
+                          details={post}
+                          postId={post._id}
+                          type={post.type}
+                          likeCount={post.likeCount}
+                        />
+                      );
                     else if (post.type === "ticket")
-                      return <TicketPost key={post._id} details={post} />;
+                      return (
+                        <TicketPost
+                          key={post._id}
+                          details={post}
+                          postId={post._id}
+                          type={post.type}
+                          likeCount={post.likeCount}
+                        />
+                      );
                     else if (post.type === "suggestMe")
-                      return <SuggestMePost key={post._id} details={post} />;
+                      return (
+                        <SuggestMePost
+                          key={post._id}
+                          details={post}
+                          postId={post._id}
+                          type={post.type}
+                          likeCount={post.likeCount}
+                        />
+                      );
                     else {
                       console.log(post.type);
                       return null;

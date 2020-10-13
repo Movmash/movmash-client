@@ -1,4 +1,11 @@
-import { LOADING_DATA, SET_POSTS, SET_POST, POST_POST } from "../types";
+import {
+  LOADING_DATA,
+  SET_POSTS,
+  SET_POST,
+  POST_POST,
+  LIKE_POST,
+  UNLIKE_POST,
+} from "../types";
 
 const initialState = {
   posts: [],
@@ -29,6 +36,17 @@ export default function (state = initialState, action) {
         ...state,
         posts: [action.payload, ...state.posts],
         loading: false,
+      };
+    case UNLIKE_POST:
+    case LIKE_POST:
+      const index = state.posts.findIndex(
+        (post) => post._id === action.payload._id
+      );
+      state.posts[index].likeCount = action.payload.likeCount;
+      state.posts[index].likes = action.payload.likes;
+      return {
+        ...state,
+        posts: [...state.posts],
       };
     default:
       return state;

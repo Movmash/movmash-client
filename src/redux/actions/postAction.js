@@ -1,5 +1,12 @@
 import axios from "axios";
-import { LOADING_DATA, SET_ERRORS, POST_POST, SET_POSTS } from "../types";
+import {
+  LOADING_DATA,
+  SET_ERRORS,
+  POST_POST,
+  SET_POSTS,
+  LIKE_POST,
+  UNLIKE_POST,
+} from "../types";
 
 export const getSubcriberPost = () => (dispatch) => {
   dispatch({ type: LOADING_DATA });
@@ -26,5 +33,30 @@ export const sendPost = (newPost) => (dispatch) => {
         type: SET_ERRORS,
         payload: e,
       });
+    });
+};
+
+export const likePost = (postId) => (dispatch) => {
+  axios
+    .put(`http://localhost:8000/api/v1/home/like-post`, { postId: postId })
+    .then((res) => {
+      dispatch({
+        type: LIKE_POST,
+        payload: res.data,
+      });
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+};
+
+export const unlikePost = (postId) => (dispatch) => {
+  axios
+    .put("http://localhost:8000/api/v1/home/unlike-post", { postId: postId })
+    .then((res) => {
+      dispatch({ type: UNLIKE_POST, payload: res.data });
+    })
+    .catch((e) => {
+      console.log(e);
     });
 };

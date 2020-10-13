@@ -88,3 +88,9 @@
 .reviewPost__contentInfo--starRating {
     margin-top: 10px;
 }
+
+.reviewPost__postDetails {
+    display: flex;
+    margin-top: 20px;
+    justify-content: center;
+}

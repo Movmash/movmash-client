@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import UserNamePlate from "./UserNamePlate";
 import "./stylesheets/SuggestMePost.css";
 import PostIconButtons from "./PostIconButtons";
-function SuggestMePost({ details }) {
-  const { duration, genreName, postedBy, rating, language } = details;
+import PostDetails from "./PostDetails";
+import CommentForm from "./CommentForm";
+function SuggestMePost({ details, type, postId }) {
+  const {
+    duration,
+    genreName,
+    postedBy,
+    rating,
+    language,
+    createdAt,
+    likeCount,
+    commentCount,
+    likes,
+  } = details;
+  const [likeCountShown, setLikeCountShown] = useState(likeCount);
+  const [openSearchMovie, setSearchMovie] = useState(false);
+  // console.log(openSearchMovie);
   return (
     <div className="suggestMePost">
       <div className="suggestMePost__container">
@@ -68,8 +83,28 @@ function SuggestMePost({ details }) {
             </div>
           </div>
         </div>
+        <div className="reviewPost__postDetails">
+          <PostDetails
+            createdAt={createdAt}
+            likeCount={likeCountShown}
+            commentCount={commentCount}
+          />
+        </div>
         <div className="SuggestMePost__container__bottomIcon">
-          <PostIconButtons type="suggestMe" />
+          <PostIconButtons
+            postId={postId}
+            type="suggestMe"
+            setSearchMovie={setSearchMovie}
+            likes={likes}
+            setLikeCountShown={setLikeCountShown}
+          />
+        </div>
+        <div className="commentForm">
+          <CommentForm
+            postId={postId}
+            type={type}
+            openSearchMovie={openSearchMovie}
+          />
         </div>
       </div>
     </div>

@@ -6,7 +6,8 @@ import urls from "../util/urls";
 import { genreConverter } from "../util/genreConverter";
 import getTimeDetails from "../util/getTimeDetails";
 import stringLimiter from "../util/stringLimiter";
-function TicketPost({ details }) {
+import PostDetails from "./PostDetails";
+function TicketPost({ details, postId }) {
   const {
     description,
     genreId,
@@ -17,6 +18,10 @@ function TicketPost({ details }) {
     showTimeFrom,
     showTimeTo,
     overview,
+    createdAt,
+    likeCount,
+    commentCount,
+    likes,
   } = details;
 
   return (
@@ -101,8 +106,15 @@ function TicketPost({ details }) {
             </div>
           </div>
         </div>
+        <div className="reviewPost__postDetails">
+          <PostDetails
+            createdAt={createdAt}
+            likeCount={likeCount}
+            commentCount={commentCount}
+          />
+        </div>
         <div className="ticketPost__container__bottomIcons">
-          <PostIconButtons type="ticket" />
+          <PostIconButtons likes={likes} type="ticket" />
         </div>
       </div>
     </div>

@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import "./stylesheets/ReviewPost.css";
 import PostIconButtons from "./PostIconButtons";
 import UserNamePlate from "./UserNamePlate";
 import { genreConverter } from "../util/genreConverter";
 import Rating from "@material-ui/lab/Rating";
 import urls from "../util/urls";
-function ReviewPost({ details }) {
+import PostDetails from "./PostDetails";
+import CommentForm from "./CommentForm";
+function ReviewPost({ details, postId, type }) {
   const {
     moviePoster,
     movieTitle,
@@ -14,7 +16,12 @@ function ReviewPost({ details }) {
     genreId,
     rating,
     postedBy,
+    createdAt,
+    likeCount,
+    commentCount,
+    likes,
   } = details;
+  const [likeCountShown, setLikeCountShown] = useState(likeCount);
   return (
     <div className="reviewPost">
       <div className="reviewPost__container">
@@ -76,8 +83,23 @@ function ReviewPost({ details }) {
             </div>
           </div>
         </div>
+        <div className="reviewPost__postDetails">
+          <PostDetails
+            createdAt={createdAt}
+            likeCount={likeCountShown}
+            commentCount={commentCount}
+          />
+        </div>
         <div className="reviewPost__bottomIcons">
-          <PostIconButtons type="review" />
+          <PostIconButtons
+            setLikeCountShown={setLikeCountShown}
+            likes={likes}
+            postId={postId}
+            type="review"
+          />
+        </div>
+        <div className="commentForm">
+          <CommentForm postId={postId} type={type} />
         </div>
       </div>
     </div>
