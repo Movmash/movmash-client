@@ -4,6 +4,7 @@ import "./stylesheets/SuggestMePost.css";
 import PostIconButtons from "./PostIconButtons";
 import PostDetails from "./PostDetails";
 import CommentForm from "./CommentForm";
+import CommentList from "./CommentList";
 function SuggestMePost({ details, type, postId }) {
   const {
     duration,
@@ -15,6 +16,7 @@ function SuggestMePost({ details, type, postId }) {
     likeCount,
     commentCount,
     likes,
+    comments,
   } = details;
   const [likeCountShown, setLikeCountShown] = useState(likeCount);
   const [openSearchMovie, setSearchMovie] = useState(false);
@@ -98,6 +100,9 @@ function SuggestMePost({ details, type, postId }) {
             likes={likes}
             setLikeCountShown={setLikeCountShown}
           />
+        </div>
+        <div className="suggestMePost__commentList">
+          <CommentList comments={comments} />
         </div>
         <div className="commentForm">
           <CommentForm

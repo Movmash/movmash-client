@@ -102,6 +102,7 @@ function CommentForm({ postId, type, openSearchMovie, submitComment }) {
 
           postType: type,
         };
+        console.log(postSuggestMeCommentWithoutMovie);
         setComment("");
         event.target.textcomment.value = "";
         submitComment(postSuggestMeCommentWithoutMovie);
@@ -115,9 +116,11 @@ function CommentForm({ postId, type, openSearchMovie, submitComment }) {
           releaseYear: postMovie.release_date.split("-")[0],
           genreId: postMovie.genre_ids,
           overview: postMovie.overview,
+          movieId: postMovie.id,
         };
         setPostMovie({});
         setComment("");
+        console.log(postSuggestMeCommentWithMovie);
         event.target.textcomment.value = "";
         submitComment(postSuggestMeCommentWithMovie);
       }

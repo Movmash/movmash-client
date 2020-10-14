@@ -1,0 +1,105 @@
+.commentCard {
+    max-width: fit-content;
+    margin-bottom: 10px;
+    display: flex;
+
+}
+
+.commentCard__userComment {
+    margin-bottom: 10px;
+
+    /* width: 400px; */
+    /* width: 100%; */
+    /* flex: 0.5; */
+    /* max-width: fit-content; */
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
+}
+
+.commentCard__suggestedMovie__poster>img {
+    max-width: 50px;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+.commentCard__suggestedMovie {
+    display: flex;
+    width: 300px;
+    margin-right: 20px;
+}
+
+.commentCard__userInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -10px;
+    width: 90%;
+}
+
+.commentCard__profilePic>.MuiAvatar-root>img {
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 100%;
+}
+
+.commentCard__userComment {
+    display: flex;
+    margin-left: 20px;
+}
+
+.commentCard___comments {
+    margin-left: 10px;
+}
+
+.commentCard__userInfo>h5 {
+    color: white;
+}
+
+.commentCard__CommentMessage>p {
+    color: lightgray;
+    font-size: 14px;
+    letter-spacing: 0.1px;
+    margin-top: -5px;
+}
+
+.commentCard__userInfo>.MuiButtonBase-root>.MuiIconButton-label>.MuiSvgIcon-root {
+    color: white;
+    font-size: 13px !important;
+}
+
+.commentCard__CommentMessage {
+    width: 90%;
+}
+
+.commentCard__suggestedMovie__details {
+    margin-left: 15px;
+}
+
+.commentCard__suggestedMovie__title>h4 {
+    color: white;
+    font-size: 15px;
+
+}
+
+.commentCard__suggestedMovie__yearGenre {
+    display: flex;
+    margin-top: 10px;
+}
+
+.commentCard__suggestedMovie__year>h6,
+.commentCard__suggestedMovie__genre>h6 {
+    color: lightgray;
+}
+
+.commentCard__suggestedMovie__genre {
+    margin-left: 10px;
+}
+
+.commentCard__userComment.withoutMovie>.commentCard___comments {
+    width: 573px
+}
+
+.commentCard__userComment>.commentCard___comments {
+    width: 287px;
+}

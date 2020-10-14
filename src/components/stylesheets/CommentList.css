@@ -1,0 +1,13 @@
+.commentList__viewFullPost>p {
+
+    font-size: 14px;
+    color: lightgray;
+    line-height: inherit;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.commentList__viewFullPost {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}

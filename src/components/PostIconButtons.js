@@ -21,7 +21,6 @@ function PostIconButtons({
   user,
   setLikeCountShown,
 }) {
-  console.log(likes);
   const handleLikePost = (id) => {
     likePost(id);
   };

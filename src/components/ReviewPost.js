@@ -7,6 +7,7 @@ import Rating from "@material-ui/lab/Rating";
 import urls from "../util/urls";
 import PostDetails from "./PostDetails";
 import CommentForm from "./CommentForm";
+import CommentList from "./CommentList";
 function ReviewPost({ details, postId, type }) {
   const {
     moviePoster,
@@ -20,8 +21,10 @@ function ReviewPost({ details, postId, type }) {
     likeCount,
     commentCount,
     likes,
+    comments,
   } = details;
   const [likeCountShown, setLikeCountShown] = useState(likeCount);
+  console.log(details.comments);
   return (
     <div className="reviewPost">
       <div className="reviewPost__container">
@@ -97,6 +100,9 @@ function ReviewPost({ details, postId, type }) {
             postId={postId}
             type="review"
           />
+        </div>
+        <div className="reviewPost__commentRepresentation">
+          <CommentList comments={comments} />
         </div>
         <div className="commentForm">
           <CommentForm postId={postId} type={type} />
