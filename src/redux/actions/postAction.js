@@ -6,6 +6,7 @@ import {
   SET_POSTS,
   LIKE_POST,
   UNLIKE_POST,
+  SUBMIT_COMMENT,
 } from "../types";
 
 export const getSubcriberPost = () => (dispatch) => {
@@ -58,5 +59,16 @@ export const unlikePost = (postId) => (dispatch) => {
     })
     .catch((e) => {
       console.log(e);
+    });
+};
+
+export const submitComment = (data) => (dispatch) => {
+  axios
+    .post("http://localhost:8000/api/v1/home/comment-post", data)
+    .then((res) => {
+      dispatch({ type: SUBMIT_COMMENT, payload: res.data });
+    })
+    .catch((err) => {
+      console.log(err);
     });
 };

@@ -20,6 +20,10 @@
     font-size: 20px;
 }
 
+.searchCard__dropDownInfo>h4 {
+    color: white;
+}
+
 .searchMovieCard:hover {
     background-color: #499E4C;
     border-radius: 10px;

@@ -12,6 +12,16 @@
     align-items: center;
 }
 
+.commentForm__moviePreview__movieInfo__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -10px;
+}
+
+.commentForm__moviePreview__movieInfo__title>.MuiButtonBase-root>.MuiIconButton-label>.MuiSvgIcon-root {
+    color: white;
+}
 
 .commentForm__moviePreview {
     width: 461px;

@@ -5,6 +5,7 @@ import {
   POST_POST,
   LIKE_POST,
   UNLIKE_POST,
+  SUBMIT_COMMENT,
 } from "../types";
 
 const initialState = {
@@ -39,11 +40,21 @@ export default function (state = initialState, action) {
       };
     case UNLIKE_POST:
     case LIKE_POST:
-      const index = state.posts.findIndex(
+      const likeIndex = state.posts.findIndex(
         (post) => post._id === action.payload._id
       );
-      state.posts[index].likeCount = action.payload.likeCount;
-      state.posts[index].likes = action.payload.likes;
+      state.posts[likeIndex].likeCount = action.payload.likeCount;
+      state.posts[likeIndex].likes = action.payload.likes;
+      return {
+        ...state,
+        posts: [...state.posts],
+      };
+    case SUBMIT_COMMENT:
+      const commentIndex = state.posts.findIndex(
+        (post) => post._id === action.payload._id
+      );
+      state.posts[commentIndex].commentCount = action.payload.commentCount;
+      state.posts[commentIndex].comments = action.payload.comments;
       return {
         ...state,
         posts: [...state.posts],

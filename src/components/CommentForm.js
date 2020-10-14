@@ -5,18 +5,24 @@ import {
   ClickAwayListener,
   TextField,
   CircularProgress,
+  IconButton,
 } from "@material-ui/core";
 import axios from "axios";
 import SearchMovieCard from "./SearchMovieCard";
 import { genreConverter } from "../util/genreConverter";
 import stringLimiter from "../util/stringLimiter";
 import urls from "../util/urls";
-function CommentForm({ postId, type, openSearchMovie }) {
+import { submitComment } from "../redux/actions/postAction";
+import { connect } from "react-redux";
+import ClearIcon from "@material-ui/icons/Clear";
+function CommentForm({ postId, type, openSearchMovie, submitComment }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [searchResult, setSearchResult] = useState([]);
   const [loading, setLoading] = useState(true);
   const [postMovie, setPostMovie] = useState({});
+  const [comment, setComment] = useState("");
+
   useEffect(() => {
     const fetchSearchResult = () => {
       if (query !== "") {
@@ -36,6 +42,28 @@ function CommentForm({ postId, type, openSearchMovie }) {
     fetchSearchResult();
     return;
   }, [query]);
+  // const handleUserEvents = useCallback((event) => {
+  //   const { key, keyCode } = event;
+  //   console.log(event);
+  //   if (keyCode === 13) {
+  //     console.log("hello");
+  //     const postComment = {
+  //       postId: postId,
+  //       comment: comment,
+  //     };
+  //     console.log(postComment);
+  //   }
+  // }, []);
+  // useEffect(() => {
+  //   document
+  //     .getElementById(postId)
+  //     .addEventListener("keypress", handleUserEvents);
+  //   return () => {
+  //     document
+  //       .getElementById("commentTextArea")
+  //       .removeEventListener("keypress", handleUserEvents);
+  //   };
+  // }, [handleUserEvents]);
   const handleOnChange = (event) => {
     if (event.target.value === "") {
       console.log("heelloo");
@@ -52,6 +80,49 @@ function CommentForm({ postId, type, openSearchMovie }) {
     setOpen(false);
   };
   // console.log(postMovie);
+  const handlePostComment = (event) => {
+    event.preventDefault();
+    // console.log(event.which);
+    if (type === "review") {
+      const postReviewComment = {
+        postId: postId,
+        comment: comment,
+        postType: type,
+      };
+      console.log(postReviewComment);
+      setComment("");
+      event.target.textcomment.value = "";
+
+      submitComment(postReviewComment);
+    } else if (type === "suggestMe") {
+      if (Object.keys(postMovie).length === 0) {
+        const postSuggestMeCommentWithoutMovie = {
+          postId: postId,
+          comment: comment,
+
+          postType: type,
+        };
+        setComment("");
+        event.target.textcomment.value = "";
+        submitComment(postSuggestMeCommentWithoutMovie);
+      } else {
+        const postSuggestMeCommentWithMovie = {
+          postId: postId,
+          comment: comment === "" ? "I am recommending this movie" : comment,
+          movieTitle: postMovie.title ? postMovie.title : postMovie.name,
+          postType: type,
+          moviePoster: postMovie.poster_path,
+          releaseYear: postMovie.release_date.split("-")[0],
+          genreId: postMovie.genre_ids,
+          overview: postMovie.overview,
+        };
+        setPostMovie({});
+        setComment("");
+        event.target.textcomment.value = "";
+        submitComment(postSuggestMeCommentWithMovie);
+      }
+    }
+  };
   return (
     <div className="commentForm">
       {type === "suggestMe" && openSearchMovie && (
@@ -98,13 +169,20 @@ function CommentForm({ postId, type, openSearchMovie }) {
             <div className="commentForm__moviePreview">
               <div className="commentForm__moviePreview__poster">
                 <img
-                  src={`${urls.movieBaseUrl}w92${postMovie.poster_path}`}
-                  alt=""
+                  src={
+                    postMovie.poster_path !== null
+                      ? `${urls.movieBaseUrl}w92${postMovie.poster_path}`
+                      : urls.movieNoPoster
+                  }
+                  alt={postMovie.title}
                 />
               </div>
               <div className="commentForm__moviePreview__movieInfo">
                 <div className="commentForm__moviePreview__movieInfo__title">
                   <h3>{postMovie.title ? postMovie.title : postMovie.name}</h3>
+                  <IconButton onClick={() => setPostMovie({})}>
+                    <ClearIcon />
+                  </IconButton>
                 </div>
                 <div className="commentForm__moviePreview__movieInfo__genreYear">
                   <div className="commentForm__moviePreview__movieInfo__year">
@@ -122,23 +200,37 @@ function CommentForm({ postId, type, openSearchMovie }) {
           )}
         </div>
       )}
-
-      <div className="commentForm__input">
-        <div className="commentForm__inputTextArea">
-          {/* <script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script> */}
-          <textarea
-            cols={65}
-            rows={1}
-            placeholder="Add a comment ..."
-            autoComplete="off"
-            autoCorrect="off"
-            // style="height: 16px;"
-          ></textarea>
+      <form onSubmit={handlePostComment} method="POST">
+        <div className="commentForm__input">
+          <div className="commentForm__inputTextArea">
+            {/* <script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script> */}
+            <textarea
+              cols={65}
+              rows={1}
+              name="textcomment"
+              placeholder="Add a comment ..."
+              autoComplete="off"
+              autoCorrect="off"
+              onChange={(e) => {
+                setComment(e.target.value);
+              }}
+              // style="height: 16px;"
+            ></textarea>
+          </div>
+          <Button
+            type="Submit"
+            disabled={
+              comment === "" && Object.keys(postMovie).length === 0
+                ? true
+                : false
+            }
+          >
+            Post
+          </Button>
         </div>
-        <Button>Post</Button>
-      </div>
+      </form>
     </div>
   );
 }
 
-export default CommentForm;
+export default connect(null, { submitComment })(CommentForm);
