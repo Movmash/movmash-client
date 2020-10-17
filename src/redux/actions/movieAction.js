@@ -19,9 +19,11 @@ export const getBannerUpcomingMovies = () => {
     axios
       .get("http://localhost:8000/api/v1/movie/upcoming-cover")
       .then((res) => {
+        console.log(res);
         dispatch({ type: GET_UPCOMINGMOVIE, payload: res.data });
       })
       .catch((e) => {
+        console.log(e);
         dispatch({ type: "err", payload: [] });
       });
   };
@@ -33,6 +35,7 @@ export const getMovieDetail = (movieId) => {
     axios
       .get(`http://localhost:8000/api/v1/movie/details/${movieId}`)
       .then((res) => {
+        console.log(res.data);
         dispatch({ type: GET_MOVIEDETAIL, payload: res.data });
       })
       .catch((e) => {

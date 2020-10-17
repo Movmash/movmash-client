@@ -43,11 +43,20 @@ export default function (state = initialState, action) {
       const likeIndex = state.posts.findIndex(
         (post) => post._id === action.payload._id
       );
-      state.posts[likeIndex].likeCount = action.payload.likeCount;
-      state.posts[likeIndex].likes = action.payload.likes;
+      const newPosts = [...state.posts];
+      newPosts[likeIndex].likeCount = action.payload.likeCount;
+      newPosts[likeIndex].likes = [...action.payload.likes];
+      // state.posts[likeIndex].likeCount = action.payload.likeCount;
+      // console.log(state.posts[likeIndex].likeCount);
+      // state.posts[likeIndex].likes = action.payload.likes;
       return {
         ...state,
-        posts: [...state.posts],
+        posts: [...newPosts],
+        // posts: [
+        //   ...state.posts,
+        //   state.posts[likeIndex].likeCount,
+        //   state.posts[likeIndex].likes,
+        // ],
       };
     case SUBMIT_COMMENT:
       const commentIndex = state.posts.findIndex(

@@ -3,6 +3,7 @@ import thunk from "redux-thunk";
 import movieReducer from "./reducers/movieReducer";
 import userReducer from "./reducers/userReducer";
 import postReducer from "./reducers/postReducer";
+import dataReducer from "./reducers/dataReducer";
 // const initialState = {
 //   movie: {},
 // };
@@ -12,6 +13,7 @@ const reducers = combineReducers({
   movie: movieReducer,
   user: userReducer,
   post: postReducer,
+  data: dataReducer,
 });
 
 // const store = createStore(

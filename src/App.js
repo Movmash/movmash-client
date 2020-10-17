@@ -17,7 +17,7 @@ import AuthRoute from "./util/AuthRoute";
 import { logoutUser, getUserData } from "./redux/actions/userAction";
 import { SET_UNAUTHENTICATED } from "./redux/types";
 import axios from "axios";
-
+import Profile from "./pages/Profile";
 const token = localStorage.mashDBToken;
 // console.log(token);
 if (token) {
@@ -51,6 +51,7 @@ function App() {
               <Route exact path="/movie/:id" component={MovieReview} />
               <AuthRoute exact path="/login" component={Login} />
               <Route exact path="/signup" component={Signup} />
+              <Route exact path="/@:userName" component={Profile} />
             </Switch>
           </div>
         </Router>

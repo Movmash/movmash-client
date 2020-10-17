@@ -11,6 +11,10 @@ import { IconButton } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import {
+  profileLikePost,
+  profileUnlikePost,
+} from "../redux/actions/dataAction";
 function PostIconButtons({
   type,
   setSearchMovie,
@@ -20,12 +24,24 @@ function PostIconButtons({
   likes,
   user,
   setLikeCountShown,
+  tag,
+  profileLikePost,
+  profileUnlikePost,
 }) {
   const handleLikePost = (id) => {
-    likePost(id);
+    if (tag) {
+      console.log(id);
+      profileLikePost(id);
+    } else {
+      likePost(id);
+    }
   };
   const handleUnLikePost = (id) => {
-    unlikePost(id);
+    if (tag) {
+      profileUnlikePost(id);
+    } else {
+      unlikePost(id);
+    }
   };
   const [isliked, setLikes] = useState(likes.includes(user._id));
   return (
@@ -128,6 +144,9 @@ const mapStateToProps = (state) => {
     user: state.user,
   };
 };
-export default connect(mapStateToProps, { likePost, unlikePost })(
-  PostIconButtons
-);
+export default connect(mapStateToProps, {
+  likePost,
+  unlikePost,
+  profileUnlikePost,
+  profileLikePost,
+})(PostIconButtons);

@@ -15,7 +15,15 @@ import urls from "../util/urls";
 import { submitComment } from "../redux/actions/postAction";
 import { connect } from "react-redux";
 import ClearIcon from "@material-ui/icons/Clear";
-function CommentForm({ postId, type, openSearchMovie, submitComment }) {
+import { profileSubmitComment } from "../redux/actions/dataAction";
+function CommentForm({
+  postId,
+  type,
+  openSearchMovie,
+  submitComment,
+  tag,
+  profileSubmitComment,
+}) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [searchResult, setSearchResult] = useState([]);
@@ -92,8 +100,12 @@ function CommentForm({ postId, type, openSearchMovie, submitComment }) {
       console.log(postReviewComment);
       setComment("");
       event.target.textcomment.value = "";
-
-      submitComment(postReviewComment);
+      if (tag) {
+        profileSubmitComment(postReviewComment);
+      } else {
+        submitComment(postReviewComment);
+      }
+      // submitComment(postReviewComment);
     } else if (type === "suggestMe") {
       if (Object.keys(postMovie).length === 0) {
         const postSuggestMeCommentWithoutMovie = {
@@ -105,7 +117,12 @@ function CommentForm({ postId, type, openSearchMovie, submitComment }) {
         console.log(postSuggestMeCommentWithoutMovie);
         setComment("");
         event.target.textcomment.value = "";
-        submitComment(postSuggestMeCommentWithoutMovie);
+        if (tag) {
+          profileSubmitComment(postSuggestMeCommentWithoutMovie);
+        } else {
+          submitComment(postSuggestMeCommentWithoutMovie);
+        }
+        // submitComment(postSuggestMeCommentWithoutMovie);
       } else {
         const postSuggestMeCommentWithMovie = {
           postId: postId,
@@ -122,7 +139,11 @@ function CommentForm({ postId, type, openSearchMovie, submitComment }) {
         setComment("");
         console.log(postSuggestMeCommentWithMovie);
         event.target.textcomment.value = "";
-        submitComment(postSuggestMeCommentWithMovie);
+        if (tag) {
+          profileSubmitComment(postSuggestMeCommentWithMovie);
+        } else {
+          submitComment(postSuggestMeCommentWithMovie);
+        }
       }
     }
   };
@@ -236,4 +257,6 @@ function CommentForm({ postId, type, openSearchMovie, submitComment }) {
   );
 }
 
-export default connect(null, { submitComment })(CommentForm);
+export default connect(null, { profileSubmitComment, submitComment })(
+  CommentForm
+);

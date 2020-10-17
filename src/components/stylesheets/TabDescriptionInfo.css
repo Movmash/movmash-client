@@ -1,0 +1,30 @@
+.tabDescriptionInfo {
+    height: 500px;
+    /* background: white; */
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.tabDescriptionInfo__logo>.MuiSvgIcon-root {
+    font-size: 62px;
+    color: white;
+}
+
+.tabDescriptionInfo__logo {
+    margin-bottom: 20px;
+}
+
+.tabDescriptionInfo__description>span {
+    font-size: 21px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: white;
+
+}
+
+.tabDescriptionInfo__description {
+    margin-bottom: 30px;
+    text-align: center;
+    width: 575px;
+}

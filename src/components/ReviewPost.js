@@ -8,7 +8,7 @@ import urls from "../util/urls";
 import PostDetails from "./PostDetails";
 import CommentForm from "./CommentForm";
 import CommentList from "./CommentList";
-function ReviewPost({ details, postId, type }) {
+function ReviewPost({ isProfile, details, postId, type }) {
   const {
     moviePoster,
     movieTitle,
@@ -24,7 +24,7 @@ function ReviewPost({ details, postId, type }) {
     comments,
   } = details;
   const [likeCountShown, setLikeCountShown] = useState(likeCount);
-  console.log(details.comments);
+  // console.log(details.comments);
   return (
     <div className="reviewPost">
       <div className="reviewPost__container">
@@ -95,6 +95,7 @@ function ReviewPost({ details, postId, type }) {
         </div>
         <div className="reviewPost__bottomIcons">
           <PostIconButtons
+            tag={isProfile}
             setLikeCountShown={setLikeCountShown}
             likes={likes}
             postId={postId}
@@ -105,7 +106,7 @@ function ReviewPost({ details, postId, type }) {
           <CommentList comments={comments} />
         </div>
         <div className="commentForm">
-          <CommentForm postId={postId} type={type} />
+          <CommentForm tag={isProfile} postId={postId} type={type} />
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./stylesheets/LeftSideBar.css";
-import { IconButton, Avatar } from "@material-ui/core";
+import { IconButton, Avatar, Link } from "@material-ui/core";
 import TelegramIcon from "@material-ui/icons/Telegram";
 import AddIcon from "@material-ui/icons/Add";
 import NotificationsNoneIcon from "@material-ui/icons/NotificationsNone";
@@ -12,7 +12,7 @@ import PostTicketPost from "./PostTicketPost";
 import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
 import { connect } from "react-redux";
 import { logoutUser } from "../redux/actions/userAction";
-function LeftSideBar({ logoutUser }) {
+function LeftSideBar({ logoutUser, userName }) {
   const [open, setOpen] = useState(false);
 
   const handleClick = () => {
@@ -48,8 +48,10 @@ function LeftSideBar({ logoutUser }) {
   return (
     <div className="leftSideBar">
       <div className="leftSideBar__container">
-        <div className="leftSideBar__container__icon">
-          <Avatar src="https://scontent.fpat3-1.fna.fbcdn.net/v/t1.0-9/119888019_2142082595936461_2747031401023743310_o.jpg?_nc_cat=109&_nc_sid=09cbfe&_nc_ohc=ItlVljbaaugAX-_LLzl&_nc_ht=scontent.fpat3-1.fna&oh=fbf15e76898631d47711bc0a81f60b01&oe=5F99422C" />
+        <div className="leftSideBar__container__icon hover">
+          <Link href={`/@${userName}`}>
+            <Avatar src="https://scontent.fpat3-1.fna.fbcdn.net/v/t1.0-9/119888019_2142082595936461_2747031401023743310_o.jpg?_nc_cat=109&_nc_sid=09cbfe&_nc_ohc=ItlVljbaaugAX-_LLzl&_nc_ht=scontent.fpat3-1.fna&oh=fbf15e76898631d47711bc0a81f60b01&oe=5F99422C" />
+          </Link>
         </div>
         <div className="leftSideBar__container__icon">
           <IconButton>
@@ -134,4 +136,10 @@ function LeftSideBar({ logoutUser }) {
   );
 }
 
-export default connect(null, { logoutUser })(LeftSideBar);
+const mapStateToProps = (state) => {
+  return {
+    userName: state.user.userName,
+  };
+};
+
+export default connect(mapStateToProps, { logoutUser })(LeftSideBar);

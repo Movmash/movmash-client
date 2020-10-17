@@ -26,9 +26,21 @@
 }
 
 .leftSideBar__container__icon>.MuiAvatar-root {
-    width: 45px !important;
-    height: 45px !important;
+    width: 45px;
+    height: 45px
 }
+
+.hover {
+    transition: 450ms;
+}
+
+.hover:hover {
+    border-radius: 50%;
+    transform: scale(1.09);
+
+}
+
+
 
 .leftSideBar__container__icons--add {
     background: linear-gradient(46.77deg, #0066FF 15.68%, rgba(169, 85, 183, 0.911342) 70.66%);

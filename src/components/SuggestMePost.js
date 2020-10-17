@@ -5,7 +5,7 @@ import PostIconButtons from "./PostIconButtons";
 import PostDetails from "./PostDetails";
 import CommentForm from "./CommentForm";
 import CommentList from "./CommentList";
-function SuggestMePost({ details, type, postId }) {
+function SuggestMePost({ isProfile, details, type, postId }) {
   const {
     duration,
     genreName,
@@ -94,6 +94,7 @@ function SuggestMePost({ details, type, postId }) {
         </div>
         <div className="SuggestMePost__container__bottomIcon">
           <PostIconButtons
+            tag={isProfile}
             postId={postId}
             type="suggestMe"
             setSearchMovie={setSearchMovie}
@@ -106,6 +107,7 @@ function SuggestMePost({ details, type, postId }) {
         </div>
         <div className="commentForm">
           <CommentForm
+            tag={isProfile}
             postId={postId}
             type={type}
             openSearchMovie={openSearchMovie}
