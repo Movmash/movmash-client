@@ -4,13 +4,15 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import axios from "axios";
-import { connect } from "react-redux";
-import { getMovieDetail } from "../redux/actions/movieAction";
-import { useHistory } from "react-router-dom";
-function MovieRow({ title, getMovieDetail }) {
+// import { connect } from "react-redux";
+// import { getMovieDetail } from "../redux/actions/movieAction";
+// import { useHistory } from "react-router-dom";
+import MoviePoster from "./MoviePoster";
+import { Link } from "react-router-dom";
+function MovieRow({ title }) {
   const [movies, setMovies] = useState([]);
   const [loading, isLoading] = useState(true);
-  const history = useHistory();
+  // const history = useHistory();
   useEffect(() => {
     axios
       .get(`http://localhost:8000/api/v1/movie/genre/${title}/1`)
@@ -73,10 +75,10 @@ function MovieRow({ title, getMovieDetail }) {
     ],
   };
 
-  const clickHandler = (id) => {
-    history.push(`/movie/${id}`);
-    getMovieDetail(id);
-  };
+  // const clickHandler = (id) => {
+  //   history.push(`/movie/${id}`);
+  //   getMovieDetail(id);
+  // };
 
   return (
     <div className="movieRow">
@@ -87,14 +89,21 @@ function MovieRow({ title, getMovieDetail }) {
             <Slider {...settings}>
               {movies.map((movie) => (
                 <div key={movie.id} className="movieRow__poster">
-                  <img
+                  {/* <Link to={`/movie/${movie.id}`}> */}
+                  <MoviePoster
+                    detail={movie}
+                    id={movie.id}
+                    posterUrl={movie.poster_path}
+                  />
+
+                  {/* <img
                     onClick={() => {
                       clickHandler(movie.id);
                     }}
                     className="movieRow__slider--image"
                     src={`https://image.tmdb.org/t/p/w185/${movie.poster_path}`}
                     alt="sasd"
-                  />
+                  /> */}
                 </div>
               ))}
             </Slider>
@@ -106,11 +115,11 @@ function MovieRow({ title, getMovieDetail }) {
     </div>
   );
 }
-const mapDispatchTopProps = (dispatch) => {
-  return {
-    getMovieDetail: (movieId) => {
-      dispatch(getMovieDetail(movieId));
-    },
-  };
-};
-export default connect(null, mapDispatchTopProps)(MovieRow);
+// const mapDispatchTopProps = (dispatch) => {
+//   return {
+//     getMovieDetail: (movieId) => {
+//       dispatch(getMovieDetail(movieId));
+//     },
+//   };
+// };
+export default MovieRow;

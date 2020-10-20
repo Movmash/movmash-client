@@ -41,11 +41,11 @@ function Movies({ loading, getUpcomingMovies, upcomingMovies }) {
   };
 
   const trailers = [];
-  if (upcomingMovies.length !== 0) {
-    for (let i = 0; i < upcomingMovies.length; i++) {
-      trailers.push(upcomingMovies[i].trailers[0].key);
-    }
-  }
+  // if (upcomingMovies.length !== 0) {
+  //   for (let i = 0; i < upcomingMovies.length; i++) {
+  //     trailers.push(upcomingMovies[i].trailers[0].key);
+  //   }
+  // }
   return (
     <div className="movies">
       {!loading && upcomingMovies.length !== 0 ? (
@@ -54,7 +54,7 @@ function Movies({ loading, getUpcomingMovies, upcomingMovies }) {
             id={upcomingMovies[randomNumber].id}
             imageUrl={`
 https://image.tmdb.org/t/p/original${upcomingMovies[randomNumber].backdrop_path}`}
-            videoSrc={`https://www.youtube.com/watch?v=${upcomingMovies[randomNumber].trailers[0].key}?showinfo=0&enablejsapi=1&origin=http://localhost:3000/`}
+            // videoSrc={`https://www.youtube.com/watch?v=${upcomingMovies[randomNumber].trailers[0].key}?showinfo=0&enablejsapi=1&origin=http://localhost:3000/`}
           />{" "}
           <div className="movies__content">
             <div className="movies__heading">
@@ -73,28 +73,29 @@ https://image.tmdb.org/t/p/original${upcomingMovies[randomNumber].backdrop_path}
                 ))}{" "}
               </Slider>
             </div>
-
-            <MovieRow title="Trending" />
-            <MovieRow title="Top Rated" />
-            <MovieRow title="Upcoming" />
-            <MovieRow title="Action" />
-            <MovieRow title="Comedy" />
-            <MovieRow title="Horror" />
-
-            <MovieRow title="Thriller" />
-            <MovieRow title="Romance" />
-            <MovieRow title="Adventure" />
-            <MovieRow title="Drama" />
-            <MovieRow title="Crime" />
-            <MovieRow title="Family" />
-            <MovieRow title="Fantasy" />
-            <MovieRow title="Animation" />
-            <MovieRow title="Sci-Fi" />
-            <MovieRow title="War" />
-            <MovieRow title="Documentary" />
-            <MovieRow title="Music" />
-            <MovieRow title="History" />
-            <MovieRow title="TV Movie" />
+            <div className="movies__rows">
+              {" "}
+              <MovieRow title="Trending" />
+              {/* <MovieRow title="Top Rated" />
+              <MovieRow title="Upcoming" /> */}
+              {/* <MovieRow title="Action" />
+              <MovieRow title="Comedy" />
+              <MovieRow title="Horror" /> */}
+              {/* <MovieRow title="Thriller" />
+              <MovieRow title="Romance" />
+              <MovieRow title="Adventure" />
+              <MovieRow title="Drama" />
+              <MovieRow title="Crime" />
+              <MovieRow title="Family" />
+              <MovieRow title="Fantasy" />
+              <MovieRow title="Animation" />
+              <MovieRow title="Sci-Fi" />
+              <MovieRow title="War" />
+              <MovieRow title="Documentary" />
+              <MovieRow title="Music" />
+              <MovieRow title="History" />
+              <MovieRow title="TV Movie" /> */}
+            </div>
           </div>{" "}
         </>
       ) : (

@@ -15,6 +15,8 @@ import { GET_UPCOMINGMOVIE, LOADING_DATA, GET_MOVIEDETAIL } from "../types";
 
 export const getBannerUpcomingMovies = () => {
   return (dispatch) => {
+    //  dispatch({ type: GET_UPCOMINGMOVIE, payload: [] });
+    // console.log(dispatch);
     dispatch({ type: LOADING_DATA });
     axios
       .get("http://localhost:8000/api/v1/movie/upcoming-cover")

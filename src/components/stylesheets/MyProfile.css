@@ -8,6 +8,35 @@
     position: relative;
 }
 
+.myProfile__profileButton {
+    position: absolute;
+    top: 35rem;
+    position: absolute;
+    left: 4.5rem;
+}
+
+.myProfile__profileButton>button {
+    background: none;
+    border: none;
+    outline: none;
+    border: 1px solid #499E4C;
+    /* padding: 5px 30px 5px 30px; */
+    width: 126px;
+    height: 27px;
+    /* background: rgb(226, 226, 226); */
+    border-radius: 3px;
+    /* color: rgb(75, 75, 75); */
+    color: #499E4C;
+    transition: 450ms;
+}
+
+.myProfile__profileButton:hover>button {
+    color: whitesmoke;
+    font-weight: 900;
+    background: #499E4C;
+    cursor: pointer;
+}
+
 .myProfile__coverPhoto>img {
     max-height: 400px;
     width: 65rem;
@@ -28,6 +57,7 @@
     margin-left: 20rem;
     margin-top: 10px;
     width: 45rem;
+    min-height: 13rem;
 }
 
 .myProfile__displayPhoto>img {

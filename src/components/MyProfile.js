@@ -32,15 +32,18 @@ function MyProfile({
           <div className="myProfile__displayPhoto">
             <img src={profileImageUrl} alt={userName} />
           </div>
+          <div className="myProfile__profileButton">
+            <button>Edit Profile</button>
+          </div>
         </div>
         <div className="myProfile__userInfo">
           <div className="myProfile__userInfo__nameButton">
             <div className="myProfile__userInfo--name">
-              <h1>{fullName}</h1>
+              <h1>{userName}</h1>
             </div>
           </div>
           <div className="myProfile__userInfo__userName">
-            <span>@{userName}</span>
+            <span>{fullName}</span>
           </div>
           <div className="myProfile__userInfo__personalityGenre">
             <span>{genre}</span>

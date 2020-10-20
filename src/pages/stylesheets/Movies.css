@@ -11,8 +11,9 @@
 
 .movies__slider {
   margin-top: 100px;
-  margin-left: 100px;
-  margin-right: 100px;
+  /* margin-left: 100px; */
+  /* margin-right: 100px; */
+  width: 84rem;
   display: flex;
   flex-flow: column;
 }
@@ -30,11 +31,21 @@
 }
 
 .movieRow__slider>.slick-slider>.slick-prev {
-  visibility: hidden !important;
+  /* visibility: hidden !important; */
+  margin-left: -35px !important;
 }
 
 .movies__content {
   margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.movies__rows {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* .slick-next {

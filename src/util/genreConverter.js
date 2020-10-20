@@ -1,4 +1,4 @@
-const genreConverter = (data) => {
+const genreConverter = (data, number) => {
   const genreList = {
     28: "Action",
     35: "Comedy",
@@ -44,6 +44,9 @@ const genreConverter = (data) => {
     }
   }
   // return movieGenres;
+  if (number !== isNaN) {
+    return currentGenre.slice(0, number).join(" | ");
+  }
   return currentGenre.join(" | ");
 };
 

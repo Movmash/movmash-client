@@ -56,11 +56,11 @@ function Banner({ id, imageUrl, videoSrc, getMovieDetail }) {
       >
         <div className="banner__dialogContent">
           <div className="player-wrapper">
-            <ReactPlayer
+            {/* <ReactPlayer
               className="react-player"
               controls={true}
               url={videoSrc}
-            />
+            /> */}
           </div>
         </div>
       </Dialog>

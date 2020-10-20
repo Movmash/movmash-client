@@ -9,6 +9,8 @@ import {
   PROFILE_LIKE_POST,
   PROFILE_UNLIKE_POST,
   PROFILE_SUBMIT_COMMENT,
+  FOLLOW_USER,
+  UNFOLLOW_USER,
 } from "../types";
 
 const initialState = {
@@ -85,6 +87,24 @@ export default function (state = initialState, action) {
       return {
         ...state,
         profilePosts: [...state.profilePosts],
+      };
+    case FOLLOW_USER:
+      return {
+        ...state,
+        mashUser: {
+          ...state.mashUser,
+          followersCount: action.payload.followersCount,
+          followers: action.payload.followers,
+        },
+      };
+    case UNFOLLOW_USER:
+      return {
+        ...state,
+        mashUser: {
+          ...state.mashUser,
+          followersCount: action.payload.followersCount,
+          followers: action.payload.followers,
+        },
       };
     default:
       break;

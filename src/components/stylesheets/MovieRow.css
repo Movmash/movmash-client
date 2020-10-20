@@ -1,4 +1,4 @@
-.movieRow__slider--image {
+/* .movieRow__slider--image {
     object-fit: contain;
     border-radius: 10px;
     max-width: 200px;
@@ -9,24 +9,36 @@
     transform: scale(1.08);
     opacity: 1;
     z-index: 100;
-}
+    cursor: pointer;
+} */
 
 .movieRow {
+    /* position: relative; */
     margin-top: 150px;
-    margin-left: 100px;
-    margin-right: 100px;
+    /* margin-left: 100px; */
+    /* margin-right: 100px; */
     display: flex;
     flex-flow: column;
 }
 
+/* .movieRow__poster {
+    height: 300px;
+} */
+
 .movieRow__slider {
     margin-top: 20px;
+    width: 84rem;
+    height: 300px;
 }
 
 .movieRow__titleText {
     color: lightgray;
 }
 
+.movies__slider>.slick-slider>.slick-prev {
+    /* visibility: hidden !important; */
+    margin-left: -35px !important;
+}
 
 /* 
     max-width: 200px;

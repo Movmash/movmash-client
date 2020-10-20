@@ -5,12 +5,24 @@ import SuggestMePost from "./SuggestMePost";
 import { connect } from "react-redux";
 import { getUserPost } from "../redux/actions/dataAction";
 import TabLoadingData from "./TabLoadingData";
+import { getMashUserPost } from "../redux/actions/dataAction";
 
-function ProfilePosts({ getUserPost, profilePosts, infoLoading }) {
+function ProfilePosts({
+  getMashUserPost,
+  isMyProfile,
+  getUserPost,
+  profilePosts,
+  infoLoading,
+
+  userName,
+}) {
   useEffect(() => {
-    getUserPost();
-  }, [getUserPost]);
-
+    if (isMyProfile) {
+      getUserPost();
+    } else {
+      getMashUserPost(userName);
+    }
+  }, [isMyProfile, getMashUserPost, getUserPost, userName]);
   return (
     <div className="profilePosts">
       {!infoLoading ? (
@@ -57,7 +69,9 @@ const mapStateToProps = (state) => {
     infoLoading: state.data.infoLoading,
   };
 };
-export default connect(mapStateToProps, { getUserPost })(ProfilePosts);
+export default connect(mapStateToProps, { getUserPost, getMashUserPost })(
+  ProfilePosts
+);
 
 // {
 //           if (post.type === "review")

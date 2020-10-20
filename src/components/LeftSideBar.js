@@ -12,7 +12,7 @@ import PostTicketPost from "./PostTicketPost";
 import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
 import { connect } from "react-redux";
 import { logoutUser } from "../redux/actions/userAction";
-function LeftSideBar({ logoutUser, userName }) {
+function LeftSideBar({ logoutUser, userName, userImage }) {
   const [open, setOpen] = useState(false);
 
   const handleClick = () => {
@@ -48,9 +48,11 @@ function LeftSideBar({ logoutUser, userName }) {
   return (
     <div className="leftSideBar">
       <div className="leftSideBar__container">
+        {" "}
         <div className="leftSideBar__container__icon hover">
+          {" "}
           <Link href={`/@${userName}`}>
-            <Avatar src="https://scontent.fpat3-1.fna.fbcdn.net/v/t1.0-9/119888019_2142082595936461_2747031401023743310_o.jpg?_nc_cat=109&_nc_sid=09cbfe&_nc_ohc=ItlVljbaaugAX-_LLzl&_nc_ht=scontent.fpat3-1.fna&oh=fbf15e76898631d47711bc0a81f60b01&oe=5F99422C" />
+            <Avatar src={userImage} />
           </Link>
         </div>
         <div className="leftSideBar__container__icon">
@@ -139,6 +141,7 @@ function LeftSideBar({ logoutUser, userName }) {
 const mapStateToProps = (state) => {
   return {
     userName: state.user.userName,
+    userImage: state.user.profileImageUrl,
   };
 };
 
