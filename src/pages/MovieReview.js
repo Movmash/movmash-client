@@ -94,9 +94,11 @@ function MovieReview({ movieDetails, getMovie, loading }) {
           <div className="movieReview__content">
             <div className="movieReview__content--basicInfo">
               <MovieInfoCard
+                movieStatus={movieDetails.movie_status}
                 title={
                   movieDetails.title ? movieDetails.title : movieDetails.name
                 }
+                id={movieDetails.id}
                 poster={movieDetails.poster_path}
                 releaseDate={movieDetails.release_date}
                 duration={movieDetails.runtime}
@@ -105,15 +107,17 @@ function MovieReview({ movieDetails, getMovie, loading }) {
                 overview={movieDetails.overview}
               />
             </div>
-            <div className="movieReview__content--buttons">
+
+            {/* <div className="movieReview__content--buttons">
               <MovieReviewButtons />
-            </div>
+            </div> */}
             <div className="movieReview__content--highlyRated">
               <ReviewCard />
             </div>
             <div className="movieReview__content--movieCrew">
               <MovieCrewList casts={movieDetails.credits.cast} />
             </div>
+
             <div className="movieReview__content--allreview">
               <Slider {...settings}>
                 <ReviewCard />

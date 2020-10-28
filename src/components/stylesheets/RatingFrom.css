@@ -1,0 +1,50 @@
+.ratingForm {
+    min-width: 40rem;
+    /* min-height: 30vh; */
+    color: #272531;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.ratingForm__starRatingForm {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    /* margin: 100px 40px 20px 40px; */
+}
+
+.ratingForm__preview>span {
+
+    font-family: Righteous;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 5rem;
+    line-height: 22px;
+    letter-spacing: 0.05em;
+
+    color: #D2D2D2;
+}
+
+.ratingForm__preview {
+    margin: 100px 40px 30px 40px;
+
+}
+
+.ratingForm__stars>.MuiRating-root {
+    font-size: 3rem;
+}
+
+.ratingForm__stars {
+    margin-top: 30px;
+}
+
+.ratingForm__RatingFormButton {
+    display: flex;
+}
+
+.ratingForm__RatingFormButton {
+    margin: 40px 0 30px 0;
+
+}

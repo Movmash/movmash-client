@@ -1,6 +1,7 @@
 .movieInfoCard {
     display: flex;
     /* flex-wrap: wrap; */
+    width: 100%;
 }
 
 .movieInfoCard__poster {
@@ -29,6 +30,7 @@
 
 .movieInfoCard__info--subHeading {
     display: flex;
+    flex-flow: column;
 }
 
 .movieInfoCard__info--subHeading--slogan {
@@ -48,7 +50,37 @@
     align-items: center;
 }
 
+.movieInfoCard__info--subHeading--tagButtons {
+    display: flex;
+    margin-top: 10px;
 
+}
+
+.movieInfoCard__info--subHeading--tagButton {
+    transition: 450ms;
+    border-radius: 50%;
+}
+
+.movieInfoCard__info--subHeading--tagButton>.MuiButtonBase-root>.MuiIconButton-label>.MuiSvgIcon-root {
+    color: white;
+}
+
+.selected>.MuiButtonBase-root>.MuiIconButton-label>.MuiSvgIcon-root {
+    color: purple;
+}
+
+.selected:hover {
+    background: transparent !important;
+}
+
+.movieInfoCard__info--subHeading--tagButtons>* {
+    margin-right: 10px;
+}
+
+.movieInfoCard__info--subHeading--tagButton:hover {
+    background: purple;
+    border-radius: 50%;
+}
 
 .movieInfoCard__info--crewMember-name>h4 {
 

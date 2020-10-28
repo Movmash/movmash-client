@@ -32,15 +32,39 @@ export const getBannerUpcomingMovies = () => {
 };
 
 export const getMovieDetail = (movieId) => {
+  let payload = {};
   return (dispatch) => {
     dispatch({ type: LOADING_DATA });
     axios
       .get(`http://localhost:8000/api/v1/movie/details/${movieId}`)
       .then((res) => {
-        console.log(res.data);
-        dispatch({ type: GET_MOVIEDETAIL, payload: res.data });
+        // console.log(res.data);
+        payload = { ...res.data };
+        axios
+          .get(`http://localhost:8000/api/v1/movie/movie-status/${movieId}`)
+          .then((status) => {
+            let movie_status = {};
+            movie_status = { ...status.data };
+            console.log(payload);
+            axios
+              .get(
+                `http://localhost:8000/api/v1/movie/movie-rated-status/${movieId}`
+              )
+              .then((ratedStatus) => {
+                movie_status = { ...movie_status, ...ratedStatus.data };
+                payload.movie_status = movie_status;
+                dispatch({ type: GET_MOVIEDETAIL, payload: payload });
+              })
+              .catch((e) => {
+                console.log(e);
+              });
+          })
+          .catch((e) => {
+            console.log(e);
+          });
       })
       .catch((e) => {
+        console.log(e);
         dispatch({ type: "err", payload: [] });
       });
   };
