@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+
+
+
+.chatUserNamePlate {
+    max-width: 600px;
+    display: flex;
+    margin: 20px;
+    justify-content: space-between
+}
+
+.chatUserNamePlate__header__userInfo {
+    display: flex;
+}
+
+.chatUserNamePlate__header__userName--info {
+    margin-left: 20px;
+}
+
+.chatUserNamePlate__header--name>h3 {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    letter-spacing: 0.05em;
+    color: lightGray;
+
+}
+
+.chatUserNamePlate__header--username>h4 {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 21px;
+    letter-spacing: 0.05em;
+    color: #adadad;
+}
+
+.chatUserNamePlate__header__tags {
+    font-family: 'Righteous',
+        cursive;
+    color: white;
+}

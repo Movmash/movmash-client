@@ -1,0 +1,85 @@
+.messageBox {
+    /* background: #f3f3f3; */
+    /* border-radius: 20px; */
+    padding: 5px 20px;
+    /* color: white; */
+    display: inline-block;
+    max-width: 80%;
+}
+
+.other {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.mine {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 5px;
+}
+
+.messageText {
+    width: 100%;
+    letter-spacing: 0;
+    float: left;
+    font-size: 1em;
+    word-wrap: break-word;
+    padding: 2px;
+}
+
+.messageText img {
+    vertical-align: middle;
+}
+
+.messageContainer {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 20px 0 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.sentText {
+    display: flex;
+    align-items: center;
+    font-family: Helvetica;
+    color: #828282;
+    letter-spacing: 0.3px;
+}
+
+.pl-10 {
+    padding-left: 10px;
+}
+
+.pr-10 {
+    padding-right: 10px;
+}
+
+.justifyStart {
+    justify-content: flex-start;
+}
+
+.justifyEnd {
+    justify-content: flex-end;
+}
+
+.colorWhite {
+    color: white;
+}
+
+.colorDark {
+    color: white;
+}
+
+.backgroundBlue {
+    background: #3f414a;
+}
+
+.backgroundLight {
+    background: transparent;
+    border: 1px solid rgb(128, 128, 128);
+    margin-left: 10px;
+}

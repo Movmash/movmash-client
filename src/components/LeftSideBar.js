@@ -12,9 +12,10 @@ import PostTicketPost from "./PostTicketPost";
 import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
 import { connect } from "react-redux";
 import { logoutUser } from "../redux/actions/userAction";
+import { useHistory } from "react-router-dom";
 function LeftSideBar({ logoutUser, userName, userImage }) {
   const [open, setOpen] = useState(false);
-
+  const history = useHistory();
   const handleClick = () => {
     setOpen((prev) => !prev);
   };
@@ -56,7 +57,11 @@ function LeftSideBar({ logoutUser, userName, userImage }) {
           </Link>
         </div>
         <div className="leftSideBar__container__icon">
-          <IconButton>
+          <IconButton
+            onClick={() => {
+              history.push("/messages/inbox/");
+            }}
+          >
             <TelegramIcon />
           </IconButton>
         </div>

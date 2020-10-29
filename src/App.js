@@ -18,6 +18,7 @@ import { logoutUser, getUserData } from "./redux/actions/userAction";
 import { SET_UNAUTHENTICATED } from "./redux/types";
 import axios from "axios";
 import Profile from "./pages/Profile";
+import Chat from "./pages/Chat";
 const token = localStorage.mashDBToken;
 // console.log(token);
 if (token) {
@@ -52,6 +53,7 @@ function App() {
               <AuthRoute exact path="/login" component={Login} />
               <Route exact path="/signup" component={Signup} />
               <Route exact path="/@:userName" component={Profile} />
+              <Route path="/messages/inbox/:userName" component={Chat} />
             </Switch>
           </div>
         </Router>

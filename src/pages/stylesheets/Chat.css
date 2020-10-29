@@ -1,0 +1,254 @@
+.chat {
+  height: 91.5vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chat_container {
+  background: #2e2b3b;
+  border: 1px solid rgb(88, 88, 88);
+  width: 60rem;
+  height: 80vh;
+  border-radius: 2px;
+  display: flex;
+}
+
+.chat_container__left {
+  width: 30%;
+  /* background: white; */
+  height: 100%;
+  overflow-y: auto;
+  border-right: 1px solid rgb(88, 88, 88);
+}
+
+.chat_container__right {
+  width: 70%;
+  height: 100%;
+  /* background: red; */
+}
+
+.chat_container__left__header {
+  background: #3f414a;
+  height: 4rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.chat_container__left__header>h1 {
+  color: white;
+  font-size: 18px;
+}
+
+.chat_container__left__user__list {
+  padding: 0.5px 0 0.5px 0;
+}
+
+.chat_container__left__user__list:hover {
+  cursor: pointer;
+  background: #272531 !important;
+  padding: 0.5px 0 0.5px 0;
+}
+
+.chat_container__left__user__list.selected:hover {
+  cursor: pointer;
+  /* background: #272531 !important; */
+  padding: 0.5px 0 0.5px 0
+}
+
+.chat_container__left__user__list.selected {
+  background: #272531 !important;
+}
+
+/* .chat_container__left__userList {
+    overflow-y: auto;
+    height: 90%;
+} */
+.chat_container__right {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+}
+
+.chat_container__right__header {
+  background: #3f414a;
+  height: 4rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.chat_container__right__input>input {
+  width: 98.2%;
+  background: transparent;
+  border-top: 1px solid rgb(119, 119, 119);
+  outline: none;
+  color: white;
+  height: 40px;
+  padding-left: 10px;
+  border-left: none;
+  border-bottom: none;
+  border-right: none;
+}
+
+.chat_container__right__input>button {
+  display: none;
+}
+
+.chat_container__right__input>input::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: lightgray;
+  /* opacity: 1; */
+  /* Firefox */
+}
+
+.chat_container__right__input>input:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: lightgray;
+}
+
+.chat_container__right__input>input::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: lightgray;
+}
+
+.chat_container__right__header {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.chat_container__right__messages {
+  /* background: white; */
+  height: 100%;
+  overflow-y: auto;
+}
+
+.chat_container__right__messages--my_messages {
+  background: #3f414a;
+  max-width: 25rem;
+  padding: 10px;
+  width: fit-content;
+  border-radius: 10px;
+  display: flex;
+  /* flex-flow: column; */
+  justify-content: flex-start;
+}
+
+.chat_container__right__messages--my_messages>span,
+.chat_container__right__messages--other_messages>span {
+  color: white;
+  max-width: fit-content;
+}
+
+.chat_container__right__messages--other_messages {
+  /* background: #3f414a; */
+  border: 1px solid #c4c4c4;
+  max-width: 25rem;
+  padding: 10px;
+  border-radius: 10px;
+  width: fit-content;
+  display: flex;
+}
+
+/* .chat_container__right__messages {
+  display: flex;
+  flex-flow: column;
+} */
+
+/* ............. */
+/* 
+.messageBox {
+  background: #f3f3f3;
+  border-radius: 20px;
+  padding: 5px 20px;
+  color: white;
+  display: inline-block;
+  max-width: 80%;
+}
+
+.other {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.mine {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 5px;
+}
+
+.messageText {
+  width: 100%;
+  letter-spacing: 0;
+  float: left;
+  font-size: 1em;
+  word-wrap: break-word;
+  padding: 2px;
+}
+
+.messageText img {
+  vertical-align: middle;
+}
+
+.messageContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 20px 0 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.sentText {
+  display: flex;
+  align-items: center;
+  font-family: Helvetica;
+  color: #828282;
+  letter-spacing: 0.3px;
+}
+
+.pl-10 {
+  padding-left: 10px;
+}
+
+.pr-10 {
+  padding-right: 10px;
+}
+
+.justifyStart {
+  justify-content: flex-start;
+}
+
+.justifyEnd {
+  justify-content: flex-end;
+}
+
+.colorWhite {
+  color: white;
+}
+
+.colorDark {
+  color: white;
+}
+
+.backgroundBlue {
+  background: #3f414a;
+}
+
+.backgroundLight {
+  background: transparent;
+  border: 1px solid rgb(128, 128, 128);
+  margin-left: 10px;
+} */

@@ -4,6 +4,7 @@ import movieReducer from "./reducers/movieReducer";
 import userReducer from "./reducers/userReducer";
 import postReducer from "./reducers/postReducer";
 import dataReducer from "./reducers/dataReducer";
+import chatReducer from "./reducers/chatReducer";
 // const initialState = {
 //   movie: {},
 // };
@@ -14,6 +15,7 @@ const reducers = combineReducers({
   user: userReducer,
   post: postReducer,
   data: dataReducer,
+  chat: chatReducer,
 });
 
 // const store = createStore(
