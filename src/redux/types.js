@@ -45,6 +45,7 @@ export const LOADING_ROOM = "LOADING_ROOM";
 export const LOADING_MESSAGE = "LOADING_MESSAGE";
 export const SET_ALL_ROOMS = "SET_ALL_ROOMS";
 export const SET_ALL_MESSAGE = "SET_ALL_MESSAGE";
+export const ADD_CHAT = "ADD_CHAT";
 // export const GET_TRENDING_MOVIE = "GET_TRENDING_MOVIE";
 // export const GET_UPCOMING_MOVIE = "GET_UPCOMING_MOVIE";
 // export const GET_TOPRATED_MOVIE = "GET_TOPRATED_MOVIE";

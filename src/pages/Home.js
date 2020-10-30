@@ -15,6 +15,7 @@ function Home({
   getSubcriberPost,
   posts,
   postLoading,
+  userId,
 }) {
   useEffect(() => {
     if (authenticated) {
@@ -98,6 +99,7 @@ function Home({
 const mapStateTopProps = (state) => {
   return {
     authenticated: state.user.authenticated,
+    userId: state.user._id,
     loading: state.user.loading,
     posts: state.post.posts,
     postLoading: state.post.loading,

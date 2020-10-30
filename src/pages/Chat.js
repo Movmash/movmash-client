@@ -1,23 +1,69 @@
 import React, { useEffect, useState } from "react";
 import "./stylesheets/Chat.css";
 import UserNamePlate from "../components/UserNamePlate";
-import { Avatar } from "@material-ui/core";
+// import { Avatar } from "@material-ui/core";
+// import io from "socket.io-client";
 import { connect } from "react-redux";
-import { getAllRooms } from "../redux/actions/chatAction";
+import ScrollToBottom from "react-scroll-to-bottom";
+import { getAllRooms, addInChats } from "../redux/actions/chatAction";
 import ChatUserNamePlate from "../components/ChatUserNamePlate";
 import ChatMessages from "../components/ChatMessages";
-function Chat({ getAllRooms, rooms, userId }) {
+import { useHistory } from "react-router-dom";
+import { useSocket } from "../contexts/SocketProvider";
+// let socket;
+function Chat({ getAllRooms, rooms, userId, addInChats }) {
   const [selectedUser, setSelectedUser] = useState({});
   const [selectedUserName, setSelectedUserName] = useState("");
+  const [message, setMessage] = useState("");
+  const [roomId, setRoomId] = useState("");
+  const history = useHistory();
+  const socket = useSocket();
   useEffect(() => {
     getAllRooms();
-  }, [getAllRooms]);
 
-  const handleClickOnUserList = (userDetails) => {
+    // return () => {};
+  }, [getAllRooms]);
+  // useEffect(() => {
+  //   if (userId !== undefined && socket !== undefined) {
+  //     socket.emit("join-chat", { userId: userId });
+  //   }
+  // }, [userId, socket]);
+  useEffect(() => {
+    console.log(socket);
+    if (socket !== undefined) {
+      socket.on("message", (message) => {
+        console.log(message);
+        addInChats(message);
+        // setMessages((messages) => [...messages, message]);
+      });
+      return () => {
+        console.log("leave");
+        socket.off();
+      };
+    }
+  }, [addInChats, socket]);
+  const handleClickOnUserList = (userDetails, room_Id) => {
+    history.push(`/messages/inbox/${room_Id}`);
     setSelectedUserName(userDetails.userName);
     setSelectedUser({ ...userDetails });
+    setRoomId(room_Id);
+    // socket.emit("join-chat", { roomId: roomId, userDetails });
   };
+  const handleSendMessage = (e) => {
+    e.preventDefault();
+    const messageData = {
+      roomId: roomId,
+      sender: userId,
+      recipient: selectedUser._id,
+      message: message,
+    };
 
+    if (message !== "" && socket !== undefined) {
+      socket.emit("sendMessage", messageData);
+      // console.log(messageData);
+      setMessage("");
+    }
+  };
   return (
     <div className="chat">
       <div className="chat_container">
@@ -30,12 +76,12 @@ function Chat({ getAllRooms, rooms, userId }) {
               const userDetails = room.participants.find(
                 (user) => user._id !== userId
               );
-              console.log(userDetails);
+
               return (
                 <div
                   key={room._id}
                   onClick={() => {
-                    handleClickOnUserList(userDetails);
+                    handleClickOnUserList(userDetails, room._id);
                   }}
                   className={`chat_container__left__user__list ${
                     userDetails.userName === selectedUserName ? "selected" : ""
@@ -71,11 +117,20 @@ function Chat({ getAllRooms, rooms, userId }) {
                 />
               </div>
               <div className="chat_container__right__messages">
-                <ChatMessages />
+                <ScrollToBottom className="chat_container__right__messages">
+                  <ChatMessages />
+                </ScrollToBottom>
               </div>
-              <form>
+              <form onSubmit={handleSendMessage}>
                 <div className="chat_container__right__input">
-                  <input type="text" placeholder="send message ..."></input>
+                  <input
+                    value={message}
+                    onChange={(e) => {
+                      setMessage(e.target.value);
+                    }}
+                    type="text"
+                    placeholder="send message ..."
+                  ></input>
                   <button type="submit">submit</button>
                 </div>
               </form>
@@ -92,4 +147,4 @@ const mapStateToProps = (state) => {
     userId: state.user._id,
   };
 };
-export default connect(mapStateToProps, { getAllRooms })(Chat);
+export default connect(mapStateToProps, { getAllRooms, addInChats })(Chat);

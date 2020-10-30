@@ -3,6 +3,7 @@ const {
   LOADING_MESSAGE,
   SET_ALL_MESSAGE,
   SET_ALL_ROOMS,
+  ADD_CHAT,
 } = require("../types");
 
 const initialState = {
@@ -35,6 +36,11 @@ const chatReducer = (state = initialState, action) => {
         ...state,
         rooms: [...action.payload],
         loadingRoom: false,
+      };
+    case ADD_CHAT:
+      return {
+        ...state,
+        messages: [...state.messages, ...action.payload],
       };
   }
 
