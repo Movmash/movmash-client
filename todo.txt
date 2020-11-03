@@ -11,4 +11,10 @@ II TODO (Notification)
 2. show the batch style of unread notification
 3. send the notification mark as read
 
-III TODO (Chat)
+III TODO (Chat) D
+
+IV TODO (LIVE SHOW)
+
+V TODO (ROOM THEATRE)
+
+VI TODO (SYNCRONIZED PLAYER)

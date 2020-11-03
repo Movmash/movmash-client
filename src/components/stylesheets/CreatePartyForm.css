@@ -1,0 +1,38 @@
+.createPartyForm {
+  width: fit-content;
+  padding: 0 70px 0 70px;
+  min-height: 30rem;
+  display: flex;
+  justify-content: center;
+}
+.createPartyForm__roomTitle {
+  margin-top: 10px;
+}
+.createPartyForm__roomDescription {
+  margin-top: 10px;
+}
+
+.createPartyForm__contentSelection {
+  margin-top: 10px;
+}
+
+.createPartyForm__privacySelection {
+  margin-top: 10px;
+}
+.createPartyForm__actionButtons {
+  margin-top: 10px;
+}
+.createPartyForm__contentSelection__question,
+.createPartyForm__privacySelection__question {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.createPartyForm__privacySelection_radioButton {
+  display: flex;
+  justify-content: space-between;
+}
+.createPartyForm__actionButtons {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0 30px 0;
+}

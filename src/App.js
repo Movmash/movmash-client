@@ -21,6 +21,8 @@ import Profile from "./pages/Profile";
 import Chat from "./pages/Chat";
 import { connect } from "react-redux";
 import { SocketProvider } from "./contexts/SocketProvider";
+import Room from "./pages/Room";
+import Singup from "./pages/Singup";
 // const token = localStorage.mashDBToken;
 // // console.log(token);
 // if (token) {
@@ -48,34 +50,63 @@ function App({ userId }) {
   }, [userId]);
   return (
     // <Provider store={store}>
+    <SocketProvider id={id}>
+      <div className="app">
+        <Router>
+          <div className="app__container">
+            <Switch>
+              <AuthRoute exact path="/login">
+                <Navbar />
+                <Login />
+              </AuthRoute>
 
-    <div className="app">
-      <Router>
-        <Navbar />
-        <div className="app__container">
-          <Switch>
-            <AuthRoute exact path="/login" component={Login} />
-            <SocketProvider id={id}>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/movies" component={Movies} />
-              <Route exact path="/live" component={LiveShow} />
-              <Route exact path="/search" component={Search} />
-              <Route exact path="/explore" component={Explore} />
-              <Route exact path="/movie/:id" component={MovieReview} />
+              <Route exact path="/">
+                <Navbar />
+                <Home />
+              </Route>
+              <Route exact path="/movies">
+                <Navbar />
+                <Movies />
+              </Route>
+              <Route exact path="/live">
+                <Navbar />
+                <LiveShow />
+              </Route>
+              <Route exact path="/search">
+                <Navbar />
+                <Search />
+              </Route>
+              <Route exact path="/explore">
+                <Navbar />
+                <Explore />
+              </Route>
+              <Route exact path="/movie/:id">
+                <Navbar />
+                <MovieReview />
+              </Route>
 
-              <Route exact path="/signup" component={Signup} />
-              <Route exact path="/@:userName" component={Profile} />
+              <Route exact path="/signup">
+                <Navbar />
+                <Singup />
+              </Route>
+              <Route exact path="/@:userName">
+                <Navbar />
+                <Profile />
+              </Route>
               <Route exact path="/messages/inbox/">
+                <Navbar />
                 <Chat />
               </Route>
               <Route exact path="/messages/inbox/:roomId">
+                <Navbar />
                 <Chat />
               </Route>
-            </SocketProvider>
-          </Switch>
-        </div>
-      </Router>
-    </div>
+            </Switch>
+            <Route exact path="/live/room/:roomCode" component={Room} />
+          </div>
+        </Router>
+      </div>
+    </SocketProvider>
     // </Provider>
   );
 }
