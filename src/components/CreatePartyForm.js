@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./stylesheets/CreatePartyForm.css";
 import TextField from "@material-ui/core/TextField";
 import { Radio, Button } from "@material-ui/core";
+import axios from "axios";
 function CreatePartyForm({ closeCreateTheatrDialog }) {
   const [privacy, setPrivacy] = useState("");
   const [videoUrl, setVideoUrl] = useState("");
@@ -12,13 +13,22 @@ function CreatePartyForm({ closeCreateTheatrDialog }) {
     setPrivacy(e.target.value);
   };
   const handleCreateParty = () => {
-    const RoomDetail = {
+    const roomDetail = {
       roomTitle: roomTitle,
       description: description,
       privacy: privacy,
       videoUrl: videoUrl,
+      roomCode: "asdasdsa",
     };
-    console.log(RoomDetail);
+    // console.log(roomDetail);
+    axios
+      .post("http://localhost:8000/api/v1/live/create-live-show", roomDetail)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
   return (
     <div className="createPartyForm">

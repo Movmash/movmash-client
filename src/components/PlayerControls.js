@@ -6,7 +6,7 @@ import PauseIcon from "@material-ui/icons/Pause";
 import VolumeUpIcon from "@material-ui/icons/VolumeUp";
 import SyncIcon from "@material-ui/icons/Sync";
 import FullscreenIcon from "@material-ui/icons/Fullscreen";
-import FullscreenExitIcon from "@material-ui/icons/FullscreenExit";
+// import FullscreenExitIcon from "@material-ui/icons/FullscreenExit";
 import { IconButton } from "@material-ui/core";
 import VolumeOffIcon from "@material-ui/icons/VolumeOff";
 export default forwardRef(
@@ -32,10 +32,13 @@ export default forwardRef(
       totalDuration, //
       onChangeDisplayFormat,
       onBookmark,
+      syncVideo,
+
+      host,
     },
     ref
   ) => {
-    const [sliderValue, setSliderValue] = useState(0);
+    // const [sliderValue, setSliderValue] = useState(0);
     return (
       <div className="playerControls">
         <div className="playerControls__topControls medium">
@@ -43,22 +46,30 @@ export default forwardRef(
             <CloseIcon />
           </IconButton>
         </div>
-        <div className="playerControls__middleControls large">
+        <div
+          className={`playerControls__middleControls large ${
+            !host && "disableControl"
+          }`}
+        >
           <IconButton onClick={onPlayPause}>
             {playing ? <PauseIcon /> : <PlayArrowIcon />}
           </IconButton>
         </div>
         <div className="playerControls__bottomControls">
-          <div className="playerControls__bottomControls__seeker">
+          <div
+            className={`playerControls__bottomControls__seeker ${
+              !host && "disableControl"
+            }`}
+          >
             <input
               type="range"
               min={0}
-              max={100}
+              max={1000}
               //   defaultValue={sliderValue}
               className="player-slider"
-              value={played * 100}
+              value={played * 1000}
               onChange={(e) => {
-                setSliderValue(e.target.value);
+                // setSliderValue(e.target.value);
                 onSeek(e);
               }}
               onMouseDown={onSeekMouseDown}
@@ -72,9 +83,17 @@ export default forwardRef(
           </div>
           <div className="playerControls__bottomControls__mainControls">
             <div className="playerControls__bottomControls__mainControls__leftControls mediumSmall">
-              <IconButton onClick={onPlayPause}>
+              <IconButton
+                style={{ pointerEvents: !host && "none" }}
+                onClick={() => {
+                  if (host) {
+                    onPlayPause();
+                  }
+                }}
+              >
                 {playing ? <PauseIcon /> : <PlayArrowIcon />}
               </IconButton>
+
               <span onClick={onChangeDisplayFormat}>
                 {elaspedTime}/{totalDuration}
               </span>
@@ -104,9 +123,15 @@ export default forwardRef(
               </div>
             </div>
             <div className="playerControls__bottomControls__mainControls__rightControls mediumSmall">
-              <IconButton>
-                <SyncIcon />
-              </IconButton>
+              {host && (
+                <IconButton
+                  onClick={() => {
+                    syncVideo();
+                  }}
+                >
+                  <SyncIcon />
+                </IconButton>
+              )}
 
               <IconButton onClick={onToggleFullscreen}>
                 <FullscreenIcon />
