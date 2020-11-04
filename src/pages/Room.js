@@ -18,11 +18,12 @@ function Room({ userName, userId }) {
   const [host, setHost] = useState(false);
   const [playerState, setPlayerState] = useState({
     playing: false,
-    muted: true,
+    muted: false,
     volume: 0.5,
     playbackRate: 1.0,
     played: 0,
     seeking: false,
+    isFullScreen: false,
   });
 
   const [hideControls, setHideControls] = useState(false);
@@ -32,7 +33,6 @@ function Room({ userName, userId }) {
   const [allMessages, setAllMessages] = useState([]);
   const { roomCode } = useParams();
   const playerRef = useRef(null);
-  const controlsRef = useRef(null);
   const playerContainerRef = useRef(null);
 
   const socket = useSocket();
@@ -43,6 +43,7 @@ function Room({ userName, userId }) {
     volume,
     playbackRate,
     played,
+    isFullScreen,
     //  seeking
   } = playerState;
 
@@ -148,6 +149,12 @@ function Room({ userName, userId }) {
   };
   const toggleFullScreen = () => {
     screenfull.toggle(playerContainerRef.current);
+    setPlayerState((prev) => {
+      return {
+        ...prev,
+        isFullScreen: !prev.isFullScreen,
+      };
+    });
   };
   const handleProgress = (changeState) => {
     if (count > 2) {
@@ -667,7 +674,7 @@ function Room({ userName, userId }) {
       <div className="room__videoContent">
         <ReactPlayer
           ref={playerRef}
-          url="https://www.youtube.com/watch?v=vuQR6Mj64jQ"
+          url="https://www.youtube.com/watch?v=XZDA2XrwenY&t=2s"
           className="player"
           width={showRight ? "100%" : "85%"}
           height="100%"
@@ -686,7 +693,7 @@ function Room({ userName, userId }) {
           } ${showRight ? "expand" : ""}`}
         >
           <PlayerControls
-            ref={controlsRef}
+            // ref={controlsRef}
             onPlayPause={handlePlayPause}
             playing={playing}
             // onRewind={handleRewind}
@@ -708,6 +715,7 @@ function Room({ userName, userId }) {
             onChangeDisplayFormat={handleChangeDisplayFormat}
             syncVideo={syncHostThroughButton}
             host={host}
+            isFullScreen={isFullScreen}
             // onBookmark={addBookmark}
           />
         </div>
