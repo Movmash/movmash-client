@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@900&display=swap');
 
+
+
 .liveShow__banner {
     /* : black; */
     position: relative;
@@ -13,13 +15,16 @@
     /* position: relative; */
     object-fit: cover;
     width: 100%;
+    /* width: 100%;
+    height: 100%; */
 }
 
 .liveShow__banner__skin {
-    position: absolute;
+    /* position: absolute; */
+    /* position: relative; */
     width: 100%;
     height: 100%;
-    background-color: rgb(62, 48, 138);
+    /* background-color: rgb(62, 48, 138); */
     opacity: 0.4;
     /* z-index: 1; */
 }
@@ -28,6 +33,7 @@
     position: absolute;
     margin-left: 100px;
     margin-top: 50px;
+    top: 0;
 }
 
 .liveShow__banner__content>h1 {
@@ -74,4 +80,42 @@
 
 
     /* font-weight: lighter; */
+}
+
+.liveShow__content {
+    display: flex;
+
+    justify-content: center;
+
+}
+
+.liveShow__content__items {
+    height: 100%;
+    width: 75%;
+}
+
+.liveShow__content__items {
+    margin-top: 70px;
+}
+
+.liveShow__content__item {
+    margin-top: 4rem;
+}
+
+.liveShow__content__items>h1 {
+    color: white;
+    font-family: "Franklin Gothic Medium",
+        "Arial Narrow",
+        Arial,
+        sans-serif;
+    ;
+    font-size: 50px;
+    margin-top: 60px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.liveShow__content__items>hr {
+    border: 1px solid rgb(99, 98, 98);
 }

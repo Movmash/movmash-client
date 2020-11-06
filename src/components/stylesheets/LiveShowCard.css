@@ -1,0 +1,146 @@
+.liveShowCard {
+    width: 26.8rem;
+    height: 16rem;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+}
+
+.liveShowCard__banner {
+    height: 60%;
+    position: relative;
+    /* background: white; */
+}
+
+.liveShowCard__banner__wrapper {
+    height: 100%;
+    border-bottom: 1px solid lightgray;
+
+}
+
+.liveShowCard__banner__skin {
+    background: black;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    opacity: 0.3;
+    transition: 450ms;
+    transition-property: opacity;
+}
+
+.liveShowCard__banner:hover>.liveShowCard__banner__skin {
+    opacity: 0.6;
+}
+
+.liveShowCard__banner__wrapper>img {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+}
+
+.liveShowCard__hostInfo {
+    display: flex;
+    align-items: center;
+}
+
+.liveShowCard__hostInfo {
+    height: 40%;
+}
+
+.liveShowCard__banner__content {
+    width: 100%;
+    height: 100%;
+    /* background: white; */
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.liveShowCard__banner__content__left {
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-end;
+}
+
+.liveShowCard__banner__content__right {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.liveShowCard__banner__content__left {
+    margin: 0 0 10px 10px;
+}
+
+.liveShowCard__banner__content__left>button {
+    border: none;
+    background: #B56E05;
+    outline: none;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 5px 10px 5px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.liveShowCard__banner__content__right__topButton {
+    margin: 10px 10px 0 0;
+
+}
+
+.liveShowCard__banner__content__right__topButton>button {
+    border: none;
+    background: rgb(248, 86, 86);
+    color: white;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+
+    /* line-height: 13px; */
+    outline: none;
+    cursor: pointer;
+    font-weight: bolder;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px 5px 10px;
+}
+
+.liveShowCard__banner__content__right__bottomButton {
+    margin: 0 10px 10px 0;
+}
+
+.liveShowCard__banner__content__right__bottomButton>button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background: rgba(42, 164, 79, 1);
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 13px;
+    font-weight: bolder;
+}
+
+
+.button_icon>.MuiSvgIcon-root {
+    color: white;
+}
+
+.liveShowCard__banner__content__right__topButton>.button_icon>.MuiSvgIcon-root {
+    font-size: 19px;
+}
+
+.button_icon>span {
+    margin-left: 5px;
+}

@@ -14,7 +14,6 @@ export function SocketProvider({ id, children }) {
     if (id !== null) {
       const newSocket = io("http://localhost:8000", { query: { id } });
       setSocket(newSocket);
-      console.log(newSocket);
 
       return () => {
         newSocket.emit("disconnect");

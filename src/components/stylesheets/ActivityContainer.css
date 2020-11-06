@@ -1,0 +1,40 @@
+/* .activityContainer {} */
+
+.activityContainer__title>h1 {
+    color: white;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.activityContainer__containers {
+    margin-top: 60px;
+    display: flex;
+    /* justify-content: center; */
+    flex-wrap: wrap;
+}
+
+.activityContainer__container {
+    margin-right: 2%;
+    margin-bottom: 3%;
+}
+
+.activityContainer__expandButton {
+    width: 100%;
+}
+
+.more_content {
+    width: 98%;
+    background: #3f414a;
+    border: none;
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+    height: 40px;
+}
+
+.more_content:hover {
+    background: #4f525a;
+}
+
+.more_content>.MuiSvgIcon-root {
+    color: lightgray;
+}

@@ -42,6 +42,7 @@ const chatReducer = (state = initialState, action) => {
         ...state,
         messages: [...state.messages, ...action.payload],
       };
+    default:
   }
 
   return state;

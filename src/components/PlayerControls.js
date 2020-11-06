@@ -9,6 +9,7 @@ import FullscreenIcon from "@material-ui/icons/Fullscreen";
 import FullscreenExitIcon from "@material-ui/icons/FullscreenExit";
 import { IconButton } from "@material-ui/core";
 import VolumeOffIcon from "@material-ui/icons/VolumeOff";
+import { Link } from "react-router-dom";
 
 function PlayerControls({
   onPlayPause, //
@@ -37,11 +38,14 @@ function PlayerControls({
 }) {
   return (
     <div className="playerControls">
-      <div className="playerControls__topControls medium">
-        <IconButton>
-          <CloseIcon />
-        </IconButton>
-      </div>
+      {" "}
+      <Link to="/live">
+        <div className="playerControls__topControls medium">
+          <IconButton>
+            <CloseIcon />
+          </IconButton>
+        </div>
+      </Link>
       <div
         className={`playerControls__middleControls large ${
           !host && "disableControl"

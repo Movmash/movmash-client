@@ -14,7 +14,7 @@ import screenfull from "screenfull";
 import format from "../util/playerDurationFormat";
 // import axios from "axios";
 let count = 0;
-function Room({ userName, userId }) {
+function Room({ userName, userId, liveShowDetail }) {
   const [host, setHost] = useState(false);
   const [playerState, setPlayerState] = useState({
     playing: false,
@@ -54,7 +54,6 @@ function Room({ userName, userId }) {
 
   //   });
   // })
-
   //...............................................................................
   useEffect(() => {
     if (socket !== undefined) {
@@ -78,7 +77,9 @@ function Room({ userName, userId }) {
     }
     return () => {
       if (socket === undefined) return;
-      socket.emit("disconnect");
+      console.log("12344");
+      // socket.emit("disconnect");
+      socket.emit("leaving-party");
       socket.off();
     };
   }, [socket, roomCode, userName, userId]);
@@ -537,8 +538,8 @@ function Room({ userName, userId }) {
       socket.on("sync-the-video-with-host", (data) => {
         let currTime = data.time;
         let state = data.state;
-        console.log("current time is: " + " " + currTime);
-        console.log("state" + state);
+        console.log(`current time is: ${currTime}`);
+        console.log(`state ${state}`);
         playerRef.current.seekTo(currTime);
         // setPlayerState((prev) => {
         //   return {
@@ -674,7 +675,7 @@ function Room({ userName, userId }) {
       <div className="room__videoContent">
         <ReactPlayer
           ref={playerRef}
-          url="https://www.youtube.com/watch?v=XZDA2XrwenY&t=2s"
+          url="https://www.youtube.com/watch?v=XZDA2XrwenY"
           className="player"
           width={showRight ? "100%" : "85%"}
           height="100%"
@@ -781,6 +782,7 @@ const mapStateToProps = (state) => {
   return {
     userName: state.user.userName,
     userId: state.user._id,
+    liveShowDetail: state.liveShow.liveShowDetail,
   };
 };
 

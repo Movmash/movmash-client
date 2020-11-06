@@ -27,7 +27,6 @@ const movieReducer = (state = initialState, action) => {
       };
 
     default:
-      console.log(action.type);
       break;
   }
 

@@ -17,7 +17,7 @@ function PostSuggestMePost({ closeSuggestMe, sendPost }) {
   const [ratingPreference, setRatingValue] = useState(0);
   const [chooseGenre, setChooseGenre] = useState([]);
   const [selectedRatingAbove, setSelectedRatingAbove] = useState("");
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const [checkAction, setAction] = useState(false);
   const [checkComedy, setComedy] = useState(false);
   const [checkHorror, setHorror] = useState(false);
