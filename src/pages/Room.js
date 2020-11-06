@@ -675,7 +675,7 @@ function Room({ userName, userId, liveShowDetail }) {
       <div className="room__videoContent">
         <ReactPlayer
           ref={playerRef}
-          url="https://www.youtube.com/watch?v=XZDA2XrwenY"
+          url={liveShowDetail.videoUrl}
           className="player"
           width={showRight ? "100%" : "85%"}
           height="100%"
