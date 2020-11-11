@@ -20,6 +20,17 @@ export const getSubcriberPost = () => (dispatch) => {
       dispatch({ type: SET_POSTS, payload: [] });
     });
 };
+export const getExplorePost = () => (dispatch) => {
+  dispatch({ type: LOADING_DATA });
+  axios
+    .get("http://localhost:8000/api/v1/explore/get-explore-post")
+    .then((res) => {
+      dispatch({ type: SET_POSTS, payload: res.data });
+    })
+    .catch((e) => {
+      dispatch({ type: SET_POSTS, payload: [] });
+    });
+};
 
 export const sendPost = (newPost) => (dispatch) => {
   dispatch({ type: LOADING_DATA });

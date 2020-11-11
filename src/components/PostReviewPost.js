@@ -11,7 +11,7 @@ import { CircularProgress } from "@material-ui/core";
 import { genreConverter } from "../util/genreConverter";
 import { sendPost } from "../redux/actions/postAction";
 import { connect } from "react-redux";
-function PostReviewPost({ closeReview, sendPost }) {
+function PostReviewPost({ closeReview, sendPost, postType }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [searchResult, setSearchResult] = useState([]);
@@ -68,6 +68,7 @@ function PostReviewPost({ closeReview, sendPost }) {
       moviePoster: movieDetail.poster_path,
       releaseYear: movieDetail.release_date.split("-")[0],
       movieTitle: movieDetail.title ? movieDetail.title : movieDetail.name,
+      postType: postType,
     };
     console.log(postDetails);
     sendPost(postDetails);

@@ -30,7 +30,7 @@ function Home({
         authenticated ? (
           <div className="home">
             <div className="home__left--part">
-              <LeftSideBar />
+              <LeftSideBar postType="home" />
             </div>
 
             <div className="home__middle--part">

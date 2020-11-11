@@ -1,0 +1,144 @@
+.peopleMatchCard {
+    width: 620px;
+    height: 300px;
+    border: 1px solid rgb(148, 148, 148);
+    border-radius: 20px;
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+
+}
+
+.peopleMatchCard__image>img {
+    height: 260px;
+    width: 260px;
+    object-fit: cover;
+    border-radius: 20px;
+    margin-left: 20px;
+
+}
+
+.peopleMatchCard__content {
+    width: 42%;
+    height: 260px;
+    margin-left: 50px;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+}
+
+.peopleMatchCard__content__headers>h3 {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 28px;
+    letter-spacing: 0.05em;
+
+    color: #D6D6D6;
+}
+
+.peopleMatchCard__content__headers>h6 {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    /* identical to box height */
+
+    letter-spacing: 0.05em;
+
+    color: #BABABA;
+}
+
+.peopleMatchCard__content__similarity {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    /* margin-bottom: 20px; */
+}
+
+.peopleMatchCard__content__similarity>span {
+    font-family: Righteous;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 64px;
+    line-height: 79px;
+    letter-spacing: 0.05em;
+
+    color: #499E4C;
+}
+
+.peopleMatchCard__content__similarity>p {
+    font-family: Righteous;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 30px;
+    /* identical to box height */
+
+    letter-spacing: 0.05em;
+
+    color: #C4C4C4;
+}
+
+.peopleMatchCard__content__buttons {
+    display: flex;
+    justify-content: space-around;
+}
+
+.peopleMatchCard__content__button>button {
+    background: none;
+    border: none;
+    outline: none;
+    border: 1px solid #499E4C;
+    /* padding: 5px 30px 5px 30px; */
+    width: 100px;
+    height: 30px;
+    /* background: rgb(226, 226, 226); */
+    border-radius: 3px;
+    /* color: rgb(75, 75, 75); */
+    color: #499E4C;
+    transition: 450ms;
+    cursor: pointer;
+    color: whitesmoke;
+    background: #499E4C;
+}
+
+.peopleMatchCard__content__button:hover>button {
+
+
+    font-weight: 900;
+
+
+}
+
+
+.peopleMatchCard__content__button__suggestMe>button {
+    background: none;
+    border: none;
+    outline: none;
+    border: 1px solid #499E4C;
+    /* padding: 5px 30px 5px 30px; */
+    width: 130px;
+    height: 30px;
+    /* background: rgb(226, 226, 226); */
+    border-radius: 3px;
+    /* color: rgb(75, 75, 75); */
+    color: #499E4C;
+    transition: 450ms;
+    cursor: pointer;
+
+
+}
+
+.peopleMatchCard__content__button__suggestMe:hover>button {
+    background: #499E4C;
+    color: whitesmoke;
+    font-weight: 900;
+
+
+}

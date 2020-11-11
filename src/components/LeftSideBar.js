@@ -13,7 +13,7 @@ import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
 import { connect } from "react-redux";
 import { logoutUser } from "../redux/actions/userAction";
 import { useHistory } from "react-router-dom";
-function LeftSideBar({ logoutUser, userName, userImage }) {
+function LeftSideBar({ logoutUser, userName, userImage, postType }) {
   const [open, setOpen] = useState(false);
   const history = useHistory();
   const handleClick = () => {
@@ -50,12 +50,13 @@ function LeftSideBar({ logoutUser, userName, userImage }) {
     <div className="leftSideBar">
       <div className="leftSideBar__container">
         {" "}
-        <div className="leftSideBar__container__icon hover">
-          {" "}
-          <Link href={`/@${userName}`}>
-            <Avatar src={userImage} />
-          </Link>
-        </div>
+        <div
+          onClick={() => history.push(`/@${userName}`)}
+          className="leftSideBar__container__icon hover"
+        >
+          {/* <Link to={`/@${userName}`}> */}
+          <Avatar src={userImage} /> {/* </Link> */}
+        </div>{" "}
         <div className="leftSideBar__container__icon">
           <IconButton
             onClick={() => {
@@ -89,7 +90,10 @@ function LeftSideBar({ logoutUser, userName, userImage }) {
                     open={openReviewDialog}
                   >
                     <div className="dialogBox--ReviewPost">
-                      <PostReviewPost closeReview={handleCloseReview} />
+                      <PostReviewPost
+                        postType={postType}
+                        closeReview={handleCloseReview}
+                      />
                     </div>
                   </Dialog>
                   <div
@@ -106,6 +110,7 @@ function LeftSideBar({ logoutUser, userName, userImage }) {
                   >
                     <div className="dialogBox--SuggestMePost">
                       <PostSuggestMePost
+                        postType={postType}
                         closeSuggestMe={handleCloseSuggestMe}
                       />
                     </div>
@@ -120,7 +125,10 @@ function LeftSideBar({ logoutUser, userName, userImage }) {
                   </div>
                   <Dialog onClose={handleCloseTicket} open={openTicketDialog}>
                     <div className="dialogBox--TicketPost">
-                      <PostTicketPost closeTicket={handleCloseTicket} />
+                      <PostTicketPost
+                        postType={postType}
+                        closeTicket={handleCloseTicket}
+                      />
                     </div>
                   </Dialog>
                 </div>

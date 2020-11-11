@@ -13,7 +13,7 @@ import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import { sendPost } from "../redux/actions/postAction";
 import { connect } from "react-redux";
 
-function PostSuggestMePost({ closeSuggestMe, sendPost }) {
+function PostSuggestMePost({ closeSuggestMe, sendPost, postType }) {
   const [ratingPreference, setRatingValue] = useState(0);
   const [chooseGenre, setChooseGenre] = useState([]);
   const [selectedRatingAbove, setSelectedRatingAbove] = useState("");
@@ -230,6 +230,7 @@ function PostSuggestMePost({ closeSuggestMe, sendPost }) {
       duration: durationPreference,
       language: languagePrefered,
       rating: ratingPreference,
+      postType: postType,
     };
     console.log(suggestMePost);
     sendPost(suggestMePost);

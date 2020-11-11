@@ -28,7 +28,7 @@ let date = new Date();
 let day = date.getDate() + 5;
 let month = date.getMonth();
 let year = date.getFullYear();
-function PostTicketPost({ closeTicket, sendPost }) {
+function PostTicketPost({ closeTicket, sendPost, postType }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [searchResult, setSearchResult] = useState([]);
@@ -123,6 +123,7 @@ function PostTicketPost({ closeTicket, sendPost }) {
       showTimeFrom: selectedDate,
       showTimeTo: timeRangeValue,
       overview: movie.overview,
+      postType: postType,
     };
     console.log(ticketPost);
     sendPost(ticketPost);
