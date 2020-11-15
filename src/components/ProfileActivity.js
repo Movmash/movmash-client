@@ -3,12 +3,16 @@ import "./stylesheets/ProfileActivity.css";
 import TabDescriptionInfo from "./TabDescriptionInfo";
 
 import LocalActivityTwoToneIcon from "@material-ui/icons/LocalActivityTwoTone";
-function ProfileActivity() {
+function ProfileActivity({ isMyProfile }) {
   return (
     <div>
       <TabDescriptionInfo
         Icon={LocalActivityTwoToneIcon}
-        info={"Your all like dislike of movies will be shown here"}
+        info={
+          isMyProfile
+            ? "Your all like dislike of movies will be shown here"
+            : "No Activity available"
+        }
       />
     </div>
   );

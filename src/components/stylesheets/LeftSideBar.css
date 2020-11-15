@@ -13,6 +13,7 @@
     flex-flow: column;
     justify-content: space-evenly;
     align-items: center;
+    z-index: 100;
 }
 
 /* .leftSideBar__container:hover {

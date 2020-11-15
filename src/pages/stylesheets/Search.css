@@ -1,11 +1,20 @@
+/* .search__content {
+    width: 80%;
+
+} */
+
 .search__container {
-    display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     margin-top: 60px;
+    /* width: 100%; */
 }
 
 .search__searchBar__input {
     position: relative;
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+
 }
 
 .search__searchBar__input>input {
@@ -24,11 +33,262 @@
 .search__icon {
     position: absolute;
     top: 5px;
-    right: 15px;
+    right: 32%;
+
+    /* right: 15px; */
 
 }
 
 .search__icon>.MuiSvgIcon-root {
     font-size: 30px;
     color: rgb(196, 196, 196);
+}
+
+.search_content__peopleMovie {
+    display: flex;
+    margin-top: 50px;
+}
+
+.search__content__peopleResults {
+    display: flex;
+    justify-content: center;
+}
+
+.search__content__people {
+    width: 50%;
+
+}
+
+.search__content__people>h2 {
+    color: white;
+    display: flex;
+    justify-content: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+
+.search__content__movies {
+    width: 50%;
+    height: 10px;
+}
+
+.search__content__peopleResults {
+    margin-top: 40px;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 25rem;
+    overflow-y: auto;
+
+
+}
+
+.search__content__avatar {
+    display: flex;
+    align-items: center;
+}
+
+.search__content__avatar>span {
+    margin-left: 30px;
+    color: white;
+    font-weight: bold;
+    font-family: 'Franklin Gothic Medium',
+        'Arial Narrow',
+        Arial,
+        sans-serif;
+}
+
+.search__content__peopleResult {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #3F414A;
+    padding: 15px;
+    margin: 10px 0 10px 0;
+    border-radius: 10px;
+    transition: 350ms;
+
+}
+
+.search__content__peopleResults>:hover {
+    background-color: #5c5f6d;
+
+    cursor: pointer;
+}
+
+.search__content__movies>h2 {
+    color: white;
+    display: flex;
+    justify-content: center;
+    font-family: 'Franklin Gothic Medium',
+        'Arial Narrow',
+        Arial,
+        sans-serif;
+
+}
+
+.search__content__movieResults {
+    margin-top: 40px;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 25rem;
+    overflow-y: auto;
+    border-left: 1px solid rgb(117, 117, 117);
+}
+
+.search__content__movieResult {
+    width: 50%;
+    display: flex;
+
+    align-items: center;
+    background-color: #3F414A;
+    padding: 15px;
+    margin: 10px 0 10px 0;
+    border-radius: 10px;
+    transition: 350ms;
+}
+
+.search__content__movieResult>img {
+    object-fit: fill;
+    max-height: 80px;
+    border-radius: 10px;
+}
+
+.search__content__movieResults>:hover {
+    background-color: #5c5f6d;
+
+    cursor: pointer;
+}
+
+.search__content__movieResult>span {
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: bold;
+    margin-left: 40px;
+
+}
+
+.search__container {
+    width: 80%;
+}
+
+.search__browse {
+    display: flex;
+    justify-content: center;
+
+}
+
+.search__peopleCard {
+    width: 236px;
+    height: 250px;
+    background: #3F414A;
+    border-radius: 20px;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    align-items: center;
+    margin-right: 30px;
+
+}
+
+.search__avatar {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+.search__peopleCardList {
+    margin-top: 50px;
+    display: flex;
+    /* justify-content: space-between; */
+    overflow-x: auto;
+    padding-bottom: 30px;
+}
+
+.search__avatar>img {
+    object-fit: fill;
+    object-fit: contain;
+    height: 120px;
+    width: 120px;
+    border-radius: 40%;
+    border: 2px solid lightgray;
+}
+
+.search__avatar>span {
+    color: white;
+    font-family: 'Franklin Gothic Medium',
+        'Arial Narrow',
+        Arial,
+        sans-serif;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.peopleMatchCard__content__button.widthButton>button {
+    width: 200px;
+    margin: 0 10px 0 10px;
+}
+
+.search__browse__people>h2 {
+    color: white;
+
+    font-family: 'Franklin Gothic Medium',
+        'Arial Narrow',
+        Arial,
+        sans-serif;
+}
+
+.search__content__loading {
+    height: 400px;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.search__content__tickets {
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+.search__content__ticketsContainer {
+
+    width: 80%;
+}
+
+.search__content__ticketsContainer>h2 {
+    color: white;
+
+    font-family: 'Franklin Gothic Medium',
+        'Arial Narrow',
+        Arial,
+        sans-serif;
+}
+
+.search__content__ticketList {
+    margin-top: 50px;
+    display: flex;
+    /* justify-content: space-between; */
+    overflow-x: auto;
+    padding-bottom: 30px;
+}
+
+.ticketContainer {
+    margin-right: 60px;
+    margin-top: -100px;
+}
+
+.search__content__loading>h3 {
+    color: white;
+
+    font-family: 'Franklin Gothic Medium',
+        'Arial Narrow',
+        Arial,
+        sans-serif;
 }

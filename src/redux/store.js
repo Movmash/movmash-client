@@ -6,6 +6,7 @@ import postReducer from "./reducers/postReducer";
 import dataReducer from "./reducers/dataReducer";
 import chatReducer from "./reducers/chatReducer";
 import liveShowReducer from "./reducers/liveShowReducer";
+import searchReducer from "./reducers/searchReducer";
 // const initialState = {
 //   movie: {},
 // };
@@ -18,6 +19,7 @@ const reducers = combineReducers({
   data: dataReducer,
   chat: chatReducer,
   liveShow: liveShowReducer,
+  search: searchReducer,
 });
 
 // const store = createStore(

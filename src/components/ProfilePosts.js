@@ -3,9 +3,11 @@ import "./stylesheets/ProfilePosts.css";
 import ReviewPost from "./ReviewPost";
 import SuggestMePost from "./SuggestMePost";
 import { connect } from "react-redux";
-import { getUserPost } from "../redux/actions/dataAction";
+import { getUserPost, resetState } from "../redux/actions/dataAction";
 import TabLoadingData from "./TabLoadingData";
 import { getMashUserPost } from "../redux/actions/dataAction";
+import TabDescriptionInfo from "./TabDescriptionInfo";
+import ViewCompactTwoToneIcon from "@material-ui/icons/ViewCompactTwoTone";
 
 function ProfilePosts({
   getMashUserPost,
@@ -13,7 +15,7 @@ function ProfilePosts({
   getUserPost,
   profilePosts,
   infoLoading,
-
+  resetState,
   userName,
 }) {
   useEffect(() => {
@@ -21,8 +23,12 @@ function ProfilePosts({
       getUserPost();
     } else {
       getMashUserPost(userName);
+      console.log(userName);
     }
-  }, [isMyProfile, getMashUserPost, getUserPost, userName]);
+    return () => {
+      resetState();
+    };
+  }, [isMyProfile, getMashUserPost, getUserPost, userName, resetState]);
   return (
     <div className="profilePosts">
       {!infoLoading ? (
@@ -51,11 +57,10 @@ function ProfilePosts({
             )
           )
         ) : (
-          <>
-            {/* here two cases will form */}
-
-            <h1>not Found</h1>
-          </>
+          <TabDescriptionInfo
+            info={isMyProfile ? "You don't have any post" : "No post available"}
+            Icon={ViewCompactTwoToneIcon}
+          />
         )
       ) : (
         <TabLoadingData />
@@ -69,9 +74,11 @@ const mapStateToProps = (state) => {
     infoLoading: state.data.infoLoading,
   };
 };
-export default connect(mapStateToProps, { getUserPost, getMashUserPost })(
-  ProfilePosts
-);
+export default connect(mapStateToProps, {
+  getUserPost,
+  getMashUserPost,
+  resetState,
+})(ProfilePosts);
 
 // {
 //           if (post.type === "review")

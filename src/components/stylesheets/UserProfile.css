@@ -37,8 +37,15 @@
     cursor: pointer;
 }
 
+
+.userProfile__coverPhoto {
+    height: 400px;
+    width: 65rem;
+    border-radius: 10px;
+}
+
 .userProfile__coverPhoto>img {
-    max-height: 400px;
+    height: 400px;
     width: 65rem;
     object-fit: cover;
     border-radius: 10px;
@@ -48,6 +55,9 @@
     position: absolute;
     top: 22rem;
     left: 3rem;
+    height: 168px;
+    width: 168px;
+    border-radius: 40%;
     /* border: 1px solid white; */
     /* border-radius: 40%; */
 
@@ -71,6 +81,7 @@
 .userProfile__userInfo--name>h1 {
     color: #e4e6eb;
     font-size: 30px;
+    /* font-family: Roboto; */
     font-family: 'Franklin Gothic Medium',
         'Arial Narrow',
         Arial,

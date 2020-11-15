@@ -11,6 +11,14 @@ import {
   PROFILE_SUBMIT_COMMENT,
   FOLLOW_USER,
   UNFOLLOW_USER,
+  SET_NEW_PROFILE_LIST,
+  DELETE_PROFILE_LIST,
+  LOADING_PROFILE_LIST,
+  LOADING_PROFILE_WATCHLIST,
+  LOADING_PROFILE_ACTIVITY,
+  UPDATE_PROFILE_LIST,
+  RESET_DATA_STATE,
+  REMOVE_FROM_WATCHLIST,
 } from "../types";
 
 const initialState = {
@@ -21,6 +29,9 @@ const initialState = {
   mashUser: {},
   profileLoading: false,
   infoLoading: false,
+  infoListLoading: false,
+  infoActivityLoading: false,
+  infoWatchListLoading: false,
 };
 
 export default function (state = initialState, action) {
@@ -29,6 +40,21 @@ export default function (state = initialState, action) {
       return {
         ...state,
         profileLoading: true,
+      };
+    case LOADING_PROFILE_LIST:
+      return {
+        ...state,
+        infoListLoading: true,
+      };
+    case LOADING_PROFILE_WATCHLIST:
+      return {
+        ...state,
+        infoWatchListLoading: true,
+      };
+    case LOADING_PROFILE_ACTIVITY:
+      return {
+        ...state,
+        infoActivityLoading: true,
       };
     case SET_INFO_LOADING:
       return {
@@ -58,13 +84,14 @@ export default function (state = initialState, action) {
       return {
         ...state,
         profileWatchLists: [...action.payload],
-        infoLoading: false,
+        infoWatchListLoading: false,
       };
 
     case SET_PROFILE_LISTS:
       return {
         ...state,
         profileLists: [...action.payload],
+        infoListLoading: false,
       };
     case PROFILE_LIKE_POST:
     case PROFILE_UNLIKE_POST:
@@ -106,6 +133,40 @@ export default function (state = initialState, action) {
           followers: action.payload.followers,
         },
       };
+    case SET_NEW_PROFILE_LIST:
+      return {
+        ...state,
+        profileLists: [action.payload, ...state.profileLists],
+        infoListLoading: false,
+      };
+    case DELETE_PROFILE_LIST:
+      return {
+        ...state,
+        profileLists: state.profileLists.filter(
+          (list) => list._id !== action.payload
+        ),
+        infoListLoading: false,
+      };
+    case UPDATE_PROFILE_LIST:
+      const listIndex = state.profileLists.findIndex(
+        (list) => list._id === action.payload._id
+      );
+      state.profileLists[listIndex] = action.payload;
+      return {
+        ...state,
+        profileLists: [...state.profileLists],
+        infoListLoading: false,
+      };
+    case REMOVE_FROM_WATCHLIST:
+      return {
+        ...state,
+        infoWatchListLoading: false,
+        profileWatchLists: state.profileWatchLists.filter(
+          (list) => list.movieId !== action.payload.movieId
+        ),
+      };
+    case RESET_DATA_STATE:
+      return initialState;
     default:
       break;
   }

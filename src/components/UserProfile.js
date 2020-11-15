@@ -32,7 +32,7 @@ function UserProfile({
     getMashUserDetails(userName);
   }, [getMashUserDetails, userName]);
   useEffect(() => {
-    if (userId !== undefined) {
+    if (userId !== undefined && followingList !== undefined) {
       setFollow(followingList.includes(userId));
     }
   }, [userId, followingList]);
@@ -63,7 +63,6 @@ function UserProfile({
     <div className="userProfile">
       {!profileLoading ? (
         <>
-          {" "}
           <div className="userProfile__container">
             {" "}
             <div className="userProfile__profilePhotos">
@@ -203,12 +202,14 @@ function UserProfile({
                 />
               )}
               {selected === "activity" && (
-                <ProfileActivity isMyProfile={false} />
+                <ProfileActivity isMyProfile={false} userName={userName} />
               )}
               {selected === "watchList" && (
-                <ProfileWatchlist isMyProfile={false} />
+                <ProfileWatchlist isMyProfile={false} userName={userName} />
               )}
-              {selected === "lists" && <ProfileList isMyProfile={false} />}
+              {selected === "lists" && (
+                <ProfileList isMyProfile={false} userName={userName} />
+              )}
             </div>
           </div>
         </>

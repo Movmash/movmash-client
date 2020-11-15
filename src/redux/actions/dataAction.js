@@ -8,6 +8,15 @@ import {
   SET_MASH_USER,
   FOLLOW_USER,
   UNFOLLOW_USER,
+  SET_NEW_PROFILE_LIST,
+  SET_PROFILE_LISTS,
+  DELETE_PROFILE_LIST,
+  LOADING_PROFILE_LIST,
+  UPDATE_PROFILE_LIST,
+  LOADING_PROFILE_WATCHLIST,
+  SET_PROFILE_WATCHLISTS,
+  RESET_DATA_STATE,
+  REMOVE_FROM_WATCHLIST,
 } from "../types";
 import axios from "axios";
 export const getMashUserDetails = (userName) => (dispatch) => {
@@ -108,4 +117,108 @@ export const unfollowUser = (id) => (dispatch) => {
     .catch((e) => {
       console.log(e);
     });
+};
+
+export const createNewList = (data) => (dispatch) => {
+  dispatch({ type: LOADING_PROFILE_LIST });
+  axios
+    .post("http://localhost:8000/api/v1/movie/create-new-list", data)
+    .then((res) => {
+      console.log(res.data);
+      dispatch({ type: SET_NEW_PROFILE_LIST, payload: res.data });
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+};
+
+export const getUserList = () => (dispatch) => {
+  dispatch({ type: LOADING_PROFILE_LIST });
+  axios
+    .get("http://localhost:8000/api/v1/movie/get-user-list")
+    .then((res) => {
+      dispatch({ type: SET_PROFILE_LISTS, payload: res.data });
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+};
+
+export const getMashUserList = (userName) => (dispatch) => {
+  dispatch({ type: LOADING_PROFILE_LIST });
+  axios
+    .get(`http://localhost:8000/api/v1/movie/get-mash-user-list/${userName}`)
+    .then((res) => {
+      dispatch({ type: SET_PROFILE_LISTS, payload: res.data });
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+};
+
+export const deleteList = (id) => (dispatch) => {
+  dispatch({ type: LOADING_PROFILE_LIST });
+  axios
+    .delete(`http://localhost:8000/api/v1/movie/delete-list/${id}`)
+    .then((res) => {
+      dispatch({ type: DELETE_PROFILE_LIST, payload: id });
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+};
+
+export const updateList = (data) => (dispatch) => {
+  dispatch({ type: LOADING_PROFILE_LIST });
+  axios
+    .put(`http://localhost:8000/api/v1/movie/update-list`, data)
+    .then((res) => {
+      console.log(res.data);
+      dispatch({ type: UPDATE_PROFILE_LIST, payload: res.data });
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+};
+
+export const getUserWatchList = () => (dispatch) => {
+  dispatch({ type: LOADING_PROFILE_WATCHLIST });
+  axios
+    .get("http://localhost:8000/api/v1/movie/get-user-watchList")
+    .then((res) => {
+      dispatch({ type: SET_PROFILE_WATCHLISTS, payload: res.data });
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+};
+
+export const getMashUserWatchList = (userName) => (dispatch) => {
+  dispatch({ type: LOADING_PROFILE_WATCHLIST });
+  axios
+    .get(
+      `http://localhost:8000/api/v1/movie/get-mash-user-watchlist/${userName}`
+    )
+    .then((res) => {
+      dispatch({ type: SET_PROFILE_WATCHLISTS, payload: res.data });
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+};
+export const deleteFromWatchList = (movieId) => (dispatch) => {
+  dispatch({ type: LOADING_PROFILE_WATCHLIST });
+  axios
+    .post("http://localhost:8000/api/v1/movie/remove-from-watchlist", {
+      movieId,
+    })
+    .then((res) => {
+      dispatch({ type: REMOVE_FROM_WATCHLIST, payload: { movieId } });
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+};
+export const resetState = () => (dispatch) => {
+  dispatch({ type: RESET_DATA_STATE });
 };

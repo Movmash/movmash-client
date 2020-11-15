@@ -1,0 +1,40 @@
+.profileList__heading {
+    color: rgb(224, 224, 224);
+    display: flex;
+
+    align-items: center;
+    margin-top: 50px;
+
+    font-family: 'Franklin Gothic Medium',
+        'Arial Narrow',
+        Arial,
+        sans-serif;
+    cursor: pointer;
+    width: fit-content;
+}
+
+.profileList__heading:hover {
+    color: white;
+    font-weight: 900;
+}
+
+.profileList__heading>* {
+    margin-right: 20px;
+}
+
+/* .profileList {
+    height: 200vh;
+} */
+
+.profileList__content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.profileList__container {
+
+    width: 47%;
+    margin: 10px;
+}

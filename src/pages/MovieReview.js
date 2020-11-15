@@ -88,6 +88,7 @@ function MovieReview({ movieDetails, getMovie, loading }) {
             imageUrl={`https://image.tmdb.org/t/p/original/${movieDetails.poster_path}`}
             videoSrc={
               movieDetails.videos.results.length !== 0 &&
+              movieDetails.videos.results !== undefined &&
               `https://www.youtube.com/watch?v=${movieDetails.videos.results[0].key}`
             }
           />

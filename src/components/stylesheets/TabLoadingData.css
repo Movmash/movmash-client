@@ -4,3 +4,61 @@
     justify-content: center;
     align-items: center;
 }
+
+.dialog__list {
+    /* height: 300px;
+    width: 300px; */
+
+    width: fit-content;
+    padding: 25px 70px 0 70px;
+    min-height: 30rem;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+}
+
+.searchYourMovie {
+    position: relative;
+}
+
+.myProfileDialog {
+    top: 110px;
+    left: 0px;
+    width: 450px;
+}
+
+.tabDescriptionInfo__selectedMovieList {
+
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.tabDescriptionInfo__selectedMovie {
+    display: flex;
+    align-items: center;
+    margin: 10px 0 10px 0;
+    justify-content: space-between;
+}
+
+.tabDescriptionInfo__selectedMovie__details {
+    display: flex;
+    align-items: center;
+}
+
+.tabDescriptionInfo__selectedMovie__details>img {
+    width: 55px;
+    height: 55px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.tabDescriptionInfo__selectedMovie__details span {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 30px;
+}
+
+.closeIcon {
+    cursor: pointer;
+}
