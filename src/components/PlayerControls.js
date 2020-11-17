@@ -10,7 +10,7 @@ import FullscreenExitIcon from "@material-ui/icons/FullscreenExit";
 import { IconButton } from "@material-ui/core";
 import VolumeOffIcon from "@material-ui/icons/VolumeOff";
 import { Link } from "react-router-dom";
-
+import { ClipLoader } from "react-spinners";
 function PlayerControls({
   onPlayPause, //
   playing, //
@@ -35,6 +35,7 @@ function PlayerControls({
   syncVideo,
   isFullScreen,
   host,
+  isProgress,
 }) {
   return (
     <div className="playerControls">
@@ -51,9 +52,13 @@ function PlayerControls({
           !host && "disableControl"
         }`}
       >
-        <IconButton onClick={onPlayPause}>
-          {playing ? <PauseIcon /> : <PlayArrowIcon />}
-        </IconButton>
+        {isProgress ? (
+          <ClipLoader color={"white"} size={"60px"} />
+        ) : (
+          <IconButton onClick={onPlayPause}>
+            {playing ? <PauseIcon /> : <PlayArrowIcon />}
+          </IconButton>
+        )}
       </div>
       <div className="playerControls__bottomControls">
         <div
@@ -92,6 +97,7 @@ function PlayerControls({
               }}
             >
               {playing ? <PauseIcon /> : <PlayArrowIcon />}
+              {/* {} */}
             </IconButton>
 
             <span onClick={onChangeDisplayFormat}>

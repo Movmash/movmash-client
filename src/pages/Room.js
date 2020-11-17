@@ -1,21 +1,26 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import "./stylesheets/Room.css";
-import ReactPlayer from "react-player/youtube";
+import ReactPlayer from "react-player";
 import SendIcon from "@material-ui/icons/Send";
 import { IconButton } from "@material-ui/core";
 import { connect } from "react-redux";
 import { useSocket } from "../contexts/SocketProvider";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import ScrollToBottom from "react-scroll-to-bottom";
 import PlayerControls from "../components/PlayerControls";
 import screenfull from "screenfull";
 import format from "../util/playerDurationFormat";
+import SentimentVeryDissatisfiedIcon from "@material-ui/icons/SentimentVeryDissatisfied";
+import { getLiveShowDetail } from "../redux/actions/liveShowAction";
+import ErrorIcon from "@material-ui/icons/Error";
+import NoMeetingRoomIcon from "@material-ui/icons/NoMeetingRoom";
 // import axios from "axios";
 let count = 0;
-function Room({ userName, userId, liveShowDetail }) {
+function Room({ userName, userId, liveShowDetail, getLiveShowDetail }) {
   const [host, setHost] = useState(false);
+  const [isRoomFound, setIsRoomFound] = useState(true);
   const [playerState, setPlayerState] = useState({
     playing: false,
     muted: false,
@@ -25,7 +30,11 @@ function Room({ userName, userId, liveShowDetail }) {
     seeking: false,
     isFullScreen: false,
   });
+  // const [isVideoValid, setVideoValid] = useState(
 
+  // );
+  const [isProgress, setProgress] = useState(true);
+  const [isHostAvailble, setIsHostAvailable] = useState(true);
   const [hideControls, setHideControls] = useState(false);
   const [timeDisplayFormat, setTimeDisplayFormat] = useState("normal");
   const [showRight, setShowRight] = useState(false);
@@ -34,7 +43,7 @@ function Room({ userName, userId, liveShowDetail }) {
   const { roomCode } = useParams();
   const playerRef = useRef(null);
   const playerContainerRef = useRef(null);
-
+  const history = useHistory();
   const socket = useSocket();
 
   const {
@@ -47,13 +56,23 @@ function Room({ userName, userId, liveShowDetail }) {
     //  seeking
   } = playerState;
 
-  // useEffect(() => {
-  //   axios.get(
-  //     `http://localhost:8000/api/v1/live/get-live-show-details/${roomCode}`
-  //   ).then(res => {
+  useEffect(() => {
+    // axios.get(
+    //   `http://localhost:8000/api/v1/live/get-live-show-details/${roomCode}`
+    // ).then(res => {
 
-  //   });
-  // })
+    // });
+    // console.log("1");
+    if (Object.keys(liveShowDetail).length === 0) {
+      if (isRoomFound) {
+        getLiveShowDetail(roomCode, history);
+      } else {
+        return;
+      }
+
+      console.log("1");
+    }
+  }, [getLiveShowDetail, liveShowDetail, isRoomFound, roomCode, history]);
   //...............................................................................
   useEffect(() => {
     if (socket !== undefined) {
@@ -85,6 +104,8 @@ function Room({ userName, userId, liveShowDetail }) {
   }, [socket, roomCode, userName, userId]);
   useEffect(() => {
     if (socket !== undefined) {
+      // console.log(ReactPlayer.canPlay(liveShowDetail.videoUrl));
+
       socket.on("party-message", (data) => {
         console.log(data);
         setAllMessages((prev) => [...prev, data]);
@@ -172,6 +193,10 @@ function Room({ userName, userId, liveShowDetail }) {
       };
     });
     // setPlayerState({ ...playerState, ...changeState });
+  };
+  const handleOnStart = (e) => {
+    console.log("start");
+    setProgress(false);
   };
   const handleSeekChange = (e) => {
     // playerRef.current.seekTo(e.target.value / 1000);
@@ -477,7 +502,7 @@ function Room({ userName, userId, liveShowDetail }) {
   }, [socket]);
 
   useEffect(() => {
-    if (socket) {
+    if (socket !== undefined) {
       socket.on("set-host", () => {
         setHost(true);
       });
@@ -666,60 +691,134 @@ function Room({ userName, userId, liveShowDetail }) {
     }
   }, [socket, changeHost]);
 
+  useEffect(() => {
+    if (socket !== undefined) {
+      socket.on("host-enter-in-room", (data) => {
+        setIsHostAvailable(true);
+      });
+    }
+  }, [socket]);
+
+  useEffect(() => {
+    if (socket !== undefined) {
+      socket.on("no-host-available", (data) => {
+        setIsHostAvailable(false);
+        setHideControls(false);
+      });
+    }
+  }, [socket]);
+  useEffect(() => {
+    if (socket !== undefined) {
+      socket.on("room-not-found", () => {
+        setIsRoomFound(false);
+      });
+    }
+  });
   return (
     <div
       onMouseMove={handleMouseMove}
       className="room"
       ref={playerContainerRef}
     >
-      <div className="room__videoContent">
-        <ReactPlayer
-          ref={playerRef}
-          url={liveShowDetail.videoUrl}
-          className="player"
-          width={showRight ? "100%" : "85%"}
-          height="100%"
-          volume={volume}
-          muted={muted}
-          playbackRate={playbackRate}
-          loop
-          playing={playing}
-          onProgress={handleProgress}
-        />
-      </div>
-      <div className="room__player-skin">
-        <div
-          className={`room__player__left ${
-            hideControls ? "hideControls" : ""
-          } ${showRight ? "expand" : ""}`}
-        >
-          <PlayerControls
-            // ref={controlsRef}
-            onPlayPause={handlePlayPause}
-            playing={playing}
-            // onRewind={handleRewind}
-            // onFastForward={handleFastForward}
-            muted={muted}
-            onMute={handleMute}
-            onVolumeChange={handleVolumeChange}
-            onVolumeSeekUp={handleVolumeSeekUp}
+      {isHostAvailble && (
+        <div className="room__videoContent">
+          <ReactPlayer
+            ref={playerRef}
+            url={liveShowDetail.videoUrl}
+            className="player"
+            width={showRight ? "100%" : "85%"}
+            height="100%"
             volume={volume}
+            muted={muted}
             playbackRate={playbackRate}
-            // onPlaybackRate={handlePlaybackRateChange}
-            onToggleFullscreen={toggleFullScreen}
-            played={played}
-            onSeek={handleSeekChange}
-            onSeekMouseDown={handleSeekMouseDown}
-            onSeekMouseUp={handleSeekMouseUp}
-            elaspedTime={elapsedTime}
-            totalDuration={totalDuration}
-            onChangeDisplayFormat={handleChangeDisplayFormat}
-            syncVideo={syncHostThroughButton}
-            host={host}
-            isFullScreen={isFullScreen}
-            // onBookmark={addBookmark}
+            loop
+            // config={{
+            //   youtube: {
+            //     playerVars: {
+            //       mode: "opaque",
+            //       showinfo: 0,
+            //       modestbranding: 0,
+            //       rel: 0,
+            //       autohide: 0,
+            //       wmode: "transparent",
+            //     },
+            //   },
+            // }}
+            playing={playing}
+            onProgress={handleProgress}
+            onReady={handleOnStart}
+            onBuffer={() => setProgress(true)}
+            onBufferEnd={() => setProgress(false)}
           />
         </div>
+      )}
+
+      <div className="room__player-skin">
+        {isHostAvailble &&
+        ReactPlayer.canPlay(liveShowDetail.videoUrl) &&
+        isRoomFound ? (
+          <div
+            className={`room__player__left ${
+              hideControls ? "hideControls" : ""
+            } ${showRight ? "expand" : ""}`}
+          >
+            <PlayerControls
+              // ref={controlsRef}
+              onPlayPause={handlePlayPause}
+              playing={playing}
+              // onRewind={handleRewind}
+              // onFastForward={handleFastForward}
+              muted={muted}
+              onMute={handleMute}
+              onVolumeChange={handleVolumeChange}
+              onVolumeSeekUp={handleVolumeSeekUp}
+              volume={volume}
+              playbackRate={playbackRate}
+              // onPlaybackRate={handlePlaybackRateChange}
+              onToggleFullscreen={toggleFullScreen}
+              played={played}
+              onSeek={handleSeekChange}
+              onSeekMouseDown={handleSeekMouseDown}
+              onSeekMouseUp={handleSeekMouseUp}
+              elaspedTime={elapsedTime}
+              totalDuration={totalDuration}
+              onChangeDisplayFormat={handleChangeDisplayFormat}
+              syncVideo={syncHostThroughButton}
+              host={host}
+              isFullScreen={isFullScreen}
+              isProgress={isProgress}
+              // onBookmark={addBookmark}
+            />
+          </div>
+        ) : (
+          <div
+            className={`errorMessage room__player__left ${
+              hideControls ? "hideControls" : ""
+            } ${showRight ? "expand" : ""}`}
+          >
+            <div className="hostIsNotAvailable__Content">
+              {ReactPlayer.canPlay(liveShowDetail.videoUrl) && isRoomFound ? (
+                <>
+                  <SentimentVeryDissatisfiedIcon />
+                  <h2>Host is not available</h2>
+                  <p>kindly wait for the host or check another room</p>
+                </>
+              ) : isRoomFound ? (
+                <>
+                  <ErrorIcon />
+                  <h2>Video can't play</h2>
+                  <p>make sure the url is valid</p>
+                </>
+              ) : (
+                <>
+                  <NoMeetingRoomIcon />
+                  <h2>Room not found</h2>
+                  <p>this room does not exist any more</p>
+                </>
+              )}
+            </div>
+          </div>
+        )}
         <div className={`room__player__right ${showRight ? "hide" : ""}`}>
           <div
             className={`room__player__right__toggleOpenCloseRight ${
@@ -786,4 +885,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Room);
+export default connect(mapStateToProps, { getLiveShowDetail })(Room);

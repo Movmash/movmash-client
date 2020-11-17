@@ -4,6 +4,10 @@
     align-items: center;
 }
 
+.userProfile__container {
+    width: 65rem;
+}
+
 .userProfile__profilePhotos {
     position: relative;
 }

@@ -57,7 +57,12 @@
     opacity: 0.5;
 }
 
-.watchlist__moviePoster>img {
+.watchlist__posterWrapper {
+    height: 250px;
+    border-radius: 15px;
+}
+
+.watchlist__posterWrapper>img {
     position: relative;
     height: 250px;
     object-fit: fill;

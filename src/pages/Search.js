@@ -6,10 +6,12 @@ import {
   getSearchedPeople,
   getSearchedMovie,
   getSearchedTicket,
+  getSearchedList,
 } from "../redux/actions/searchAction";
 import { Avatar } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import TicketPost from "../components/TicketPost";
+import ListCard from "../components/ListCard";
 function Search({
   getSearchedPeople,
   getSearchedMovie,
@@ -20,6 +22,9 @@ function Search({
   getSearchedTicket,
   searchedTicket,
   loadingSearchedTicket,
+  searchedList,
+  loadingSearchedList,
+  getSearchedList,
 }) {
   const [searchQuery, setSearchQuery] = useState("");
   const history = useHistory();
@@ -27,8 +32,15 @@ function Search({
     getSearchedPeople(searchQuery);
     getSearchedMovie(searchQuery);
     getSearchedTicket(searchQuery);
+    getSearchedList(searchQuery);
     console.log(!loadingSearchedMovie && searchedMovie.length === 0);
-  }, [searchQuery, getSearchedPeople, getSearchedMovie, getSearchedTicket]);
+  }, [
+    searchQuery,
+    getSearchedPeople,
+    getSearchedMovie,
+    getSearchedTicket,
+    getSearchedList,
+  ]);
 
   return (
     <div className="search">
@@ -138,7 +150,29 @@ function Search({
               </div>
             )}
           </div>
-          <div className="search__content__list"></div>
+          <div className="search__content__list">
+            {searchedList.length !== 0 && (
+              <div className="search__content__movieListContainer">
+                {" "}
+                <h2>Lists</h2>
+                <div className="search__content__movieList">
+                  {searchedList.map((list) => (
+                    <div key={list._id} className="listContainer">
+                      <ListCard
+                        id={list._id}
+                        createdBy={list.createdBy}
+                        listTitle={list.listTitle}
+                        description={list.description}
+                        movieList={list.movieList}
+                        privacyValue={list.privacy}
+                        tagArray={list.tags}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       ) : (
         <div className="search__browse">
@@ -266,13 +300,16 @@ const mapStateToProps = (state) => {
     searchedPeople: state.search.searchedPeople,
     searchedMovie: state.search.searchedMovie,
     searchedTicket: state.search.searchedTicket,
+    searchedList: state.search.searchedList,
     loadingSearchedTicket: state.search.loadingSearchedTicket,
     loadingSearchedPeople: state.search.loadingSearchedPeople,
     loadingSearchedMovie: state.search.loadingSearchedMovie,
+    loadingSearchedList: state.search.loadingSearchedList,
   };
 };
 export default connect(mapStateToProps, {
   getSearchedPeople,
   getSearchedMovie,
   getSearchedTicket,
+  getSearchedList,
 })(Search);

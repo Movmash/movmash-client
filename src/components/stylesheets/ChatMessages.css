@@ -28,6 +28,8 @@
     font-size: 1em;
     word-wrap: break-word;
     padding: 2px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
 }
 
 .messageText img {
@@ -45,8 +47,10 @@
 .sentText {
     display: flex;
     align-items: center;
-    font-family: Helvetica;
-    color: #828282;
+    /* font-family: Helvetica; */
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: white;
+    /* font-weight: 900; */
     letter-spacing: 0.3px;
 }
 
@@ -75,11 +79,16 @@
 }
 
 .backgroundBlue {
-    background: #3f414a;
+    background: linear-gradient(46.77deg, #0066FF 15.68%, rgba(169, 85, 183, 0.911342) 70.66%);
+    /* background: linear-gradient(135.49deg, #EC1313 11.04%, rgba(232, 83, 19, 0.983505) 34.01%, rgba(197, 128, 23, 0.833333) 101.04%, rgba(5, 45, 188, 0) 101.05%, rgba(148, 29, 83, 0.619792) 101.05%); */
+    ;
 }
 
 .backgroundLight {
     background: transparent;
-    border: 1px solid rgb(128, 128, 128);
+    /* border: 1px solid rgb(128, 128, 128); */
     margin-left: 10px;
+    display: flex;
+    align-items: center;
+    background: #3f414a;
 }

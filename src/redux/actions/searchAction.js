@@ -55,7 +55,22 @@ export const getSearchedMovie = (movieQuery) => (dispatch) => {
       });
   }
 };
-export const getSearchedList = () => (dispatch) => {};
+export const getSearchedList = (listQuery) => (dispatch) => {
+  if (listQuery === "") {
+    dispatch({ type: GET_SEARCH_LIST, payload: [] });
+  } else {
+    dispatch({ type: LOADING_SEARCH_LIST });
+    axios
+      .get(`http://localhost:8000/api/v1/search-list?search=${listQuery}`)
+      .then((res) => {
+        console.log(res);
+        dispatch({ type: GET_SEARCH_LIST, payload: res.data });
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
+};
 export const getSearchedTicket = (ticketQuery) => (dispatch) => {
   if (ticketQuery === "") {
     dispatch({ type: GET_SEARCH_TICKET, payload: [] });

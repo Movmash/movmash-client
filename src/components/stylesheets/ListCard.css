@@ -1,5 +1,5 @@
 .listCard {
-    width: 100%;
+    width: 30rem;
     height: 400px;
     background: #3F414A;
     border-radius: 15px;
@@ -87,7 +87,7 @@
     height: 45px;
     width: 45px;
     border-radius: 10px;
-    object-fit: fill;
+    object-fit: cover;
 
 }
 

@@ -148,3 +148,43 @@
 /* .hideCursor {
     cursor: none !important;
 } */
+
+.errorMessage {
+    background: #1c1b25;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.hostIsNotAvailable__Content {
+
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+
+}
+
+.hostIsNotAvailable__Content>h2 {
+    color: lightgray;
+    margin-top: 30px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.hostIsNotAvailable__Content>p {
+    color: lightgray;
+    margin-top: 10px;
+    font-family: 'Franklin Gothic Medium',
+        'Arial Narrow',
+        Arial,
+        sans-serif;
+
+}
+
+.hostIsNotAvailable__Content>.MuiSvgIcon-root {
+    color: lightgray;
+    font-size: 60px;
+}
+
+/* #1c1b25 
+#181722*/

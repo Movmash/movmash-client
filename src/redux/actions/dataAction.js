@@ -17,6 +17,10 @@ import {
   SET_PROFILE_WATCHLISTS,
   RESET_DATA_STATE,
   REMOVE_FROM_WATCHLIST,
+  SET_PROFILE_ACTIVITY,
+  LOADING_PROFILE_ACTIVITY,
+  REMOVE_UNDO_LIKE_MOVIE,
+  REMOVE_UNDO_DISLIKE_MOVIE,
 } from "../types";
 import axios from "axios";
 export const getMashUserDetails = (userName) => (dispatch) => {
@@ -50,6 +54,49 @@ export const getMashUserPost = (userName) => (dispatch) => {
     .then((res) => {
       console.log(res.data);
       dispatch({ type: SET_PROFILE_POSTS, payload: res.data });
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+};
+
+export const getUserLikeDislike = () => (dispatch) => {
+  dispatch({ type: LOADING_PROFILE_ACTIVITY });
+  axios
+    .get(`http://localhost:8000/api/v1/movie/get-user-like-dislike-movielist`)
+    .then((res) => {
+      dispatch({ type: SET_PROFILE_ACTIVITY, payload: res.data });
+    });
+};
+
+export const getMashUserLikeDislike = (userName) => (dispatch) => {
+  dispatch({ type: LOADING_PROFILE_ACTIVITY });
+  axios
+    .get(
+      `http://localhost:8000/api/v1/movie/get-mash-user-like-dislike-movielist/${userName}`
+    )
+    .then((res) => {
+      dispatch({ type: SET_PROFILE_ACTIVITY, payload: res.data });
+    });
+};
+export const unlikeMovies = (movieId) => (dispatch) => {
+  dispatch({ type: LOADING_PROFILE_ACTIVITY });
+  axios
+    .post("http://localhost:8000/api/v1/movie/undo-like-movie", { movieId })
+    .then((res) => {
+      dispatch({ type: REMOVE_UNDO_LIKE_MOVIE, payload: { movieId } });
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+};
+
+export const undoDislikeMovies = (movieId) => (dispatch) => {
+  dispatch({ type: LOADING_PROFILE_ACTIVITY });
+  axios
+    .post("http://localhost:8000/api/v1/movie/undo-dislike-movie", { movieId })
+    .then((res) => {
+      dispatch({ type: REMOVE_UNDO_DISLIKE_MOVIE, payload: { movieId } });
     })
     .catch((e) => {
       console.log(e);
@@ -219,6 +266,7 @@ export const deleteFromWatchList = (movieId) => (dispatch) => {
       console.log(e);
     });
 };
+
 export const resetState = () => (dispatch) => {
   dispatch({ type: RESET_DATA_STATE });
 };

@@ -47,32 +47,39 @@ function ProfileWatchlist({
         <TabLoadingData />
       ) : watchlists.length !== 0 ? (
         <div className="watchlist__container">
-          <h2>Your watchlist</h2>
+          <h2>Watchlist</h2>
           <div className="watchlist__movieContent">
             {watchlists.map((list) => (
               <div key={list._id} className="watchlist__movieItem">
                 <div className="watchlist__moviePoster">
                   {list.moviePoster !== null ? (
-                    <img
-                      src={`https://image.tmdb.org/t/p/w92${list.moviePoster}`}
-                      alt={list.movieTitle}
-                    />
+                    <div className="watchlist__posterWrapper">
+                      <img
+                        src={`https://image.tmdb.org/t/p/w185${list.moviePoster}`}
+                        alt={list.movieTitle}
+                      />
+                    </div>
                   ) : (
-                    <img
-                      src="https://streaming.tvseries-movies.com/themes/vstripe/images/no-cover.png"
-                      alt={list.movieTitle}
-                    />
+                    <div className="watchlist__posterWrapper">
+                      {" "}
+                      <img
+                        src="https://streaming.tvseries-movies.com/themes/vstripe/images/no-cover.png"
+                        alt={list.movieTitle}
+                      />
+                    </div>
                   )}
                 </div>
                 <div className="watchlist__moviePoster__skin"></div>
-                <div
-                  onClick={() => {
-                    handleRemoveFromWatchList(list.movieId);
-                  }}
-                  className="watchlist__moviePoster__button"
-                >
-                  <CloseIcon />
-                </div>
+                {isMyProfile && (
+                  <div
+                    onClick={() => {
+                      handleRemoveFromWatchList(list.movieId);
+                    }}
+                    className="watchlist__moviePoster__button"
+                  >
+                    <CloseIcon />
+                  </div>
+                )}
                 <div className="moviePoster__detailCard__title profileWatchList">
                   <span>
                     {stringLimiter(

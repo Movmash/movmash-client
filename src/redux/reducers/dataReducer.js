@@ -19,11 +19,16 @@ import {
   UPDATE_PROFILE_LIST,
   RESET_DATA_STATE,
   REMOVE_FROM_WATCHLIST,
+  REMOVE_UNDO_DISLIKE_MOVIE,
+  REMOVE_UNDO_LIKE_MOVIE,
 } from "../types";
 
 const initialState = {
   profilePosts: [],
-  profileActivity: {},
+  profileActivity: {
+    likedMovies: [],
+    dislikedMovies: [],
+  },
   profileWatchLists: [],
   profileLists: [],
   mashUser: {},
@@ -77,8 +82,11 @@ export default function (state = initialState, action) {
     case SET_PROFILE_ACTIVITY:
       return {
         ...state,
-        profileActivity: { ...action.payload },
-        infoLoading: false,
+        profileActivity: {
+          likedMovies: [...action.payload.likedMovies],
+          dislikedMovies: [...action.payload.dislikedMovies],
+        },
+        infoActivityLoading: false,
       };
     case SET_PROFILE_WATCHLISTS:
       return {
@@ -165,8 +173,40 @@ export default function (state = initialState, action) {
           (list) => list.movieId !== action.payload.movieId
         ),
       };
+    case REMOVE_UNDO_DISLIKE_MOVIE:
+      return {
+        ...state,
+        infoActivityLoading: false,
+        profileActivity: {
+          likedMovies: [...state.profileActivity.likedMovies],
+          dislikedMovies: state.profileActivity.dislikedMovies.filter(
+            (dislikeMovie) => dislikeMovie.movieId !== action.payload.movieId
+          ),
+        },
+      };
+    case REMOVE_UNDO_LIKE_MOVIE:
+      return {
+        ...state,
+        infoActivityLoading: false,
+        profileActivity: {
+          likedMovies: state.profileActivity.likedMovies.filter(
+            (likeMovie) => likeMovie.movieId !== action.payload.movieId
+          ),
+
+          dislikedMovies: [...state.profileActivity.dislikedMovies],
+        },
+      };
     case RESET_DATA_STATE:
-      return initialState;
+      return {
+        ...state,
+        profilePosts: [],
+        profileActivity: {
+          likedMovies: [],
+          dislikedMovies: [],
+        },
+        profileWatchLists: [],
+        profileLists: [],
+      };
     default:
       break;
   }
