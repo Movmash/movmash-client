@@ -1,5 +1,5 @@
 .leftSideBar__container {
-    height: 60vh;
+    height: 570px;
     background-color: #3F414A;
     width: 90px;
     left: 0;
@@ -26,6 +26,13 @@
     color: white;
 }
 
+.badge>.MuiButtonBase-root>.MuiIconButton-label>.MuiBadge-root>.MuiSvgIcon-root {
+    font-size: 40px !important;
+    color: white;
+}
+
+
+
 .leftSideBar__container__icon>.MuiAvatar-root {
     width: 45px;
     height: 45px
@@ -42,6 +49,24 @@
 }
 
 
+.notificationClickAway {
+    height: 300px;
+    width: 250px;
+    top: -120px;
+    overflow-y: auto;
+    left: 88px;
+    right: 0;
+    padding: 8px;
+    z-index: 100;
+    position: absolute;
+    background-color: #3F414A;
+    border-radius: 10px;
+    transition: ease-in;
+}
+
+.notificationClickAway>* {
+    margin-bottom: 5px;
+}
 
 .leftSideBar__container__icons--add {
     background: linear-gradient(46.77deg, #0066FF 15.68%, rgba(169, 85, 183, 0.911342) 70.66%);

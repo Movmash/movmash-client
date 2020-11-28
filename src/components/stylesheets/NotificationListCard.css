@@ -1,0 +1,26 @@
+.notificationListCard {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: 450ms;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.notificationListCard__message {
+    margin-left: 10px;
+}
+
+.notificationListCard__message>p {
+    color: rgb(241, 241, 241);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+
+.notificationListCard__message>p>span {
+    font-weight: bold;
+}
+
+.notificationListCard:hover {
+    background: #4e505a
+}

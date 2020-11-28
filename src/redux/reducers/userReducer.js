@@ -1,4 +1,13 @@
-import { SET_AUTHENTICATED, SET_UNAUTHENTICATED, SET_USER } from "../types";
+import {
+  SET_AUTHENTICATED,
+  SET_UNAUTHENTICATED,
+  SET_USER,
+  GET_ALL_NOTIFICATION,
+  ADD_NEW_NOTIFICATION,
+  MARK_NOTIFICATIONS_READ,
+  GET_UNREAD_ROOM,
+  UPDATE_ROOM,
+} from "../types";
 
 const initialState = {
   authenticated: false,
@@ -6,6 +15,7 @@ const initialState = {
   credential: {},
   likes: [],
   notifications: [],
+  messageRoom: [],
 };
 
 export default function (state = initialState, action) {
@@ -22,6 +32,42 @@ export default function (state = initialState, action) {
         authenticated: true,
         loading: false,
         ...action.payload,
+      };
+    case GET_ALL_NOTIFICATION:
+      return {
+        ...state,
+        notifications: action.payload,
+      };
+    case ADD_NEW_NOTIFICATION:
+      return {
+        ...state,
+        notifications: [action.payload, ...state.notifications],
+      };
+    case MARK_NOTIFICATIONS_READ:
+      const newNotification = state.notifications
+        .filter((noti) => action.payload.includes(noti._id))
+        .map((noti) => ({ ...noti, read: true }));
+      const oldNotification = state.notifications.filter(
+        (noti) => !action.payload.includes(noti._id)
+      );
+      return {
+        ...state,
+        notifications: [...newNotification, ...oldNotification],
+      };
+    case GET_UNREAD_ROOM:
+      return {
+        ...state,
+        messageRoom: action.payload,
+      };
+    case UPDATE_ROOM:
+      console.log(action.payload);
+      const oldRoom =
+        state.messageRoom !== undefined
+          ? state.messageRoom.filter((room) => room._id !== action.payload._id)
+          : [];
+      return {
+        ...state,
+        messageRoom: [action.payload, ...oldRoom],
       };
     default:
       return state;

@@ -3,14 +3,20 @@ import "./stylesheets/ChatMessages.css";
 import { Avatar } from "@material-ui/core";
 import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
-import { getRoomChats } from "../redux/actions/chatAction";
+import { getRoomChats, clearChat } from "../redux/actions/chatAction";
 
-function ChatMessages({ getRoomChats, messages, userId }) {
+function ChatMessages({ getRoomChats, messages, userId, clearChat }) {
   const { roomId } = useParams();
   //   console.log(params);
 
   useEffect(() => {
-    getRoomChats(roomId);
+    console.log(roomId);
+    if (roomId !== undefined) {
+      getRoomChats(roomId);
+    }
+    return () => {
+      clearChat();
+    };
   }, [roomId, getRoomChats]);
   return (
     <div>
@@ -43,4 +49,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { getRoomChats })(ChatMessages);
+export default connect(mapStateToProps, { getRoomChats, clearChat })(
+  ChatMessages
+);

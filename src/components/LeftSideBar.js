@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./stylesheets/LeftSideBar.css";
-import { IconButton, Avatar, Link } from "@material-ui/core";
+import { IconButton, Avatar, Link, Badge } from "@material-ui/core";
 import TelegramIcon from "@material-ui/icons/Telegram";
 import AddIcon from "@material-ui/icons/Add";
 import NotificationsNoneIcon from "@material-ui/icons/NotificationsNone";
@@ -10,12 +10,36 @@ import PostReviewPost from "./PostReviewPost";
 import PostSuggestMePost from "./PostSuggestMePost";
 import PostTicketPost from "./PostTicketPost";
 import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
+import NotificationListCard from "../components/NotificationListCard";
 import { connect } from "react-redux";
-import { logoutUser } from "../redux/actions/userAction";
+import { updateRooms } from "../redux/actions/chatAction";
+import {
+  logoutUser,
+  getAllNotification,
+  addNewNotification,
+  markNotificationRead,
+  getUnreadUserRoom,
+} from "../redux/actions/userAction";
 import { useHistory } from "react-router-dom";
-function LeftSideBar({ logoutUser, userName, userImage, postType }) {
+import { useSocket } from "../contexts/SocketProvider";
+function LeftSideBar({
+  logoutUser,
+  userName,
+  userImage,
+  postType,
+  getAllNotification,
+  addNewNotification,
+  notifications,
+  markNotificationRead,
+  updateRooms,
+  getUnreadUserRoom,
+  messageRoom,
+}) {
   const [open, setOpen] = useState(false);
+
+  const [openNotification, setOpenNotification] = useState(false);
   const history = useHistory();
+  const socket = useSocket();
   const handleClick = () => {
     setOpen((prev) => !prev);
   };
@@ -25,6 +49,29 @@ function LeftSideBar({ logoutUser, userName, userImage, postType }) {
   const [openReviewDialog, setOpenReviewDialog] = useState(false);
   const [openSuggestMeDialog, setOpenSuggestMeDialog] = useState(false);
   const [openTicketDialog, setOpenTicketDialog] = useState(false);
+  useEffect(() => {
+    if (socket !== undefined) {
+      socket.on("notification", (data) => {
+        console.log(data);
+        addNewNotification(data);
+      });
+    }
+    return () => {};
+  }, [socket, addNewNotification]);
+  useEffect(() => {
+    if (socket !== undefined) {
+      socket.on("message-room", (roomData) => {
+        console.log(roomData);
+        updateRooms(roomData);
+      });
+    }
+  }, [socket, updateRooms]);
+  useEffect(() => {
+    getAllNotification();
+  }, [getAllNotification]);
+  useEffect(() => {
+    getUnreadUserRoom();
+  }, [getUnreadUserRoom]);
   //..................................................................................[handle review post]
   const handleClickOpenReview = () => {
     setOpenReviewDialog(true);
@@ -46,6 +93,23 @@ function LeftSideBar({ logoutUser, userName, userImage, postType }) {
   const handleCloseTicket = () => {
     setOpenTicketDialog(false);
   };
+  const handleClickAwayNotification = () => {
+    setOpenNotification(false);
+  };
+  const handleMarkNotificationRead = () => {
+    const markReadNotification = [];
+    if (notifications !== undefined) {
+      notifications.filter((notification) => {
+        if (notification.read === false) {
+          // console.log(notification._id);
+          markReadNotification.push(notification._id);
+          return notification._id;
+        }
+      });
+      console.log(markReadNotification);
+      markNotificationRead(markReadNotification);
+    }
+  };
   return (
     <div className="leftSideBar">
       <div className="leftSideBar__container">
@@ -57,13 +121,19 @@ function LeftSideBar({ logoutUser, userName, userImage, postType }) {
           {/* <Link to={`/@${userName}`}> */}
           <Avatar src={userImage} /> {/* </Link> */}
         </div>{" "}
-        <div className="leftSideBar__container__icon">
+        <div className="leftSideBar__container__icon badge">
           <IconButton
             onClick={() => {
               history.push("/messages/inbox/");
             }}
           >
-            <TelegramIcon />
+            {" "}
+            <Badge
+              badgeContent={messageRoom !== undefined ? messageRoom.length : 0}
+              color="secondary"
+            >
+              <TelegramIcon />{" "}
+            </Badge>
           </IconButton>
         </div>
         <div className="leftSideBar__container__icon">
@@ -135,12 +205,62 @@ function LeftSideBar({ logoutUser, userName, userImage, postType }) {
               ) : null}
             </div>
           </ClickAwayListener>
-        </div>
+        </div>{" "}
         <div className="leftSideBar__container__icon">
-          <IconButton>
-            <NotificationsNoneIcon />
-          </IconButton>
-        </div>
+          <ClickAwayListener onClickAway={handleClickAwayNotification}>
+            <div className="leftSideBar__container__icon--click_away">
+              <div className="badge">
+                <IconButton
+                  onClick={() => {
+                    setOpenNotification((prev) => !prev);
+                    handleMarkNotificationRead();
+                  }}
+                >
+                  <Badge
+                    badgeContent={
+                      notifications !== undefined
+                        ? notifications.filter(
+                            (notification) => notification.read === false
+                          ).length
+                        : 0
+                    }
+                    color="secondary"
+                  >
+                    <NotificationsNoneIcon />
+                  </Badge>
+                </IconButton>
+              </div>
+              {openNotification ? (
+                <div className="notificationClickAway">
+                  {notifications.map((notification) => {
+                    if (notification.type === "like") {
+                      return (
+                        <NotificationListCard
+                          key={notification._id}
+                          imageUrl={notification.senderId.profileImageUrl}
+                          type={notification.type}
+                          message="liked your post"
+                          userName={notification.senderId.userName}
+                        />
+                      );
+                    }
+                    if (notification.type === "comment") {
+                      return (
+                        <NotificationListCard
+                          key={notification._id}
+                          imageUrl={notification.senderId.profileImageUrl}
+                          type={notification.type}
+                          message="commented on your post"
+                          userName={notification.senderId.userName}
+                        />
+                      );
+                    }
+                  })}
+                </div>
+              ) : null}
+            </div>
+          </ClickAwayListener>
+        </div>{" "}
         <div className="leftSideBar__container__icon">
           <IconButton onClick={() => logoutUser()}>
             <PowerSettingsNewIcon />
@@ -155,7 +275,16 @@ const mapStateToProps = (state) => {
   return {
     userName: state.user.userName,
     userImage: state.user.profileImageUrl,
+    notifications: state.user.notifications,
+    messageRoom: state.user.messageRoom,
   };
 };
 
-export default connect(mapStateToProps, { logoutUser })(LeftSideBar);
+export default connect(mapStateToProps, {
+  logoutUser,
+  getAllNotification,
+  addNewNotification,
+  markNotificationRead,
+  updateRooms,
+  getUnreadUserRoom,
+})(LeftSideBar);

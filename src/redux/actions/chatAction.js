@@ -5,8 +5,26 @@ import {
   LOADING_MESSAGE,
   SET_ALL_MESSAGE,
   ADD_CHAT,
+  UPDATE_ROOM,
+  MARK_CHAT_ROOM_READ,
+  CLEAR_CHAT,
 } from "../types";
 
+export const clearChat = () => (dispatch) => {
+  dispatch({ type: CLEAR_CHAT });
+};
+export const updateRooms = (roomData) => (dispatch) => {
+  dispatch({ type: UPDATE_ROOM, payload: roomData });
+};
+export const markChatRoomRead = (roomId) => (dispatch) => {
+  axios
+    .put("http://localhost:8000/api/v1/home/mark-chatRoom-read", {
+      roomId: roomId,
+    })
+    .then((res) => {
+      dispatch({ type: MARK_CHAT_ROOM_READ, payload: roomId });
+    });
+};
 export const getAllRooms = () => (dispatch) => {
   dispatch({ type: LOADING_ROOM });
   axios

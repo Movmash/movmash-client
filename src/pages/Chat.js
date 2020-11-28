@@ -1,23 +1,37 @@
 import React, { useEffect, useState } from "react";
 import "./stylesheets/Chat.css";
-import UserNamePlate from "../components/UserNamePlate";
+// import UserNamePlate from "../components/UserNamePlate";
 // import { Avatar } from "@material-ui/core";
 // import io from "socket.io-client";
 import { connect } from "react-redux";
 import ScrollToBottom from "react-scroll-to-bottom";
-import { getAllRooms, addInChats } from "../redux/actions/chatAction";
+import {
+  getAllRooms,
+  addInChats,
+  updateRooms,
+  markChatRoomRead,
+} from "../redux/actions/chatAction";
 import ChatUserNamePlate from "../components/ChatUserNamePlate";
 import ChatMessages from "../components/ChatMessages";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useSocket } from "../contexts/SocketProvider";
+import { Avatar } from "@material-ui/core";
 // let socket;
-function Chat({ getAllRooms, rooms, userId, addInChats }) {
+function Chat({
+  getAllRooms,
+  rooms,
+  userId,
+  addInChats,
+  updateRooms,
+  markChatRoomRead,
+}) {
   const [selectedUser, setSelectedUser] = useState({});
   const [selectedUserName, setSelectedUserName] = useState("");
   const [message, setMessage] = useState("");
   const [roomId, setRoomId] = useState("");
   const history = useHistory();
   const socket = useSocket();
+  const roomIdParams = useParams();
   useEffect(() => {
     getAllRooms();
 
@@ -28,6 +42,14 @@ function Chat({ getAllRooms, rooms, userId, addInChats }) {
   //     socket.emit("join-chat", { userId: userId });
   //   }
   // }, [userId, socket]);
+  useEffect(() => {
+    if (socket !== undefined) {
+      socket.on("message-room", (roomData) => {
+        console.log(roomData);
+        updateRooms(roomData);
+      });
+    }
+  }, [socket, updateRooms]);
   useEffect(() => {
     console.log(socket);
     if (socket !== undefined) {
@@ -47,6 +69,7 @@ function Chat({ getAllRooms, rooms, userId, addInChats }) {
     setSelectedUserName(userDetails.userName);
     setSelectedUser({ ...userDetails });
     setRoomId(room_Id);
+    markChatRoomRead(room_Id);
     // socket.emit("join-chat", { roomId: roomId, userDetails });
   };
   const handleSendMessage = (e) => {
@@ -90,6 +113,7 @@ function Chat({ getAllRooms, rooms, userId, addInChats }) {
                   <ChatUserNamePlate
                     name={userDetails.userName}
                     imageUrl={userDetails.profileImageUrl}
+                    lastMessage={room.lastMessage}
                     // username={`Iamak47`}
                   />
                 </div>
@@ -105,38 +129,55 @@ function Chat({ getAllRooms, rooms, userId, addInChats }) {
             </div> */}
           </div>
         </div>
-        <div className="chat_container__right">
-          {selectedUserName !== "" ? (
-            <>
-              {" "}
-              <div className="chat_container__right__header">
-                <UserNamePlate
+        {roomIdParams.roomId ? (
+          <div className="chat_container__right">
+            {selectedUserName !== "" ? (
+              <>
+                {" "}
+                <div className="chat_container__right__header">
+                  {/* <UserNamePlate
                   name={selectedUser.userName}
                   imageUrl={selectedUser.profileImageUrl}
                   username={`Iamak47`}
-                />
-              </div>
-              <div className="chat_container__right__messages">
-                <ScrollToBottom className="chat_container__right__messages">
-                  <ChatMessages />
-                </ScrollToBottom>
-              </div>
-              <form onSubmit={handleSendMessage}>
-                <div className="chat_container__right__input">
-                  <input
-                    value={message}
-                    onChange={(e) => {
-                      setMessage(e.target.value);
-                    }}
-                    type="text"
-                    placeholder="send message ..."
-                  ></input>
-                  <button type="submit">submit</button>
+                /> */}
+                  <div className="chatUserNamePlate__header__container">
+                    <div className="chatUserNamePlate__header__userInfo chatHeader">
+                      <Avatar src={selectedUser.profileImageUrl} />
+                      <div className="chatUserNamePlate__header__userName--info">
+                        <div className="chatUserNamePlate__header--name">
+                          <h3>{selectedUser.userName}</h3>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </form>
-            </>
-          ) : null}
-        </div>
+                <div className="chat_container__right__messages">
+                  <ScrollToBottom className="chat_container__right__messages">
+                    <ChatMessages />
+                  </ScrollToBottom>
+                </div>
+                <form onSubmit={handleSendMessage}>
+                  <div className="chat_container__right__input">
+                    <input
+                      value={message}
+                      onChange={(e) => {
+                        setMessage(e.target.value);
+                      }}
+                      type="text"
+                      onContextMenu={() => {
+                        console.log("start");
+                      }}
+                      placeholder="send message ..."
+                    ></input>
+                    <button type="submit">submit</button>
+                  </div>
+                </form>
+              </>
+            ) : null}
+          </div>
+        ) : (
+          <div className="chat_container__right">heyy there</div>
+        )}
       </div>
     </div>
   );
@@ -147,4 +188,9 @@ const mapStateToProps = (state) => {
     userId: state.user._id,
   };
 };
-export default connect(mapStateToProps, { getAllRooms, addInChats })(Chat);
+export default connect(mapStateToProps, {
+  getAllRooms,
+  addInChats,
+  updateRooms,
+  markChatRoomRead,
+})(Chat);

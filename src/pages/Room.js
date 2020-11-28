@@ -5,7 +5,7 @@ import SendIcon from "@material-ui/icons/Send";
 import { IconButton } from "@material-ui/core";
 import { connect } from "react-redux";
 import { useSocket } from "../contexts/SocketProvider";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, Link } from "react-router-dom";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import ScrollToBottom from "react-scroll-to-bottom";
@@ -16,6 +16,7 @@ import SentimentVeryDissatisfiedIcon from "@material-ui/icons/SentimentVeryDissa
 import { getLiveShowDetail } from "../redux/actions/liveShowAction";
 import ErrorIcon from "@material-ui/icons/Error";
 import NoMeetingRoomIcon from "@material-ui/icons/NoMeetingRoom";
+import CloseIcon from "@material-ui/icons/Close";
 // import axios from "axios";
 let count = 0;
 function Room({ userName, userId, liveShowDetail, getLiveShowDetail }) {
@@ -799,21 +800,54 @@ function Room({ userName, userId, liveShowDetail, getLiveShowDetail }) {
             <div className="hostIsNotAvailable__Content">
               {ReactPlayer.canPlay(liveShowDetail.videoUrl) && isRoomFound ? (
                 <>
-                  <SentimentVeryDissatisfiedIcon />
-                  <h2>Host is not available</h2>
-                  <p>kindly wait for the host or check another room</p>
+                  <div className="errorMessage__header">
+                    <Link to="/live">
+                      <div className="playerControls__topControls medium room_header">
+                        <IconButton>
+                          <CloseIcon />
+                        </IconButton>
+                      </div>
+                    </Link>
+                  </div>
+                  <div className="errorMessage__content">
+                    <SentimentVeryDissatisfiedIcon />
+                    <h2>Host is not available</h2>
+                    <p>kindly wait for the host or check another room</p>
+                  </div>
                 </>
-              ) : isRoomFound ? (
+              ) : !isRoomFound ? (
                 <>
-                  <ErrorIcon />
-                  <h2>Video can't play</h2>
-                  <p>make sure the url is valid</p>
+                  <div className="errorMessage__header">
+                    <Link to="/live">
+                      <div className="playerControls__topControls medium room_header">
+                        <IconButton>
+                          <CloseIcon />
+                        </IconButton>
+                      </div>
+                    </Link>
+                  </div>
+                  <div className="errorMessage__content">
+                    <NoMeetingRoomIcon />
+                    <h2>Room not found</h2>
+                    <p>this room does not exist any more</p>
+                  </div>
                 </>
               ) : (
                 <>
-                  <NoMeetingRoomIcon />
-                  <h2>Room not found</h2>
-                  <p>this room does not exist any more</p>
+                  <div className="errorMessage__header">
+                    <Link to="/live">
+                      <div className="playerControls__topControls medium room_header">
+                        <IconButton>
+                          <CloseIcon />
+                        </IconButton>
+                      </div>
+                    </Link>
+                  </div>
+                  <div className="errorMessage__content">
+                    <ErrorIcon />
+                    <h2>Video can't play</h2>
+                    <p>make sure the url is valid</p>
+                  </div>
                 </>
               )}
             </div>

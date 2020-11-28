@@ -157,21 +157,23 @@
 
 }
 
-.hostIsNotAvailable__Content {
+.errorMessage__content {
 
     display: flex;
     flex-flow: column;
     align-items: center;
+    height: 90vh;
+    justify-content: center;
 
 }
 
-.hostIsNotAvailable__Content>h2 {
+.errorMessage__content>h2 {
     color: lightgray;
     margin-top: 30px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-.hostIsNotAvailable__Content>p {
+.errorMessage__content>p {
     color: lightgray;
     margin-top: 10px;
     font-family: 'Franklin Gothic Medium',
@@ -181,10 +183,19 @@
 
 }
 
-.hostIsNotAvailable__Content>.MuiSvgIcon-root {
+.errorMessage__content>.MuiSvgIcon-root {
     color: lightgray;
     font-size: 60px;
 }
 
+.room_header {
+    /* width: 70%; */
+    display: flex;
+    justify-content: flex-end;
+}
+
 /* #1c1b25 
 #181722*/
+.hostIsNotAvailable__Content {
+    width: 100%;
+}

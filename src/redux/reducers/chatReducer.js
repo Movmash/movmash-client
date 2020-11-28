@@ -4,6 +4,9 @@ const {
   SET_ALL_MESSAGE,
   SET_ALL_ROOMS,
   ADD_CHAT,
+  UPDATE_ROOM,
+  MARK_CHAT_ROOM_READ,
+  CLEAR_CHAT,
 } = require("../types");
 
 const initialState = {
@@ -41,6 +44,35 @@ const chatReducer = (state = initialState, action) => {
       return {
         ...state,
         messages: [...state.messages, ...action.payload],
+      };
+    case UPDATE_ROOM:
+      // const newRoom = state.rooms.filter(
+      //   (room) => room._id === action.payload._id
+      // );
+      const oldRoom = state.rooms.filter(
+        (room) => room._id !== action.payload._id
+      );
+      return {
+        ...state,
+        rooms: [action.payload, ...oldRoom],
+      };
+    case MARK_CHAT_ROOM_READ:
+      const roomIndex = state.rooms.findIndex(
+        (room) => room._id === action.payload
+      );
+      console.log(state.rooms[roomIndex]);
+      state.rooms[roomIndex].lastMessage = {
+        ...state.rooms[roomIndex].lastMessage,
+        read: true,
+      };
+      return {
+        ...state,
+        rooms: [...state.rooms],
+      };
+    case CLEAR_CHAT:
+      return {
+        ...state,
+        messages: [],
       };
     default:
   }
