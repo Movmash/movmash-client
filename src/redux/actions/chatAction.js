@@ -48,7 +48,32 @@ export const getRoomChats = (roomId) => (dispatch) => {
       console.log(e);
     });
 };
-
+export const createRoomChat = (
+  userId,
+  history,
+  closeDialog,
+  type,
+  movieData,
+  postData
+) => (dispatch) => {
+  axios
+    .post("http://localhost:8000/api/v1/home/create-chat-room", {
+      userId,
+      type,
+      movieData,
+      postData,
+    })
+    .then((res) => {
+      if (!type) {
+        dispatch({ type: UPDATE_ROOM, payload: res.data });
+        history.push(`/messages/inbox/${res.data._id}`);
+      }
+      closeDialog(false);
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+};
 export const addInChats = (chat) => (dispatch) => {
   dispatch({ type: ADD_CHAT, payload: chat });
 };

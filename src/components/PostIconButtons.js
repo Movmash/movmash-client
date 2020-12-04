@@ -7,14 +7,16 @@ import ChatIcon from "@material-ui/icons/Chat";
 import ShareIcon from "@material-ui/icons/Share";
 import ConfirmationNumberIcon from "@material-ui/icons/ConfirmationNumber";
 import DateRangeIcon from "@material-ui/icons/DateRange";
-import { IconButton } from "@material-ui/core";
+import { IconButton, Dialog } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import NearMeIcon from "@material-ui/icons/NearMe";
 import {
   profileLikePost,
   profileUnlikePost,
 } from "../redux/actions/dataAction";
+import FriendListMessage from "./FriendListMessage";
 function PostIconButtons({
   type,
   setSearchMovie,
@@ -27,6 +29,7 @@ function PostIconButtons({
   tag,
   profileLikePost,
   profileUnlikePost,
+  details,
 }) {
   const handleLikePost = (id) => {
     if (tag) {
@@ -44,6 +47,13 @@ function PostIconButtons({
     }
   };
   const [isliked, setLikes] = useState(likes.includes(user._id));
+  const [openSendPostDialog, setOpenSendPostDilog] = useState(false);
+  const handleOpenSendPost = () => {
+    setOpenSendPostDilog(true);
+  };
+  const handleCloseSendPost = () => {
+    setOpenSendPostDilog(false);
+  };
   return (
     <div className="postIconButtons">
       {(type === "review" || type === "suggestMe") && (
@@ -114,9 +124,16 @@ function PostIconButtons({
           )}
 
           <div className="postIconButtons--share">
-            <IconButton>
-              <ShareIcon />
+            <IconButton onClick={handleOpenSendPost}>
+              <NearMeIcon />
             </IconButton>
+            <Dialog onClose={handleCloseSendPost} open={openSendPostDialog}>
+              <FriendListMessage
+                closeDialog={handleCloseSendPost}
+                postData={details}
+                type={type}
+              />
+            </Dialog>
           </div>
         </>
       )}

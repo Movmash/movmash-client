@@ -4,7 +4,9 @@ import "./stylesheets/Chat.css";
 // import { Avatar } from "@material-ui/core";
 // import io from "socket.io-client";
 import { connect } from "react-redux";
+import TelegramIcon from "@material-ui/icons/Telegram";
 import ScrollToBottom from "react-scroll-to-bottom";
+import FriendListMessage from "../components/FriendListMessage";
 import {
   getAllRooms,
   addInChats,
@@ -16,6 +18,8 @@ import ChatMessages from "../components/ChatMessages";
 import { useHistory, useParams } from "react-router-dom";
 import { useSocket } from "../contexts/SocketProvider";
 import { Avatar } from "@material-ui/core";
+import { Dialog } from "@material-ui/core";
+import CreateIcon from "@material-ui/icons/Create";
 // let socket;
 function Chat({
   getAllRooms,
@@ -24,19 +28,30 @@ function Chat({
   addInChats,
   updateRooms,
   markChatRoomRead,
+  messages,
 }) {
+  const roomIdParams = useParams();
   const [selectedUser, setSelectedUser] = useState({});
   const [selectedUserName, setSelectedUserName] = useState("");
   const [message, setMessage] = useState("");
   const [roomId, setRoomId] = useState("");
   const history = useHistory();
   const socket = useSocket();
-  const roomIdParams = useParams();
+  const [openDialog, setOpenDialog] = useState(false);
+
   useEffect(() => {
     getAllRooms();
-
     // return () => {};
   }, [getAllRooms]);
+  useEffect(() => {
+    if (messages[0] !== undefined) {
+      if (userId === messages[0].sender._id) {
+        setSelectedUser(messages[0].recipient);
+      } else {
+        setSelectedUser(messages[0].sender);
+      }
+    }
+  }, [messages[0]]);
   // useEffect(() => {
   //   if (userId !== undefined && socket !== undefined) {
   //     socket.emit("join-chat", { userId: userId });
@@ -64,18 +79,26 @@ function Chat({
       };
     }
   }, [addInChats, socket]);
-  const handleClickOnUserList = (userDetails, room_Id) => {
+  const handleOpenDialog = () => {
+    setOpenDialog(true);
+  };
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
+  const handleClickOnUserList = (userDetails, room_Id, lastMessage) => {
     history.push(`/messages/inbox/${room_Id}`);
     setSelectedUserName(userDetails.userName);
     setSelectedUser({ ...userDetails });
     setRoomId(room_Id);
-    markChatRoomRead(room_Id);
+    if (lastMessage !== undefined && userId !== lastMessage.sender) {
+      markChatRoomRead(room_Id);
+    }
     // socket.emit("join-chat", { roomId: roomId, userDetails });
   };
   const handleSendMessage = (e) => {
     e.preventDefault();
     const messageData = {
-      roomId: roomId,
+      roomId: roomIdParams.roomId,
       sender: userId,
       recipient: selectedUser._id,
       message: message,
@@ -93,21 +116,30 @@ function Chat({
         <div className="chat_container__left">
           <div className="chat_container__left__header">
             <h1>Messages</h1>
+            <span onClick={handleOpenDialog}>
+              <CreateIcon />
+            </span>
           </div>
           <div className="chat_container__left__userList">
             {rooms.map((room) => {
               const userDetails = room.participants.find(
                 (user) => user._id !== userId
               );
-
+              {
+                /* setSelectedUser(userDetails); */
+              }
               return (
                 <div
                   key={room._id}
                   onClick={() => {
-                    handleClickOnUserList(userDetails, room._id);
+                    handleClickOnUserList(
+                      userDetails,
+                      room._id,
+                      room.lastMessage
+                    );
                   }}
                   className={`chat_container__left__user__list ${
-                    userDetails.userName === selectedUserName ? "selected" : ""
+                    room._id === roomIdParams.roomId ? "selected" : ""
                   }`}
                 >
                   <ChatUserNamePlate
@@ -131,54 +163,67 @@ function Chat({
         </div>
         {roomIdParams.roomId ? (
           <div className="chat_container__right">
-            {selectedUserName !== "" ? (
-              <>
-                {" "}
-                <div className="chat_container__right__header">
-                  {/* <UserNamePlate
+            {/* {selectedUserName !== "" ? ( */}
+            <>
+              {" "}
+              <div className="chat_container__right__header">
+                {/* <UserNamePlate
                   name={selectedUser.userName}
                   imageUrl={selectedUser.profileImageUrl}
                   username={`Iamak47`}
                 /> */}
-                  <div className="chatUserNamePlate__header__container">
-                    <div className="chatUserNamePlate__header__userInfo chatHeader">
-                      <Avatar src={selectedUser.profileImageUrl} />
-                      <div className="chatUserNamePlate__header__userName--info">
-                        <div className="chatUserNamePlate__header--name">
-                          <h3>{selectedUser.userName}</h3>
-                        </div>
+                <div className="chatUserNamePlate__header__container">
+                  <div className="chatUserNamePlate__header__userInfo chatHeader">
+                    <Avatar src={selectedUser.profileImageUrl} />
+                    <div className="chatUserNamePlate__header__userName--info">
+                      <div className="chatUserNamePlate__header--name">
+                        <h3>{selectedUser.userName}</h3>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div className="chat_container__right__messages">
-                  <ScrollToBottom className="chat_container__right__messages">
-                    <ChatMessages />
-                  </ScrollToBottom>
+              </div>
+              <div className="chat_container__right__messages">
+                <ScrollToBottom className="chat_container__right__messages">
+                  <ChatMessages />
+                </ScrollToBottom>
+              </div>
+              <form onSubmit={handleSendMessage}>
+                <div className="chat_container__right__input">
+                  <input
+                    value={message}
+                    onChange={(e) => {
+                      setMessage(e.target.value);
+                    }}
+                    type="text"
+                    onContextMenu={() => {
+                      console.log("start");
+                    }}
+                    placeholder="send message ..."
+                  ></input>
+                  <button type="submit">submit</button>
                 </div>
-                <form onSubmit={handleSendMessage}>
-                  <div className="chat_container__right__input">
-                    <input
-                      value={message}
-                      onChange={(e) => {
-                        setMessage(e.target.value);
-                      }}
-                      type="text"
-                      onContextMenu={() => {
-                        console.log("start");
-                      }}
-                      placeholder="send message ..."
-                    ></input>
-                    <button type="submit">submit</button>
-                  </div>
-                </form>
-              </>
-            ) : null}
+              </form>
+            </>
+            {/* ) : null} */}
           </div>
         ) : (
-          <div className="chat_container__right">heyy there</div>
+          <div className="chat_container__right noUserSelected">
+            <div className="chat_container__right__sendMessageContainer">
+              <div className="chat_container__right__sendMessageContainer__logo">
+                <TelegramIcon />
+              </div>
+              <span>Send private message to your friends</span>
+              <button onClick={handleOpenDialog} className="chat__sendMessage">
+                Send
+              </button>
+            </div>
+          </div>
         )}
       </div>
+      <Dialog onClose={handleCloseDialog} open={openDialog}>
+        <FriendListMessage closeDialog={setOpenDialog} />
+      </Dialog>
     </div>
   );
 }
@@ -186,6 +231,7 @@ const mapStateToProps = (state) => {
   return {
     rooms: state.chat.rooms,
     userId: state.user._id,
+    messages: state.chat.messages,
   };
 };
 export default connect(mapStateToProps, {

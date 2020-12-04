@@ -1,0 +1,9 @@
+.movieChatCard>img {
+    border-radius: 20px;
+    padding: 10px 0 10px 0;
+    max-height: 200px;
+}
+
+.movieChatCard {
+    cursor: pointer;
+}

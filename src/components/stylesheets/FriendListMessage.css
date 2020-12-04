@@ -1,0 +1,101 @@
+.friendListMessage {
+    width: 400px;
+    height: 450px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.friendListMessage__heading {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 20px 0 20px;
+    align-items: center;
+}
+
+.friendListMessage__heading>span {
+    font-size: 18px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.friendListMessage__closeButton>.MuiSvgIcon-root {
+    color: white;
+    font-size: 18px
+}
+
+.friendListMessage__closeButton {
+    cursor: pointer;
+}
+
+.friendListMessage__searchInput {
+    display: flex;
+    justify-content: center;
+}
+
+.friendListMessage__searchInput {
+    margin-top: 15px;
+}
+
+.friendListMessage__searchInput>input {
+    outline: 0;
+    border: 0;
+    background: 0;
+    width: 70%;
+    height: 25px;
+    color: white;
+    border-bottom: 1px solid rgb(160, 160, 160);
+}
+
+.friendListMessage__searchInput>input::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: lightgray
+        /* Firefox */
+}
+
+.friendListMessage__searchInput>input:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+
+    color: lightgray
+}
+
+.friendListMessage__searchInput>input::-ms-input-placeholder {
+    /* Microsoft Edge */
+
+    color: lightgray
+}
+
+.friendListMessage__tabs {
+    display: flex;
+    justify-content: space-between;
+
+    background: #3F414A;
+    border-radius: 5px;
+    margin-top: 25px;
+}
+
+.followers {
+    border-right: 1px solid rgb(160, 160, 160);
+}
+
+.friendListMessage__tab {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    height: 40px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.friendListMessage__tab.selected {
+    color: greenyellow;
+}
+
+.friendListCard {
+    width: 90% !important;
+    background-color: transparent !important;
+}
+
+.friendListMessage__listContainer {
+    overflow-y: auto;
+    max-height: 302px;
+}

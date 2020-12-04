@@ -1,0 +1,11 @@
+.suggestMeChatCard {
+    padding: 10px 0 10px 0;
+}
+
+.suggestMeChatCard__Container {
+    margin: 0;
+    border-radius: 0;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    width: 200px;
+}

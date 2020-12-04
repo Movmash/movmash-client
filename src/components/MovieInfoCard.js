@@ -13,6 +13,7 @@ import { genreConverter } from "../util/genreConverter";
 import axios from "axios";
 import Dialog from "@material-ui/core/Dialog";
 import RatingFrom from "./RatingFrom";
+import FriendListMessage from "./FriendListMessage";
 
 function MovieInfoCard({
   id,
@@ -34,6 +35,7 @@ function MovieInfoCard({
   }
   const [selectedLike, setSelectedLike] = useState(movieStatus.liked);
   const [selectedDislike, setSelectedDislike] = useState(movieStatus.disliked);
+  const [sendMovieDialog, setSendMovieDialog] = useState(false);
   const [selectedWatchList, setSelectedWatchList] = useState(
     movieStatus.inWatchlist
   );
@@ -67,6 +69,7 @@ function MovieInfoCard({
     releaseDate: releaseDate,
     genreId: movieGenresId,
   };
+
   const handleLikeMovie = () => {
     console.log("liked");
     setSelectedLike(true);
@@ -151,6 +154,12 @@ function MovieInfoCard({
         return;
       })
       .catch((e) => console.log(e));
+  };
+  const handleCloseSendMovieDialog = () => {
+    setSendMovieDialog(false);
+  };
+  const handleOpenSendMovieDialog = () => {
+    setSendMovieDialog(true);
   };
   const handleOpenRatingDialog = () => {
     setOpenRatingDialog(true);
@@ -262,9 +271,21 @@ function MovieInfoCard({
               </IconButton>
             </div>
             <div className="movieInfoCard__info--subHeading--tagButton">
-              <IconButton>
+              <IconButton onClick={handleOpenSendMovieDialog}>
                 <NearMeIcon />
               </IconButton>
+              <div className="movieInfoCard__info--sendMovieDialog">
+                <Dialog
+                  onClose={handleCloseSendMovieDialog}
+                  open={sendMovieDialog}
+                >
+                  <FriendListMessage
+                    type={"movie"}
+                    movieData={movieDetails}
+                    closeDialog={handleCloseSendMovieDialog}
+                  />
+                </Dialog>
+              </div>
             </div>
           </div>
         </div>

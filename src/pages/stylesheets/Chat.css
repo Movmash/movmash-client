@@ -62,6 +62,19 @@
 .chat_container__left__header>h1 {
   color: white;
   font-size: 18px;
+  width: 90%;
+  display: flex;
+  justify-content: center;
+}
+
+.chat_container__left__header>span>.MuiSvgIcon-root {
+  color: white;
+}
+
+.chat_container__left__header>span {
+  padding-right: 10px;
+  width: 10%;
+  cursor: pointer;
 }
 
 .chat_container__left__user__list {
@@ -176,6 +189,48 @@
   border-radius: 10px;
   width: fit-content;
   display: flex;
+}
+
+.noUserSelected {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chat_container__right__sendMessageContainer {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.chat_container__right__sendMessageContainer>span {
+  color: white;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+
+.chat_container__right__sendMessageContainer__logo {
+  color: white;
+  margin-bottom: 20px;
+}
+
+.chat_container__right__sendMessageContainer__logo>.MuiSvgIcon-root {
+  font-size: 50px;
+}
+
+
+.chat__sendMessage {
+  border: 0;
+  background: 0;
+  color: white;
+  background: #499E4C;
+  outline: 0;
+  cursor: pointer;
+  padding: 5px;
+  width: 90px;
+  border-radius: 4px;
+
 }
 
 /* .chat_container__right__messages {

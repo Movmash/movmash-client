@@ -95,6 +95,7 @@ function ReviewPost({ isProfile, details, postId, type }) {
         </div>
         <div className="reviewPost__bottomIcons">
           <PostIconButtons
+            details={details}
             tag={isProfile}
             setLikeCountShown={setLikeCountShown}
             likes={likes}

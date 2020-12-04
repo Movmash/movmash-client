@@ -99,6 +99,7 @@ function SuggestMePost({ isProfile, details, type, postId }) {
             type="suggestMe"
             setSearchMovie={setSearchMovie}
             likes={likes}
+            details={details}
             setLikeCountShown={setLikeCountShown}
           />
         </div>

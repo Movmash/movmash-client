@@ -41,6 +41,7 @@ const chatReducer = (state = initialState, action) => {
         loadingRoom: false,
       };
     case ADD_CHAT:
+      console.log(action.payload);
       return {
         ...state,
         messages: [...state.messages, ...action.payload],
