@@ -17,9 +17,17 @@ import { getLiveShowDetail } from "../redux/actions/liveShowAction";
 import ErrorIcon from "@material-ui/icons/Error";
 import NoMeetingRoomIcon from "@material-ui/icons/NoMeetingRoom";
 import CloseIcon from "@material-ui/icons/Close";
+import ChatIcon from "@material-ui/icons/Chat";
+import GroupIcon from "@material-ui/icons/Group";
+import SettingsIcon from "@material-ui/icons/Settings";
+import PeopleRoomTab from "../components/PeopleRoomTab";
+import SettingRoomTab from "../components/SettingRoomTab";
+import Peer from "simple-peer";
 // import axios from "axios";
 let count = 0;
+
 function Room({ userName, userId, liveShowDetail, getLiveShowDetail }) {
+  const [selectedTab, setSelectedTab] = useState("chat");
   const [host, setHost] = useState(false);
   const [isRoomFound, setIsRoomFound] = useState(true);
   const [playerState, setPlayerState] = useState({
@@ -46,7 +54,116 @@ function Room({ userName, userId, liveShowDetail, getLiveShowDetail }) {
   const playerContainerRef = useRef(null);
   const history = useHistory();
   const socket = useSocket();
+  //.................
+  // const [videoStream, setVideoStream] = useState({});
+  // const [peers, setPeers] = useState([]);
+  // const userVideo = useRef();
+  // const peersRef = useRef([]);
+  // const [startVideoChat, setStartVideoChat] = useState(false);
+  // useEffect(() => {
+  //   return () => {
+  //     console.log(videoStream);
+  //     if (!videoStream) {
+  //       videoStream.getTracks().forEach((track) => track.stop());
+  //     }
+  //   };
+  // }, [videoStream]);
+  // const handleVideoChat = useCallback(() => {
+  //   if (socket === undefined) return;
+  //   navigator.mediaDevices
+  //     .getUserMedia({ video: true, audio: true })
+  //     .then((stream) => {
+  //       setStartVideoChat(true);
+  //       userVideo.current.srcObject = stream;
+  //       setVideoStream(stream);
+  //       socket.emit("join room", roomCode);
+  //       socket.on("all users", (users) => {
+  //         console.log(users);
+  //         const peers = [];
+  //         users.forEach((userID) => {
+  //           // let userID = user.id;
+  //           const peer = createPeer(userID, socket.id, stream);
+  //           peersRef.current.push({
+  //             peerID: userID,
+  //             peer,
+  //           });
+  //           peers.push({ id: userID, peer });
+  //         });
+  //         setPeers(peers);
+  //       });
+  //       socket.on("close-peer", () => {
+  //         const peer = new Peer({
+  //           initiator: true,
+  //           trickle: false,
+  //           stream,
+  //         });
+  //         // stream.getTracks().forEach((track) => track.stop());
+  //         console.log("closePeer");
+  //         peer.removeAllListeners();
 
+  //         peer.destroy();
+  //       });
+  //       socket.on("user joined", (payload) => {
+  //         const peer = addPeer(payload.signal, payload.callerID, stream);
+  //         peersRef.current.push({
+  //           peerID: payload.callerID,
+  //           peer,
+  //         });
+
+  //         setPeers((users) => [...users, { id: payload.callerID, peer }]);
+  //       });
+
+  //       socket.on("receiving returned signal", (payload) => {
+  //         const item = peersRef.current.find((p) => p.peerID === payload.id);
+  //         item.peer.signal(payload.signal);
+  //       });
+  //     });
+  //   return () => {
+  //     const peer = new Peer({
+  //       initiator: true,
+  //       trickle: false,
+  //       stream: videoStream,
+  //     });
+  //     videoStream.getTracks().forEach((track) => track.stop());
+  //     console.log("closePeer");
+  //     peer.removeAllListeners();
+
+  //     peer.destroy();
+  //   };
+  // }, [socket, selectedTab]);
+  // function createPeer(userToSignal, callerID, stream) {
+  //   const peer = new Peer({
+  //     initiator: true,
+  //     trickle: false,
+  //     stream,
+  //   });
+
+  //   peer.on("signal", (signal) => {
+  //     socket.emit("sending signal", {
+  //       userToSignal,
+  //       callerID,
+  //       signal,
+  //     });
+  //   });
+
+  //   return peer;
+  // }
+
+  // function addPeer(incomingSignal, callerID, stream) {
+  //   const peer = new Peer({
+  //     initiator: false,
+  //     trickle: false,
+  //     stream,
+  //   });
+
+  //   peer.on("signal", (signal) => {
+  //     socket.emit("returning signal", { signal, callerID });
+  //   });
+
+  //   peer.signal(incomingSignal);
+
+  //   return peer;
+  // }
   const {
     playing,
     muted,
@@ -75,6 +192,8 @@ function Room({ userName, userId, liveShowDetail, getLiveShowDetail }) {
     }
   }, [getLiveShowDetail, liveShowDetail, isRoomFound, roomCode, history]);
   //...............................................................................
+
+  //.........................
   useEffect(() => {
     if (socket !== undefined) {
       socket.emit(
@@ -87,18 +206,12 @@ function Room({ userName, userId, liveShowDetail, getLiveShowDetail }) {
         //   }
         // }
       );
-      // return () => {
-      //   socket.emit("disconnect");
-      //   console.log("disconnect");
-      // };
-      //  socket.emit("new-room", roomCode, (data) => {
-
-      //  });
     }
     return () => {
       if (socket === undefined) return;
-      console.log("12344");
+
       // socket.emit("disconnect");
+
       socket.emit("leaving-party");
       socket.off();
     };
@@ -715,6 +828,9 @@ function Room({ userName, userId, liveShowDetail, getLiveShowDetail }) {
       });
     }
   });
+
+  //...........................
+
   return (
     <div
       onMouseMove={handleMouseMove}
@@ -863,48 +979,93 @@ function Room({ userName, userId, liveShowDetail, getLiveShowDetail }) {
               {!showRight ? <ArrowForwardIosIcon /> : <ArrowBackIosIcon />}
             </IconButton>
           </div>
-
-          <ScrollToBottom className="room__player__right__content">
-            {" "}
-            {/* <div className="room__player__right__contentu"> */}{" "}
-            {allMessages.map((message, index) =>
-              message.type === "greet" ? (
-                <p key={index} className="sentText pr-10 greet">
-                  {message.text}
-                </p>
-              ) : message.user === userName ? (
-                <div key={index} className="messageContainer justifyEnd">
-                  <div className="messageBox backgroundBlue mine">
-                    <p className="messageText colorWhite">{message.text}</p>
-                  </div>
-                </div>
-              ) : (
-                <div key={index} className="messageContainer justifyStart">
-                  {/* <Avatar src={chatMessage.sender.profileImageUrl}></Avatar> */}
-                  <div className="messageBox backgroundLight other">
-                    <p className="messageText colorDark">{message.text}</p>
-                  </div>
-                  {/* <p className="sentText pl-10 ">usersaddasd</p> */}
-                </div>
-              )
-            )}{" "}
-            {/* </div>{" "} */}
-          </ScrollToBottom>
-
-          <div className="room__player__right__chat__input">
-            <input
-              onKeyPress={(event) =>
-                event.key === "Enter" ? handleSendMessage() : null
-              }
-              onChange={(e) => setSendMessage(e.target.value)}
-              type="text"
-              value={sendMessage}
-              placeholder="type message ..."
-            ></input>
-            <IconButton onClick={handleSendMessage}>
-              <SendIcon />
-            </IconButton>
+          <div className="room__player__right__buttons">
+            <div className="room__player__right__inviteButtom">
+              <button>Invite Friends</button>
+            </div>
+            <div className="room__player__right__tabs">
+              <div
+                onClick={() => setSelectedTab("chat")}
+                className={`room__player__right__tab ${
+                  selectedTab === "chat" && "selected"
+                }`}
+              >
+                <ChatIcon />
+              </div>
+              <div
+                onClick={() => setSelectedTab("group")}
+                className={`room__player__right__tab ${
+                  selectedTab === "group" && "selected"
+                }`}
+              >
+                <GroupIcon />
+              </div>
+              <div
+                onClick={() => setSelectedTab("setting")}
+                className={`room__player__right__tab ${
+                  selectedTab === "setting" && "selected"
+                }`}
+              >
+                <SettingsIcon />
+              </div>
+            </div>
           </div>
+          {selectedTab === "chat" && (
+            <>
+              <ScrollToBottom className="room__player__right__content">
+                {" "}
+                {/* <div className="room__player__right__contentu"> */}{" "}
+                {allMessages.map((message, index) =>
+                  message.type === "greet" ? (
+                    <p key={index} className="sentText pr-10 greet">
+                      {message.text}
+                    </p>
+                  ) : message.user === userName ? (
+                    <div key={index} className="messageContainer justifyEnd">
+                      <div className="messageBox backgroundBlue mine">
+                        <p className="messageText colorWhite">{message.text}</p>
+                      </div>
+                    </div>
+                  ) : (
+                    <div key={index} className="messageContainer justifyStart">
+                      {/* <Avatar src={chatMessage.sender.profileImageUrl}></Avatar> */}
+                      <div className="messageBox backgroundLight other">
+                        <p className="messageText colorDark">{message.text}</p>
+                      </div>
+                      {/* <p className="sentText pl-10 ">usersaddasd</p> */}
+                    </div>
+                  )
+                )}{" "}
+                {/* </div>{" "} */}
+              </ScrollToBottom>
+              <div className="room__player__right__chat__input">
+                <input
+                  onKeyPress={(event) =>
+                    event.key === "Enter" ? handleSendMessage() : null
+                  }
+                  onChange={(e) => setSendMessage(e.target.value)}
+                  type="text"
+                  value={sendMessage}
+                  placeholder="type message ..."
+                ></input>
+                <IconButton onClick={handleSendMessage}>
+                  <SendIcon />
+                </IconButton>
+              </div>
+            </>
+          )}
+          {selectedTab === "group" && (
+            <PeopleRoomTab
+              socket={socket}
+              roomCode={roomCode}
+              // handleVideoChat={handleVideoChat}
+              // startVideoChat={startVideoChat}
+              // userVideo={userVideo}
+              // peers={peers}
+              // stream={videoStream}
+            />
+          )}
+          {selectedTab === "setting" && <SettingRoomTab />}
         </div>
       </div>
     </div>

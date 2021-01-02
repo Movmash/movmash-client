@@ -1,0 +1,91 @@
+.peopleRoomTab {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.peopleRoomTab__memberList {
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+.peopleRoomTab__memberListCard {
+    background: #3F414A;
+    margin: 10px 0 10px 0;
+    width: 95%;
+    border-radius: 10px;
+}
+
+.peopleRoomTab__memberList__header {
+    display: flex;
+    align-items: center;
+    color: white;
+    justify-content: space-between;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: 10px 25px 10px 20px;
+
+}
+
+.infoUser {
+    display: flex;
+    align-items: center;
+}
+
+.infoUser>span {
+    margin-left: 10px;
+}
+
+.peopleRoomTab__memberList__header>.tagHost {
+    font-family: Righteous;
+}
+
+.peopleRoomTab__memberList__footer {
+    display: flex;
+    justify-content: space-around;
+    height: 50px;
+
+    align-items: center;
+}
+
+.peopleRoomTab__memberList__button {
+    color: lightgray;
+    cursor: pointer;
+    width: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70%;
+    border-radius: 8px;
+}
+
+.peopleRoomTab__memberList__button:hover {
+    background: #606370;
+}
+
+.peopleRoomTab__memberList__videoContent {
+    display: flex;
+    justify-content: center;
+
+}
+
+.poepleRoomTab__memberList__videoContainer>img {
+    height: 200px;
+    width: 200px;
+    border-radius: 40px;
+}
+
+.poepleRoomTab__memberList__videoContainer>video {
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+    border-radius: 40px;
+    transform: scaleX(-1);
+
+}
+
+.startVideoChat {
+    width: 95%;
+}

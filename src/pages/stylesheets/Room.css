@@ -43,7 +43,7 @@
     display: flex;
     flex-flow: column;
     position: relative;
-    justify-content: flex-end;
+    justify-content: space-between;
     /* align-items: flex-end; */
     transition: 450ms;
     transition-property: width;
@@ -131,10 +131,15 @@
     flex-flow: column; */
 
     /* background: red; */
-    max-height: 85%;
+    height: 85%;
     overflow-y: auto;
 
 }
+
+/* 
+.room__player__right__chatBox {
+
+} */
 
 .room__player__right__toggleOpenCloseRight>.MuiButtonBase-root>.MuiIconButton-label>.MuiSvgIcon-root {
     color: white;
@@ -198,4 +203,60 @@
 #181722*/
 .hostIsNotAvailable__Content {
     width: 100%;
+}
+
+.room__player__right__buttons {
+    height: 15%;
+}
+
+.room__player__right__inviteButtom>button {
+    border: 0;
+    outline: 0;
+    background: 0;
+    color: white;
+    width: 100%;
+    background: #499E4C;
+    height: 40px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.room__player__right__inviteButtom>button:hover {
+    font-weight: bold;
+
+}
+
+.room__player__right__inviteButtom>button:active {
+    background: #5fcc62;
+}
+
+.room__player__right__tabs {
+    display: flex;
+    justify-content: space-around;
+    background: #3F414A;
+    align-items: center;
+    height: 60px;
+}
+
+.room__player__right__tab {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    height: 75%;
+    border-radius: 10px;
+}
+
+.room__player__right__tab.selected>.MuiSvgIcon-root {
+    color: greenyellow;
+}
+
+.room__player__right__tab:hover {
+    background: #606370;
+}
+
+.room__player__right__tab>.MuiSvgIcon-root {
+    color: lightgray;
 }
