@@ -4,13 +4,41 @@
     padding: 10px;
     margin: 10px 30px 5px 30px;
 }
-
+.postIconButtons--ticketButtons{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
 .postIconButtons--BookNow {
     color: #499E4C;
     display: flex;
     align-items: center;
+    cursor: pointer;
+    border-radius: 10px;
+    background-color:#353242;
+    padding: 0 20px 0 10px;
 }
-
+.postIconButtons--BookNow:hover{
+    background-color: #413d50;
+}
+.postIconButtons--BookNow:active{
+    background-color: #383544;
+}
+.postIconButtons--CancelBooking{
+     color:grey;
+     display: flex;
+     align-items: center;
+     cursor: pointer;
+     border-radius: 10px;
+     background-color:#353242;
+     padding: 0 20px 0 10px;
+}
+.postIconButtons--CancelBooking:hover {
+    background-color: #413d50;
+}
+.postIconButtons--CancelBooking:active {
+    background-color: #383544;
+}
 .postIconButtons--schedule {
     display: flex;
     align-items: center;
@@ -22,7 +50,10 @@
     color: #499E4C;
     font-size: 30px !important;
 }
-
+.postIconButtons--CancelBooking>.MuiButtonBase-root>.MuiIconButton-label>.MuiSvgIcon-root {
+    color: grey;
+    font-size: 30px !important;
+}
 .postIconButtons--schedule>.MuiButtonBase-root>.MuiIconButton-label>.MuiSvgIcon-root,
 .postIconButtons--share>.MuiButtonBase-root>.MuiIconButton-label>.MuiSvgIcon-root,
 .postIconButtons--likeButton>.MuiButtonBase-root>.MuiIconButton-label>.MuiSvgIcon-root,

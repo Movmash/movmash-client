@@ -156,7 +156,12 @@ function MoviePoster({ posterUrl, id, getMovieDetail, detail }) {
                 {stringLimiter(detail.title ? detail.title : detail.name, 15)}{" "}
               </span>
 
-              <span>({detail.release_date.split("-")[0]})</span>
+              <span>
+                (
+                {detail.release_date !== undefined &&
+                  detail.release_date.split("-")[0]}
+                )
+              </span>
             </div>{" "}
           </Link>
           <div className="moviePoster__detailCard__overview">

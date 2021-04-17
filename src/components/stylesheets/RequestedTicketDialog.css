@@ -1,0 +1,56 @@
+.requestedTicketDialog {
+  padding: 0 70px 0 70px;
+  min-height: 40rem;
+  display: flex;
+  flex-flow: column;
+}
+.requestedTicketDialog__content{
+    margin-top: 20px;
+    width: 500px;
+    max-height: 35rem;
+    overflow-y: auto;
+
+}
+.requestedTicketDialog__heading{
+    margin-top: 20px;
+
+}
+.requestedTicketDialog__content__showcard__heading{
+    display: flex;
+    align-items: center;
+}
+
+.requestedTicketDialog__content__showcard__heading>span{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-left: 20px;
+}
+.requestedTicketDialog__content__showcard{
+    background-color:#3F414A;
+    border-radius: 10px;
+    padding: 20px 30px 10px 30px;
+    margin-bottom: 20px;
+}
+
+.requestedTicketDialog__content__showcard__content{
+    margin-top: 20px;
+    display: flex;
+}
+
+.requestedTicketDialog__content__showcard__content__movieposter>img{
+    width: 80px;
+    object-fit: contain;
+    border-radius:10px ;
+}
+
+.requestedTicketDialog__content__showcard__content__countdown{
+  
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.requestedTicketDialog__content__showcard__content__countdown>span{
+    font-family: Righteous;
+    font-size: 50px;
+}

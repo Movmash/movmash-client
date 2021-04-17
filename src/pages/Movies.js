@@ -46,6 +46,7 @@ function Movies({ loading, getUpcomingMovies, upcomingMovies }) {
   //     trailers.push(upcomingMovies[i].trailers[0].key);
   //   }
   // }
+  // console.log(upcomingMovies)
   return (
     <div className="movies">
       {!loading && upcomingMovies.length !== 0 ? (
@@ -76,12 +77,12 @@ https://image.tmdb.org/t/p/original${upcomingMovies[randomNumber].backdrop_path}
             <div className="movies__rows">
               {" "}
               <MovieRow title="Trending" />
-              {/* <MovieRow title="Top Rated" />
-              <MovieRow title="Upcoming" /> */}
-              {/* <MovieRow title="Action" />
+              <MovieRow title="Top Rated" />
+              <MovieRow title="Upcoming" />
+              <MovieRow title="Action" />
               <MovieRow title="Comedy" />
-              <MovieRow title="Horror" /> */}
-              {/* <MovieRow title="Thriller" />
+              <MovieRow title="Horror" />
+              <MovieRow title="Thriller" />
               <MovieRow title="Romance" />
               <MovieRow title="Adventure" />
               <MovieRow title="Drama" />
@@ -94,7 +95,7 @@ https://image.tmdb.org/t/p/original${upcomingMovies[randomNumber].backdrop_path}
               <MovieRow title="Documentary" />
               <MovieRow title="Music" />
               <MovieRow title="History" />
-              <MovieRow title="TV Movie" /> */}
+              <MovieRow title="TV Movie" />
             </div>
           </div>{" "}
         </>

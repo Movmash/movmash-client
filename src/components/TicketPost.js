@@ -114,7 +114,11 @@ function TicketPost({ details, postId }) {
           />
         </div>
         <div className="ticketPost__container__bottomIcons">
-          <PostIconButtons likes={likes} type="ticket" />
+          <PostIconButtons
+            ticketDetails={details}
+            likes={likes}
+            type="ticket"
+          />
         </div>
       </div>
     </div>

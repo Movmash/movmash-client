@@ -23,6 +23,9 @@ export const markChatRoomRead = (roomId) => (dispatch) => {
     })
     .then((res) => {
       dispatch({ type: MARK_CHAT_ROOM_READ, payload: roomId });
+    })
+    .catch((e) => {
+      console.log(e);
     });
 };
 export const getAllRooms = () => (dispatch) => {
