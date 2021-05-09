@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./stylesheets/FriendListMessage.css";
-import axios from "axios";
+import axios from "../util/axios";
 import CloseIcon from "@material-ui/icons/Close";
 import { Avatar } from "@material-ui/core";
 import { createRoomChat } from "../redux/actions/chatAction";
@@ -24,7 +24,7 @@ function FriendListMessage({
   const history = useHistory();
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/v1/home/get-followers")
+      .get("/api/v1/home/get-followers")
       .then((res) => {
         setFollowers(res.data);
         setFilteredFollowers(res.data);
@@ -39,7 +39,7 @@ function FriendListMessage({
   }, [selectedTab]);
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/v1/home/get-followings")
+      .get("/api/v1/home/get-followings")
       .then((res) => {
         setFollowings(res.data);
         setFilteredFollowings(res.data);

@@ -17,7 +17,7 @@ import {
 import DateFnsUtils from "@date-io/date-fns";
 import "date-fns";
 //................................................
-import axios from "axios";
+import axios from "../util/axios";
 import { genreConverter } from "../util/genreConverter";
 import stringLimiter from "../util/stringLimiter";
 import getTimeDetails from "../util/getTimeDetails";
@@ -68,7 +68,7 @@ function PostTicketPost({ closeTicket, sendPost, postType }) {
     const fetchSearchResult = () => {
       if (query !== "") {
         axios
-          .get(`http://localhost:8000/api/v1/movie/search-movie?query=${query}`)
+          .get(`/api/v1/movie/search-movie?query=${query}`)
           .then((res) => {
             setLoading(false);
             setSearchResult([...res.data.results]);

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../util/axios";
 import {
   LOADING_DATA,
   SET_ERRORS,
@@ -12,7 +12,7 @@ import {
 export const getSubcriberPost = () => (dispatch) => {
   dispatch({ type: LOADING_DATA });
   axios
-    .get("http://localhost:8000/api/v1/home/getSubPost")
+    .get("/api/v1/home/getSubPost")
     .then((res) => {
       dispatch({ type: SET_POSTS, payload: res.data });
     })
@@ -23,7 +23,7 @@ export const getSubcriberPost = () => (dispatch) => {
 export const getExplorePost = () => (dispatch) => {
   dispatch({ type: LOADING_DATA });
   axios
-    .get("http://localhost:8000/api/v1/explore/get-explore-post")
+    .get("/api/v1/explore/get-explore-post")
     .then((res) => {
       dispatch({ type: SET_POSTS, payload: res.data });
     })
@@ -35,7 +35,7 @@ export const getExplorePost = () => (dispatch) => {
 export const sendPost = (newPost) => (dispatch) => {
   dispatch({ type: LOADING_DATA });
   axios
-    .post("http://localhost:8000/api/v1/home/post", newPost)
+    .post("/api/v1/home/post", newPost)
     .then((res) => {
       dispatch({ type: POST_POST, payload: res.data });
     })
@@ -50,7 +50,7 @@ export const sendPost = (newPost) => (dispatch) => {
 
 export const likePost = (postId) => (dispatch) => {
   axios
-    .put(`http://localhost:8000/api/v1/home/like-post`, { postId: postId })
+    .put(`/api/v1/home/like-post`, { postId: postId })
     .then((res) => {
       console.log(res.data);
       dispatch({
@@ -65,7 +65,7 @@ export const likePost = (postId) => (dispatch) => {
 
 export const unlikePost = (postId) => (dispatch) => {
   axios
-    .put("http://localhost:8000/api/v1/home/unlike-post", { postId: postId })
+    .put("/api/v1/home/unlike-post", { postId: postId })
     .then((res) => {
       console.log(res.data);
       dispatch({ type: UNLIKE_POST, payload: res.data });
@@ -77,7 +77,7 @@ export const unlikePost = (postId) => (dispatch) => {
 
 export const submitComment = (data) => (dispatch) => {
   axios
-    .post("http://localhost:8000/api/v1/home/comment-post", data)
+    .post("/api/v1/home/comment-post", data)
     .then((res) => {
       dispatch({ type: SUBMIT_COMMENT, payload: res.data });
     })

@@ -22,11 +22,11 @@ import {
   REMOVE_UNDO_LIKE_MOVIE,
   REMOVE_UNDO_DISLIKE_MOVIE,
 } from "../types";
-import axios from "axios";
+import axios from "../../util/axios";
 export const getMashUserDetails = (userName) => (dispatch) => {
   dispatch({ type: SET_PROFILE_LOADING });
   axios
-    .get(`http://localhost:8000/api/v1/home/mash-user-details/${userName}`)
+    .get(`/api/v1/home/mash-user-details/${userName}`)
     .then((res) => {
       dispatch({ type: SET_MASH_USER, payload: res.data });
     })
@@ -37,7 +37,7 @@ export const getMashUserDetails = (userName) => (dispatch) => {
 export const getUserPost = () => (dispatch) => {
   dispatch({ type: SET_INFO_LOADING });
   axios
-    .get("http://localhost:8000/api/v1/home/myPost")
+    .get("/api/v1/home/myPost")
     .then((res) => {
       // console.log(res.data);
       dispatch({ type: SET_PROFILE_POSTS, payload: res.data });
@@ -50,7 +50,7 @@ export const getMashUserPost = (userName) => (dispatch) => {
   dispatch({ type: SET_INFO_LOADING });
   console.log(userName);
   axios
-    .get(`http://localhost:8000/api/v1/home/mash-user-post/${userName}`)
+    .get(`/api/v1/home/mash-user-post/${userName}`)
     .then((res) => {
       console.log(res.data);
       dispatch({ type: SET_PROFILE_POSTS, payload: res.data });
@@ -63,7 +63,7 @@ export const getMashUserPost = (userName) => (dispatch) => {
 export const getUserLikeDislike = () => (dispatch) => {
   dispatch({ type: LOADING_PROFILE_ACTIVITY });
   axios
-    .get(`http://localhost:8000/api/v1/movie/get-user-like-dislike-movielist`)
+    .get(`/api/v1/movie/get-user-like-dislike-movielist`)
     .then((res) => {
       dispatch({ type: SET_PROFILE_ACTIVITY, payload: res.data });
     });
@@ -73,7 +73,7 @@ export const getMashUserLikeDislike = (userName) => (dispatch) => {
   dispatch({ type: LOADING_PROFILE_ACTIVITY });
   axios
     .get(
-      `http://localhost:8000/api/v1/movie/get-mash-user-like-dislike-movielist/${userName}`
+      `/api/v1/movie/get-mash-user-like-dislike-movielist/${userName}`
     )
     .then((res) => {
       dispatch({ type: SET_PROFILE_ACTIVITY, payload: res.data });
@@ -82,7 +82,7 @@ export const getMashUserLikeDislike = (userName) => (dispatch) => {
 export const unlikeMovies = (movieId) => (dispatch) => {
   dispatch({ type: LOADING_PROFILE_ACTIVITY });
   axios
-    .post("http://localhost:8000/api/v1/movie/undo-like-movie", { movieId })
+    .post("/api/v1/movie/undo-like-movie", { movieId })
     .then((res) => {
       dispatch({ type: REMOVE_UNDO_LIKE_MOVIE, payload: { movieId } });
     })
@@ -94,7 +94,7 @@ export const unlikeMovies = (movieId) => (dispatch) => {
 export const undoDislikeMovies = (movieId) => (dispatch) => {
   dispatch({ type: LOADING_PROFILE_ACTIVITY });
   axios
-    .post("http://localhost:8000/api/v1/movie/undo-dislike-movie", { movieId })
+    .post("/api/v1/movie/undo-dislike-movie", { movieId })
     .then((res) => {
       dispatch({ type: REMOVE_UNDO_DISLIKE_MOVIE, payload: { movieId } });
     })
@@ -104,7 +104,7 @@ export const undoDislikeMovies = (movieId) => (dispatch) => {
 };
 export const profileLikePost = (postId) => (dispatch) => {
   axios
-    .put(`http://localhost:8000/api/v1/home/like-post`, { postId: postId })
+    .put(`/api/v1/home/like-post`, { postId: postId })
     .then((res) => {
       console.log(res);
       dispatch({
@@ -119,7 +119,7 @@ export const profileLikePost = (postId) => (dispatch) => {
 
 export const profileUnlikePost = (postId) => (dispatch) => {
   axios
-    .put("http://localhost:8000/api/v1/home/unlike-post", { postId: postId })
+    .put("/api/v1/home/unlike-post", { postId: postId })
     .then((res) => {
       dispatch({ type: PROFILE_UNLIKE_POST, payload: res.data });
     })
@@ -130,7 +130,7 @@ export const profileUnlikePost = (postId) => (dispatch) => {
 
 export const profileSubmitComment = (data) => (dispatch) => {
   axios
-    .post("http://localhost:8000/api/v1/home/comment-post", data)
+    .post("/api/v1/home/comment-post", data)
     .then((res) => {
       dispatch({ type: PROFILE_SUBMIT_COMMENT, payload: res.data });
     })
@@ -141,7 +141,7 @@ export const profileSubmitComment = (data) => (dispatch) => {
 
 export const followUser = (id) => (dispatch) => {
   axios
-    .put(`http://localhost:8000/api/v1/home/user/follow`, { followId: id })
+    .put(`/api/v1/home/user/follow`, { followId: id })
     .then((res) => {
       dispatch({ type: FOLLOW_USER, payload: res.data });
       console.log(res.data);
@@ -154,7 +154,7 @@ export const followUser = (id) => (dispatch) => {
 export const unfollowUser = (id) => (dispatch) => {
   console.log("unfollow");
   axios
-    .put(`http://localhost:8000/api/v1/home/user/unfollow`, {
+    .put(`/api/v1/home/user/unfollow`, {
       unfollowId: id,
     })
     .then((res) => {
@@ -169,7 +169,7 @@ export const unfollowUser = (id) => (dispatch) => {
 export const createNewList = (data) => (dispatch) => {
   dispatch({ type: LOADING_PROFILE_LIST });
   axios
-    .post("http://localhost:8000/api/v1/movie/create-new-list", data)
+    .post("/api/v1/movie/create-new-list", data)
     .then((res) => {
       console.log(res.data);
       dispatch({ type: SET_NEW_PROFILE_LIST, payload: res.data });
@@ -182,7 +182,7 @@ export const createNewList = (data) => (dispatch) => {
 export const getUserList = () => (dispatch) => {
   dispatch({ type: LOADING_PROFILE_LIST });
   axios
-    .get("http://localhost:8000/api/v1/movie/get-user-list")
+    .get("/api/v1/movie/get-user-list")
     .then((res) => {
       dispatch({ type: SET_PROFILE_LISTS, payload: res.data });
     })
@@ -194,7 +194,7 @@ export const getUserList = () => (dispatch) => {
 export const getMashUserList = (userName) => (dispatch) => {
   dispatch({ type: LOADING_PROFILE_LIST });
   axios
-    .get(`http://localhost:8000/api/v1/movie/get-mash-user-list/${userName}`)
+    .get(`/api/v1/movie/get-mash-user-list/${userName}`)
     .then((res) => {
       dispatch({ type: SET_PROFILE_LISTS, payload: res.data });
     })
@@ -206,7 +206,7 @@ export const getMashUserList = (userName) => (dispatch) => {
 export const deleteList = (id) => (dispatch) => {
   dispatch({ type: LOADING_PROFILE_LIST });
   axios
-    .delete(`http://localhost:8000/api/v1/movie/delete-list/${id}`)
+    .delete(`/api/v1/movie/delete-list/${id}`)
     .then((res) => {
       dispatch({ type: DELETE_PROFILE_LIST, payload: id });
     })
@@ -218,7 +218,7 @@ export const deleteList = (id) => (dispatch) => {
 export const updateList = (data) => (dispatch) => {
   dispatch({ type: LOADING_PROFILE_LIST });
   axios
-    .put(`http://localhost:8000/api/v1/movie/update-list`, data)
+    .put(`/api/v1/movie/update-list`, data)
     .then((res) => {
       console.log(res.data);
       dispatch({ type: UPDATE_PROFILE_LIST, payload: res.data });
@@ -231,7 +231,7 @@ export const updateList = (data) => (dispatch) => {
 export const getUserWatchList = () => (dispatch) => {
   dispatch({ type: LOADING_PROFILE_WATCHLIST });
   axios
-    .get("http://localhost:8000/api/v1/movie/get-user-watchList")
+    .get("/api/v1/movie/get-user-watchList")
     .then((res) => {
       dispatch({ type: SET_PROFILE_WATCHLISTS, payload: res.data });
     })
@@ -244,7 +244,7 @@ export const getMashUserWatchList = (userName) => (dispatch) => {
   dispatch({ type: LOADING_PROFILE_WATCHLIST });
   axios
     .get(
-      `http://localhost:8000/api/v1/movie/get-mash-user-watchlist/${userName}`
+      `/api/v1/movie/get-mash-user-watchlist/${userName}`
     )
     .then((res) => {
       dispatch({ type: SET_PROFILE_WATCHLISTS, payload: res.data });
@@ -256,7 +256,7 @@ export const getMashUserWatchList = (userName) => (dispatch) => {
 export const deleteFromWatchList = (movieId) => (dispatch) => {
   dispatch({ type: LOADING_PROFILE_WATCHLIST });
   axios
-    .post("http://localhost:8000/api/v1/movie/remove-from-watchlist", {
+    .post("/api/v1/movie/remove-from-watchlist", {
       movieId,
     })
     .then((res) => {

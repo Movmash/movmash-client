@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { getMovieDetail } from "../redux/actions/movieAction";
 // import { genreConverter } from "../util/genreConverter";
 import stringLimiter from "../util/stringLimiter";
-import axios from "axios";
+import axios from "../util/axios";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
@@ -37,7 +37,7 @@ function MoviePoster({ posterUrl, id, getMovieDetail, detail }) {
     setSelectedDislike(false);
 
     axios
-      .post("http://localhost:8000/api/v1/movie/like-movie", movieDetails)
+      .post("/api/v1/movie/like-movie", movieDetails)
       .then((res) => {
         // console.log(res.data);
       })
@@ -49,7 +49,7 @@ function MoviePoster({ posterUrl, id, getMovieDetail, detail }) {
     // console.log("unlike");
     setSelectedLike(false);
     axios
-      .post("http://localhost:8000/api/v1/movie/undo-like-movie", movieDetails)
+      .post("/api/v1/movie/undo-like-movie", movieDetails)
       .then((res) => {
         // console.log(res.data);
         return;
@@ -63,7 +63,7 @@ function MoviePoster({ posterUrl, id, getMovieDetail, detail }) {
     setSelectedLike(false);
     setSelectedDislike(true);
     axios
-      .post("http://localhost:8000/api/v1/movie/dislike-movie", movieDetails)
+      .post("/api/v1/movie/dislike-movie", movieDetails)
       .then((res) => {
         // console.log(res.data);
         return;
@@ -78,7 +78,7 @@ function MoviePoster({ posterUrl, id, getMovieDetail, detail }) {
     setSelectedDislike(false);
     axios
       .post(
-        "http://localhost:8000/api/v1/movie/undo-dislike-movie",
+        "/api/v1/movie/undo-dislike-movie",
         movieDetails
       )
       .then((res) => {
@@ -94,7 +94,7 @@ function MoviePoster({ posterUrl, id, getMovieDetail, detail }) {
     setSelectedWatchList(false);
     axios
       .post(
-        "http://localhost:8000/api/v1/movie/remove-from-watchlist",
+        "/api/v1/movie/remove-from-watchlist",
         movieDetails
       )
       .then((res) => {
@@ -107,7 +107,7 @@ function MoviePoster({ posterUrl, id, getMovieDetail, detail }) {
     console.log("Add to WatchList");
     setSelectedWatchList(true);
     axios
-      .post("http://localhost:8000/api/v1/movie/add-to-watchlist", movieDetails)
+      .post("/api/v1/movie/add-to-watchlist", movieDetails)
       .then((res) => {
         // console.log(res.data);
         return;
@@ -118,7 +118,7 @@ function MoviePoster({ posterUrl, id, getMovieDetail, detail }) {
   };
   const handleOnHover = () => {
     axios
-      .get(`http://localhost:8000/api/v1/movie/movie-status/${id}`)
+      .get(`/api/v1/movie/movie-status/${id}`)
       .then((res) => {
         setSelectedLike(res.data.liked);
         setSelectedDislike(res.data.disliked);

@@ -10,7 +10,7 @@ import StarIcon from "@material-ui/icons/Star";
 import ListIcon from "@material-ui/icons/List";
 import NearMeIcon from "@material-ui/icons/NearMe";
 import { genreConverter } from "../util/genreConverter";
-import axios from "axios";
+import axios from "../util/axios";
 import Dialog from "@material-ui/core/Dialog";
 import RatingFrom from "./RatingFrom";
 import FriendListMessage from "./FriendListMessage";
@@ -45,7 +45,7 @@ function MovieInfoCard({
   // useEffect(() => {
   //   const fetchMovieStatus = () => {
   //     axios
-  //       .get(`http://localhost:8000/api/v1/movie/movie-status/${id}`)
+  //       .get(`/api/v1/movie/movie-status/${id}`)
   //       .then((res) => {
   //         setSelectedLike(res.data.liked);
   //         setSelectedDislike(res.data.disliked);
@@ -75,7 +75,7 @@ function MovieInfoCard({
     setSelectedLike(true);
     setSelectedDislike(false);
     axios
-      .post("http://localhost:8000/api/v1/movie/like-movie", movieDetails)
+      .post("/api/v1/movie/like-movie", movieDetails)
       .then((res) => {
         // console.log(res.data);
       })
@@ -87,7 +87,7 @@ function MovieInfoCard({
     console.log("unlike");
     setSelectedLike(false);
     axios
-      .post("http://localhost:8000/api/v1/movie/undo-like-movie", movieDetails)
+      .post("/api/v1/movie/undo-like-movie", movieDetails)
       .then((res) => {
         // console.log(res.data);
         return;
@@ -101,7 +101,7 @@ function MovieInfoCard({
     setSelectedLike(false);
     setSelectedDislike(true);
     axios
-      .post("http://localhost:8000/api/v1/movie/dislike-movie", movieDetails)
+      .post("/api/v1/movie/dislike-movie", movieDetails)
       .then((res) => {
         // console.log(res.data);
         return;
@@ -115,7 +115,7 @@ function MovieInfoCard({
     setSelectedDislike(false);
     axios
       .post(
-        "http://localhost:8000/api/v1/movie/undo-dislike-movie",
+        "/api/v1/movie/undo-dislike-movie",
         movieDetails
       )
       .then((res) => {
@@ -131,7 +131,7 @@ function MovieInfoCard({
     console.log("added to watchlist");
     setSelectedWatchList(true);
     axios
-      .post("http://localhost:8000/api/v1/movie/add-to-watchlist", movieDetails)
+      .post("/api/v1/movie/add-to-watchlist", movieDetails)
       .then((res) => {
         // console.log(res.data);
         return;
@@ -146,7 +146,7 @@ function MovieInfoCard({
     setSelectedWatchList(false);
     axios
       .post(
-        "http://localhost:8000/api/v1/movie/remove-from-watchlist",
+        "/api/v1/movie/remove-from-watchlist",
         movieDetails
       )
       .then((res) => {

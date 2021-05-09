@@ -6,7 +6,7 @@ import Rating from "@material-ui/lab/Rating";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import axios from "axios";
+import axios from "../util/axios";
 import { CircularProgress } from "@material-ui/core";
 import { genreConverter } from "../util/genreConverter";
 import { sendPost } from "../redux/actions/postAction";
@@ -23,7 +23,7 @@ function PostReviewPost({ closeReview, sendPost, postType }) {
     const fetchSearchResult = () => {
       if (query !== "") {
         axios
-          .get(`http://localhost:8000/api/v1/movie/search-movie?query=${query}`)
+          .get(`/api/v1/movie/search-movie?query=${query}`)
           .then((res) => {
             setLoading(false);
             setSearchResult([...res.data.results]);

@@ -7,7 +7,7 @@ import {
   CircularProgress,
   IconButton,
 } from "@material-ui/core";
-import axios from "axios";
+import axios from "../util/axios";
 import SearchMovieCard from "./SearchMovieCard";
 import { genreConverter } from "../util/genreConverter";
 import stringLimiter from "../util/stringLimiter";
@@ -35,7 +35,7 @@ function CommentForm({
     const fetchSearchResult = () => {
       if (query !== "") {
         axios
-          .get(`http://localhost:8000/api/v1/movie/search-movie?query=${query}`)
+          .get(`/api/v1/movie/search-movie?query=${query}`)
           .then((res) => {
             setLoading(false);
             setSearchResult([...res.data.results]);

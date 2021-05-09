@@ -18,7 +18,7 @@ import { connect } from "react-redux";
 import { deleteList, updateList } from "../redux/actions/dataAction";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import { genreConverter } from "../util/genreConverter";
-import Axios from "axios";
+import Axios from "../util/axios";
 
 import SearchMovieCard from "./SearchMovieCard";
 function ListCard({
@@ -50,7 +50,7 @@ function ListCard({
     const fetchSearchResult = () => {
       if (query !== "") {
         Axios.get(
-          `http://localhost:8000/api/v1/movie/search-movie?query=${query}`
+          `/api/v1/movie/search-movie?query=${query}`
         )
           .then((res) => {
             setLoading(false);

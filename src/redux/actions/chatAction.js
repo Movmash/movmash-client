@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../util/axios";
 import {
   LOADING_ROOM,
   SET_ALL_ROOMS,
@@ -18,7 +18,7 @@ export const updateRooms = (roomData) => (dispatch) => {
 };
 export const markChatRoomRead = (roomId) => (dispatch) => {
   axios
-    .put("http://localhost:8000/api/v1/home/mark-chatRoom-read", {
+    .put("/api/v1/home/mark-chatRoom-read", {
       roomId: roomId,
     })
     .then((res) => {
@@ -31,7 +31,7 @@ export const markChatRoomRead = (roomId) => (dispatch) => {
 export const getAllRooms = () => (dispatch) => {
   dispatch({ type: LOADING_ROOM });
   axios
-    .get("http://localhost:8000/api/v1/home/get-user-rooms")
+    .get("/api/v1/home/get-user-rooms")
     .then((res) => {
       dispatch({ type: SET_ALL_ROOMS, payload: res.data });
     })
@@ -43,7 +43,7 @@ export const getAllRooms = () => (dispatch) => {
 export const getRoomChats = (roomId) => (dispatch) => {
   dispatch({ type: LOADING_MESSAGE });
   axios
-    .get(`http://localhost:8000/api/v1/home/get-rooms-messages/${roomId}`)
+    .get(`/api/v1/home/get-rooms-messages/${roomId}`)
     .then((res) => {
       dispatch({ type: SET_ALL_MESSAGE, payload: res.data });
     })
@@ -60,7 +60,7 @@ export const createRoomChat = (
   postData
 ) => (dispatch) => {
   axios
-    .post("http://localhost:8000/api/v1/home/create-chat-room", {
+    .post("/api/v1/home/create-chat-room", {
       userId,
       type,
       movieData,

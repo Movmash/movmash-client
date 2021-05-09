@@ -16,7 +16,7 @@ import AddIcon from "@material-ui/icons/Add";
 import { genreConverter } from "../util/genreConverter";
 import { connect } from "react-redux";
 import stringLimiter from "../util/stringLimiter";
-import Axios from "axios";
+import Axios from "../util/axios";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 
 import {
@@ -53,7 +53,7 @@ function ProfileList({
     const fetchSearchResult = () => {
       if (query !== "") {
         Axios.get(
-          `http://localhost:8000/api/v1/movie/search-movie?query=${query}`
+          `/api/v1/movie/search-movie?query=${query}`
         )
           .then((res) => {
             setLoading(false);

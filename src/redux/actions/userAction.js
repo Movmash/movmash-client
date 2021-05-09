@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../util/axios";
 import {
   LOADING_UI,
   SET_ERRORS,
@@ -13,7 +13,7 @@ import {
 
 export const getUnreadUserRoom = () => (dispatch) => {
   axios
-    .get("http://localhost:8000/api/v1/home/get-unread-rooms")
+    .get("/api/v1/home/get-unread-rooms")
     .then((res) => {
       console.log(res.data);
       dispatch({ type: GET_UNREAD_ROOM, payload: res.data });
@@ -25,7 +25,7 @@ export const getUnreadUserRoom = () => (dispatch) => {
 
 export const getAllNotification = () => (dispatch) => {
   axios
-    .get("http://localhost:8000/api/v1/home/get-notification")
+    .get("/api/v1/home/get-notification")
     .then((res) => {
       dispatch({ type: GET_ALL_NOTIFICATION, payload: res.data });
     })
@@ -39,7 +39,7 @@ export const addNewNotification = (newNotification) => (dispatch) => {
 export const markNotificationRead = (notificationId) => (dispatch) => {
   axios
     .put(
-      "http://localhost:8000/api/v1/home/user/read-notification",
+      "/api/v1/home/user/read-notification",
       notificationId
     )
     .then((doc) => {
@@ -53,7 +53,7 @@ export const markNotificationRead = (notificationId) => (dispatch) => {
 export const loginUser = (userData, history) => (dispatch) => {
   dispatch({ type: LOADING_UI });
   axios
-    .post("http://localhost:8000/api/v1/home/login", userData)
+    .post("/api/v1/home/login", userData)
     .then((res) => {
       setAuthorizationHeader(res.data.idToken);
       dispatch(getUserData());
@@ -68,7 +68,7 @@ export const loginUser = (userData, history) => (dispatch) => {
 export const getUserData = () => (dispatch) => {
   dispatch({ type: LOADING_USER });
   axios
-    .get("http://localhost:8000/api/v1/home/get-user")
+    .get("/api/v1/home/get-user")
     .then((res) => {
       dispatch({ type: SET_USER, payload: res.data });
     })

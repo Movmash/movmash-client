@@ -3,7 +3,7 @@ import Rating from "@material-ui/lab/Rating";
 import "./stylesheets/RatingFrom.css";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import { TextField, Button } from "@material-ui/core";
-import axios from "axios";
+import axios from "../util/axios";
 // import {connect} from "react-redux"
 function RatingFrom({ closeRatingForm, movieId }) {
   const [rating, setRating] = useState(null);
@@ -15,7 +15,7 @@ function RatingFrom({ closeRatingForm, movieId }) {
       description: description === "" ? undefined : description,
     };
     axios
-      .post("http://localhost:8000/api/v1/movie/post-user-review", reviewData)
+      .post("/api/v1/movie/post-user-review", reviewData)
       .then((res) => console.log(res.data))
       .catch((e) => console.log(e));
   };

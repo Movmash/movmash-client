@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../util/axios";
 import {
   LOADING_REQUESTED_TICKET,
   GET_REQUESTED_TICKETS,
@@ -9,7 +9,7 @@ import {
 export const getRequestedTicket = () => (dispatch) => {
   dispatch({ type: LOADING_REQUESTED_TICKET });
   axios
-    .get("http://localhost:8000/api/v1/bookingTicket/get-requested-ticket")
+    .get("/api/v1/bookingTicket/get-requested-ticket")
     .then((res) => {
       dispatch({ type: GET_REQUESTED_TICKETS, payload: res.data });
     })
@@ -23,7 +23,7 @@ export const sendBookingRequest = (requestData) => (dispatch) => {
   // console.log(requestData);
   axios
     .post(
-      "http://localhost:8000/api/v1/bookingTicket/send-booking-request",
+      "/api/v1/bookingTicket/send-booking-request",
       requestData
     )
     .then((res) => {
@@ -40,7 +40,7 @@ export const cancelRequestedTicket = (ticketInfo) => (dispatch) => {
   dispatch({ type: LOADING_REQUESTED_TICKET });
   axios
     .delete(
-      `http://localhost:8000/api/v1/bookingTicket/cancel-requested-ticket/${ticketInfo.postId}`
+      `/api/v1/bookingTicket/cancel-requested-ticket/${ticketInfo.postId}`
     )
     .then((res) => {
       dispatch({ type: DELETE_REQUESTED_TICKET, payload: ticketInfo });

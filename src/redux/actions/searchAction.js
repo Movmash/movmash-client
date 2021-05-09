@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../util/axios";
 const {
   LOADING_PEOPLE,
   LOADING_SEARCH_PEOPLE,
@@ -29,7 +29,7 @@ export const getSearchedPeople = (userQuery) => (dispatch) => {
   } else {
     dispatch({ type: LOADING_SEARCH_PEOPLE });
     axios
-      .get(`http://localhost:8000/api/v1/search-user?search=${userQuery}`)
+      .get(`/api/v1/search-user?search=${userQuery}`)
       .then((res) => {
         dispatch({ type: GET_SEARCH_PEOPLE, payload: res.data });
       })
@@ -45,7 +45,7 @@ export const getSearchedMovie = (movieQuery) => (dispatch) => {
     dispatch({ type: LOADING_SEARCH_MOVIE });
     axios
       .get(
-        `http://localhost:8000/api/v1/movie/search-movie?query=${movieQuery}`
+        `/api/v1/movie/search-movie?query=${movieQuery}`
       )
       .then((res) => {
         dispatch({ type: GET_SEARCH_MOVIE, payload: res.data.results });
@@ -61,7 +61,7 @@ export const getSearchedList = (listQuery) => (dispatch) => {
   } else {
     dispatch({ type: LOADING_SEARCH_LIST });
     axios
-      .get(`http://localhost:8000/api/v1/search-list?search=${listQuery}`)
+      .get(`/api/v1/search-list?search=${listQuery}`)
       .then((res) => {
         console.log(res);
         dispatch({ type: GET_SEARCH_LIST, payload: res.data });
@@ -77,7 +77,7 @@ export const getSearchedTicket = (ticketQuery) => (dispatch) => {
   } else {
     dispatch({ type: LOADING_SEARCH_TICKET });
     axios
-      .get(`http://localhost:8000/api/v1/search-ticket?search=${ticketQuery}`)
+      .get(`/api/v1/search-ticket?search=${ticketQuery}`)
       .then((res) => {
         console.log(res);
         dispatch({ type: GET_SEARCH_TICKET, payload: res.data });

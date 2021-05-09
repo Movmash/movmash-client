@@ -3,7 +3,7 @@ import "./stylesheets/MovieRow.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import axios from "axios";
+import axios from "../util/axios";
 // import { connect } from "react-redux";
 // import { getMovieDetail } from "../redux/actions/movieAction";
 // import { useHistory } from "react-router-dom";
@@ -15,7 +15,7 @@ function MovieRow({ title }) {
   // const history = useHistory();
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/api/v1/movie/genre/${title}/1`)
+      .get(`/api/v1/movie/genre/${title}/1`)
       .then((res) => {
         setMovies(res.data.results);
         isLoading(false);

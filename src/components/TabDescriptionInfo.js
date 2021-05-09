@@ -11,7 +11,7 @@ import AddIcon from "@material-ui/icons/Add";
 import "./stylesheets/TabDescriptionInfo.css";
 import Dialog from "@material-ui/core/Dialog";
 import SearchMovieCard from "./SearchMovieCard";
-import Axios from "axios";
+import Axios from "../util/axios";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import { genreConverter } from "../util/genreConverter";
 import stringLimiter from "../util/stringLimiter";
@@ -35,7 +35,7 @@ function TabDescriptionInfo({ Icon, info, isButton, createNewList }) {
     const fetchSearchResult = () => {
       if (query !== "") {
         Axios.get(
-          `http://localhost:8000/api/v1/movie/search-movie?query=${query}`
+          `/api/v1/movie/search-movie?query=${query}`
         )
           .then((res) => {
             setLoading(false);
