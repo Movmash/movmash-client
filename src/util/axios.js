@@ -1,5 +1,6 @@
 import axios from "axios";
-const URL = "http://localhost:8000";
+import {P_URL,D_URL} from "./baseUrl";
+
 export default axios.create({
-  baseURL: URL,
+  baseURL: P_URL,
 });
