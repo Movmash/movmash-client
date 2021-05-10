@@ -7,7 +7,7 @@ import { logoutUser, getUserData } from "./redux/actions/userAction";
 import { SET_UNAUTHENTICATED } from "./redux/types";
 import jwtDecode from "jwt-decode";
 import store from "./redux/store";
-import axios from "axios";
+import axios from "./util/axios";
 import { Provider } from "react-redux";
 const token = localStorage.mashDBToken;
 // console.log(token);
