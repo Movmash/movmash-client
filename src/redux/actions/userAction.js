@@ -83,14 +83,15 @@ export const logoutUser = () => (dispatch) => {
   // localStorage.removeItem("mashDBToken");
   // delete axios.defaults.headers.common["Authorization"];
   dispatch({ type: SET_UNAUTHENTICATED });
-  axios
-    .get("/logout")
-    .then((res) => {
+  window.location.href="http://localhost:8000/logout"
+  // axios
+  //   .get("/logout")
+  //   .then((res) => {
      
-    })
-    .catch((e) => {
-      console.log(e);
-    });
+  //   })
+  //   .catch((e) => {
+  //     console.log(e);
+  //   });
 };
 
 export const getOAuthUserData = () => (dispatch) => {

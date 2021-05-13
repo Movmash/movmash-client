@@ -26,16 +26,6 @@ function UserProfile({
   unfollowUser,
 }) {
   const [isFollow, setFollow] = useState(true);
-
-  console.log(userName);
-  useEffect(() => {
-    getMashUserDetails(userName);
-  }, [getMashUserDetails, userName]);
-  useEffect(() => {
-    if (userId !== undefined && followingList !== undefined) {
-      setFollow(followingList.includes(userId));
-    }
-  }, [userId, followingList]);
   const {
     bio,
     coverImageUrl,
@@ -47,6 +37,20 @@ function UserProfile({
     watchHour,
     profileImageUrl,
   } = userDetails;
+  console.log(userName);
+  useEffect(() => {
+    getMashUserDetails(userName);
+    document.title = fullName;
+    return () => {
+      document.title = "Movmash";
+    };
+  }, [getMashUserDetails, userName, fullName]);
+  useEffect(() => {
+    if (userId !== undefined && followingList !== undefined) {
+      setFollow(followingList.includes(userId));
+    }
+  }, [userId, followingList]);
+  
   console.log(userId);
   console.log(isFollow);
   const [selected, setSelection] = useState("posts");

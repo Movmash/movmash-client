@@ -69,7 +69,6 @@ function App({ userId, isAuthenticated }) {
             <Switch>
               {/* <Route exact path="/login"> */}
               <Route exact path="/login">
-                <Navbar />
                 <Login />
               </Route>
               {/* </Route> */}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./stylesheets/MyProfile.css";
 import ViewCompactTwoToneIcon from "@material-ui/icons/ViewCompactTwoTone";
 import BookmarkTwoToneIcon from "@material-ui/icons/BookmarkTwoTone";
@@ -21,6 +21,12 @@ function MyProfile({
   profileImageUrl,
 }) {
   const [selected, setSelection] = useState("posts");
+  useEffect(() => {
+    document.title = fullName;
+    return () => {
+      document.title = "Movmash";
+    };
+  }, [fullName]);
   return (
     <div className="myProfile">
       <div className="myProfile__container">

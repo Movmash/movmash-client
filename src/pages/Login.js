@@ -30,32 +30,41 @@ function Login({ user, loginUser }) {
 
   return (
     <div>
-      {user.authLoading?<div className="home__bounceloader">
-        <BounceLoader size={150} color={"#2aa44f"} loading />
-      </div> :  <div className="card auth-card input-field">
-        <input
-          type="text"
-          placeholder="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="password"
-          value={password}
-          onChange={(e) => setPasword(e.target.value)}
-        />
-        <button
-          // onClick={() => postData()}
-          // onClick={() => (location.href = "http://localhost:8000/auth/google")}
-          className="btn waves-effect waves-light #64b5f6 blue darken-1"
-        >
-          <a href="http://localhost:8000/auth/google">Login</a>
-        </button>
-      </div>
-    }
-      
-     </div>
+      {user.authLoading ? (
+        <div className="home__bounceloader">
+          <BounceLoader size={150} color={"#2aa44f"} loading />
+        </div>
+      ) : (
+        <div className="card auth-card input-field">
+          <input
+            type="text"
+            placeholder="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="password"
+            value={password}
+            onChange={(e) => setPasword(e.target.value)}
+          />
+          <button
+            // onClick={() => postData()}
+            // onClick={() => (location.href = "http://localhost:8000/auth/google")}
+            className="btn waves-effect waves-light #64b5f6 blue darken-1"
+          >
+            <a href="http://localhost:8000/auth/google">Login with google</a>
+          </button>
+          <button
+            // onClick={() => postData()}
+            // onClick={() => (location.href = "http://localhost:8000/auth/google")}
+            className="btn waves-effect waves-light #64b5f6 blue darken-1"
+          >
+            <a href="http://localhost:8000/auth/facebook">Login with facebook</a>
+          </button>
+        </div>
+      )}
+    </div>
   );
 }
 const mapStateToProps = (state) => ({
