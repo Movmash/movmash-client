@@ -12,11 +12,11 @@ import MovieReview from "./pages/MovieReview";
 // import { Provider } from "react-redux";
 // import store from "./redux/store";
 import Login from "./pages/Login";
-import Signup from "./pages/Singup";
-import AuthRoute from "./util/AuthRoute";
+// import Signup from "./pages/Singup";
+// import AuthRoute from "./util/AuthRoute";
 // import { logoutUser, getUserData } from "./redux/actions/userAction";
 // import { SET_UNAUTHENTICATED } from "./redux/types";
-import axios from "axios";
+// import axios from "axios";
 import Profile from "./pages/Profile";
 import Chat from "./pages/Chat";
 import { connect } from "react-redux";
@@ -40,7 +40,7 @@ import Singup from "./pages/Singup";
 //   }
 // }
 
-function App({ userId }) {
+function App({ userId, isAuthenticated }) {
   const [id, setId] = useState(null);
   useEffect(() => {
     console.log(userId);
@@ -48,6 +48,18 @@ function App({ userId }) {
       setId(userId);
     }
   }, [userId]);
+  // useEffect(() => {
+  //   console.log(isAuthenticated);
+  //   console.log(window.location.pathname)
+
+  //   // if (!isAuthenticated ) {
+  //   //   if (window.location.pathname !== "/login"){
+  //   //     window.location.href = "/login";
+  //   //   }
+        
+  //   // }
+  // }, [isAuthenticated]);
+
   return (
     // <Provider store={store}>
     <SocketProvider id={id}>
@@ -55,11 +67,13 @@ function App({ userId }) {
         <Router>
           <div className="app__container">
             <Switch>
-              <AuthRoute exact path="/login">
+              {/* <Route exact path="/login"> */}
+              <Route exact path="/login">
                 <Navbar />
                 <Login />
-              </AuthRoute>
-
+              </Route>
+              {/* </Route> */}
+             
               <Route exact path="/">
                 <Navbar />
                 <Home />
@@ -114,6 +128,7 @@ function App({ userId }) {
 const mapStateToProps = (state) => {
   return {
     userId: state.user._id,
+    isAuthenticated: state.user.authenticated,
   };
 };
 export default connect(mapStateToProps)(App);

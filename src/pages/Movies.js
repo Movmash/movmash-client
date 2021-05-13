@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Banner from "../components/Banner";
 import Slider from "react-slick";
 import "./stylesheets/Movies.css";
@@ -9,18 +9,26 @@ import { connect } from "react-redux";
 import { getBannerUpcomingMovies } from "../redux/actions/movieAction";
 import MovieRow from "../components/MovieRow";
 import { BounceLoader } from "react-spinners";
-function Movies({ loading, getUpcomingMovies, upcomingMovies }) {
+import { useHistory } from "react-router-dom";
+function Movies({
+  loading,
+  getUpcomingMovies,
+  upcomingMovies,
+  authenticated,
+  authLoading,
+}) {
   const randomNumber = Math.floor(Math.random() * 5);
-  const [unmounted, setUnmounted] = useState(false);
+  const history = useHistory();
   useEffect(() => {
-    if (!unmounted) {
-      getUpcomingMovies();
+    if (!authLoading) {
+      console.log("get upcoming movie");
+      if (authenticated) {
+        getUpcomingMovies();
+      } else {
+        history.push("/login");
+      }
     }
-
-    return () => {
-      setUnmounted(true);
-    };
-  }, [unmounted, getUpcomingMovies]);
+  }, [authLoading, getUpcomingMovies, history, authenticated]);
 
   const settings = {
     infinite: true,
@@ -117,6 +125,8 @@ const mapStateToProps = (state) => {
   return {
     upcomingMovies: state.movie.upcomingMovies,
     loading: state.movie.loading,
+    authenticated: state.user.authenticated,
+    authLoading: state.user.authLoading
   };
 };
 

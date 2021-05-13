@@ -6,7 +6,7 @@ import { Avatar } from "@material-ui/core";
 import { createRoomChat } from "../redux/actions/chatAction";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { useSocket } from "../contexts/SocketProvider";
+// import { useSocket } from "../contexts/SocketProvider";
 function FriendListMessage({
   createRoomChat,
   closeDialog,
@@ -20,7 +20,7 @@ function FriendListMessage({
   const [filterFollowings, setFilteredFollowings] = useState([]);
   const [filterQuery, setFilterQuery] = useState("");
   const [selectedTab, setSelectedTab] = useState("followers");
-  const socket = useSocket();
+  // const socket = useSocket();
   const history = useHistory();
   useEffect(() => {
     axios

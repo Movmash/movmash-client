@@ -25,6 +25,8 @@ function Search({
   searchedList,
   loadingSearchedList,
   getSearchedList,
+  authenticated,
+  authLoading,
 }) {
   const [searchQuery, setSearchQuery] = useState("");
   const history = useHistory();
@@ -33,7 +35,7 @@ function Search({
     getSearchedMovie(searchQuery);
     getSearchedTicket(searchQuery);
     getSearchedList(searchQuery);
-    console.log(!loadingSearchedMovie && searchedMovie.length === 0);
+    // console.log(!loadingSearchedMovie && searchedMovie.length === 0);
   }, [
     searchQuery,
     getSearchedPeople,
@@ -41,7 +43,13 @@ function Search({
     getSearchedTicket,
     getSearchedList,
   ]);
-
+  useEffect(() => {
+    if (!authLoading) {
+      if (!authenticated) {
+        history.push("/login");
+      }
+    }
+  }, [authLoading, authenticated, history]);
   return (
     <div className="search">
       <div className="search__searchBar__input">
@@ -305,6 +313,8 @@ const mapStateToProps = (state) => {
     loadingSearchedPeople: state.search.loadingSearchedPeople,
     loadingSearchedMovie: state.search.loadingSearchedMovie,
     loadingSearchedList: state.search.loadingSearchedList,
+    authenticated: state.user.authenticated,
+    authLoading: state.user.authLoading
   };
 };
 export default connect(mapStateToProps, {

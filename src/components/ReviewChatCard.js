@@ -15,6 +15,7 @@ function ReviewChatCard({ postData }) {
           <div className="reviewChatCard__content">
             <img
               src={`https://image.tmdb.org/t/p/w154${postData.moviePoster}`}
+              alt={postData.moviePoster}
             ></img>
           </div>
           <div className="reviewChatCard__bottom">

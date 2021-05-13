@@ -29,20 +29,29 @@ function Chat({
   updateRooms,
   markChatRoomRead,
   messages,
+  authenticated,
+  authLoading,
 }) {
   const roomIdParams = useParams();
   const [selectedUser, setSelectedUser] = useState({});
-  const [selectedUserName, setSelectedUserName] = useState("");
+  // const [selectedUserName, setSelectedUserName] = useState("");
   const [message, setMessage] = useState("");
-  const [roomId, setRoomId] = useState("");
+  // const [roomId, setRoomId] = useState("");
   const history = useHistory();
   const socket = useSocket();
   const [openDialog, setOpenDialog] = useState(false);
 
   useEffect(() => {
-    getAllRooms();
+    if (!authLoading){
+      if (authenticated){
+         getAllRooms();
+        }
+    else{ 
+      history.push("/login");
+      }   
+    } 
     // return () => {};
-  }, [getAllRooms]);
+  }, [getAllRooms, authLoading, history, authenticated]);
   useEffect(() => {
     if (messages[0] !== undefined) {
       if (userId === messages[0].sender._id) {
@@ -51,7 +60,7 @@ function Chat({
         setSelectedUser(messages[0].sender);
       }
     }
-  }, [messages[0]]);
+  }, [userId,messages]);
   // useEffect(() => {
   //   if (userId !== undefined && socket !== undefined) {
   //     socket.emit("join-chat", { userId: userId });
@@ -87,9 +96,9 @@ function Chat({
   };
   const handleClickOnUserList = (userDetails, room_Id, lastMessage) => {
     history.push(`/messages/inbox/${room_Id}`);
-    setSelectedUserName(userDetails.userName);
+    // setSelectedUserName(userDetails.userName);
     setSelectedUser({ ...userDetails });
-    setRoomId(room_Id);
+    // setRoomId(room_Id);
     if (lastMessage !== undefined && userId !== lastMessage.sender) {
       markChatRoomRead(room_Id);
     }
@@ -124,10 +133,7 @@ function Chat({
             {rooms.map((room) => {
               const userDetails = room.participants.find(
                 (user) => user._id !== userId
-              );
-              {
-                /* setSelectedUser(userDetails); */
-              }
+              )
               return (
                 <div
                   key={room._id}
@@ -232,6 +238,8 @@ const mapStateToProps = (state) => {
     rooms: state.chat.rooms,
     userId: state.user._id,
     messages: state.chat.messages,
+    authenticated: state.user.authenticated,
+    authLoading: state.user.authLoading,
   };
 };
 export default connect(mapStateToProps, {

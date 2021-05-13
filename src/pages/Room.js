@@ -22,11 +22,18 @@ import GroupIcon from "@material-ui/icons/Group";
 import SettingsIcon from "@material-ui/icons/Settings";
 import PeopleRoomTab from "../components/PeopleRoomTab";
 import SettingRoomTab from "../components/SettingRoomTab";
-import Peer from "simple-peer";
+// import Peer from "simple-peer";
 // import axios from "axios";
 let count = 0;
 
-function Room({ userName, userId, liveShowDetail, getLiveShowDetail }) {
+function Room({
+  userName,
+  userId,
+  liveShowDetail,
+  getLiveShowDetail,
+  authenticated,
+  authLoading,
+}) {
   const [selectedTab, setSelectedTab] = useState("chat");
   const [host, setHost] = useState(false);
   const [isRoomFound, setIsRoomFound] = useState(true);
@@ -181,16 +188,28 @@ function Room({ userName, userId, liveShowDetail, getLiveShowDetail }) {
 
     // });
     // console.log("1");
-    if (Object.keys(liveShowDetail).length === 0) {
-      if (isRoomFound) {
-        getLiveShowDetail(roomCode, history);
-      } else {
-        return;
-      }
+    if (!authLoading) {
+      if (authenticated) {
+        if (Object.keys(liveShowDetail).length === 0 && isRoomFound) {
+          // if (isRoomFound) {
+          getLiveShowDetail(roomCode, history);
+          // }
+        }
 
-      console.log("1");
+        console.log("1");
+      } else {
+        history.push("/login");
+      }
     }
-  }, [getLiveShowDetail, liveShowDetail, isRoomFound, roomCode, history]);
+  }, [
+    getLiveShowDetail,
+    liveShowDetail,
+    isRoomFound,
+    roomCode,
+    history,
+    authenticated,
+    authLoading,
+  ]);
   //...............................................................................
 
   //.........................
@@ -710,8 +729,8 @@ function Room({ userName, userId, liveShowDetail, getLiveShowDetail }) {
       socket.on("sync-the-video-with-host-button", (data) => {
         let currTime = data.time;
         let state = data.state;
-        console.log("current time is: " + " " + currTime);
-        console.log("state" + state);
+        console.log(`current time is: ${currTime}`);
+        // console.log("state" + state);
         playerRef.current.seekTo(currTime);
         // setPlayerState((prev) => {
         //   return {
@@ -1077,6 +1096,8 @@ const mapStateToProps = (state) => {
     userName: state.user.userName,
     userId: state.user._id,
     liveShowDetail: state.liveShow.liveShowDetail,
+    authenticated: state.user.authenticated,
+    authLoading: state.user.authLoading,
   };
 };
 

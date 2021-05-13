@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./stylesheets/MovieInfoCard.css";
 import { IconButton } from "@material-ui/core";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
@@ -40,7 +40,8 @@ function MovieInfoCard({
     movieStatus.inWatchlist
   );
 
-  const [selectedRated, setRated] = useState(movieStatus.isRated);
+  // const [selectedRated, setRated] = useState(movieStatus.isRated);
+  const selectedRated = movieStatus.isRated;
   const [openRatingDialog, setOpenRatingDialog] = useState(false);
   // useEffect(() => {
   //   const fetchMovieStatus = () => {

@@ -4,13 +4,13 @@ import "./stylesheets/PostIconButtons.css";
 import { likePost, unlikePost } from "../redux/actions/postAction";
 import { connect } from "react-redux";
 import ChatIcon from "@material-ui/icons/Chat";
-import ShareIcon from "@material-ui/icons/Share";
+// import ShareIcon from "@material-ui/icons/Share";
 import {
   sendBookingRequest,
   cancelRequestedTicket,
 } from "../redux/actions/ticketAction";
 import ConfirmationNumberIcon from "@material-ui/icons/ConfirmationNumber";
-import DateRangeIcon from "@material-ui/icons/DateRange";
+// import DateRangeIcon from "@material-ui/icons/DateRange";
 import { IconButton, Dialog } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";

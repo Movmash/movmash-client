@@ -6,9 +6,10 @@ import ReviewPost from "../components/ReviewPost";
 import SuggestMePost from "../components/SuggestMePost";
 import TicketPost from "../components/TicketPost";
 import { connect } from "react-redux";
-import Login from "./Login";
+// import Login from "./Login";
 import { getSubcriberPost } from "../redux/actions/postAction";
 import { BounceLoader } from "react-spinners";
+import {useHistory} from "react-router-dom"
 function Home({
   authenticated,
   loading,
@@ -16,82 +17,85 @@ function Home({
   posts,
   postLoading,
   userId,
+  authLoading,
 }) {
+  const history = useHistory();
   useEffect(() => {
-    if (authenticated) {
-      getSubcriberPost();
+    if (!authLoading) {
+      if(authenticated){
+        getSubcriberPost();
+      }else {
+      history.push("/login");
     }
+      
+    } 
     return;
-  }, [authenticated, getSubcriberPost]);
+  }, [authLoading, authenticated, getSubcriberPost, history]);
 
   return (
     <>
       {!loading ? (
-        authenticated ? (
-          <div className="home">
-            <div className="home__left--part">
-              <LeftSideBar postType="home" />
-            </div>
-
-            <div className="home__middle--part">
-              <div className="home__story--part"></div>
-              {postLoading ? (
-                <div className="home__bounceloader">
-                  <BounceLoader size={150} color={"#2aa44f"} loading />
-                </div>
-              ) : (
-                <div className="home__feed--part">
-                  {posts.map((post) => {
-                    if (post.type === "review")
-                      return (
-                        <ReviewPost
-                          key={post._id}
-                          details={post}
-                          postId={post._id}
-                          type={post.type}
-                          likeCount={post.likeCount}
-                        />
-                      );
-                    else if (post.type === "ticket")
-                      return (
-                        <TicketPost
-                          key={post._id}
-                          details={post}
-                          postId={post._id}
-                          type={post.type}
-                          likeCount={post.likeCount}
-                        />
-                      );
-                    else if (post.type === "suggestMe")
-                      return (
-                        <SuggestMePost
-                          key={post._id}
-                          details={post}
-                          postId={post._id}
-                          type={post.type}
-                          likeCount={post.likeCount}
-                        />
-                      );
-                    else {
-                      console.log(post.type);
-                      return null;
-                    }
-                  })}
-                </div>
-              )}
-            </div>
-
-            <div className="home__right--part">
-              <RightSideBar />
-            </div>
+        <div className="home">
+          <div className="home__left--part">
+            <LeftSideBar postType="home" />
           </div>
-        ) : (
-          <Login />
-        )
+
+          <div className="home__middle--part">
+            <div className="home__story--part"></div>
+            {postLoading ? (
+              <div className="home__bounceloader">
+                <BounceLoader size={150} color={"#2aa44f"} loading />
+              </div>
+            ) : (
+              <div className="home__feed--part">
+                {posts.map((post) => {
+                  if (post.type === "review")
+                    return (
+                      <ReviewPost
+                        key={post._id}
+                        details={post}
+                        postId={post._id}
+                        type={post.type}
+                        likeCount={post.likeCount}
+                      />
+                    );
+                  else if (post.type === "ticket")
+                    return (
+                      <TicketPost
+                        key={post._id}
+                        details={post}
+                        postId={post._id}
+                        type={post.type}
+                        likeCount={post.likeCount}
+                      />
+                    );
+                  else if (post.type === "suggestMe")
+                    return (
+                      <SuggestMePost
+                        key={post._id}
+                        details={post}
+                        postId={post._id}
+                        type={post.type}
+                        likeCount={post.likeCount}
+                      />
+                    );
+                  else {
+                    console.log(post.type);
+                    return null;
+                  }
+                })}
+              </div>
+            )}
+          </div>
+
+          <div className="home__right--part">
+            <RightSideBar />
+          </div>
+        </div>
       ) : (
-        <>
-          <h1>loading ....</h1>
-        </>
+        <div className="home__bounceloader">
+          <BounceLoader size={150} color={"#2aa44f"} loading />
+        </div>
       )}
     </>
   );
@@ -103,6 +107,7 @@ const mapStateTopProps = (state) => {
     loading: state.user.loading,
     posts: state.post.posts,
     postLoading: state.post.loading,
+    authLoading: state.user.authLoading,
   };
 };
 export default connect(mapStateTopProps, { getSubcriberPost })(Home);

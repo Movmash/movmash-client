@@ -13,7 +13,7 @@ import EventIcon from "@material-ui/icons/Event";
 import { Dialog } from "@material-ui/core";
 import RequestedTicketDialog from "./RequestedTicketDialog";
 import { getRequestedTicket } from "../redux/actions/ticketAction";
-function Navbar({ loading, profileImage, getRequestedTicket }) {
+function Navbar({ profileImage, getRequestedTicket, authenticated }) {
   const location = useLocation();
   const history = useHistory();
   const [openTicket, setOpenTicket] = useState(false);
@@ -25,8 +25,10 @@ function Navbar({ loading, profileImage, getRequestedTicket }) {
     setOpenTicket(false);
   };
   useEffect(() => {
-    getRequestedTicket();
-  });
+    if (authenticated){
+      getRequestedTicket();
+    } 
+  }, [getRequestedTicket, authenticated]);
 
   return (
     <div className="navbar">
@@ -104,7 +106,7 @@ function Navbar({ loading, profileImage, getRequestedTicket }) {
         <Dialog onClose={handleCloseTicketDialog} open={openTicket}>
           <RequestedTicketDialog />
         </Dialog>
-        {!loading ? <Avatar src={profileImage} /> : <h1>loading</h1>}
+        <Avatar src={profileImage} />
       </div>
     </div>
   );
@@ -112,7 +114,7 @@ function Navbar({ loading, profileImage, getRequestedTicket }) {
 const mapStateToProps = (state) => {
   return {
     profileImage: state.user.profileImageUrl,
-    loading: state.user.loading,
+    authenticated: state.user.authenticated
   };
 };
 export default connect(mapStateToProps, { getRequestedTicket })(Navbar);

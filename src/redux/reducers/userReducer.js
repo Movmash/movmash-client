@@ -7,11 +7,14 @@ import {
   MARK_NOTIFICATIONS_READ,
   GET_UNREAD_ROOM,
   UPDATE_ROOM,
+  LOADING_USER,
+  AUTH_LOADING,
 } from "../types";
 
 const initialState = {
   authenticated: false,
   loading: false,
+  authLoading: false,
   credential: {},
   likes: [],
   notifications: [],
@@ -31,6 +34,7 @@ export default function (state = initialState, action) {
       return {
         authenticated: true,
         loading: false,
+        authLoading:false,
         ...action.payload,
       };
     case GET_ALL_NOTIFICATION:
@@ -69,6 +73,16 @@ export default function (state = initialState, action) {
         ...state,
         messageRoom: [action.payload, ...oldRoom],
       };
+    case LOADING_USER:
+      return {
+        ...state,
+        loading:true
+      }  
+    case AUTH_LOADING:
+      return {
+        ...state,
+        authLoading: true
+      }  
     default:
       return state;
   }

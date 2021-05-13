@@ -1,37 +1,37 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import "./stylesheets/peopleRoomTab.css";
 import { Avatar } from "@material-ui/core";
-import MicIcon from "@material-ui/icons/Mic";
-import VideocamIcon from "@material-ui/icons/Videocam";
-import VideocamOffIcon from "@material-ui/icons/VideocamOff";
-import MicOffIcon from "@material-ui/icons/MicOff";
-import VideoCallIcon from "@material-ui/icons/VideoCall";
+// import MicIcon from "@material-ui/icons/Mic";
+// import VideocamIcon from "@material-ui/icons/Videocam";
+// import VideocamOffIcon from "@material-ui/icons/VideocamOff";
+// import MicOffIcon from "@material-ui/icons/MicOff";
+// import VideoCallIcon from "@material-ui/icons/VideoCall";
 import { useSocket } from "../contexts/SocketProvider";
 import { connect } from "react-redux";
-import Peer from "simple-peer";
-import styled from "styled-components";
-const StyledVideo = styled.video`
-  transform: scaleX(-1);
-  object-fit: cover;
-  height: 200px;
-  width: 200px;
-  border-radius: 40px;
-`;
-function Video(props) {
-  const ref = useRef();
-  useEffect(() => {
-    props.peer.on("stream", (stream) => {
-      console.log(stream);
-      ref.current.srcObject = stream;
-    });
-  }, [props]);
+// import Peer from "simple-peer";
+// import styled from "styled-components";
+// const StyledVideo = styled.video`
+//   transform: scaleX(-1);
+//   object-fit: cover;
+//   height: 200px;
+//   width: 200px;
+//   border-radius: 40px;
+// `;
+// function Video(props) {
+//   const ref = useRef();
+//   useEffect(() => {
+//     props.peer.on("stream", (stream) => {
+//       console.log(stream);
+//       ref.current.srcObject = stream;
+//     });
+//   }, [props]);
 
-  return (
-    <>
-      <StyledVideo playsInline autoPlay ref={ref} />
-    </>
-  );
-}
+//   return (
+//     <>
+//       <StyledVideo playsInline autoPlay ref={ref} />
+//     </>
+//   );
+// }
 function PeopleRoomTab({
   roomCode,
   userName,
@@ -212,7 +212,7 @@ function PeopleRoomTab({
     if (socket) {
       socket.emit("get-user-in-the-room", { roomId: roomCode });
     }
-  }, [socket]);
+  }, [socket, roomCode]);
   useEffect(() => {
     if (socket) {
       socket.on("user-list-inside-the-room", (data) => {

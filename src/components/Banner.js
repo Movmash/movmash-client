@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./stylesheets/Banner.css";
-import ReactPlayer from "react-player";
+// import ReactPlayer from "react-player";
 //................................
 import Dialog from "@material-ui/core/Dialog";
 import { useHistory } from "react-router-dom";

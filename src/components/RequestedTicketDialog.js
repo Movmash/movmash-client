@@ -33,7 +33,7 @@ function RequestedTicketDialog({ ticketList }) {
             </div>
             <div className="requestedTicketDialog__content__showcard__content">
               <div className="requestedTicketDialog__content__showcard__content__movieposter">
-                <img src="https://image.tmdb.org/t/p/w185//8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg" />
+                <img src="https://image.tmdb.org/t/p/w185//8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg" alt="" />
               </div>
               <div className="requestedTicketDialog__content__showcard__content__countdown">
                 <span>

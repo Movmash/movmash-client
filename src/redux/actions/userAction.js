@@ -1,4 +1,5 @@
 import axios from "../../util/axios";
+// import Axios from "axios";
 import {
   LOADING_UI,
   SET_ERRORS,
@@ -9,6 +10,7 @@ import {
   ADD_NEW_NOTIFICATION,
   MARK_NOTIFICATIONS_READ,
   GET_UNREAD_ROOM,
+  AUTH_LOADING,
 } from "../types";
 
 export const getUnreadUserRoom = () => (dispatch) => {
@@ -78,10 +80,32 @@ export const getUserData = () => (dispatch) => {
 };
 
 export const logoutUser = () => (dispatch) => {
-  localStorage.removeItem("mashDBToken");
-  delete axios.defaults.headers.common["Authorization"];
+  // localStorage.removeItem("mashDBToken");
+  // delete axios.defaults.headers.common["Authorization"];
   dispatch({ type: SET_UNAUTHENTICATED });
+  axios
+    .get("/logout")
+    .then((res) => {
+     
+    })
+    .catch((e) => {
+      console.log(e);
+    });
 };
+
+export const getOAuthUserData = () => (dispatch) => {
+  dispatch({ type: AUTH_LOADING });
+  axios
+    .get("/current_user")
+    .then((res) => {
+      console.log(res)
+      if(res.data==="") return dispatch({ type: SET_UNAUTHENTICATED });
+      dispatch({ type: SET_USER, payload: res.data });
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+}
 
 const setAuthorizationHeader = (token) => {
   const mashDBToken = `Bearer ${token}`;

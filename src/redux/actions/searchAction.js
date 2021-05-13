@@ -5,15 +5,15 @@ const {
   LOADING_SEARCH_LIST,
   LOADING_SEARCH_MOVIE,
   LOADING_SEARCH_TICKET,
-  LOADING_LIST,
-  LOADING_TICKET,
+  // LOADING_LIST,
+  // LOADING_TICKET,
   GET_SEARCH_PEOPLE,
   GET_SEARCH_LIST,
   GET_SEARCH_MOVIE,
   GET_SEARCH_TICKET,
-  GET_LIST,
-  GET_PEOPLE,
-  GET_TICKET,
+  // GET_LIST,
+  // GET_PEOPLE,
+  // GET_TICKET,
 } = require("../types");
 
 export const getPeople = () => (dispatch) => {

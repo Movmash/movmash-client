@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./stylesheets/LiveShow.css";
 import { Dialog } from "@material-ui/core";
 import CreatePartyForm from "../components/CreatePartyForm";
@@ -6,6 +6,7 @@ import ActivityContainer from "../components/ActivityContainer";
 import LiveShowCard from "../components/LiveShowCard";
 import { connect } from "react-redux";
 import { BounceLoader } from "react-spinners";
+import { useHistory } from "react-router-dom";
 // import { getAllLiveShow } from "../redux/actions/liveShowAction";
 function LiveShow({
   action,
@@ -19,12 +20,18 @@ function LiveShow({
   thriller,
   myFamily,
   loadingCreateLiveShow,
+  authenticated,
+  authLoading
 }) {
   const [openDialog, isDialogOpen] = useState(false);
-
-  // useEffect(() => {
-  //   getAllLiveShow();
-  // }, [getAllLiveShow]);
+  const history = useHistory();
+  useEffect(() => {
+    if (!authLoading) {
+      if (!authenticated)  {
+        history.push("/login");
+      }
+    }
+  }, [authLoading, authenticated, history]);
   const handleOpenDialog = () => {
     isDialogOpen(true);
   };
@@ -189,6 +196,8 @@ const mapStateToProps = (state) => {
     thriller: state.liveShow.thrillerShow,
     myFamily: state.liveShow.myFamilyShow,
     loadingCreateLiveShow: state.liveShow.loadingCreateLiveShow,
+    authenticated: state.user.authenticated,
+    authLoading: state.user.authLoading,
   };
 };
 

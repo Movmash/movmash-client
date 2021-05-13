@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./stylesheets/LeftSideBar.css";
-import { IconButton, Avatar, Link, Badge } from "@material-ui/core";
+import { IconButton, Avatar, Badge } from "@material-ui/core";
 import TelegramIcon from "@material-ui/icons/Telegram";
 import AddIcon from "@material-ui/icons/Add";
 import NotificationsNoneIcon from "@material-ui/icons/NotificationsNone";
@@ -105,6 +105,7 @@ function LeftSideBar({
           markReadNotification.push(notification._id);
           return notification._id;
         }
+        return notification._id;
       });
       console.log(markReadNotification);
       markNotificationRead(markReadNotification);
@@ -232,9 +233,9 @@ function LeftSideBar({
               </div>
               {openNotification ? (
                 <div className="notificationClickAway">
-                  {notifications.map((notification) => {
-                    if (notification.type === "like") {
-                      return (
+                  {notifications.map((notification) => (
+                    (notification.type === "like") &&
+                       (
                         <NotificationListCard
                           key={notification._id}
                           imageUrl={notification.senderId.profileImageUrl}
@@ -242,10 +243,10 @@ function LeftSideBar({
                           message="liked your post"
                           userName={notification.senderId.userName}
                         />
-                      );
-                    }
-                    if (notification.type === "comment") {
-                      return (
+                      )
+                    
+                     (notification.type === "comment") &&
+                      (
                         <NotificationListCard
                           key={notification._id}
                           imageUrl={notification.senderId.profileImageUrl}
@@ -253,9 +254,9 @@ function LeftSideBar({
                           message="commented on your post"
                           userName={notification.senderId.userName}
                         />
-                      );
-                    }
-                  })}
+                      )
+                    
+                  ))}
                 </div>
               ) : null}
             </div>

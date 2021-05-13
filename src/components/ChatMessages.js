@@ -20,7 +20,7 @@ function ChatMessages({ getRoomChats, messages, userId, clearChat }) {
     return () => {
       clearChat();
     };
-  }, [roomId, getRoomChats]);
+  }, [roomId, getRoomChats, clearChat]);
   return (
     <div>
       {messages.map((chatMessage) =>

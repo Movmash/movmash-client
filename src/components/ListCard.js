@@ -402,7 +402,11 @@ function ListCard({
 }
 
 export default connect(null, { deleteList, updateList })(ListCard);
-{
+
+
+
+
+
   /*{ createdBy, id, listTitle, description, movieList }
   https://cdn.pastemagazine.com/www/articles/2016/01/21/ProphetEW_Main.jpg 
   <div className="liveShowCard__banner__content">
@@ -431,4 +435,4 @@ export default connect(null, { deleteList, updateList })(ListCard);
         </div>
       
        */
-}
+

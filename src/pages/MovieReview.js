@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./stylesheets/MovieReview.css";
 import BannerReview from "../components/BannerReview";
 import MovieInfoCard from "../components/MovieInfoCard";
-import MovieReviewButtons from "../components/MovieReviewButtons";
+// import MovieReviewButtons from "../components/MovieReviewButtons";
 import ReviewCard from "../components/ReviewCard";
 import MovieCrewList from "../components/MovieCrewList";
 import "slick-carousel/slick/slick.css";
@@ -10,11 +10,11 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { connect } from "react-redux";
 import { getMovieDetail } from "../redux/actions/movieAction";
-import { useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { BounceLoader } from "react-spinners";
-function MovieReview({ movieDetails, getMovie, loading }) {
+function MovieReview({ movieDetails, getMovie, loading, authenticated, authLoading }) {
   const location = useLocation();
-  const [unmounted, setUnmounted] = useState(false);
+  const history = useHistory();
   const id = location.pathname.split("/")[
     location.pathname.split("/").length - 1
   ];
@@ -69,15 +69,15 @@ function MovieReview({ movieDetails, getMovie, loading }) {
     // ],
   };
   useEffect(() => {
-    if (!unmounted) {
-      getMovie(id);
+    if (!authLoading) {
+      if (authenticated) {
+        console.log("movie details")
+        getMovie(id);
+      } else {
+        history.push("/login");
+      }
     }
-
-    return () => {
-      setUnmounted(true);
-    };
-  });
-  console.log(movieDetails);
+  }, [authLoading, getMovie, authenticated, history, id]);
 
   return (
     <div className="movieReview">
@@ -145,6 +145,8 @@ const mapStateToProps = (state) => {
   return {
     movieDetails: state.movie.movieDetails,
     loading: state.movie.loading,
+    authenticated: state.user.authenticated,
+    authLoading: state.user.authLoading,
   };
 };
 

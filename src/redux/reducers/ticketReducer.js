@@ -49,8 +49,10 @@ const ticketReducer = (state = intialState, action) => {
       };
     case MARK_REQUESTED_TICKET_CONFIRM:
       return state;
+    default:
+      return state;  
   }
-  return state;
+  // return state;
 };
 
 export default ticketReducer;
