@@ -1,0 +1,295 @@
+
+.login{
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    
+}
+.login__right{
+    width: 60%;
+    
+}
+.login__left{
+    width: 40%;
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    /* background-color:#2e3349; */
+    
+}
+.login__right>img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+     box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2),
+     0 6px 20px 0 rgba(0, 0, 0, 0.19);
+     
+}
+.login__left>img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    -webkit-filter: blur(30px);
+    filter: blur(30px);
+}
+.login_left__content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+/* .login_content>img{
+    max-width: 100px;
+} */
+.login__left__content__nav{
+    display: flex;
+    /* height: 100px; */
+    justify-self: center;
+    align-items: center;
+    /* background: red; */
+}
+
+.login__left__content__nav>h2{
+justify-self: center;
+align-items: center;
+display: flex;
+font-family: "Permanent Marker",
+cursive;
+font-size: 30px;
+color: rgb(255, 253, 253);
+}
+.login__left__content__nav>img{
+    width: 80px;
+}
+.login-box>img{
+     width: 80px;
+     margin: 0 0 5vh 0;
+}
+
+
+
+.card {
+    padding: 0;
+    margin: 0;
+}
+
+.login-box {
+    /* background: #3F414A; */
+    padding: 20px;
+    max-width: 480px;
+    margin: 20vh auto;
+    text-align: center;
+    /* letter-spacing: 1px; */
+    /* position: relative; */
+
+}
+
+.login-box:hover {
+    /* box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+}
+
+.login-box h2 {
+    margin: 20px 0 50px;
+    padding: 0;
+    /* text-transform: uppercase; */
+    color: #ffffff;
+    font-family: 'Montserrat',
+    sans-serif;
+    font-size: 35px;
+     /* text-shadow: 0 0 3px #181717,
+     0 0 5px #0c0c0c; */
+}
+
+.social-button {
+    background-position: 25px 0px;
+    box-sizing: border-box;
+    color: #3F414A;
+    cursor: pointer;
+    display: inline-block;
+    height: 50px;
+    line-height: 50px;
+    text-align: left;
+    text-decoration: none;
+    text-transform: uppercase;
+    vertical-align: middle;
+    width: 100%;
+    border-radius: 3px;
+    margin: 10px auto;
+    outline: #3F414A none 0px;
+    padding-left: 20%;
+    transition: all 0.2s cubic-bezier(0.72, 0.01, 0.56, 1) 0s;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+}
+
+
+#facebook-connect {
+    /* background: rgb(255, 255, 255) url('https://raw.githubusercontent.com/eswarasai/social-login/master/img/facebook.svg?sanitize=true') no-repeat scroll 5px 0px / 30px 50px padding-box border-box; */
+    border: 1px solid rgb(60, 90, 154);
+      border-color: rgb(60, 90, 154);
+      background: rgb(60, 90, 154) url('https://raw.githubusercontent.com/eswarasai/social-login/master/img/facebook-white.svg?sanitize=true') no-repeat scroll 5px 0px / 30px 50px padding-box border-box;
+}
+
+#facebook-connect:hover {
+    border-color: rgb(60, 90, 154);
+    background: rgb(60, 90, 154) url('https://raw.githubusercontent.com/eswarasai/social-login/master/img/facebook-white.svg?sanitize=true') no-repeat scroll 5px 0px / 30px 50px padding-box border-box;
+    -webkit-transition: all .8s ease-out;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease-out;
+}
+
+#facebook-connect span {
+    box-sizing: border-box;
+    /* color: rgb(60, 90, 154); */
+    cursor: pointer;
+    text-align: center;
+    text-transform: uppercase;
+    border: 0px none rgb(255, 255, 255);
+    outline: rgb(255, 255, 255) none 0px;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+    font-family: 'Montserrat',
+    sans-serif;
+color: #FFF;
+}
+
+#facebook-connect:hover span {
+    color: #FFF;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+    font-family: 'Montserrat',
+    sans-serif;
+}
+
+#google-connect {
+    /* background: rgb(255, 255, 255) url('https://raw.githubusercontent.com/eswarasai/social-login/master/img/google-plus.png') no-repeat scroll 5px 0px / 50px 50px padding-box border-box; */
+    border: 1px solid rgb(220, 74, 61);
+    background: rgb(220, 74, 61) url('https://raw.githubusercontent.com/eswarasai/social-login/master/img/google-plus-white.png') no-repeat scroll 5px 0px / 50px 50px padding-box border-box;
+   
+}
+
+#google-connect:hover {
+    border-color: rgb(220, 74, 61);
+    background: rgb(220, 74, 61) url('https://raw.githubusercontent.com/eswarasai/social-login/master/img/google-plus-white.png') no-repeat scroll 5px 0px / 50px 50px padding-box border-box;
+    -webkit-transition: all .8s ease-out;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease-out;
+    
+}
+
+#google-connect span {
+    box-sizing: border-box;
+    /* color: rgb(220, 74, 61); */
+    cursor: pointer;
+    text-align: center;
+    text-transform: uppercase;
+    border: 0px none rgb(220, 74, 61);
+    outline: rgb(255, 255, 255) none 0px;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+    font-family: 'Montserrat',
+    sans-serif;
+color: #FFF;
+}
+
+#google-connect:hover span {
+    color: #FFF;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+    font-family: 'Montserrat',
+    sans-serif;
+}
+
+@media only screen and (max-width:800px) {
+
+.login__right {
+    width: 0%;
+    visibility: hidden;
+}
+
+.login__left {
+    width: 100%;
+
+}
+
+.login__right>img {
+    height: 0%;
+    width: 0%;
+    visibility: hidden;
+
+}
+
+.login_left__content {
+    width: 100%;
+}
+
+.login-box {
+    padding: 20px;
+    min-width: 100vw;
+    /* margin: 30vh auto; */
+margin: 20vh auto;
+
+}
+}
+
+@media only screen and (max-width:500px) {
+
+    /* For mobile phones: */
+
+
+.login__right {
+    width: 0%;
+visibility: hidden;
+}
+
+.login__left {
+    width: 100%;
+ 
+}
+
+.login_left__content {
+    width: 100%;
+}
+.login__right>img {
+    height: 0%;
+    width: 0%;
+    visibility: hidden;
+
+}
+.login-box {
+    /* background: #3F414A; */
+    padding: 20px;
+    min-width: 100vw;
+    margin: 20vh auto;
+    /* position: relative; */
+
+}
+.login__left__content__nav {
+    /* height: 25vh; */
+    
+    /* background: red; */
+}
+
+}

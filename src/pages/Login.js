@@ -1,32 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { loginUser } from "../redux/actions/userAction";
 import { useHistory } from "react-router-dom";
 import { BounceLoader } from "react-spinners";
+import "./stylesheets/Login.css"
+// import coverPoster from "../images/login_cover_pic_1.jpg";
+// import coverPoster from "../images/login_cover_pic_2.jpg";
+// import coverPoster from "../images/login_cover_pic_3.jpg";
+// import coverPoster from "../images/login_cover_pic_4.jpg";
+import coverPoster from "../images/login_cover_pic_5.jpg";
+// import coverPoster from "../images/login_cover_pic_6.jpg";
+// import coverPoster from "../images/login_cover_pic_7.jpg";
+import MovmashLogo from "../images/Movmash_logo.png";
 function Login({ user, loginUser }) {
   const history = useHistory();
-  const [password, setPasword] = useState("");
-  const [email, setEmail] = useState("");
 
     useEffect(() => {
-      // const user = localStorage.getItem("user");
-      // if (user) {
-      //   getUserData(user, history);
-      //   //   history.push("/");
-      // }
       if (user.authenticated) {
         history.push("/");
       }
     }, [user.authenticated, history]);
-
-  // const postData = () => {
-  //   const userData = {
-  //     email: email,
-  //     password: password,
-  //   };
-
-  //   loginUser(userData, history);
-  // };
 
   return (
     <div>
@@ -35,33 +28,38 @@ function Login({ user, loginUser }) {
           <BounceLoader size={150} color={"#2aa44f"} loading />
         </div>
       ) : (
-        <div className="card auth-card input-field">
-          <input
-            type="text"
-            placeholder="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="password"
-            value={password}
-            onChange={(e) => setPasword(e.target.value)}
-          />
-          <button
-            // onClick={() => postData()}
-            // onClick={() => (location.href = "http://localhost:8000/auth/google")}
-            className="btn waves-effect waves-light #64b5f6 blue darken-1"
-          >
-            <a href="http://localhost:8000/auth/google">Login with google</a>
-          </button>
-          <button
-            // onClick={() => postData()}
-            // onClick={() => (location.href = "http://localhost:8000/auth/google")}
-            className="btn waves-effect waves-light #64b5f6 blue darken-1"
-          >
-            <a href="http://localhost:8000/auth/facebook">Login with facebook</a>
-          </button>
+        <div className="login">
+          <div className="login__left">
+            <img src={coverPoster} alt={coverPoster} />
+            <div className="login_left__content">
+              {/* <img src={MovmashLogo} alt="logo" /> */}
+              <div className="login__left__content__nav">
+                {/* <h2>MOVMASH</h2> */}
+                {/* <img src={MovmashLogo} alt="logo" /> */}
+              </div>
+              <div className="login-box">
+                <img src={MovmashLogo} alt="logo" />
+                <h2>Log in to your account</h2>
+                <a
+                  href="http://localhost:8000/auth/facebook"
+                  className="social-button"
+                  id="facebook-connect"
+                >
+                  <span>Login with Facebook</span>
+                </a>
+                <a
+                  href="http://localhost:8000/auth/google"
+                  className="social-button"
+                  id="google-connect"
+                >
+                  <span>Login with Google</span>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div className="login__right">
+            <img src={coverPoster} alt="login_pic" />
+          </div>
         </div>
       )}
     </div>
