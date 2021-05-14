@@ -105,6 +105,7 @@ export const getOAuthUserData = () => (dispatch) => {
     })
     .catch((e) => {
       console.log(e);
+      dispatch({ type: SET_ERRORS, payload: e.message });
     });
 }
 

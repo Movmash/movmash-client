@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import {  getOAuthUserData } from "./redux/actions/userAction";
-// import { SET_UNAUTHENTICATED } from "./redux/types";
+import { SET_UNAUTHENTICATED } from "./redux/types";
 // import jwtDecode from "jwt-decode";
 import store from "./redux/store";
 // import axios from "./util/axios";
@@ -25,7 +25,7 @@ import { Provider } from "react-redux";
 //     // window.location.href = "/";
 //   }
 // }
-// store.dispatch({ type: SET_UNAUTHENTICATED });
+store.dispatch({ type: SET_UNAUTHENTICATED });
 store.dispatch(getOAuthUserData());
 
 ReactDOM.render(

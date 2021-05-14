@@ -14,7 +14,7 @@ function Login({ user, loginUser }) {
       //   getUserData(user, history);
       //   //   history.push("/");
       // }
-      if (user.authenticated ) {
+      if (user.authenticated) {
         history.push("/");
       }
     }, [user.authenticated, history]);

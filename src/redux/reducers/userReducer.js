@@ -9,6 +9,7 @@ import {
   UPDATE_ROOM,
   LOADING_USER,
   AUTH_LOADING,
+  SET_ERRORS
 } from "../types";
 
 const initialState = {
@@ -82,6 +83,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         authLoading: true
+      }  
+    case SET_ERRORS:
+      return {
+        ...state,
+        authLoading: false
       }  
     default:
       return state;
