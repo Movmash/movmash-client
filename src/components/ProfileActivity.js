@@ -41,7 +41,7 @@ function ProfileActivity({
     userName,
     resetState,
   ]);
-
+console.log(likedMovies,dislikedMovies);
   const handleUnlike = (id) => {
     unlikeMovies(id);
   };
@@ -55,59 +55,61 @@ function ProfileActivity({
       {/* */}
       {activityLoading ? (
         <TabLoadingData />
-      ) : likedMovies.length !== 0 && dislikedMovies.length !== 0 ? (
+      ) : likedMovies.length !== 0 || dislikedMovies.length !== 0 ? (
         <>
           {" "}
-          <div className="watchlist__container">
-            <h2>Likes</h2>
-            <div className="watchlist__movieContent">
-              {likedMovies.map((list) => (
-                <div className="watchlist__movieItem">
-                  <div className="watchlist__moviePoster">
-                    {list.moviePoster !== null ? (
-                      <div className="watchlist__posterWrapper">
-                        <img
-                          src={`https://image.tmdb.org/t/p/w185${list.moviePoster}`}
-                          alt={list.movieTitle}
-                        />
-                      </div>
-                    ) : (
-                      <div className="watchlist__posterWrapper">
-                        {" "}
-                        <img
-                          src="https://streaming.tvseries-movies.com/themes/vstripe/images/no-cover.png"
-                          alt={list.movieTitle}
-                        />
+          {likedMovies.length !== 0 && (
+            <div className="watchlist__container">
+              <h2>Likes</h2>
+              <div className="watchlist__movieContent">
+                {likedMovies.map((list) => (
+                  <div className="watchlist__movieItem">
+                    <div className="watchlist__moviePoster">
+                      {list.moviePoster !== null ? (
+                        <div className="watchlist__posterWrapper">
+                          <img
+                            src={`https://image.tmdb.org/t/p/w185${list.moviePoster}`}
+                            alt={list.movieTitle}
+                          />
+                        </div>
+                      ) : (
+                        <div className="watchlist__posterWrapper">
+                          {" "}
+                          <img
+                            src="https://streaming.tvseries-movies.com/themes/vstripe/images/no-cover.png"
+                            alt={list.movieTitle}
+                          />
+                        </div>
+                      )}
+                    </div>
+                    <div className="watchlist__moviePoster__skin"></div>
+                    {isMyProfile && (
+                      <div
+                        onClick={() => {
+                          handleUnlike(list.movieId);
+                        }}
+                        className="watchlist__moviePoster__button"
+                      >
+                        <CloseIcon />
                       </div>
                     )}
-                  </div>
-                  <div className="watchlist__moviePoster__skin"></div>
-                  {isMyProfile && (
-                    <div
-                      onClick={() => {
-                        handleUnlike(list.movieId);
-                      }}
-                      className="watchlist__moviePoster__button"
-                    >
-                      <CloseIcon />
-                    </div>
-                  )}
-                  <div className="moviePoster__detailCard__title profileWatchList">
-                    <span>
-                      {" "}
-                      {stringLimiter(
-                        list.movieTitle ? list.movieTitle : list.name,
-                        15
-                      )}
-                    </span>
+                    <div className="moviePoster__detailCard__title profileWatchList">
+                      <span>
+                        {" "}
+                        {stringLimiter(
+                          list.movieTitle ? list.movieTitle : list.name,
+                          15
+                        )}
+                      </span>
 
-                    <span> ({list.releaseDate.split("-")[0]})</span>
+                      <span> ({list.releaseDate.split("-")[0]})</span>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
-          <div className="watchlist__container">
+          )}
+          {dislikedMovies.length !== 0 && <div className="watchlist__container">
             <h2>Dislikes</h2>
             <div className="watchlist__movieContent">
               {dislikedMovies.map((list) => (
@@ -156,7 +158,8 @@ function ProfileActivity({
               ))}
             </div>
           </div>
-        </>
+         }
+         </>
       ) : (
         <TabDescriptionInfo
           Icon={LocalActivityTwoToneIcon}

@@ -28,8 +28,8 @@
     height: 100%;
     width: 100%;
     object-fit: cover;
-    -webkit-filter: blur(30px);
-    filter: blur(30px);
+    -webkit-filter: blur(7px);
+    filter: blur(7px);
 }
 .login_left__content {
     position: absolute;
@@ -247,7 +247,7 @@ color: #FFF;
 
 .login-box {
     padding: 20px;
-    min-width: 100vw;
+    /* min-width: 100vw; */
     /* margin: 30vh auto; */
 margin: 20vh auto;
 
@@ -281,7 +281,7 @@ visibility: hidden;
 .login-box {
     /* background: #3F414A; */
     padding: 20px;
-    min-width: 100vw;
+    /* min-width: 100vw; */
     margin: 20vh auto;
     /* position: relative; */
 

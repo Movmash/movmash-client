@@ -34,6 +34,7 @@ function LeftSideBar({
   updateRooms,
   getUnreadUserRoom,
   messageRoom,
+  authenticated,
 }) {
   const [open, setOpen] = useState(false);
 
@@ -67,11 +68,15 @@ function LeftSideBar({
     }
   }, [socket, updateRooms]);
   useEffect(() => {
-    getAllNotification();
-  }, [getAllNotification]);
+    if (authenticated) {
+      getAllNotification();
+    }
+  }, [getAllNotification, authenticated]);
   useEffect(() => {
+    if (authenticated) {
     getUnreadUserRoom();
-  }, [getUnreadUserRoom]);
+    }
+  }, [getUnreadUserRoom, authenticated]);
   //..................................................................................[handle review post]
   const handleClickOpenReview = () => {
     setOpenReviewDialog(true);
@@ -233,20 +238,16 @@ function LeftSideBar({
               </div>
               {openNotification ? (
                 <div className="notificationClickAway">
-                  {notifications.map((notification) => (
-                    (notification.type === "like") &&
-                       (
-                        <NotificationListCard
-                          key={notification._id}
-                          imageUrl={notification.senderId.profileImageUrl}
-                          type={notification.type}
-                          message="liked your post"
-                          userName={notification.senderId.userName}
-                        />
-                      )
-                    
-                     (notification.type === "comment") &&
-                      (
+                  {notifications.map(
+                    (notification) =>
+                      notification.type === "like" &&
+                      (<NotificationListCard
+                        key={notification._id}
+                        imageUrl={notification.senderId.profileImageUrl}
+                        type={notification.type}
+                        message="liked your post"
+                        userName={notification.senderId.userName}
+                      />)(notification.type === "comment") && (
                         <NotificationListCard
                           key={notification._id}
                           imageUrl={notification.senderId.profileImageUrl}
@@ -255,8 +256,7 @@ function LeftSideBar({
                           userName={notification.senderId.userName}
                         />
                       )
-                    
-                  ))}
+                  )}
                 </div>
               ) : null}
             </div>
@@ -278,6 +278,7 @@ const mapStateToProps = (state) => {
     userImage: state.user.profileImageUrl,
     notifications: state.user.notifications,
     messageRoom: state.user.messageRoom,
+    authenticated: state.user.authenticated,
   };
 };
 

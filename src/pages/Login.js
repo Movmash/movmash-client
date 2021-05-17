@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { loginUser } from "../redux/actions/userAction";
 import { useHistory } from "react-router-dom";
-import { BounceLoader } from "react-spinners";
+// import { BounceLoader } from "react-spinners";
 import "./stylesheets/Login.css"
 // import coverPoster from "../images/login_cover_pic_1.jpg";
 // import coverPoster from "../images/login_cover_pic_2.jpg";
@@ -23,11 +23,11 @@ function Login({ user, loginUser }) {
 
   return (
     <div>
-      {user.authLoading ? (
+      {/* {user.authLoading ? (
         <div className="home__bounceloader">
           <BounceLoader size={150} color={"#2aa44f"} loading />
         </div>
-      ) : (
+      ) : ( */}
         <div className="login">
           <div className="login__left">
             <img src={coverPoster} alt={coverPoster} />
@@ -61,7 +61,7 @@ function Login({ user, loginUser }) {
             <img src={coverPoster} alt="login_pic" />
           </div>
         </div>
-      )}
+      {/* )} */}
     </div>
   );
 }
