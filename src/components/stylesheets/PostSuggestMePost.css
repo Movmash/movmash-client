@@ -1,13 +1,20 @@
 .postSuggestMe {
-    width: 668px;
-    border: 1px solid lightgray;
+    width: 65ch;
+    border: 1px solid var(--border);
     border-radius: 7px;
     display: flex;
     flex-flow: column;
-    max-height: 85vh;
+    overflow-x:hidden;
     overflow-y: auto;
+    max-height: 85vh;
+    background-color: var(--lightBlack);
+    font-family: Arial, Helvetica, sans-serif;
 }
-
+.postSuggestMe__mainContent{
+    max-height: 70ch;
+    overflow-y: auto;
+    overflow-x:hidden;
+}
 .postSuggestMe__ratingStep {
     display: flex;
     flex-flow: column;
@@ -26,7 +33,7 @@
 }
 
 .postSuggestMe--label {
-    color: white;
+    color: var(--boldText);
     font-size: 16px;
     margin-left: 25px;
     margin-top: 15px;
@@ -35,9 +42,9 @@
 .postSuggestMe__ratingStep__content__text {
     width: 203px;
     height: 197px;
-    background: #3F414A;
+    background: var(--palletes);
     border-radius: 10px;
-    margin: 15px;
+    margin: 15px 0 15px 20px;
     display: flex;
     flex-flow: column;
     justify-content: center;
@@ -52,7 +59,7 @@
     line-height: 22px;
     letter-spacing: 0.05em;
 
-    color: #D2D2D2;
+    color: var(--boldText);
 }
 
 .postSuggestMe__ratingStep__content__text--content {
@@ -88,7 +95,7 @@
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background: #4CAF50;
+    background: var(--green);
     cursor: pointer;
 }
 
@@ -148,9 +155,9 @@
 .postSuggestMe__genreStep__content {
     padding: 20px 20px 10px 20px;
     min-width: 50%;
-    background: #3F414A;
+    background: var(--palletes);
     border-radius: 10px;
-    margin: 15px;
+    margin: 15px 35px 15px 20px;
     display: flex;
     flex-flow: column;
     align-items: baseline;
@@ -174,17 +181,20 @@
 
 .postSuggestMe__genreStep__content__genre-menu {
     position: absolute;
-    width: 638px;
+    width: 59ch;
     max-height: 164px;
     overflow-y: auto;
-    top: 47px;
-    right: 0;
-    left: -570px;
+    overflow-x: hidden;
+    top: 55px;
+    right: -2.4ch;
+    /* left: -56.2ch; */
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
     z-index: 1;
-    background-color: #3F414A;
+    background-color: var(--palletes);
+    font-family: Arial, Helvetica, sans-serif;
 }
+
 
 .postSuggestMe__genreStep__content__genre-menuItem>h3 {
     color: white;
@@ -201,17 +211,20 @@
 
 .postSuggestMe__genreStep__content__genre-menuItem:hover {
 
-    background-color: #272531;
+    background-color: var(--lightBlack);
     cursor: pointer;
 
 }
 
 .MuiTypography-root {
     width: 530px;
+    font-family: Arial, Helvetica, sans-serif !important;
+    font-size: var(--primaryFontSize) !important;
 }
 
 .postSuggestMe__genreStep__content__genre-menuItem--container {
     margin-left: 15px;
+    
 }
 
 .MuiCheckbox-colorSecondary.Mui-checked {
@@ -219,7 +232,7 @@
 }
 
 .MuiCheckbox-root {
-    color: lightgray !important;
+    color: var(--boldText) !important;
 }
 
 
@@ -342,6 +355,7 @@
 
 .postSuggestMe__buttons {
     display: flex;
-    justify-content: flex-end;
-    margin: -5px 0px 30px 0px;
+    justify-content: center;
+    margin: 10px 0px 20px 0px;
+    z-index: 1;
 }

@@ -144,8 +144,8 @@
 
 .myProfile__userData {
     margin-top: 7rem;
-    border-top: 1px solid rgb(146, 146, 146);
-    border-bottom: 1px solid rgb(146, 146, 146)
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border)
 }
 
 .myProfile__userData__row {
@@ -174,11 +174,12 @@
 }
 
 .myProfile__allPostButtons {
-    background-color: #3F414A;
+    background-color:var(--lightBlack);
     width: 100%;
     height: 70px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+    border: 1px solid var(--border);
 }
 
 
@@ -193,7 +194,7 @@
     align-items: center;
     position: sticky;
     z-index: 100;
-    top: 8.5vh;
+    top: 70px;
 }
 
 .myProfile__allPostButton {
@@ -217,7 +218,7 @@
 
 .myProfile__allPostButton:hover {
     cursor: pointer;
-    background-color: #4e505a;
+    background-color:var(--palletes);
 
 }
 

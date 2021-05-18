@@ -15,14 +15,14 @@
     align-items: center;
     cursor: pointer;
     border-radius: 10px;
-    background-color:#353242;
+    background-color: var(--palletes);
     padding: 0 20px 0 10px;
 }
 .postIconButtons--BookNow:hover{
-    background-color: #413d50;
+    background-color: #444444;
 }
 .postIconButtons--BookNow:active{
-    background-color: #383544;
+    background-color: #333333;
 }
 .postIconButtons--CancelBooking{
      color:grey;
@@ -30,14 +30,14 @@
      align-items: center;
      cursor: pointer;
      border-radius: 10px;
-     background-color:#353242;
+     background-color:var(--palletes);
      padding: 0 20px 0 10px;
 }
 .postIconButtons--CancelBooking:hover {
-    background-color: #413d50;
+    background-color: #444444;
 }
 .postIconButtons--CancelBooking:active {
-    background-color: #383544;
+    background-color: #333333;
 }
 .postIconButtons--schedule {
     display: flex;

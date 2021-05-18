@@ -162,6 +162,8 @@ function CommentForm({
                   id={postId}
                   name="commentForm"
                   label="Search Your Movie"
+                  variant="filled"
+                  autoComplete="off"
                 />
                 {open &&
                   (loading ? (

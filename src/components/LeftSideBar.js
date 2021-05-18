@@ -75,6 +75,7 @@ function LeftSideBar({
   //..................................................................................[handle review post]
   const handleClickOpenReview = () => {
     setOpenReviewDialog(true);
+    setOpen(false);
   };
   const handleCloseReview = () => {
     setOpenReviewDialog(false);
@@ -82,6 +83,7 @@ function LeftSideBar({
   //....................................................................................[handle Suggest me post]
   const handleClickOpenSuggestMe = () => {
     setOpenSuggestMeDialog(true);
+    setOpen(false);
   };
   const handleCloseSuggestMe = () => {
     setOpenSuggestMeDialog(false);
@@ -89,6 +91,7 @@ function LeftSideBar({
   //....................................................................................[handle ticket post]
   const handleClickOpenTicket = () => {
     setOpenTicketDialog(true);
+    setOpen(false);
   };
   const handleCloseTicket = () => {
     setOpenTicketDialog(false);
@@ -120,7 +123,10 @@ function LeftSideBar({
           className="leftSideBar__container__icon hover"
         >
           {/* <Link to={`/@${userName}`}> */}
-          <Avatar src={userImage} /> {/* </Link> */}
+          <Avatar src={userImage}>
+            <div className="loading_avatar"></div>
+          </Avatar>
+          {/* </Link> */}
         </div>{" "}
         <div className="leftSideBar__container__icon badge">
           <IconButton
@@ -155,18 +161,6 @@ function LeftSideBar({
                   >
                     <h4>Post your review</h4>
                   </div>
-                  <Dialog
-                    onClose={handleCloseReview}
-                    aria-labelledby="customized-dialog-title"
-                    open={openReviewDialog}
-                  >
-                    <div className="dialogBox--ReviewPost">
-                      <PostReviewPost
-                        postType={postType}
-                        closeReview={handleCloseReview}
-                      />
-                    </div>
-                  </Dialog>
                   <div
                     onClick={() => {
                       handleClickOpenSuggestMe();
@@ -175,17 +169,6 @@ function LeftSideBar({
                   >
                     <h4>Want Suggestions</h4>
                   </div>
-                  <Dialog
-                    onClose={handleCloseSuggestMe}
-                    open={openSuggestMeDialog}
-                  >
-                    <div className="dialogBox--SuggestMePost">
-                      <PostSuggestMePost
-                        postType={postType}
-                        closeSuggestMe={handleCloseSuggestMe}
-                      />
-                    </div>
-                  </Dialog>
                   <div
                     onClick={() => {
                       handleClickOpenTicket();
@@ -194,16 +177,38 @@ function LeftSideBar({
                   >
                     <h4>Create ticket</h4>
                   </div>
-                  <Dialog onClose={handleCloseTicket} open={openTicketDialog}>
-                    <div className="dialogBox--TicketPost">
-                      <PostTicketPost
-                        postType={postType}
-                        closeTicket={handleCloseTicket}
-                      />
-                    </div>
-                  </Dialog>
                 </div>
               ) : null}
+              <Dialog
+                onClose={handleCloseReview}
+                aria-labelledby="customized-dialog-title"
+                open={openReviewDialog}
+              >
+                <div className="dialogBox--ReviewPost">
+                  <PostReviewPost
+                    postType={postType}
+                    closeReview={handleCloseReview}
+                  />
+                </div>
+              </Dialog>
+
+              <Dialog onClose={handleCloseSuggestMe} open={openSuggestMeDialog}>
+                <div className="dialogBox--SuggestMePost">
+                  <PostSuggestMePost
+                    postType={postType}
+                    closeSuggestMe={handleCloseSuggestMe}
+                  />
+                </div>
+              </Dialog>
+
+              <Dialog onClose={handleCloseTicket} open={openTicketDialog}>
+                <div className="dialogBox--TicketPost">
+                  <PostTicketPost
+                    postType={postType}
+                    closeTicket={handleCloseTicket}
+                  />
+                </div>
+              </Dialog>
             </div>
           </ClickAwayListener>
         </div>{" "}
@@ -233,20 +238,16 @@ function LeftSideBar({
               </div>
               {openNotification ? (
                 <div className="notificationClickAway">
-                  {notifications.map((notification) => (
-                    (notification.type === "like") &&
-                       (
-                        <NotificationListCard
-                          key={notification._id}
-                          imageUrl={notification.senderId.profileImageUrl}
-                          type={notification.type}
-                          message="liked your post"
-                          userName={notification.senderId.userName}
-                        />
-                      )
-                    
-                     (notification.type === "comment") &&
-                      (
+                  {notifications.map(
+                    (notification) =>
+                      notification.type === "like" &&
+                      (<NotificationListCard
+                        key={notification._id}
+                        imageUrl={notification.senderId.profileImageUrl}
+                        type={notification.type}
+                        message="liked your post"
+                        userName={notification.senderId.userName}
+                      />)(notification.type === "comment") && (
                         <NotificationListCard
                           key={notification._id}
                           imageUrl={notification.senderId.profileImageUrl}
@@ -255,8 +256,7 @@ function LeftSideBar({
                           userName={notification.senderId.userName}
                         />
                       )
-                    
-                  ))}
+                  )}
                 </div>
               ) : null}
             </div>

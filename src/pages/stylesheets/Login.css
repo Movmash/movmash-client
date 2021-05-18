@@ -243,7 +243,7 @@ color: #FFF;
 
 .login-box {
     padding: 20px;
-    min-width: 100vw;
+    /* min-width: 100vw; */
     /* margin: 30vh auto; */
 margin: 20vh auto;
 
@@ -277,7 +277,7 @@ visibility: hidden;
 .login-box {
     /* background: #3F414A; */
     padding: 20px;
-    min-width: 100vw;
+    /* min-width: 100vw; */
     margin: 20vh auto;
     /* position: relative; */
 

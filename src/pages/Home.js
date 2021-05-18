@@ -8,7 +8,7 @@ import TicketPost from "../components/TicketPost";
 import { connect } from "react-redux";
 // import Login from "./Login";
 import { getSubcriberPost } from "../redux/actions/postAction";
-import { BounceLoader } from "react-spinners";
+import { HashLoader, MoonLoader } from "react-spinners";
 import {useHistory} from "react-router-dom"
 function Home({
   authenticated,
@@ -44,7 +44,7 @@ function Home({
             <div className="home__story--part"></div>
             {postLoading ? (
               <div className="home__bounceloader">
-                <BounceLoader size={150} color={"#2aa44f"} loading />
+                <MoonLoader size={50} color={"#2aa44f"} loading />
               </div>
             ) : (
               <div className="home__feed--part">
@@ -94,7 +94,7 @@ function Home({
         </div>
       ) : (
         <div className="home__bounceloader">
-          <BounceLoader size={150} color={"#2aa44f"} loading />
+          <HashLoader size={150} color={"#2aa44f"} loading />
         </div>
       )}
     </>

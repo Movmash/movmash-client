@@ -11,9 +11,9 @@ function UserNamePlate({ imageUrl, type, name, username }) {
           <div className="userNamePlate__header--name">
             <h3>{name}</h3>
           </div>
-          <div className="userNamePlate__header--username">
+          {/* <div className="userNamePlate__header--username">
             <h4>{username}</h4>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="userNamePlate__header__tags">

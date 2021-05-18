@@ -1,12 +1,15 @@
 .postReviewPost {
-    width: 627px;
-    border: 1px solid lightgray;
+    width: 58ch;
+    border: 1px solid var(--border);
     border-radius: 7px;
     overflow-y: auto;
     max-height: 80vh;
     overflow-x: hidden;
+    background-color: var(--lightBlack);
 }
-
+.postReviewPost__DialogHeader {
+    width: 100%;
+}
 .postReviewPost__container {
     display: flex;
     flex-flow: column;
@@ -19,6 +22,9 @@
     max-width: fit-content;
 }
 
+.postReviewPost__contentPoster{
+    margin-right: 25px;
+}
 .postReviewPost__contentPoster>img {
     object-fit: contain;
     max-width: 80px;
@@ -27,13 +33,18 @@
 
 .postReviewPost__mainPost {
     display: flex;
+    justify-content: center;
     padding: 0px 20px 0px 20px;
-    margin: 40px 5px 0px 5px;
+    margin: 10px 5px 0px 5px;
 }
+.postReviewPost__contentMovie{
+display: flex;
+margin-top: 10px;
 
-.postReviewPost__contentInfo {
-    margin-left: 30px;
 }
+/* .postReviewPost__contentInfo {
+    margin-left: 30px;
+} */
 
 .postReviewPost__contentInfo--heading,
 .postReviewPost__contentInfo--durationGenre,
@@ -122,21 +133,32 @@
 /* .Mui-focused.MuiOutlinedInput-notchedOutline {
     border-color: #499E4C !important;
 } */
-
+.MuiFilledInput-underline:hover:before {
+    border-bottom: 1px solid transparent !important;
+}
 .MuiFormControl-root.MuiTextField-root {
     width: 52ch;
 }
-
+.MuiFormControl-root> label{
+    color: var(--boldText) !important;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.MuiFilledInput-root{
+    background-color: var(--palletes) !important;
+}
+.MuiFilledInput-underline:after{
+    border-bottom: 1px solid var(--border) !important;
+}
 /* .MuiInputBase-root{
 
 } */
 
 .MuiInput-underline:after {
-    border-bottom: 1px solid white !important
+    border-bottom: 1px solid var(--border) !important
 }
 
 .MuiInput-underline:before {
-    border-bottom: 1px solid lightgray !important
+    border-bottom: 1px solid var(--border) !important
 }
 
 .postReviewPost__bottomIcons {
@@ -155,24 +177,19 @@
 
 
 .postReview-clickAwayListener--content {
-    /* display: flex; */
-    /* flex-flow: column;
-    justify-content: space-around; */
-    /* align-items: baseline; */
     max-height: 232px;
     min-height: 60px;
     overflow-y: auto;
-    width: 465px;
-    top: 72px;
-    left: 73px;
-    right: 0;
-    /* border: 1px solid; */
+    width:50ch;
+    top: 140px;
+    right: 27px;
     padding: 8px;
     z-index: 100;
     position: absolute;
-    background-color: #3F414A;
+    background-color: var(--lightBlack);
     border-radius: 10px;
     transition: ease-in;
+    box-shadow: var(--boxShadow);
 }
 
 .postReviewPost__contentInfo--starRating {
@@ -181,4 +198,34 @@
 
 .MuiRating-iconEmpty {
     color: lightgray !important;
+}
+
+.postReviewPost__bottomIcon>button{
+       width: 55.5ch;
+       height: 36px;
+       border-radius: 7px;
+       outline: none;
+       color: var(--boldText);
+       font-family: Arial, Helvetica, sans-serif;
+       font-size: var(--primaryFontSize);
+       border: none;
+    background-color: var(--green);
+    cursor: pointer;
+    font-weight: 600;
+}
+.postReviewPost__bottomIcon.disabled>button {
+    background-color:rgb(102, 102, 102);
+    cursor: not-allowed;
+}
+.postReviewPost__bottomIcon.disabled>button:hover {
+    background-color: rgb(102, 102, 102);
+    cursor: not-allowed;
+}
+.postReviewPost__bottomIcon>button:hover{
+    background-color: #3fbd64
+}
+
+.postReviewPost__bottomIcon>button:active {
+    transform: scale(0.98);
+    transition: 200ms;
 }

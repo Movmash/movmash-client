@@ -8,7 +8,7 @@ import ReactPlayer from "react-player";
 import { connect } from "react-redux";
 import { getBannerUpcomingMovies } from "../redux/actions/movieAction";
 import MovieRow from "../components/MovieRow";
-import { BounceLoader } from "react-spinners";
+import { MoonLoader } from "react-spinners";
 import { useHistory } from "react-router-dom";
 function Movies({
   loading,
@@ -109,9 +109,9 @@ https://image.tmdb.org/t/p/original${upcomingMovies[randomNumber].backdrop_path}
         </>
       ) : (
         <div className="home__bounceloader">
-          <BounceLoader
+          <MoonLoader
             // css={override}
-            size={150}
+            size={50}
             color={"#2aa44f"}
             loading
           />

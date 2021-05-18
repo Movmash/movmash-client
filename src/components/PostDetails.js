@@ -14,9 +14,9 @@ function PostDetails({ createdAt, likeCount, commentCount }) {
         <div className="postDetails__Detail">
           <h5> • {commentCount} comments </h5>
         </div>
-        <div className="postDetails__Detail">
+        {/* <div className="postDetails__Detail">
           <h5>{" • 12 shares"}</h5>
-        </div>
+        </div> */}
       </div>
     </div>
   );

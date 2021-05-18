@@ -1,8 +1,13 @@
 .ticketPost {
     width: 627px;
-    border: 1px solid lightgray;
+    /* border: 1px solid var(--border); */
     border-radius: 7px;
-    margin-top: 100px;
+    margin-top: 18px;
+    background-color: var(--lightBlack);
+    padding: 2px;
+     font-family: Arial,
+     Helvetica,
+     sans-serif;
 }
 
 
@@ -55,6 +60,11 @@
 .ticketPost__container__showDetails--movieDetail {
     display: flex;
     flex: 0.6;
+     color: var(--boldText);
+     line-height: 25px;
+     letter-spacing: 0.01em;
+     font-size: .9375rem;
+     line-height: 1.3333;
 
 }
 
@@ -80,9 +90,11 @@
 
 .ticketPost__container__paragraph>p,
 .ticketPost__container__showDetails__movieDetails--overview>p {
-    color: lightgray;
+    color: var(--boldText);
     line-height: 25px;
     letter-spacing: 0.01em;
+    font-size: .9375rem;
+    line-height: 1.3333;
 }
 
 .ticketPost__container__showDetails--movieDetails--genre {

@@ -36,65 +36,49 @@ function Navbar({ profileImage, getRequestedTicket, authenticated }) {
         <h2 className="navbar__leftLogo">MOVMASH</h2>
       </div>
       <div className="navbar__center">
-        <div className="navbar__center__icon">
-          <div
-            className={`navbar__center__iconStyle ${
-              location.pathname === "/live" && "active"
-            }`}
-          >
-            <IconButton onClick={() => history.push("/live")}>
-              <LiveTvIcon />
-            </IconButton>
-          </div>
+        <div
+          className={`navbar__center__icon ${
+            location.pathname === "/live" && "active"
+          }`}
+          onClick={() => history.push("/live")}
+        >
+          <LiveTvIcon />
         </div>
 
-        <div className="navbar__center__icon">
-          <div
-            className={`navbar__center__iconStyle ${
-              location.pathname === "/movies" && "active"
-            }`}
-          >
-            {" "}
-            <IconButton onClick={() => history.push("/movies")}>
-              <MovieIcon />
-            </IconButton>
-          </div>
+        <div
+          className={`navbar__center__icon ${
+            location.pathname === "/movies" && "active"
+          }`}
+          onClick={() => history.push("/movies")}
+        >
+          <MovieIcon />
         </div>
 
-        <div className="navbar__center__icon">
-          <div
-            className={`navbar__center__iconStyle ${
-              location.pathname === "/" && "active"
-            }`}
-          >
-            <IconButton onClick={() => history.push("/")}>
-              <HomeIcon />
-            </IconButton>
-          </div>
+        <div
+          className={`navbar__center__icon ${
+            location.pathname === "/" && "active"
+          }`}
+          onClick={() => history.push("/")}
+        >
+          <HomeIcon />
         </div>
 
-        <div className="navbar__center__icon">
-          <div
-            className={`navbar__center__iconStyle ${
-              location.pathname === "/explore" && "active"
-            }`}
-          >
-            <IconButton onClick={() => history.push("/explore")}>
-              <PeopleIcon />
-            </IconButton>
-          </div>
+        <div
+          className={`navbar__center__icon ${
+            location.pathname === "/explore" && "active"
+          }`}
+          onClick={() => history.push("/explore")}
+        >
+          <PeopleIcon />
         </div>
 
-        <div className="navbar__center__icon">
-          <div
-            className={`navbar__center__iconStyle ${
-              location.pathname === "/search" && "active"
-            }`}
-          >
-            <IconButton onClick={() => history.push("/search")}>
-              <SearchIcon />
-            </IconButton>
-          </div>
+        <div
+          className={`navbar__center__icon ${
+            location.pathname === "/search" && "active"
+          }`}
+          onClick={() => history.push("/search")}
+        >
+          <SearchIcon />
         </div>
       </div>
       <div className="navbar__right">
@@ -106,7 +90,9 @@ function Navbar({ profileImage, getRequestedTicket, authenticated }) {
         <Dialog onClose={handleCloseTicketDialog} open={openTicket}>
           <RequestedTicketDialog />
         </Dialog>
-        <Avatar src={profileImage} />
+        <Avatar src={profileImage}>
+          <div className="loading_avatar"></div>
+        </Avatar>
       </div>
     </div>
   );

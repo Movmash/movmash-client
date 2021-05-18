@@ -1,10 +1,10 @@
 import React from "react";
 import "./stylesheets/TabLoadingData.css";
-import { FadeLoader } from "react-spinners";
+import { MoonLoader } from "react-spinners";
 function TabLoadingData() {
   return (
     <div className="tabLoadingData">
-      <FadeLoader color={"#499E4C"} />
+      <MoonLoader color={"#499E4C"} size={40}/>
     </div>
   );
 }
