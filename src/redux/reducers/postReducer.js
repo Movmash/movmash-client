@@ -77,13 +77,13 @@ export default function (state = initialState, action) {
       const postIndex = state.posts.findIndex(
         (post) => post._id === action.payload.postId._id
       );
-      console.log(postIndex);
+      // console.log(postIndex);
       const newPostTicket = [...state.posts];
       newPostTicket[postIndex].bookingRequest = [
         action.payload.requestedBy._id,
         ...newPostTicket[postIndex].bookingRequest,
       ];
-      console.log(action.payload.requestedBy);
+      // console.log(action.payload.requestedBy);
       return {
         ...state,
         posts: [...newPostTicket],
@@ -93,6 +93,7 @@ export default function (state = initialState, action) {
         (post) => post._id === action.payload.postId
       );
       const newDeletePostTicket = [...state.posts];
+      // console.log(action.payload);
       newDeletePostTicket[postDeleteIndex].bookingRequest = newDeletePostTicket[
         postDeleteIndex
       ].bookingRequest.filter((id) => id !== action.payload.requestedBy);

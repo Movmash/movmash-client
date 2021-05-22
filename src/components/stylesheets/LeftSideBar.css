@@ -1,4 +1,5 @@
 .leftSideBar__container {
+    top: 6vh;
     height: 570px;
     background-color: var(--lightBlack);
     width: 90px;
