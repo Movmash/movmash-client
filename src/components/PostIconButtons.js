@@ -170,7 +170,7 @@ function PostIconButtons({
           </div>
         </>
       )}
-      {type === "ticket" && (
+      {type === "ticket" && ticketDetails.postedBy._id !== user._id && (
         <div className="postIconButtons--ticketButtons">
           {!bookingSent ? (
             <div className="postIconButtons--BookNow" onClick={handleBookNow}>

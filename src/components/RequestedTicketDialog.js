@@ -2,14 +2,12 @@ import { Avatar } from "@material-ui/core";
 import React, { useState } from "react";
 import "./stylesheets/RequestedTicketDialog.css";
 import DialogHeader from "./DialogHeader";
-// import Countdown from "react-countdown";
 import { connect } from "react-redux";
 import stringLimiter from "../util/stringLimiter";
 import { genreConverter } from "../util/genreConverter";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import TabDescriptionInfo from "./TabDescriptionInfo";
-// import { Dialog } from "@material-ui/core";
 import Countdown from "react-countdown";
 import ConfirmationNumberTwoToneIcon from "@material-ui/icons/ConfirmationNumberTwoTone";
 import { useHistory } from "react-router-dom";
@@ -21,31 +19,22 @@ import {
 function RequestedTicketDialog({
   ticketList,
   closeRequestedDialog,
-  cancelRequestedTicket,
   userId,
   markRequestedTicketConfirmed,
   removeReminderTicket,
-  // countdown,
-  // handleCloseTicketDialog,
-  // openTicket,
 }) {
   const [countdown, isCountdownComplete] = useState([]);
   const [openDetail, isOpen] = useState(null);
   const history = useHistory();
-  // const [openTicket, setOpenTicket] = useState(false);
-  // const handleOpenTicketDialog = () => {
-  //   setOpenTicket(true);
-  // };
-  // const handleCloseTicketDialog = () => {
-  //   setOpenTicket(false);
-  // };
   const renderer = ({ days, hours, minutes, seconds, completed }) => {
     if (completed) {
-      return <span>You are good to go!</span>;
+      return <span>Time's up!</span>;
     } else {
       return (
         <span>
-          {days}:{hours}:{minutes}:{seconds}
+          {days.toString().padStart(2, "0")}:{hours.toString().padStart(2, "0")}
+          :{minutes.toString().padStart(2, "0")}:
+          {seconds.toString().padStart(2, "0")}
         </span>
       );
     }
@@ -59,7 +48,6 @@ function RequestedTicketDialog({
     isOpen(index);
   };
   const handleCancelTicket = (postId, postedById, requestedById, ticketId) => {
-    // const requestedTicketIndex = ticketList.filter(ticket => ticket._id ===)
     removeReminderTicket({
       postId: postId,
       requestedBy: requestedById,
@@ -68,7 +56,6 @@ function RequestedTicketDialog({
     });
   };
   return (
-    // <Dialog onClose={handleCloseTicketDialog} open={openTicket}>
     <div className="requestedTicketDialog">
       <div className="requestedTicketDialog__heading">
         <DialogHeader
@@ -106,7 +93,7 @@ function RequestedTicketDialog({
                   ) : (
                     <h4>
                       <span>{ticket.requestedBy.fullName}</span> want to watch
-                      Your show with you. Your show will expire in:
+                      your show with you. Your show will expire in:
                     </h4>
                   )
                 ) : ticket.bookingStatus === "pending" ? (
@@ -192,12 +179,6 @@ function RequestedTicketDialog({
                       if (data.completed) return checkCountDown(ticket._id);
                     }}
                   ></Countdown>
-                  {/* {console.log(children)}
-                    {children.filter((Timer) => {
-                      if (Timer.key === ticket._id) {
-                        return Timer;
-                      }
-                    })} */}
                 </span>
               </div>
               {userId === ticket.postedBy._id ? (
@@ -316,7 +297,6 @@ function RequestedTicketDialog({
         </div>
       )}
     </div>
-    //</Dialog>
   );
 }
 

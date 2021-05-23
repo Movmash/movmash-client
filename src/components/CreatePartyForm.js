@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import "./stylesheets/CreatePartyForm.css";
 import TextField from "@material-ui/core/TextField";
 // import { removeItemOnce } from "../util/arrayItemDeleter";
-import { Radio, Button } from "@material-ui/core";
+import { Radio } from "@material-ui/core";
 import { connect } from "react-redux";
 import { createLiveShow } from "../redux/actions/liveShowAction";
 import { useHistory } from "react-router-dom";
+import DialogHeader from "./DialogHeader";
 // import axios from "axios";
 function CreatePartyForm({ closeCreateTheatrDialog, createLiveShow }) {
   const [privacy, setPrivacy] = useState("");
@@ -35,28 +36,26 @@ function CreatePartyForm({ closeCreateTheatrDialog, createLiveShow }) {
   };
   return (
     <div className="createPartyForm">
-      <div className="createPartyForm__heading">
-        <h1>Create Party</h1>
-      </div>
+      <DialogHeader
+        heading="Create Party"
+        close={closeCreateTheatrDialog}
+        left={22.5}
+      />
       <div className="createPartyForm__container">
         <div className="createPartyForm__roomTitle">
-          {/* <div className="createPartyForm__roomTitle__title">
-          <span>Room Title</span>
-        </div> */}
           <div className="createPartyForm__roomTitle__input">
             <TextField
               id="outlined-full-width"
               label="Room Title"
               onChange={(e) => setRoomTitle(e.target.value)}
-              // style={{ margin: 30 }}
               placeholder="Horror Night"
-              // helperText="Full width!"
               fullWidth
               margin="normal"
+              variant="filled"
+              autoComplete="off"
               InputLabelProps={{
                 shrink: true,
               }}
-              variant="outlined"
             />
           </div>
         </div>
@@ -66,9 +65,8 @@ function CreatePartyForm({ closeCreateTheatrDialog, createLiveShow }) {
             <TextField
               id="outlined-full-width"
               label="Description"
-              // style={{ margin: 30 }}
+              autoComplete="off"
               placeholder="let's hangout together !!"
-              // helperText="Full width!"
               fullWidth
               onChange={(e) => setDescription(e.target.value)}
               margin="normal"
@@ -76,8 +74,8 @@ function CreatePartyForm({ closeCreateTheatrDialog, createLiveShow }) {
                 shrink: true,
               }}
               multiline
+              variant="filled"
               rows={3}
-              variant="outlined"
             />
           </div>
         </div>
@@ -89,16 +87,15 @@ function CreatePartyForm({ closeCreateTheatrDialog, createLiveShow }) {
             <TextField
               id="outlined-full-width"
               label="video url"
-              // style={{ margin: 30 }}
               placeholder="e.g: https://www.youtube.com/watch?v=o2-wA-N04PA"
-              // helperText="Full width!"
               onChange={(e) => setVideoUrl(e.target.value)}
               fullWidth
+              autoComplete="off"
               margin="normal"
               InputLabelProps={{
                 shrink: true,
               }}
-              variant="outlined"
+              variant="filled"
             />
           </div>
         </div>
@@ -240,24 +237,14 @@ function CreatePartyForm({ closeCreateTheatrDialog, createLiveShow }) {
         </div>
       </div>
       <div className="createPartyForm__actionButtons">
-        <div className="createPartyForm__actionButton">
-          <Button
-            onClick={closeCreateTheatrDialog}
-            variant="outlined"
-            color="secondary"
-          >
-            Cancel
-          </Button>
-        </div>
-        <div className="createPartyForm__actionButton">
-          <Button
-            onClick={handleCreateParty}
-            // disabled={ratingPreference === 0 ? true : false}
-            variant="contained"
-            color="primary"
-          >
+        <div
+          className={`createPartyForm__actionButton ${
+            videoUrl === "" && "disabled"
+          }`}
+        >
+          <button disabled={videoUrl === ""} onClick={handleCreateParty}>
             Create Theatre
-          </Button>
+          </button>
         </div>
       </div>
     </div>

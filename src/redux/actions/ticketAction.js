@@ -88,12 +88,13 @@ const setMashReminder = (ticketList) => {
   for(let i = 0; i < ticketList.length ; i++){
     data[i] = {
       id: ticketList[i]._id,
-      expiryTime: ticketList[i].showTimeTo,
+      expiryTime: ticketList[i].showTimeFrom,
       status: ticketList[i].bookingStatus,
       postedBy: ticketList[i].postedBy._id,
       requestedBy: ticketList[i].requestedBy._id,
       postId: ticketList[i].postId._id,
     };
+    console.log([new Date(ticketList[i].showTimeFrom),new Date(ticketList[i].showTimeTo)]);
   }
   
   localStorage.setItem("mashReminder",JSON.stringify(data));

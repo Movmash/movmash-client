@@ -19,7 +19,7 @@ const reminder = JSON.parse(localStorage.getItem("mashReminder"));
 for (let i = 0; i < reminder.length; i++) {
   
     let date = new Date(reminder[i].expiryTime) - new Date();
-    if (date <= 0) {
+    if (date <= 0 ) {
         // console.log(date);
         if(!completedReminderId.includes(reminder[i].id)){
             completedReminderId.push(reminder[i].id);

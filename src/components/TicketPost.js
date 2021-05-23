@@ -22,6 +22,8 @@ function TicketPost({ details, postId }) {
     likeCount,
     commentCount,
     likes,
+    type,
+    bookingRequest
   } = details;
 
   return (
@@ -111,6 +113,8 @@ function TicketPost({ details, postId }) {
             createdAt={createdAt}
             likeCount={likeCount}
             commentCount={commentCount}
+            type={type}
+            request={bookingRequest}        
           />
         </div>
         <div className="ticketPost__container__bottomIcons">
