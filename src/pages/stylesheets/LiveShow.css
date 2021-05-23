@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@900&display=swap');
-
-
-
+.liveShow{
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--boldText);
+}
 .liveShow__banner {
     /* : black; */
     position: relative;
@@ -25,8 +25,9 @@
     width: 100%;
     height: 100%;
     /* background-color: rgb(62, 48, 138); */
-    opacity: 0.4;
-    /* z-index: 1; */
+    /* opacity: 0.4; */
+    filter: blur(5px);
+    z-index: 1;
 }
 
 .liveShow__banner__content {
@@ -58,7 +59,7 @@
     font-size: larger;
     /* border-radius: 150px; */
 
-    transition: 450ms;
+    
     /* font-weight: lighter; */
 }
 
@@ -67,21 +68,26 @@
     color: white;
     /* background: none; */
     outline: none;
-    border: 3px solid purple;
+    /* border: 3px solid purple; */
+    border: 3px solid var(--purpleGradient);
     cursor: pointer;
-    background: purple;
+    /* background: purple; */
+    background: var(--purpleGradient);
     width: 16rem;
     height: 5rem;
-    opacity: 0.8;
+    /* opacity: 0.8; */
     font-family: 'Poppins',
         sans-serif;
     /* font-size: 20px; */
     border-radius: 1px;
-
+transition: 450ms;
 
     /* font-weight: lighter; */
 }
-
+.liveShow__banner__content>button:active{
+    transform: scale(0.95);
+    transition: 450ms;
+}
 .liveShow__content {
     display: flex;
 
@@ -103,12 +109,12 @@
 }
 
 .liveShow__content__items>h1 {
-    color: white;
-    font-family: "Franklin Gothic Medium",
+    /* color: white; */
+    /* font-family: "Franklin Gothic Medium",
         "Arial Narrow",
         Arial,
         sans-serif;
-    ;
+    ; */
     font-size: 50px;
     margin-top: 60px;
     margin-bottom: 20px;

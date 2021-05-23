@@ -1,8 +1,13 @@
 .liveShowCard {
     width: 26.8rem;
     height: 16rem;
-    border: 1px solid lightgray;
+    border: 1px solid var(--border);
     border-radius: 4px;
+    background: var(--lightBlack);
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    color: var(--boldText);
+
 }
 
 .liveShowCard__banner {
@@ -13,7 +18,7 @@
 
 .liveShowCard__banner__wrapper {
     height: 100%;
-    border-bottom: 1px solid lightgray;
+    border-bottom: 1px solid var(--border);
 
 }
 
@@ -95,11 +100,11 @@
 .liveShowCard__banner__content__right__topButton>button {
     border: none;
     background: rgb(248, 86, 86);
-    color: white;
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
+    color: var(--boldText);
+    /* font-family: Roboto; */
+    /* font-style: normal; */
+    /* font-weight: normal; */
+    /* font-size: 16px; */
 
     /* line-height: 13px; */
     outline: none;

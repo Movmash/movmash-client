@@ -4,7 +4,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
 /* Roboto font  */
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
-
+/* Poppin font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@900&display=swap');
 * {
   margin: 0px
 }

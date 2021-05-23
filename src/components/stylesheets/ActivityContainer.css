@@ -1,9 +1,11 @@
-/* .activityContainer {} */
-
-.activityContainer__title>h1 {
-    color: white;
-    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+.activityContainer {
+    color: var(--boldText);
+    font-family: Arial, Helvetica, sans-serif;
 }
+
+/* .activityContainer__title>h1 {
+    
+} */
 
 .activityContainer__containers {
     margin-top: 60px;
