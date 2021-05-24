@@ -22,6 +22,8 @@ import GroupIcon from "@material-ui/icons/Group";
 import SettingsIcon from "@material-ui/icons/Settings";
 import PeopleRoomTab from "../components/PeopleRoomTab";
 import SettingRoomTab from "../components/SettingRoomTab";
+import {Dialog} from "@material-ui/core";
+import FriendListMessage from "../components/FriendListMessage";
 // import Peer from "simple-peer";
 // import axios from "axios";
 let count = 0;
@@ -29,11 +31,13 @@ let count = 0;
 function Room({
   userName,
   userId,
+  fullName,
   liveShowDetail,
   getLiveShowDetail,
   authenticated,
   authLoading,
 }) {
+  const [openInviteFriendsDialog, setOpenInviteFriendsDialog] = useState(false);
   const [selectedTab, setSelectedTab] = useState("chat");
   const [host, setHost] = useState(false);
   const [isRoomFound, setIsRoomFound] = useState(true);
@@ -182,12 +186,7 @@ function Room({
   } = playerState;
 
   useEffect(() => {
-    // axios.get(
-    //   `http://localhost:8000/api/v1/live/get-live-show-details/${roomCode}`
-    // ).then(res => {
-
-    // });
-    // console.log("1");
+    document.body.style.overflowY = "auto";
     if (!authLoading) {
       if (authenticated) {
         if (Object.keys(liveShowDetail).length === 0 && isRoomFound) {
@@ -217,7 +216,7 @@ function Room({
     if (socket !== undefined) {
       socket.emit(
         "join-party",
-        { roomCode: roomCode, userName: userName, userId }
+        { roomCode: roomCode, userName: userName, userId, fullName }
         // (data) => {
         //   if (data) {
         //     console.log("Host is syncing the new socket! ");
@@ -234,7 +233,7 @@ function Room({
       socket.emit("leaving-party");
       socket.off();
     };
-  }, [socket, roomCode, userName, userId]);
+  }, [socket, roomCode, userName, userId, fullName]);
   useEffect(() => {
     if (socket !== undefined) {
       // console.log(ReactPlayer.canPlay(liveShowDetail.videoUrl));
@@ -253,6 +252,7 @@ function Room({
       roomCode: roomCode,
       userName: userName,
       message: sendMessage,
+      fullName: fullName
     };
     if (socket === undefined || sendMessage === "") return;
 
@@ -862,7 +862,7 @@ function Room({
             ref={playerRef}
             url={liveShowDetail.videoUrl}
             className="player"
-            width={showRight ? "100%" : "85%"}
+            width={showRight ? "100%" : "80%"}
             height="100%"
             volume={volume}
             muted={muted}
@@ -925,6 +925,15 @@ function Room({
               isProgress={isProgress}
               // onBookmark={addBookmark}
             />
+            <div
+              className={`room__player__right__toggleOpenCloseRight ${
+                hideControls ? "hideControls" : ""
+              }`}
+            >
+              <IconButton onClick={handleOpenRight}>
+                {!showRight ? <ArrowForwardIosIcon /> : <ArrowBackIosIcon />}
+              </IconButton>
+            </div>
           </div>
         ) : (
           <div
@@ -986,22 +995,35 @@ function Room({
                 </>
               )}
             </div>
+            <div
+              className={`room__player__right__toggleOpenCloseRight ${
+                hideControls ? "hideControls" : ""
+              }`}
+            >
+              <IconButton onClick={handleOpenRight}>
+                {!showRight ? <ArrowForwardIosIcon /> : <ArrowBackIosIcon />}
+              </IconButton>
+            </div>
           </div>
         )}
         <div className={`room__player__right ${showRight ? "hide" : ""}`}>
-          <div
-            className={`room__player__right__toggleOpenCloseRight ${
-              hideControls ? "hideControls" : ""
-            }`}
-          >
-            <IconButton onClick={handleOpenRight}>
-              {!showRight ? <ArrowForwardIosIcon /> : <ArrowBackIosIcon />}
-            </IconButton>
-          </div>
           <div className="room__player__right__buttons">
             <div className="room__player__right__inviteButtom">
-              <button>Invite Friends</button>
+              <button onClick={() => setOpenInviteFriendsDialog(true)}>
+                Invite Friends
+              </button>
             </div>
+            <Dialog
+              open={openInviteFriendsDialog}
+              onClose={() => setOpenInviteFriendsDialog(false)}
+            >
+              <FriendListMessage
+                closeDialog={() => setOpenInviteFriendsDialog(false)}
+                type="text"
+                room={true}
+                link={window.location.href}
+              />
+            </Dialog>
             <div className="room__player__right__tabs">
               <div
                 onClick={() => setSelectedTab("chat")}
@@ -1094,6 +1116,7 @@ function Room({
 const mapStateToProps = (state) => {
   return {
     userName: state.user.userName,
+    fullName: state.user.fullName,
     userId: state.user._id,
     liveShowDetail: state.liveShow.liveShowDetail,
     authenticated: state.user.authenticated,

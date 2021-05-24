@@ -16,6 +16,7 @@ function Login({ user, loginUser }) {
   const history = useHistory();
 
     useEffect(() => {
+      document.body.style.overflowY="hidden";
       if (user.authenticated) {
         history.push("/");
       }

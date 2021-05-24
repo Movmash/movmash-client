@@ -5,7 +5,7 @@ import CreatePartyForm from "../components/CreatePartyForm";
 import ActivityContainer from "../components/ActivityContainer";
 import LiveShowCard from "../components/LiveShowCard";
 import { connect } from "react-redux";
-import { BounceLoader } from "react-spinners";
+import { MoonLoader } from "react-spinners";
 import { useHistory } from "react-router-dom";
 // import liveShowCoverImage from "../images/live_show_cover_image_1.jpeg"
 import liveShowCoverImage from "../images/live_show_cover_image_2.jpg";
@@ -182,7 +182,7 @@ function LiveShow({
         </>
       ) : (
         <div className="home__bounceloader">
-          <BounceLoader size={150} color={"#2aa44f"} loading />
+          <MoonLoader size={50} color={"#2aa44f"} loading />
         </div>
       )}
     </div>

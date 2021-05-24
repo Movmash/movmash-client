@@ -1,5 +1,5 @@
 .room {
-    background-color: rgb(14, 13, 13);
+    /* background-color: rgb(14, 13, 13); */
     width: 100%;
     height: 100vh;
     /* display: flex; */
@@ -7,6 +7,8 @@
     /* align-content: center; */
     position: relative;
     overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--boldText);
 
 }
 
@@ -23,10 +25,10 @@
     position: absolute;
     top: 0;
 
-    background-color: transparent;
+    /* background-color: transparent; */
     width: 100%;
     height: 100vh;
-    color: black;
+    /* color: black; */
     display: flex;
     justify-content: space-between;
 
@@ -37,50 +39,52 @@
 } */
 
 .room__player__right {
-    width: 15%;
+    width: 20%;
+    min-width: 30ch;
     height: 100%;
-    background: rgb(36, 35, 48);
+    position: fixed; 
+    right: 0;
+    background: var(--black); 
     display: flex;
     flex-flow: column;
-    position: relative;
+    /* position: relative; */
     justify-content: space-between;
     /* align-items: flex-end; */
-    transition: 450ms;
-    transition-property: width;
+    transition: 200ms;
+    /* transition-property: width; */
+    /* border-left: 1px solid var(--border); */
+    /* box-shadow: var(--boxShadow); */
+    box-shadow: -0.5px 0px 10px 1px var(--black);
+    
+}
+.room__player__right.hide {
+transform: translate(100%, 0);
+box-shadow: none
 }
 
 .room__player__right__toggleOpenCloseRight {
     position: absolute;
-    top: 50%;
-    left: -5rem;
+    top: 47.5%;
+    right: 32px;
 }
 
 .room__player__left {
-    width: 85%;
+    width: 80%;
     height: 100%;
     /* background: rgb(48, 46, 63);
     opacity: 0.5; */
-    transition: 450ms;
+    transition: 200ms;
     transition-property: width;
+    position: relative;
 }
 
-.hide {
-    width: 0%;
 
-}
 
-.hide>.room__player__right__content>*,
-.hide>.room__player__right__chat__input {
-    transform: translate(308px);
-    transition: 450ms;
-    transition-property: transform;
-    display: none;
-}
 
 
 
 .player {
-    transition: 450ms !important;
+    transition: 200ms !important;
     transition-property: width !important;
 }
 
@@ -90,19 +94,20 @@
 
 .room__player__right__chat__input>input {
     outline: none;
-    background: rgba(196, 196, 196, 1);
+    background: var(--boldText);
     border: none;
     border-radius: 40px;
     padding-left: 20px;
     height: 32px;
-    width: 65%;
+    width: 75%;
     margin-left: 10px;
 
     /* width: calc(216px / 22.3); */
 }
 
 .room__player__right__chat__input {
-    background: #3F414A;
+    background: var(--lightBlack);
+    border-top:1px solid var(--border);
     height: 60px;
     display: flex;
     justify-content: center;
@@ -110,36 +115,28 @@
 }
 
 .room__player__right__chat__input>.MuiButtonBase-root>.MuiIconButton-label>.MuiSvgIcon-root {
-    color: rgba(196, 196, 196, 1);
+    color: var(--boldText);
 }
 
 .greet {
-    color: lightgray;
-    font-weight: lighter;
+    color: var(--boldText);
     font-style: italic;
+    font-weight: 600;
     /* margin-left: 100%;
     margin-right: 100%; */
     display: flex;
-    font-size: calc(18px / 1.3);
+    font-size: calc(18px / 1.4);
     justify-content: center;
     padding: 0 20px 0 20px;
-    margin-bottom: 30px;
+    margin:20px 0 30px 0;
 }
 
 .room__player__right__content {
-    /* display: flex;
-    flex-flow: column; */
-
-    /* background: red; */
-    height: 85%;
+    height:100%;
     overflow-y: auto;
 
 }
 
-/* 
-.room__player__right__chatBox {
-
-} */
 
 .room__player__right__toggleOpenCloseRight>.MuiButtonBase-root>.MuiIconButton-label>.MuiSvgIcon-root {
     color: white;
@@ -150,12 +147,8 @@
 
 }
 
-/* .hideCursor {
-    cursor: none !important;
-} */
-
 .errorMessage {
-    background: #1c1b25;
+    background: var(--black);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -175,16 +168,11 @@
 .errorMessage__content>h2 {
     color: lightgray;
     margin-top: 30px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .errorMessage__content>p {
     color: lightgray;
     margin-top: 10px;
-    font-family: 'Franklin Gothic Medium',
-        'Arial Narrow',
-        Arial,
-        sans-serif;
 
 }
 
@@ -194,20 +182,17 @@
 }
 
 .room_header {
-    /* width: 70%; */
     display: flex;
     justify-content: flex-end;
 }
 
-/* #1c1b25 
-#181722*/
 .hostIsNotAvailable__Content {
     width: 100%;
 }
 
-.room__player__right__buttons {
+/* .room__player__right__buttons {
     height: 15%;
-}
+} */
 
 .room__player__right__inviteButtom>button {
     border: 0;
@@ -215,9 +200,8 @@
     background: 0;
     color: white;
     width: 100%;
-    background: #499E4C;
+    background: var(--green);
     height: 40px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 15px;
     cursor: pointer;
 }
@@ -234,9 +218,11 @@
 .room__player__right__tabs {
     display: flex;
     justify-content: space-around;
-    background: #3F414A;
+    /* background: #3F414A; */
+    background: var(--lightBlack);
     align-items: center;
     height: 60px;
+    border-bottom: 1px solid var(--border);
 }
 
 .room__player__right__tab {
@@ -250,13 +236,14 @@
 }
 
 .room__player__right__tab.selected>.MuiSvgIcon-root {
-    color: greenyellow;
+    color: var(--green);
 }
 
 .room__player__right__tab:hover {
-    background: #606370;
+    background: var(--palletes);
+    transition: 300ms
 }
 
 .room__player__right__tab>.MuiSvgIcon-root {
-    color: lightgray;
+    color: var(--boldText);
 }

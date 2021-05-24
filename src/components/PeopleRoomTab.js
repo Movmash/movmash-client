@@ -8,6 +8,8 @@ import { Avatar } from "@material-ui/core";
 // import VideoCallIcon from "@material-ui/icons/VideoCall";
 import { useSocket } from "../contexts/SocketProvider";
 import { connect } from "react-redux";
+// import {ReactComponent as HostCrown} from "../icons/host_crown.svg";
+import { ReactComponent as HostCrown } from "../icons/host_crown_2.svg";
 // import Peer from "simple-peer";
 // import styled from "styled-components";
 // const StyledVideo = styled.video`
@@ -301,15 +303,20 @@ function PeopleRoomTab({
     <div className="peopleRoomTab">
       <div id="videoGrid" className="peopleRoomTab__memberList">
         {userList
-          .filter((user) => user.name === userName)
+          .filter((user) => user.userName === userName)
           .map((user) => (
             <div key={user.id} className="peopleRoomTab__memberListCard">
               <div className="peopleRoomTab__memberList__header">
                 <div className="infoUser">
                   <Avatar src="https://i.pinimg.com/236x/3c/f5/7f/3cf57f5504727d17df4ea776c80b8c8a.jpg" />
-                  <span>{user.name}</span>
+                  {user.host && (
+                    <div className="hostCrownIcon">
+                      <HostCrown />
+                    </div>
+                  )}
+
+                  <span>{user.fullName}</span>
                 </div>
-                {user.host && <span className="tagHost">Host</span>}
               </div>
               {/* <div className="peopleRoomTab__memberList__videoContent">
                 <div className="poepleRoomTab__memberList__videoContainer">
@@ -380,16 +387,19 @@ function PeopleRoomTab({
             </div>
           ))}
         {userList
-          .filter((user) => user.name !== userName)
+          .filter((user) => user.userName !== userName)
           .map((user) => (
             <div key={user.id} className="peopleRoomTab__memberListCard">
               <div className="peopleRoomTab__memberList__header">
                 <div className="infoUser">
                   <Avatar src="https://i.pinimg.com/236x/3c/f5/7f/3cf57f5504727d17df4ea776c80b8c8a.jpg" />
-                  <span>{user.name}</span>
+                  {user.host && (
+                    <div className="hostCrownIcon">
+                      <HostCrown />
+                    </div>
+                  )}
+                  <span>{user.fullName}</span>
                 </div>
-
-                {user.host && <span className="tagHost">Host</span>}
               </div>
               {/* <div className="peopleRoomTab__memberList__videoContent">
                 <div className="poepleRoomTab__memberList__videoContainer">
