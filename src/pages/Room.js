@@ -61,6 +61,7 @@ function Room({
   // const [isVideoValid, setVideoValid] = useState(
 
   // );
+  const [watchTime, setWatchTime] = useState(0);
   const [isProgress, setProgress] = useState(true);
   const [isHostAvailble, setIsHostAvailable] = useState(true);
   const [hideControls, setHideControls] = useState(false);
@@ -327,6 +328,8 @@ function Room({
     });
   };
   const handleProgress = (changeState) => {
+    setWatchTime((prev) => ++prev);
+    socket.emit("update-watch-second", {watchSecond: watchTime});
     if (count > 2) {
       setHideControls(true);
       count = 0;
