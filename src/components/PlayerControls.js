@@ -97,7 +97,7 @@ function PlayerControls({
         }`}
       >
         {isProgress ? (
-          <MoonLoader color={"white"} size={"60px"} />
+          <MoonLoader color={"white"} size={"50px"} />
         ) : playing ? (
 
             <IconButton onClick={onPlayPause}>

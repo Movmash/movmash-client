@@ -24,6 +24,11 @@ import PeopleRoomTab from "../components/PeopleRoomTab";
 import SettingRoomTab from "../components/SettingRoomTab";
 import {Dialog} from "@material-ui/core";
 import FriendListMessage from "../components/FriendListMessage";
+import InfoIcon from "@material-ui/icons/Info";
+import {
+  updateVideoUrl,
+  updateLiveShowInfo,
+} from "../redux/actions/liveShowAction";
 // import Peer from "simple-peer";
 // import axios from "axios";
 let count = 0;
@@ -37,6 +42,8 @@ function Room({
   authenticated,
   authLoading,
   profileImageUrl,
+  updateVideoUrl,
+  updateLiveShowInfo,
 }) {
   const [openInviteFriendsDialog, setOpenInviteFriendsDialog] = useState(false);
   const [selectedTab, setSelectedTab] = useState("chat");
@@ -260,7 +267,7 @@ function Room({
       userName: userName,
       message: sendMessage,
       fullName: fullName,
-      profileImageUrl:profileImageUrl
+      profileImageUrl: profileImageUrl,
     };
     if (socket === undefined || sendMessage === "") return;
 
@@ -857,7 +864,23 @@ function Room({
   });
 
   //...........................
+  useEffect(() => {
+    if (socket !== undefined) {
+    socket.on("new-room-video-source", (payload) => {
+      console.log(payload);
+      updateVideoUrl(payload);
+    });
+    }
+  }, [socket, updateVideoUrl]);  
 
+  useEffect(() => {
+    if (socket !== undefined) {
+    socket.on("new-room-info", (payload) => {
+      console.log(payload);
+      updateLiveShowInfo(payload);
+    });
+    }
+  }, [socket, updateLiveShowInfo]);
   return (
     <div
       onMouseMove={handleMouseMove}
@@ -1055,7 +1078,11 @@ function Room({
                   selectedTab === "setting" && "selected"
                 }`}
               >
-                <SettingsIcon />
+                {liveShowDetail.host === userId ? (
+                  <SettingsIcon />
+                ) : (
+                  <InfoIcon />
+                )}
               </div>
             </div>
           </div>
@@ -1076,7 +1103,10 @@ function Room({
                       </div>
                     </div>
                   ) : (
-                    <div key={index} className="messageContainer justifyStart alineCenter">
+                    <div
+                      key={index}
+                      className="messageContainer justifyStart alineCenter"
+                    >
                       <div className="infoUser">
                         <Avatar src={message.profileImageUrl}></Avatar>
                       </div>
@@ -1136,4 +1166,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { getLiveShowDetail })(Room);
+export default connect(mapStateToProps, {
+  getLiveShowDetail,
+  updateVideoUrl,
+  updateLiveShowInfo,
+})(Room);
