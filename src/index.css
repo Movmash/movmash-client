@@ -35,7 +35,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+.MuiPaper-root {
+  color: var(--boldText) !important;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--lightBlack) !important;
+}
 html {
   scrollbar-face-color: #646464;
   scrollbar-base-color: #646464;

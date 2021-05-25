@@ -34,11 +34,15 @@ box-shadow:
     color: white;
 
 }
-
+.playerPlayButton>.MuiSvgIcon-root{
+      color: white;
+}
 .large>.MuiButtonBase-root>.MuiIconButton-label>.MuiSvgIcon-root {
     font-size: 100px !important;
 }
-
+.playerPlayButton>.MuiSvgIcon-root {
+    font-size: 100px !important;
+}
 .medium>.MuiButtonBase-root>.MuiIconButton-label>.MuiSvgIcon-root {
     font-size: 40px;
 }

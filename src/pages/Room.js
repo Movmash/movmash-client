@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import "./stylesheets/Room.css";
 import ReactPlayer from "react-player";
 import SendIcon from "@material-ui/icons/Send";
-import { IconButton } from "@material-ui/core";
+import { Avatar, IconButton } from "@material-ui/core";
 import { connect } from "react-redux";
 import { useSocket } from "../contexts/SocketProvider";
 import { useParams, useHistory, Link } from "react-router-dom";
@@ -36,6 +36,7 @@ function Room({
   getLiveShowDetail,
   authenticated,
   authLoading,
+  profileImageUrl,
 }) {
   const [openInviteFriendsDialog, setOpenInviteFriendsDialog] = useState(false);
   const [selectedTab, setSelectedTab] = useState("chat");
@@ -216,7 +217,13 @@ function Room({
     if (socket !== undefined) {
       socket.emit(
         "join-party",
-        { roomCode: roomCode, userName: userName, userId, fullName }
+        {
+          roomCode,
+          userName,
+          userId,
+          fullName,
+          profileImageUrl,
+        }
         // (data) => {
         //   if (data) {
         //     console.log("Host is syncing the new socket! ");
@@ -233,7 +240,7 @@ function Room({
       socket.emit("leaving-party");
       socket.off();
     };
-  }, [socket, roomCode, userName, userId, fullName]);
+  }, [socket, roomCode, userName, userId, fullName, profileImageUrl]);
   useEffect(() => {
     if (socket !== undefined) {
       // console.log(ReactPlayer.canPlay(liveShowDetail.videoUrl));
@@ -252,7 +259,8 @@ function Room({
       roomCode: roomCode,
       userName: userName,
       message: sendMessage,
-      fullName: fullName
+      fullName: fullName,
+      profileImageUrl:profileImageUrl
     };
     if (socket === undefined || sendMessage === "") return;
 
@@ -1068,9 +1076,12 @@ function Room({
                       </div>
                     </div>
                   ) : (
-                    <div key={index} className="messageContainer justifyStart">
-                      {/* <Avatar src={chatMessage.sender.profileImageUrl}></Avatar> */}
-                      <div className="messageBox backgroundLight other">
+                    <div key={index} className="messageContainer justifyStart alineCenter">
+                      <div className="infoUser">
+                        <Avatar src={message.profileImageUrl}></Avatar>
+                      </div>
+
+                      <div className="messageBox backgroundLight other borderRadius">
                         <p className="messageText colorDark">{message.text}</p>
                       </div>
                       {/* <p className="sentText pl-10 ">usersaddasd</p> */}
@@ -1117,6 +1128,7 @@ const mapStateToProps = (state) => {
   return {
     userName: state.user.userName,
     fullName: state.user.fullName,
+    profileImageUrl: state.user.profileImageUrl,
     userId: state.user._id,
     liveShowDetail: state.liveShow.liveShowDetail,
     authenticated: state.user.authenticated,

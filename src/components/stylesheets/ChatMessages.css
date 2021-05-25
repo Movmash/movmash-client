@@ -88,10 +88,10 @@
 .backgroundLight {
     background: transparent;
     /* border: 1px solid rgb(128, 128, 128); */
-    margin-left: 10px;
+    margin-left: 5px;
     display: flex;
     align-items: center;
-    background: #3f414a;
+    background:var(--palletes);
 }
 
 .messageContainer>.MuiAvatar-root {

@@ -308,7 +308,7 @@ function PeopleRoomTab({
             <div key={user.id} className="peopleRoomTab__memberListCard">
               <div className="peopleRoomTab__memberList__header">
                 <div className="infoUser">
-                  <Avatar src="https://i.pinimg.com/236x/3c/f5/7f/3cf57f5504727d17df4ea776c80b8c8a.jpg" />
+                  <Avatar src={user.profileImageUrl} alt={user.fullName} />
                   {user.host && (
                     <div className="hostCrownIcon">
                       <HostCrown />
@@ -392,7 +392,7 @@ function PeopleRoomTab({
             <div key={user.id} className="peopleRoomTab__memberListCard">
               <div className="peopleRoomTab__memberList__header">
                 <div className="infoUser">
-                  <Avatar src="https://i.pinimg.com/236x/3c/f5/7f/3cf57f5504727d17df4ea776c80b8c8a.jpg" />
+                  <Avatar src={user.profileImageUrl} alt={user.fullName} />
                   {user.host && (
                     <div className="hostCrownIcon">
                       <HostCrown />

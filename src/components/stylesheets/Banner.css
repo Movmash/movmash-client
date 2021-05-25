@@ -73,11 +73,11 @@
 .banner__dialog {
     color: #272531 !important;
 } */
-.MuiPaper-root {
+/* .MuiPaper-root {
     color: white !important;
     background-color: #272531 !important;
 
-}
+} */
 
 .MuiDialog-paperWidthSm {
     max-width: fit-content !important;

@@ -37,6 +37,49 @@ function PlayerControls({
   host,
   isProgress,
 }) {
+  // var elem = document.getElementById("playPauseButton"),
+  //   fadeInInterval,
+  //   fadeOutInterval;
+  // const handleFadedAnimation =() => {
+  //   clearInterval(fadeInInterval);
+  //   clearInterval(fadeOutInterval);
+
+  //   elem.fadeIn = function (timing) {
+  //     var newValue = 0;
+
+  //     elem.style.display = "block";
+  //     elem.style.opacity = 0;
+
+  //     fadeInInterval = setInterval(function () {
+  //       if (newValue < 1) {
+  //         newValue += 0.01;
+  //       } else if (newValue === 1) {
+  //         clearInterval(fadeInInterval);
+  //       }
+
+  //       elem.style.opacity = newValue;
+  //     }, timing);
+  //   };
+  //   elem.fadeOut = function (timing) {
+  //     var newValue = 1;
+  //     elem.style.opacity = 1;
+
+  //     fadeOutInterval = setInterval(function () {
+  //       if (newValue > 0) {
+  //         newValue -= 0.01;
+  //       } else if (newValue < 0) {
+  //         elem.style.opacity = 0;
+  //         elem.style.display = "none";
+  //         clearInterval(fadeOutInterval);
+  //       }
+
+  //       elem.style.opacity = newValue;
+  //     }, timing);
+  //   };
+
+  //   elem.fadeIn(10);
+  //   elem.fadeOut(10);
+  // };
   return (
     <div className="playerControls">
       {" "}
@@ -48,6 +91,7 @@ function PlayerControls({
         </div>
       </Link>
       <div
+        // onClick={handleFadedAnimation}
         className={`playerControls__middleControls large ${
           !host && "disableControl"
         }`}
@@ -55,6 +99,7 @@ function PlayerControls({
         {isProgress ? (
           <MoonLoader color={"white"} size={"60px"} />
         ) : playing ? (
+
             <IconButton onClick={onPlayPause}>
               <PauseIcon />
             </IconButton>

@@ -247,3 +247,10 @@ box-shadow: none
 .room__player__right__tab>.MuiSvgIcon-root {
     color: var(--boldText);
 }
+
+.messageContainer.alineCenter {
+    align-items: center;
+}
+.messageBox.borderRadius {
+    border-radius: 20px;
+}
