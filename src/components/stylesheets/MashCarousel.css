@@ -1,0 +1,69 @@
+.mashCarousel{
+    position: relative;
+}
+.mashCarousel__contentList {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    
+}
+.mashCarousel__ContentItem{
+    transition: 450ms;
+}
+.mashCarousel__button>*{
+    position: absolute;
+    top: 39%;
+    z-index: 10;
+}
+.mashCarousel__button.Back>*{
+    left: 0;
+    z-index: 30;
+}
+.mashCarousel__button.Back>*>* {
+    margin-left: 6px;
+}
+.mashCarousel__button.Forward>* {
+    right: 10px;
+    z-index: 30;
+}
+.mashCarousel__button>*{
+      height: 48px;
+      width: 48px;
+      background: #3e4042;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: var(--boxShadow);
+}
+
+.mashCarousel__button>*:hover {
+    background-color: rgb(80, 80, 80);
+
+}
+
+.mashCarousel__button>*:active {
+    background-color: rgb(66, 66, 66);
+    transform: scale(0.95);
+    transition: 200ms;
+}
+.mashCarousel__rightBackground{
+    background: linear-gradient(90deg, transparent, rgba(37, 37, 37, 0.61), var(--black));
+    ;
+    position: absolute;
+    z-index: 20;
+    right: 0;
+    height: 29ch;
+   width: 54px;
+}
+.mashCarousel__leftBackground{
+     background: linear-gradient(-90deg, transparent, rgba(37, 37, 37, 0.61), var(--black));
+     ;
+     position: absolute;
+     z-index: 20;
+     left: 0;
+     height: 29ch;
+     width: 95px;
+}

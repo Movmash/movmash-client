@@ -1,11 +1,18 @@
 .watchlist__movieContent {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    grid-auto-rows: auto;
+    grid-gap: 2em;
+    /* display: flex;
+    flex-wrap: wrap; */
+    margin-top: 50px;
 
 }
 
 .watchlist__movieContent>* {
-    margin: 10px
+    /* margin: 10px; */
+    margin-left: 10px;
+    width: 166px;
 }
 
 .watchlist__container>h2 {
@@ -30,9 +37,7 @@
     cursor: pointer;
 }
 
-.watchlist__movieContent {
-    margin-top: 50px;
-}
+
 
 .watchlist__movieItem {
     position: relative;

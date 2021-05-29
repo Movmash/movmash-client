@@ -10,6 +10,7 @@ import {
   // DELETE_REQUESTED_TICKET_POST,
   DELETE_REQUESTED_TICKET,
   SEND_BOOKING_REQUEST,
+  RESET_POST,
 } from "../types";
 
 const initialState = {
@@ -77,7 +78,9 @@ export default function (state = initialState, action) {
       const postIndex = state.posts.findIndex(
         (post) => post._id === action.payload.postId._id
       );
-      // console.log(postIndex);
+      if(postIndex === -1) return {
+        ...state
+      }
       const newPostTicket = [...state.posts];
       newPostTicket[postIndex].bookingRequest = [
         action.payload.requestedBy._id,
@@ -92,6 +95,10 @@ export default function (state = initialState, action) {
       const postDeleteIndex = state.posts.findIndex(
         (post) => post._id === action.payload.postId
       );
+      if (postDeleteIndex === -1)
+        return {
+          ...state,
+        };
       const newDeletePostTicket = [...state.posts];
       // console.log(action.payload);
       newDeletePostTicket[postDeleteIndex].bookingRequest = newDeletePostTicket[
@@ -101,6 +108,11 @@ export default function (state = initialState, action) {
         ...state,
         posts: [...newDeletePostTicket],
       };
+    case RESET_POST:
+      return {
+        ...state,
+        posts: []
+      }  
     default:
       return state;
   }

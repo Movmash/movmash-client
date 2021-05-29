@@ -34,6 +34,7 @@ function LeftSideBar({
   updateRooms,
   getUnreadUserRoom,
   messageRoom,
+  authenticated
 }) {
   const [open, setOpen] = useState(false);
 
@@ -67,11 +68,15 @@ function LeftSideBar({
     }
   }, [socket, updateRooms]);
   useEffect(() => {
-    getAllNotification();
-  }, [getAllNotification]);
+    if (authenticated) {
+      getAllNotification();
+    }
+  }, [getAllNotification, authenticated]);
   useEffect(() => {
-    getUnreadUserRoom();
-  }, [getUnreadUserRoom]);
+    if (authenticated) {
+      getUnreadUserRoom();
+    }
+  }, [getUnreadUserRoom, authenticated]);
   //..................................................................................[handle review post]
   const handleClickOpenReview = () => {
     setOpenReviewDialog(true);
@@ -274,6 +279,7 @@ function LeftSideBar({
 
 const mapStateToProps = (state) => {
   return {
+    authenticated: state.user.authenticated,
     userName: state.user.userName,
     userImage: state.user.profileImageUrl,
     notifications: state.user.notifications,

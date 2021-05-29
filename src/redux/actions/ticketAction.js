@@ -24,13 +24,14 @@ export const getRequestedTicket = () => (dispatch) => {
 
 export const sendBookingRequest = (requestData) => (dispatch) => {
   dispatch({ type: LOADING_REQUESTED_TICKET });
-  // console.log(requestData);
+  console.log(requestData);
   axios
     .post(
       "/api/v1/bookingTicket/send-booking-request",
       requestData
     )
     .then((res) => {
+      console.log(res)
       dispatch({ type: SEND_BOOKING_REQUEST, payload: res.data });
       addNewReminder(res.data);
     })
@@ -88,7 +89,7 @@ const setMashReminder = (ticketList) => {
   for(let i = 0; i < ticketList.length ; i++){
     data[i] = {
       id: ticketList[i]._id,
-      expiryTime: ticketList[i].showTimeFrom,
+      expiryTime:ticketList[i].showTimeTo,
       status: ticketList[i].bookingStatus,
       postedBy: ticketList[i].postedBy._id,
       requestedBy: ticketList[i].requestedBy._id,
@@ -102,15 +103,20 @@ const setMashReminder = (ticketList) => {
 };
 
 const addNewReminder = (newReminder) => {
+  // console.log(
+  //   new Date(newReminder.showTimeTo) - new Date(newReminder.showTimeFrom) < 0
+  //     ? newReminder.showTimeFrom
+  //     : newReminder.showTimeTo
+  // );
   const filteredReminder = {
     id: newReminder._id,
-    expiryTime: newReminder.showTimeFrom,
+    expiryTime:newReminder.showTimeTo,
     status: newReminder.bookingStatus,
     postedBy: newReminder.postedBy._id,
     requestedBy: newReminder.requestedBy._id,
     postId: newReminder.postId._id,
   };
-  
+  console.log(filteredReminder);
   const oldReminder = JSON.parse(localStorage.getItem("mashReminder"));
   const updatedReminder = [...oldReminder, filteredReminder];
   // console.log(updatedReminder);

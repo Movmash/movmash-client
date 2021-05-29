@@ -8,15 +8,17 @@
 .dialog__list {
     /* height: 300px;
     width: 300px; */
-
-    width: fit-content;
-    padding: 25px 70px 0 70px;
+    border: 1px solid var(--border);
+     width: 58ch;
+    /* padding: 25px 70px 0 70px;  */
     min-height: 30rem;
     display: flex;
     flex-flow: column;
     justify-content: center;
-}
-
+}   
+/* .dialog__list__width{
+    width: 58ch;
+} */
 .searchYourMovie {
     position: relative;
 }
@@ -30,7 +32,6 @@
 .tabDescriptionInfo__selectedMovieList {
 
     max-height: 250px;
-    overflow-y: auto;
 }
 
 .tabDescriptionInfo__selectedMovie {

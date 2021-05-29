@@ -170,7 +170,7 @@ function RequestedTicketDialog({
                   <Countdown
                     renderer={renderer}
                     date={
-                      Date.now() + (new Date(ticket.showTimeFrom) - Date.now())
+                      Date.now() + (new Date(ticket.showTimeTo) - Date.now())
                     }
                     onMount={(data) => {
                       if (data.completed) return checkCountDown(ticket._id);

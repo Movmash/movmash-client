@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./stylesheets/ListCard.css";
 import {
   Avatar,
-  Button,
   Radio,
   TextField,
   CircularProgress,
@@ -21,6 +20,7 @@ import { genreConverter } from "../util/genreConverter";
 import Axios from "../util/axios";
 
 import SearchMovieCard from "./SearchMovieCard";
+import DialogHeader from "./DialogHeader";
 function ListCard({
   createdBy,
   description,
@@ -115,6 +115,14 @@ function ListCard({
       handleClose();
     }
   };
+    // const resetTheState = () => {
+    //   setMovieList([]);
+    //   setListDescription("");
+    //   setPrivacy("");
+    //   setTags([]);
+    //   setListTitle("");
+    //   setTagsInText("");
+    // };
   return (
     <div className="listCard">
       <div className="listCard__header">
@@ -131,9 +139,19 @@ function ListCard({
 
         <Dialog onClose={handleClose} open={openDialog}>
           <div className="dialog__list">
-            <div className="createPartyForm__heading">
-              <h1>Create List</h1>
-            </div>
+            <DialogHeader
+              heading="Create list"
+              close={() => {
+                handleClose();
+                setMovieList(movieList);
+                setListTitle(listTitle);
+                setListDescription(description);
+                setTags(tagArray);
+                setTagsInText(tagArray.join(","));
+                setPrivacy(privacyValue);
+              }}
+              left={21.5}
+            />
             <div className="createPartyForm__container">
               <div className="createPartyForm__roomTitle">
                 <div className="createPartyForm__roomTitle__input">
@@ -148,7 +166,8 @@ function ListCard({
                       shrink: true,
                     }}
                     value={listTitleInText}
-                    variant="outlined"
+                    autoComplete="off"
+                    variant="filled"
                   />
                 </div>
               </div>
@@ -167,7 +186,8 @@ function ListCard({
                     }}
                     multiline
                     rows={3}
-                    variant="outlined"
+                    autoComplete="off"
+                    variant="filled"
                     value={listDescription}
                   />
                 </div>
@@ -192,7 +212,8 @@ function ListCard({
                       placeholder="Search ..."
                       id="standard-basic"
                       label="Search Your Movie"
-                      variant="outlined"
+                      autoComplete="off"
+                      variant="filled"
                       value={query}
                     />
                     {open &&
@@ -278,7 +299,8 @@ function ListCard({
                       shrink: true,
                     }}
                     value={tagsInText}
-                    variant="outlined"
+                    autoComplete="off"
+                    variant="filled"
                   />
                 </div>
               </div>
@@ -313,26 +335,18 @@ function ListCard({
             </div>
 
             <div className="createPartyForm__actionButtons">
-              <div className="createPartyForm__actionButton">
-                <Button
-                  onClick={() => {
-                    handleClose();
-                  }}
-                  variant="outlined"
-                  color="secondary"
-                >
-                  Cancel
-                </Button>
-              </div>
-              <div className="createPartyForm__actionButton">
-                <Button
+              <div
+                className={`createPartyForm__actionButton ${
+                  !(movieListInDialog.length !== 0 && privacy !== "") &&
+                  "disabled"
+                }`}
+              >
+                <button
+                  disabled={!(movieListInDialog.length !== 0 && privacy !== "")}
                   onClick={handleCreateList}
-                  // disabled={ratingPreference === 0 ? true : false}
-                  variant="contained"
-                  color="primary"
                 >
                   Save
-                </Button>
+                </button>
               </div>
             </div>
           </div>

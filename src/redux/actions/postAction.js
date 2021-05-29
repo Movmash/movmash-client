@@ -7,6 +7,7 @@ import {
   LIKE_POST,
   UNLIKE_POST,
   SUBMIT_COMMENT,
+  RESET_POST,
 } from "../types";
 
 export const getSubcriberPost = () => (dispatch) => {
@@ -85,3 +86,7 @@ export const submitComment = (data) => (dispatch) => {
       console.log(err);
     });
 };
+
+export const resetPost = () => (dispatch) => {
+  dispatch({type:RESET_POST});
+}

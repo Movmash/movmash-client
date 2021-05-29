@@ -13,6 +13,7 @@ const {
   GET_LIST,
   GET_PEOPLE,
   GET_TICKET,
+  RESET_SEARCH_PAGE,
 } = require("../types");
 
 const initialState = {
@@ -57,19 +58,20 @@ const searchReducer = (state = initialState, action) => {
     case LOADING_PEOPLE:
       return {
         ...state,
-        loadingSearchedTicket: true,
+        loadingPeople: true,
       };
     case LOADING_LIST:
       return {
         ...state,
-        loadingSearchedTicket: true,
+        loadingList: true,
       };
     case LOADING_TICKET:
       return {
         ...state,
-        loadingSearchedTicket: true,
+        loadingTicket: true,
       };
     case GET_PEOPLE:
+      console.log(action.payload)
       return {
         ...state,
         people: action.payload,
@@ -111,6 +113,8 @@ const searchReducer = (state = initialState, action) => {
         searchedTicket: action.payload,
         loadingSearchedTicket: false,
       };
+    case RESET_SEARCH_PAGE:
+      return initialState;  
     default:
   }
   return state;

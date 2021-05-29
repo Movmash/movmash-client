@@ -7,11 +7,17 @@ import {
   getSearchedMovie,
   getSearchedTicket,
   getSearchedList,
+  getPeople,
+  getList,
+  getTicket,resetSearchPage,
 } from "../redux/actions/searchAction";
 import { Avatar } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import TicketPost from "../components/TicketPost";
 import ListCard from "../components/ListCard";
+import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
+import MashCarousel from "../components/MashCarousel";
+import SearchSkeleton from "../loadingSkeletons/SearchSkeleton";
 function Search({
   getSearchedPeople,
   getSearchedMovie,
@@ -27,14 +33,26 @@ function Search({
   getSearchedList,
   authenticated,
   authLoading,
+  getPeople,
+  getList,
+  getTicket,
+  peopleList,
+  browseMovieList,
+  ticketList,
+  loadingPeople,
+  loadingTicket,
+  loadingList,
+  resetSearchPage,
 }) {
   const [searchQuery, setSearchQuery] = useState("");
   const history = useHistory();
   useEffect(() => {
-    getSearchedPeople(searchQuery);
-    getSearchedMovie(searchQuery);
-    getSearchedTicket(searchQuery);
-    getSearchedList(searchQuery);
+    if (searchQuery !== "") {
+      getSearchedPeople(searchQuery);
+      getSearchedMovie(searchQuery);
+      getSearchedTicket(searchQuery);
+      getSearchedList(searchQuery);
+    }
     // console.log(!loadingSearchedMovie && searchedMovie.length === 0);
   }, [
     searchQuery,
@@ -47,9 +65,24 @@ function Search({
     if (!authLoading) {
       if (!authenticated) {
         history.push("/login");
+      } else {
+        getPeople();
+        getList();
+        getTicket();
       }
     }
-  }, [authLoading, authenticated, history]);
+    return () => {
+      resetSearchPage();
+    };
+  }, [
+    authLoading,
+    authenticated,
+    history,
+    getPeople,
+    getList,
+    getTicket,
+    resetSearchPage,
+  ]);
   return (
     <div className="search">
       <div className="search__searchBar__input">
@@ -137,35 +170,44 @@ function Search({
               </div>
             )}
           </div>
-
-          <div className="search__content__tickets">
-            {searchedTicket.length !== 0 && (
+          {searchedTicket.length !== 0 && (
+            <div className="search__content__tickets">
               <div className="search__content__ticketsContainer">
-                {" "}
                 <h2>Tickets</h2>
                 <div className="search__content__ticketList">
-                  {searchedTicket.map((ticket) => (
-                    <div key={ticket._id} className="ticketContainer">
-                      <TicketPost
-                        details={ticket}
-                        postId={ticket._id}
-                        type={ticket.type}
-                        likeCount={ticket.likeCount}
-                      />
-                    </div>
-                  ))}
+                  <MashCarousel
+                    compenentSize={627}
+                    totalItemInAFrame={2}
+                    componentRightMargin={20}
+                    transparentHeight={45}
+                    buttonTopMargin={43}
+                  >
+                    {searchedTicket.map((ticket) => (
+                        <TicketPost
+                          details={ticket}
+                          postId={ticket._id}
+                          type={ticket.type}
+                          likeCount={ticket.likeCount}
+                        />
+                    ))}
+                  </MashCarousel>
                 </div>
               </div>
-            )}
-          </div>
-          <div className="search__content__list">
-            {searchedList.length !== 0 && (
+            </div>
+          )}
+          {searchedList.length !== 0 && (
+            <div className="search__content__list">
               <div className="search__content__movieListContainer">
                 {" "}
                 <h2>Lists</h2>
-                <div className="search__content__movieList">
-                  {searchedList.map((list) => (
-                    <div key={list._id} className="listContainer">
+                <div className="search__content__movieList searchedList">
+                  <MashCarousel
+                    compenentSize={430}
+                    totalItemInAFrame={3}
+                    componentRightMargin={20}
+                    transparentHeight={45}
+                  >
+                    {searchedList.map((list) => (
                       <ListCard
                         id={list._id}
                         createdBy={list.createdBy}
@@ -175,128 +217,177 @@ function Search({
                         privacyValue={list.privacy}
                         tagArray={list.tags}
                       />
-                    </div>
-                  ))}
+                    ))}
+                  </MashCarousel>
                 </div>
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       ) : (
         <div className="search__browse">
           <div className="search__container">
-            <div className="search__browse__people">
-              <h2>Peoples</h2>
-              <div className="search__peopleCardList">
-                <div className="search__peopleCard">
-                  <div className="search__avatar">
-                    <img
-                      src="https://i.pinimg.com/236x/3c/f5/7f/3cf57f5504727d17df4ea776c80b8c8a.jpg"
-                      alt=""
-                    />
-                    <span>mrankurkuanl</span>
-                  </div>
+            {loadingTicket || loadingList || loadingPeople ? (
+              <SearchSkeleton />
+            ) : (
+              <>
+                {peopleList.length !== 0 && (
+                  <div className="search__browse__people">
+                    <h2>Peoples</h2>
+                    <div className="search__peopleCardList">
+                      <MashCarousel
+                        compenentSize={190}
+                        componentRightMargin={20}
+                        totalItemInAFrame={6}
+                      >
+                        {peopleList.map((person) => (
+                          <div key={person._id} className="search__peopleCard">
+                            <div className="search__avatar">
+                              <img
+                                src={person.profileImageUrl}
+                                alt={person.fullName}
+                              />
+                              <span>{person.fullName}</span>
+                            </div>
 
-                  <div className="peopleMatchCard__content__button widthButton">
-                    <button>Follow</button>
+                            <div className="peopleMatchCard__content__button widthButton">
+                              <button>Follow</button>
+                            </div>
+                          </div>
+                        ))}
+                      </MashCarousel>
+                    </div>
                   </div>
+                )}
+
+                {browseMovieList.length !== 0 && (
+                  <div className="search__browse__lists">
+                    <h2>Lists</h2>
+                    <div className="search__browse__movielist">
+                      <MashCarousel
+                        compenentSize={430}
+                        totalItemInAFrame={3}
+                        componentRightMargin={20}
+                        transparentHeight={45}
+                      >
+                        {browseMovieList.map((list) => (
+                          <div className="search__browse__movieListCard">
+                            <ListCard
+                              id={list._id}
+                              createdBy={list.createdBy}
+                              listTitle={list.listTitle}
+                              description={list.description}
+                              movieList={list.movieList}
+                              privacyValue={list.privacy}
+                              tagArray={list.tags}
+                              isMyProfile={false}
+                            />
+                          </div>
+                        ))}
+                      </MashCarousel>
+                    </div>
+                  </div>
+                )}
+                {ticketList.length !== 0 && (
+                  <div className="search__browse__ticket">
+                    <h2>Tickets</h2>
+                    <div className="search__browse__ticketList">
+                      <MashCarousel
+                        compenentSize={627}
+                        totalItemInAFrame={2}
+                        componentRightMargin={20}
+                        transparentHeight={45}
+                        buttonTopMargin={43}
+                      >
+                        {ticketList.map((ticket) => (
+                          <div className="search__browse__ticketListCard">
+                            <TicketPost
+                              details={ticket}
+                              postId={ticket._id}
+                              type={ticket.type}
+                              likeCount={ticket.likeCount}
+                            />
+                          </div>
+                        ))}
+                      </MashCarousel>
+                    </div>
+                  </div>
+                )}
+              </>
+            )}
+            <div className="search__browse__movieGenreBrowse">
+              <h2>Browse genre</h2>
+              <div className="search__browse__movieGenreBrowse__genreList">
+                <div className="search__browse__movieGenreBrowse__genreList__genreCard Action">
+                  <span>Action</span>
+                  <ArrowForwardIcon />
                 </div>
-                <div className="search__peopleCard">
-                  <div className="search__avatar">
-                    <img
-                      src="https://i.pinimg.com/236x/3c/f5/7f/3cf57f5504727d17df4ea776c80b8c8a.jpg"
-                      alt=""
-                    />
-                    <span>mrankurkuanl</span>
-                  </div>
-
-                  <div className="peopleMatchCard__content__button widthButton">
-                    <button>Follow</button>
-                  </div>
-                </div>{" "}
-                <div className="search__peopleCard">
-                  <div className="search__avatar">
-                    <img
-                      src="https://i.pinimg.com/236x/3c/f5/7f/3cf57f5504727d17df4ea776c80b8c8a.jpg"
-                      alt=""
-                    />
-                    <span>mrankurkuanl</span>
-                  </div>
-
-                  <div className="peopleMatchCard__content__button widthButton">
-                    <button>Follow</button>
-                  </div>
-                </div>{" "}
-                <div className="search__peopleCard">
-                  <div className="search__avatar">
-                    <img
-                      src="https://i.pinimg.com/236x/3c/f5/7f/3cf57f5504727d17df4ea776c80b8c8a.jpg"
-                      alt=""
-                    />
-                    <span>mrankurkuanl</span>
-                  </div>
-
-                  <div className="peopleMatchCard__content__button widthButton">
-                    <button>Follow</button>
-                  </div>
+                <div className="search__browse__movieGenreBrowse__genreList__genreCard Comedy">
+                  <span>Comedy</span>
+                  <ArrowForwardIcon />
                 </div>
-                <div className="search__peopleCard">
-                  <div className="search__avatar">
-                    <img
-                      src="https://i.pinimg.com/236x/3c/f5/7f/3cf57f5504727d17df4ea776c80b8c8a.jpg"
-                      alt=""
-                    />
-                    <span>mrankurkuanl</span>
-                  </div>
-
-                  <div className="peopleMatchCard__content__button widthButton">
-                    <button>Follow</button>
-                  </div>
+                <div className="search__browse__movieGenreBrowse__genreList__genreCard Horror">
+                  <span>Horror</span>
+                  <ArrowForwardIcon />
                 </div>
-                <div className="search__peopleCard">
-                  <div className="search__avatar">
-                    <img
-                      src="https://i.pinimg.com/236x/3c/f5/7f/3cf57f5504727d17df4ea776c80b8c8a.jpg"
-                      alt=""
-                    />
-                    <span>mrankurkuanl</span>
-                  </div>
-
-                  <div className="peopleMatchCard__content__button widthButton">
-                    <button>Follow</button>
-                  </div>
-                </div>{" "}
-                <div className="search__peopleCard">
-                  <div className="search__avatar">
-                    <img
-                      src="https://i.pinimg.com/236x/3c/f5/7f/3cf57f5504727d17df4ea776c80b8c8a.jpg"
-                      alt=""
-                    />
-                    <span>mrankurkuanl</span>
-                  </div>
-
-                  <div className="peopleMatchCard__content__button widthButton">
-                    <button>Follow</button>
-                  </div>
-                </div>{" "}
-                <div className="search__peopleCard">
-                  <div className="search__avatar">
-                    <img
-                      src="https://i.pinimg.com/236x/3c/f5/7f/3cf57f5504727d17df4ea776c80b8c8a.jpg"
-                      alt=""
-                    />
-                    <span>mrankurkuanl</span>
-                  </div>
-
-                  <div className="peopleMatchCard__content__button widthButton">
-                    <button>Follow</button>
-                  </div>
+                <div className="search__browse__movieGenreBrowse__genreList__genreCard Thriller">
+                  <span>Thriller</span>
+                  <ArrowForwardIcon />
+                </div>
+                <div className="search__browse__movieGenreBrowse__genreList__genreCard Adventure">
+                  <span>Adventure</span>
+                  <ArrowForwardIcon />
+                </div>
+                <div className="search__browse__movieGenreBrowse__genreList__genreCard Drama">
+                  <span>Drama</span>
+                  <ArrowForwardIcon />
+                </div>
+                <div className="search__browse__movieGenreBrowse__genreList__genreCard Crime">
+                  <span>Crime</span>
+                  <ArrowForwardIcon />
+                </div>
+                <div className="search__browse__movieGenreBrowse__genreList__genreCard Family">
+                  <span>Family</span>
+                  <ArrowForwardIcon />
+                </div>
+                <div className="search__browse__movieGenreBrowse__genreList__genreCard Fantasy">
+                  <span>Fantasy</span>
+                  <ArrowForwardIcon />
+                </div>
+                <div className="search__browse__movieGenreBrowse__genreList__genreCard Animation">
+                  <span>Animation</span>
+                  <ArrowForwardIcon />
+                </div>
+                <div className="search__browse__movieGenreBrowse__genreList__genreCard Sci-fi">
+                  <span>Sci-fi</span>
+                  <ArrowForwardIcon />
+                </div>
+                <div className="search__browse__movieGenreBrowse__genreList__genreCard Romance">
+                  <span>Romance</span>
+                  <ArrowForwardIcon />
+                </div>
+                <div className="search__browse__movieGenreBrowse__genreList__genreCard War">
+                  <span>War</span>
+                  <ArrowForwardIcon />
+                </div>
+                <div className="search__browse__movieGenreBrowse__genreList__genreCard Documentary">
+                  <span>Documentary</span>
+                  <ArrowForwardIcon />
+                </div>
+                <div className="search__browse__movieGenreBrowse__genreList__genreCard Music">
+                  <span>Music</span>
+                  <ArrowForwardIcon />
+                </div>
+                <div className="search__browse__movieGenreBrowse__genreList__genreCard History">
+                  <span>History</span>
+                  <ArrowForwardIcon />
+                </div>
+                <div className="search__browse__movieGenreBrowse__genreList__genreCard Tv-Movies">
+                  <span>Tv Movies</span>
+                  <ArrowForwardIcon />
                 </div>
               </div>
             </div>
-            <div className="search__browse__lists"></div>
-            <div className="search__browse__movieGenreBrowse"></div>
-            <div className="search__browse__people"></div>
           </div>
         </div>
       )}
@@ -305,6 +396,9 @@ function Search({
 }
 const mapStateToProps = (state) => {
   return {
+    peopleList: state.search.people,
+    browseMovieList: state.search.list,
+    ticketList: state.search.ticket,
     searchedPeople: state.search.searchedPeople,
     searchedMovie: state.search.searchedMovie,
     searchedTicket: state.search.searchedTicket,
@@ -314,7 +408,10 @@ const mapStateToProps = (state) => {
     loadingSearchedMovie: state.search.loadingSearchedMovie,
     loadingSearchedList: state.search.loadingSearchedList,
     authenticated: state.user.authenticated,
-    authLoading: state.user.authLoading
+    authLoading: state.user.authLoading,
+    loadingPeople: state.search.loadingPeople,
+    loadingTicket: state.search.loadingTicket,
+    loadingList: state.search.loadingList,
   };
 };
 export default connect(mapStateToProps, {
@@ -322,4 +419,10 @@ export default connect(mapStateToProps, {
   getSearchedMovie,
   getSearchedTicket,
   getSearchedList,
+  getPeople,
+  getList,
+  getTicket,
+  resetSearchPage,
 })(Search);
+
+

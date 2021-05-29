@@ -7,7 +7,14 @@
 .postIconButtons--ticketButtons{
     width: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
+}
+
+.postIconButtons--ticketButtons>* {
+    width: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
 }
 .postIconButtons--BookNow {
     color: #499E4C;
@@ -60,4 +67,8 @@
 .postIconButtons--comment>.MuiButtonBase-root>.MuiIconButton-label>.MuiSvgIcon-root {
     color: lightgray;
     font-size: 30px;
+}
+.postIconButtons.ticket {
+    justify-content: center;
+    margin: 0px 19px 4px;
 }

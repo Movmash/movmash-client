@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import {
   IconButton,
   TextField,
-  Button,
   Radio,
   CircularProgress,
   ClickAwayListener,
@@ -17,6 +16,7 @@ import { genreConverter } from "../util/genreConverter";
 import stringLimiter from "../util/stringLimiter";
 import { connect } from "react-redux";
 import { createNewList } from "../redux/actions/dataAction";
+import DialogHeader from "./DialogHeader";
 // import LocalActivityTwoToneIcon from "@material-ui/icons/LocalActivityTwoTone";
 function TabDescriptionInfo({ Icon, info, isButton, createNewList }) {
   const [openDialog, setDailogOpen] = useState(false);
@@ -118,18 +118,17 @@ function TabDescriptionInfo({ Icon, info, isButton, createNewList }) {
           </div>
           <Dialog onClose={handleClose} open={openDialog}>
             <div className="dialog__list">
-              {/* title */}
-              {/* description */}
+              <DialogHeader
+                heading="Create list"
+                close={() => {
+                  handleClose();
+                  resetTheState();
+                }}
+                left={21.5}
+              />
 
-              {/* add your movie */}
-              <div className="createPartyForm__heading">
-                <h1>Create List</h1>
-              </div>
               <div className="createPartyForm__container">
                 <div className="createPartyForm__roomTitle">
-                  {/* <div className="createPartyForm__roomTitle__title">
-          <span>Room Title</span>
-        </div> */}
                   <div className="createPartyForm__roomTitle__input">
                     <TextField
                       id="outlined-full-width"
@@ -143,7 +142,8 @@ function TabDescriptionInfo({ Icon, info, isButton, createNewList }) {
                       InputLabelProps={{
                         shrink: true,
                       }}
-                      variant="outlined"
+                      autoComplete="off"
+                      variant="filled"
                     />
                   </div>
                 </div>
@@ -162,7 +162,8 @@ function TabDescriptionInfo({ Icon, info, isButton, createNewList }) {
                       }}
                       multiline
                       rows={3}
-                      variant="outlined"
+                      autoComplete="off"
+                      variant="filled"
                     />
                   </div>
                 </div>
@@ -186,7 +187,8 @@ function TabDescriptionInfo({ Icon, info, isButton, createNewList }) {
                         placeholder="Search ..."
                         id="standard-basic"
                         label="Search Your Movie"
-                        variant="outlined"
+                        autoComplete="off"
+                        variant="filled"
                         value={query}
                       />
                       {open &&
@@ -273,7 +275,8 @@ function TabDescriptionInfo({ Icon, info, isButton, createNewList }) {
                       InputLabelProps={{
                         shrink: true,
                       }}
-                      variant="outlined"
+                      autoComplete="off"
+                      variant="filled"
                     />
                   </div>
                 </div>
@@ -308,27 +311,17 @@ function TabDescriptionInfo({ Icon, info, isButton, createNewList }) {
               </div>
 
               <div className="createPartyForm__actionButtons">
-                <div className="createPartyForm__actionButton">
-                  <Button
-                    onClick={() => {
-                      handleClose();
-                      resetTheState();
-                    }}
-                    variant="outlined"
-                    color="secondary"
-                  >
-                    Cancel
-                  </Button>
-                </div>
-                <div className="createPartyForm__actionButton">
-                  <Button
+                <div
+                  className={`createPartyForm__actionButton ${
+                    !(movieList.length !== 0 && privacy !== "") && "disabled"
+                  }`}
+                >
+                  <button
+                    disabled={!(movieList.length !== 0 && privacy !== "")}
                     onClick={handleCreateList}
-                    // disabled={ratingPreference === 0 ? true : false}
-                    variant="contained"
-                    color="primary"
                   >
                     Create List
-                  </Button>
+                  </button>
                 </div>
               </div>
             </div>

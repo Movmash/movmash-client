@@ -5,24 +5,53 @@ const {
   LOADING_SEARCH_LIST,
   LOADING_SEARCH_MOVIE,
   LOADING_SEARCH_TICKET,
-  // LOADING_LIST,
-  // LOADING_TICKET,
+  LOADING_LIST,
+  LOADING_TICKET,
   GET_SEARCH_PEOPLE,
   GET_SEARCH_LIST,
   GET_SEARCH_MOVIE,
   GET_SEARCH_TICKET,
-  // GET_LIST,
-  // GET_PEOPLE,
-  // GET_TICKET,
+  GET_PEOPLE,
+  GET_LIST,
+  GET_TICKET,
+  RESET_SEARCH_PAGE,
 } = require("../types");
 
 export const getPeople = () => (dispatch) => {
   dispatch({ type: LOADING_PEOPLE });
+  axios.get("/api/v1/search-get-people").then(res => {
+    dispatch({ type: GET_PEOPLE, payload: res.data });
+  }).catch(e => {
+    console.log(e)
+  });
 };
 
-export const getList = () => (dispatch) => {};
-export const getTicket = () => (dispatch) => {};
+export const getList = () => (dispatch) => {
+    dispatch({ type: LOADING_LIST });
+    axios
+      .get("/api/v1/search-get-list")
+      .then((res) => {
+        dispatch({ type: GET_LIST, payload: res.data });
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+};
+export const getTicket = () => (dispatch) => {
+    dispatch({type: LOADING_TICKET});
+    axios
+      .get("/api/v1/search-get-ticket")
+      .then((res) => {
+        dispatch({ type: GET_TICKET, payload: res.data });
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+};
 
+export const resetSearchPage = () => (dispatch) => {
+  dispatch({type:RESET_SEARCH_PAGE});
+}
 export const getSearchedPeople = (userQuery) => (dispatch) => {
   if (userQuery === "") {
     dispatch({ type: GET_SEARCH_PEOPLE, payload: [] });

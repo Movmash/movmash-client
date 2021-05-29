@@ -6,6 +6,7 @@
     display: flex;
     /* justify-content: space-between; */
     align-items: center;
+   
 
 }
 
@@ -93,29 +94,38 @@
 .peopleMatchCard__content__button>button {
     background: none;
     border: none;
+    font-family: Arial,
+    Helvetica,
+    sans-serif;
+    font-weight: 600;
     outline: none;
     border: 1px solid #499E4C;
     /* padding: 5px 30px 5px 30px; */
     width: 100px;
     height: 30px;
     /* background: rgb(226, 226, 226); */
-    border-radius: 3px;
+    border-radius: 6px;
     /* color: rgb(75, 75, 75); */
     color: #499E4C;
-    transition: 450ms;
+    transition: 200ms;
     cursor: pointer;
     color: whitesmoke;
-    background: #499E4C;
+    background: var(--green);
 }
 
 .peopleMatchCard__content__button:hover>button {
 
+ background: var(--greenHover);
+   
 
-    font-weight: 900;
+}
+.peopleMatchCard__content__button:active>button {
+
+
+    transform: scale(0.98);
 
 
 }
-
 
 .peopleMatchCard__content__button__suggestMe>button {
     background: none;

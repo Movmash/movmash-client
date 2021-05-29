@@ -3,8 +3,6 @@ import "./stylesheets/ProfileList.css";
 import TabDescriptionInfo from "./TabDescriptionInfo";
 import VideoLibraryTwoToneIcon from "@material-ui/icons/VideoLibraryTwoTone";
 import {
-  // IconButton,
-  Button,
   Radio,
   TextField,
   CircularProgress,
@@ -27,6 +25,7 @@ import {
 } from "../redux/actions/dataAction";
 import TabLoadingData from "./TabLoadingData";
 import SearchMovieCard from "./SearchMovieCard";
+import DialogHeader from "./DialogHeader";
 function ProfileList({
   isMyProfile,
   getUserList,
@@ -147,26 +146,34 @@ function ProfileList({
             {profileList.map((list) => {
               console.log(list);
               return (
-                <div key={list._id} className="profileList__container">
-                  <ListCard
-                    id={list._id}
-                    createdBy={list.createdBy}
-                    listTitle={list.listTitle}
-                    description={list.description}
-                    movieList={list.movieList}
-                    privacyValue={list.privacy}
-                    tagArray={list.tags}
-                    isMyProfile={isMyProfile}
-                  />
-                </div>
+                  <div key={list._id} className="profileList__container">
+                    <ListCard
+                      id={list._id}
+                      createdBy={list.createdBy}
+                      listTitle={list.listTitle}
+                      description={list.description}
+                      movieList={list.movieList}
+                      privacyValue={list.privacy}
+                      tagArray={list.tags}
+                      isMyProfile={isMyProfile}
+                    />
+                  </div>
               );
             })}
           </div>
           <Dialog onClose={handleClose} open={openDialog}>
             <div className="dialog__list">
-              <div className="createPartyForm__heading">
+              <DialogHeader
+                heading="Create list"
+                close={() => {
+                  handleClose();
+                  resetTheState();
+                }}
+                left={21.5}
+              />
+              {/* <div className="createPartyForm__heading">
                 <h1>Create List</h1>
-              </div>
+              </div> */}
               <div className="createPartyForm__container">
                 <div className="createPartyForm__roomTitle">
                   <div className="createPartyForm__roomTitle__input">
@@ -180,7 +187,8 @@ function ProfileList({
                       InputLabelProps={{
                         shrink: true,
                       }}
-                      variant="outlined"
+                      autoComplete="off"
+                      variant="filled"
                     />
                   </div>
                 </div>
@@ -199,7 +207,8 @@ function ProfileList({
                       }}
                       multiline
                       rows={3}
-                      variant="outlined"
+                      autoComplete="off"
+                      variant="filled"
                     />
                   </div>
                 </div>
@@ -223,7 +232,8 @@ function ProfileList({
                         placeholder="Search ..."
                         id="standard-basic"
                         label="Search Your Movie"
-                        variant="outlined"
+                        autoComplete="off"
+                        variant="filled"
                       />
                       {open &&
                         (loading ? (
@@ -309,7 +319,8 @@ function ProfileList({
                       InputLabelProps={{
                         shrink: true,
                       }}
-                      variant="outlined"
+                      autoComplete="off"
+                      variant="filled"
                     />
                   </div>
                 </div>
@@ -344,27 +355,15 @@ function ProfileList({
               </div>
 
               <div className="createPartyForm__actionButtons">
-                <div className="createPartyForm__actionButton">
-                  <Button
-                    onClick={() => {
-                      handleClose();
-                      resetTheState();
-                    }}
-                    variant="outlined"
-                    color="secondary"
-                  >
-                    Cancel
-                  </Button>
-                </div>
-                <div className="createPartyForm__actionButton">
-                  <Button
+                <div className={`createPartyForm__actionButton ${!(movieList.length !== 0 && privacy !== "")&& "disabled"}`}>
+                  <button
                     onClick={handleCreateList}
-                    // disabled={ratingPreference === 0 ? true : false}
                     variant="contained"
                     color="primary"
+                    disabled = {!(movieList.length !== 0 && privacy !== "")}
                   >
                     Create List
-                  </Button>
+                  </button>
                 </div>
               </div>
             </div>

@@ -9,14 +9,17 @@
 
 .activityContainer__containers {
     margin-top: 60px;
-    display: flex;
+    /* display: flex; */
     /* justify-content: center; */
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
+display: grid;
+grid-template-columns: repeat(3, 33%);
+grid-gap: 2em;
 }
 
 .activityContainer__container {
-    margin-right: 2%;
-    margin-bottom: 3%;
+    /* margin-right: 2%;
+    margin-bottom: 3%; */
 }
 
 .activityContainer__expandButton {

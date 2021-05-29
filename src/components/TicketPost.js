@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./stylesheets/TicketPost.css";
 import UserNamePlate from "./UserNamePlate";
 import PostIconButtons from "./PostIconButtons";
@@ -25,7 +25,7 @@ function TicketPost({ details, postId }) {
     type,
     bookingRequest
   } = details;
-
+  const [totalRequest ,setTotalRequest] = useState(bookingRequest.length)
   return (
     <div className="ticketPost">
       <div className="ticketPost__container">
@@ -114,7 +114,8 @@ function TicketPost({ details, postId }) {
             likeCount={likeCount}
             commentCount={commentCount}
             type={type}
-            request={bookingRequest}        
+            request={bookingRequest}
+            totalRequest={totalRequest}
           />
         </div>
         <div className="ticketPost__container__bottomIcons">
@@ -122,6 +123,7 @@ function TicketPost({ details, postId }) {
             ticketDetails={details}
             likes={likes}
             type="ticket"
+            setTotalRequest={setTotalRequest}
           />
         </div>
       </div>

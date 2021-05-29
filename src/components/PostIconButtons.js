@@ -38,6 +38,7 @@ function PostIconButtons({
   ticketDetails,
   sendBookingRequest,
   cancelRequestedTicket,
+  setTotalRequest,
 }) {
   const handleLikePost = (id) => {
     if (tag) {
@@ -78,6 +79,7 @@ function PostIconButtons({
       showTimeFrom: new Date(ticketDetails.showTimeFrom),
       showTimeTo: new Date(ticketDetails.showTimeTo),
     });
+    setTotalRequest((prev) => ++prev);
     setBookingSent(true);
   };
   const handleCancelNow = () => {
@@ -85,10 +87,11 @@ function PostIconButtons({
       postId: ticketDetails._id,
       requestedBy: user._id,
     });
+    setTotalRequest((prev) => --prev);
     setBookingSent(false);
   };
   return (
-    <div className="postIconButtons">
+    <div className={`postIconButtons ${type}`}>
       {(type === "review" || type === "suggestMe") && (
         <>
           {/* {likes.includes(user._id) ? (

@@ -23,6 +23,7 @@ import { connect } from "react-redux";
 import { SocketProvider } from "./contexts/SocketProvider";
 import Room from "./pages/Room";
 import Singup from "./pages/Singup";
+import PageNotFound from "./pages/PageNotFound"
 // const token = localStorage.mashDBToken;
 // // console.log(token);
 // if (token) {
@@ -72,7 +73,7 @@ function App({ userId, isAuthenticated }) {
                 <Login />
               </Route>
               {/* </Route> */}
-             
+
               <Route exact path="/">
                 <Navbar />
                 <Home />
@@ -114,6 +115,14 @@ function App({ userId, isAuthenticated }) {
                 <Navbar />
                 <Chat />
               </Route>
+              <Route exact path="/NotFound">
+                <PageNotFound />
+              </Route>
+              {/* <Route
+                exact
+                path="*"
+                render={() => <Redirect to="/NotFound" />}
+              /> */}
             </Switch>
             <Route exact path="/live/room/:roomCode" component={Room} />
           </div>
