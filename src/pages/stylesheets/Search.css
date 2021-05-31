@@ -434,10 +434,18 @@ overflow: hidden;
 
 
 
+h2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-
-
-
+h2>a>span {
+    font-size: 18px;
+    font-weight: lighter;
+    color: white;
+    text-decoration: underline;
+}
 
 
 

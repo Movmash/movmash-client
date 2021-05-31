@@ -24,6 +24,12 @@ import { SocketProvider } from "./contexts/SocketProvider";
 import Room from "./pages/Room";
 import Singup from "./pages/Singup";
 import PageNotFound from "./pages/PageNotFound"
+import PeopleBrowse from "./pages/PeopleBrowse";
+import ListBrowse from "./pages/ListBrowse";
+import GenreBrowse from "./pages/GenreBrowse";
+import Post from "./pages/Post";
+import CreateLiveShow from "./pages/CreateLiveShow";
+import TicketBrowse from "./pages/TicketBrowse";
 // const token = localStorage.mashDBToken;
 // // console.log(token);
 // if (token) {
@@ -117,6 +123,30 @@ function App({ userId, isAuthenticated }) {
               </Route>
               <Route exact path="/NotFound">
                 <PageNotFound />
+              </Route>
+              <Route exact path="/browse/people">
+                <Navbar />
+                <PeopleBrowse />
+              </Route>
+              <Route exact path="/browse/lists">
+                <Navbar />
+                <ListBrowse />
+              </Route>
+              <Route exact path="/browse/tickets">
+                <Navbar />
+                <TicketBrowse />
+              </Route>
+              <Route exact path="/browse/genre/:genreName">
+                <Navbar />
+                <GenreBrowse />
+              </Route>
+              <Route exact path="/post/:postId">
+                <Navbar />
+                <Post />
+              </Route>
+              <Route exact path="/live/create">
+                <Navbar />
+                <CreateLiveShow />
               </Route>
               {/* <Route
                 exact

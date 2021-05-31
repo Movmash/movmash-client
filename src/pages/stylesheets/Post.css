@@ -1,0 +1,10 @@
+.post{
+display: flex;
+justify-content: center;
+font-family: Arial, Helvetica, sans-serif;
+color: var(--boldText);
+}
+.post__container{
+    /* width: 50%; */
+    margin-top: 50px;
+}

@@ -57,7 +57,7 @@ function SettingRoomTab({ liveShowDetail, userId }) {
         <span>Video source</span>
         <input
           type="text"
-          value={isHost? newVideoSrc: videoUrl}
+          value={isHost ? newVideoSrc : videoUrl}
           readOnly={!isHost}
           onChange={(e) => {
             setCanVideoPlay(ReactPlayer.canPlay(e.target.value));
@@ -70,7 +70,12 @@ function SettingRoomTab({ liveShowDetail, userId }) {
               (!canVideoPlay || newVideoSrc === videoUrl) && "disabled"
             }`}
           >
-            <button onClick={handleChangeVideoUrl}>Change video</button>
+            <button
+              disabled={!canVideoPlay || newVideoSrc === videoUrl}
+              onClick={handleChangeVideoUrl}
+            >
+              Change video
+            </button>
           </div>
         )}
       </div>
@@ -94,7 +99,7 @@ function SettingRoomTab({ liveShowDetail, userId }) {
                 document.execCommand("copy");
               }}
             >
-              Change video
+              Share link
             </button>
           </div>
         </div>
@@ -285,7 +290,17 @@ function SettingRoomTab({ liveShowDetail, userId }) {
               "disabled"
             }`}
           >
-            <button onClick={handleChangeRoomInfo}>Change video</button>
+            <button
+              disabled={
+                genre === newGenre &&
+                privacy === newPrivacy &&
+                roomTitle === newRoomTitle &&
+                description === roomDescription
+              }
+              onClick={handleChangeRoomInfo}
+            >
+              Update
+            </button>
           </div>
         )}
       </div>

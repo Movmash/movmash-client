@@ -1,0 +1,26 @@
+.listBrowse {
+    display: flex;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--boldText);
+    margin-top: 60px;
+}
+
+.listBrowse__heading {
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 20px;
+}
+
+.listBrowse__container {
+    width: 60%;
+}
+
+.listBrowse__List{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 2rem;
+}

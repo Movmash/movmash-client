@@ -1,0 +1,27 @@
+.genreBrowse {
+    display: flex;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--boldText);
+    margin-top: 60px;
+}
+
+.genreBrowse__heading {
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.genreBrowse__container {
+    width: 80%;
+}
+
+.genreBrowse__movieList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(196.97px, 1fr));
+    grid-gap: 2rem;
+}

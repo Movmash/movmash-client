@@ -21,6 +21,7 @@ export const POST_ERRORS = "POST_ERRORS";
 export const POST_POST = "POST_POST";
 export const SET_POST = "SET_POST";
 export const SUBMIT_COMMENT = "SUBMIT_COMMENT";
+export const ERROR_POST = "ERROR_POST";
 //chat reducer type
 export const GET_CHAT = "GET_CHAT";
 //movie reducer type
@@ -120,6 +121,13 @@ export const GET_COMPLETED_REMINDERS = "GET_COMPLETED_REMINDERS";
 export const CHANGE_REMINDERS = "CHANGE_REMINDERS";
 export const REMOVE_REMINDER_TICKET = "REMOVE_REMINDER_TICKET";
 export const RESET_POST = "RESET_POST";
+
+export const GET_BROWSE_PEOPLE = "GET_BROWSE_PEOPLE";
+export const GET_BROWSE_TICKETS = "GET_BROWSE_TICKETS";
+export const GET_BROWSE_LISTS = "GET_BROWSE_LISTS";
+export const GET_BROWSE_GENRE = "GET_BROWSE_GENRE";
+export const LOADING_BROWSE = "LOADING_BROWSE";
+export const INVALID_GENRE = "INVALID_GENRE";
 // export const GET_ACTION_MOVIE = "GET_ACTION_MOVIE";
 // export const GET_COMEDY_MOVIE = "GET_COMEDY_MOVIE";
 // export const GET_HORROR_MOVIE = "GET_HORROR_MOVIE";

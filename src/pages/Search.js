@@ -12,7 +12,7 @@ import {
   getTicket,resetSearchPage,
 } from "../redux/actions/searchAction";
 import { Avatar } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import TicketPost from "../components/TicketPost";
 import ListCard from "../components/ListCard";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
@@ -183,12 +183,12 @@ function Search({
                     buttonTopMargin={43}
                   >
                     {searchedTicket.map((ticket) => (
-                        <TicketPost
-                          details={ticket}
-                          postId={ticket._id}
-                          type={ticket.type}
-                          likeCount={ticket.likeCount}
-                        />
+                      <TicketPost
+                        details={ticket}
+                        postId={ticket._id}
+                        type={ticket.type}
+                        likeCount={ticket.likeCount}
+                      />
                     ))}
                   </MashCarousel>
                 </div>
@@ -233,7 +233,12 @@ function Search({
               <>
                 {peopleList.length !== 0 && (
                   <div className="search__browse__people">
-                    <h2>Peoples</h2>
+                    <h2>
+                      Peoples{" "}
+                      <Link to="/browse/people">
+                        <span>see all</span>
+                      </Link>
+                    </h2>
                     <div className="search__peopleCardList">
                       <MashCarousel
                         compenentSize={190}
@@ -262,7 +267,12 @@ function Search({
 
                 {browseMovieList.length !== 0 && (
                   <div className="search__browse__lists">
-                    <h2>Lists</h2>
+                    <h2>
+                      Lists
+                      <Link to="/browse/lists">
+                        <span>see all</span>
+                      </Link>
+                    </h2>
                     <div className="search__browse__movielist">
                       <MashCarousel
                         compenentSize={430}
@@ -290,7 +300,12 @@ function Search({
                 )}
                 {ticketList.length !== 0 && (
                   <div className="search__browse__ticket">
-                    <h2>Tickets</h2>
+                    <h2>
+                      Tickets
+                      <Link to="/browse/tickets">
+                        <span>see all</span>
+                      </Link>
+                    </h2>
                     <div className="search__browse__ticketList">
                       <MashCarousel
                         compenentSize={627}
@@ -318,72 +333,123 @@ function Search({
             <div className="search__browse__movieGenreBrowse">
               <h2>Browse genre</h2>
               <div className="search__browse__movieGenreBrowse__genreList">
-                <div className="search__browse__movieGenreBrowse__genreList__genreCard Action">
+                <div
+                  onClick={() => history.push("/browse/genre/Action")}
+                  className="search__browse__movieGenreBrowse__genreList__genreCard Action"
+                >
                   <span>Action</span>
                   <ArrowForwardIcon />
                 </div>
-                <div className="search__browse__movieGenreBrowse__genreList__genreCard Comedy">
+                <div
+                  onClick={() => history.push("/browse/genre/Comedy")}
+                  className="search__browse__movieGenreBrowse__genreList__genreCard Comedy"
+                >
                   <span>Comedy</span>
                   <ArrowForwardIcon />
                 </div>
-                <div className="search__browse__movieGenreBrowse__genreList__genreCard Horror">
+                <div
+                  onClick={() => history.push("/browse/genre/Horror")}
+                  className="search__browse__movieGenreBrowse__genreList__genreCard Horror"
+                >
                   <span>Horror</span>
                   <ArrowForwardIcon />
                 </div>
-                <div className="search__browse__movieGenreBrowse__genreList__genreCard Thriller">
+                <div
+                  onClick={() => history.push("/browse/genre/Thriller")}
+                  className="search__browse__movieGenreBrowse__genreList__genreCard Thriller"
+                >
                   <span>Thriller</span>
                   <ArrowForwardIcon />
                 </div>
-                <div className="search__browse__movieGenreBrowse__genreList__genreCard Adventure">
+                <div
+                  onClick={() => history.push("/browse/genre/Adventure")}
+                  className="search__browse__movieGenreBrowse__genreList__genreCard Adventure"
+                >
                   <span>Adventure</span>
                   <ArrowForwardIcon />
                 </div>
-                <div className="search__browse__movieGenreBrowse__genreList__genreCard Drama">
+                <div
+                  onClick={() => history.push("/browse/genre/Drama")}
+                  className="search__browse__movieGenreBrowse__genreList__genreCard Drama"
+                >
                   <span>Drama</span>
                   <ArrowForwardIcon />
                 </div>
-                <div className="search__browse__movieGenreBrowse__genreList__genreCard Crime">
+                <div
+                  onClick={() => history.push("/browse/genre/Crime")}
+                  className="search__browse__movieGenreBrowse__genreList__genreCard Crime"
+                >
                   <span>Crime</span>
                   <ArrowForwardIcon />
                 </div>
-                <div className="search__browse__movieGenreBrowse__genreList__genreCard Family">
+                <div
+                  onClick={() => history.push("/browse/genre/Family")}
+                  className="search__browse__movieGenreBrowse__genreList__genreCard Family"
+                >
                   <span>Family</span>
                   <ArrowForwardIcon />
                 </div>
-                <div className="search__browse__movieGenreBrowse__genreList__genreCard Fantasy">
+                <div
+                  onClick={() => history.push("/browse/genre/Fantasy")}
+                  className="search__browse__movieGenreBrowse__genreList__genreCard Fantasy"
+                >
                   <span>Fantasy</span>
                   <ArrowForwardIcon />
                 </div>
-                <div className="search__browse__movieGenreBrowse__genreList__genreCard Animation">
+                <div
+                  onClick={() => history.push("/browse/genre/Animation")}
+                  className="search__browse__movieGenreBrowse__genreList__genreCard Animation"
+                >
                   <span>Animation</span>
                   <ArrowForwardIcon />
                 </div>
-                <div className="search__browse__movieGenreBrowse__genreList__genreCard Sci-fi">
-                  <span>Sci-fi</span>
+                <div
+                  onClick={() => history.push("/browse/genre/Sci-Fi")}
+                  className="search__browse__movieGenreBrowse__genreList__genreCard Sci-fi"
+                >
+                  <span>Sci-Fi</span>
                   <ArrowForwardIcon />
                 </div>
-                <div className="search__browse__movieGenreBrowse__genreList__genreCard Romance">
+                <div
+                  onClick={() => history.push("/browse/genre/Romance")}
+                  className="search__browse__movieGenreBrowse__genreList__genreCard Romance"
+                >
                   <span>Romance</span>
                   <ArrowForwardIcon />
                 </div>
-                <div className="search__browse__movieGenreBrowse__genreList__genreCard War">
+                <div
+                  onClick={() => history.push("/browse/genre/War")}
+                  className="search__browse__movieGenreBrowse__genreList__genreCard War"
+                >
                   <span>War</span>
                   <ArrowForwardIcon />
                 </div>
-                <div className="search__browse__movieGenreBrowse__genreList__genreCard Documentary">
+                <div
+                  onClick={() => history.push("/browse/genre/Documentary")}
+                  className="search__browse__movieGenreBrowse__genreList__genreCard Documentary"
+                >
                   <span>Documentary</span>
                   <ArrowForwardIcon />
                 </div>
-                <div className="search__browse__movieGenreBrowse__genreList__genreCard Music">
+                <div
+                  onClick={() => history.push("/browse/genre/Music")}
+                  className="search__browse__movieGenreBrowse__genreList__genreCard Music"
+                >
                   <span>Music</span>
                   <ArrowForwardIcon />
                 </div>
-                <div className="search__browse__movieGenreBrowse__genreList__genreCard History">
+                <div
+                  onClick={() => history.push("/browse/genre/History")}
+                  className="search__browse__movieGenreBrowse__genreList__genreCard History"
+                >
                   <span>History</span>
                   <ArrowForwardIcon />
                 </div>
-                <div className="search__browse__movieGenreBrowse__genreList__genreCard Tv-Movies">
-                  <span>Tv Movies</span>
+                <div
+                  onClick={() => history.push("/browse/genre/TV Movie")}
+                  className="search__browse__movieGenreBrowse__genreList__genreCard Tv-Movies"
+                >
+                  <span>Tv Movie</span>
                   <ArrowForwardIcon />
                 </div>
               </div>

@@ -8,6 +8,8 @@ import {
   UNLIKE_POST,
   SUBMIT_COMMENT,
   RESET_POST,
+  SET_POST,
+  ERROR_POST,
 } from "../types";
 
 export const getSubcriberPost = () => (dispatch) => {
@@ -86,6 +88,24 @@ export const submitComment = (data) => (dispatch) => {
       console.log(err);
     });
 };
+
+export const getPostDetail = (postId) => (dispatch) => {
+   dispatch({ type: LOADING_DATA });
+  axios
+    .get(`/api/v1/home/get-post-details/${postId}`)
+    .then((res) => {
+      if(res.status === 404) {
+        dispatch({ type: ERROR_POST });
+      }else {
+
+      dispatch({ type: SET_POST, payload: res.data });
+      }
+    })
+    .catch((e) => {
+      dispatch({ type: ERROR_POST });
+      console.log(e);
+    });
+}
 
 export const resetPost = () => (dispatch) => {
   dispatch({type:RESET_POST});

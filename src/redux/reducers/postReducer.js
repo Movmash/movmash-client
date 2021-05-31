@@ -11,12 +11,14 @@ import {
   DELETE_REQUESTED_TICKET,
   SEND_BOOKING_REQUEST,
   RESET_POST,
+  ERROR_POST,
 } from "../types";
 
 const initialState = {
   posts: [],
   post: {},
   loading: false,
+  validPost:true
 };
 
 export default function (state = initialState, action) {
@@ -36,7 +38,15 @@ export default function (state = initialState, action) {
       return {
         ...state,
         post: action.payload,
+        loading: false,
+        validPost: true,
       };
+    case ERROR_POST:
+      return {
+        ...state,
+        loading:false,
+        validPost:false,
+      }  
     case POST_POST:
       return {
         ...state,
@@ -48,6 +58,15 @@ export default function (state = initialState, action) {
       const likeIndex = state.posts.findIndex(
         (post) => post._id === action.payload._id
       );
+      if (likeIndex === -1)
+        return {
+          ...state,
+          post: {
+            ...state.post,
+            likeCount: action.payload.likeCount,
+            likes: action.payload.likes,
+          },
+        };
       const newPosts = [...state.posts];
       newPosts[likeIndex].likeCount = action.payload.likeCount;
       newPosts[likeIndex].likes = [...action.payload.likes];
@@ -67,6 +86,15 @@ export default function (state = initialState, action) {
       const commentIndex = state.posts.findIndex(
         (post) => post._id === action.payload._id
       );
+      if (commentIndex === -1)
+        return {
+          ...state,
+          post: {
+            ...state.post,
+            commentCount: action.payload.commentCount,
+            comments: action.payload.comments,
+          },
+        };
       state.posts[commentIndex].commentCount = action.payload.commentCount;
       state.posts[commentIndex].comments = action.payload.comments;
       return {
@@ -79,8 +107,8 @@ export default function (state = initialState, action) {
         (post) => post._id === action.payload.postId._id
       );
       if(postIndex === -1) return {
-        ...state
-      }
+        ...state,
+      };
       const newPostTicket = [...state.posts];
       newPostTicket[postIndex].bookingRequest = [
         action.payload.requestedBy._id,

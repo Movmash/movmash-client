@@ -1,0 +1,30 @@
+.ticketBrowse {
+    display: flex;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--boldText);
+    margin-top: 60px;
+}
+
+.ticketBrowse__heading {
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 20px;
+}
+
+.ticketBrowse__container {
+    width: 80%;
+}
+
+.ticketBrowse__ticketList {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 2rem;
+}
+.ticketBrowse__ticketList>*{
+margin-top: 0;
+width: 100%;
+}

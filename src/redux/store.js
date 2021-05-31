@@ -8,6 +8,7 @@ import chatReducer from "./reducers/chatReducer";
 import liveShowReducer from "./reducers/liveShowReducer";
 import searchReducer from "./reducers/searchReducer";
 import ticketReducer from "./reducers/ticketReducer";
+import browserReducer from "./reducers/browseReducer";
 // const initialState = {
 //   movie: {},
 // };
@@ -22,6 +23,7 @@ const reducers = combineReducers({
   liveShow: liveShowReducer,
   search: searchReducer,
   ticket: ticketReducer,
+  browse: browserReducer,
 });
 
 // const store = createStore(
