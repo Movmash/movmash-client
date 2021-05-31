@@ -28,29 +28,10 @@ function ActivityContainer({
           </div>
           <div className="activityContainer__containers">
             {content.slice(0, nextShow).map((show) => (
-              <>
+             
                 <div key={show._id} className="activityContainer__container">
                   <Component {...show} />
                 </div>
-                <div key={show._id} className="activityContainer__container">
-                  <Component {...show} />
-                </div>
-                <div key={show._id} className="activityContainer__container">
-                  <Component {...show} />
-                </div>
-                <div key={show._id} className="activityContainer__container">
-                  <Component {...show} />
-                </div>
-                <div key={show._id} className="activityContainer__container">
-                  <Component {...show} />
-                </div>
-                <div key={show._id} className="activityContainer__container">
-                  <Component {...show} />
-                </div>
-                <div key={show._id} className="activityContainer__container">
-                  <Component {...show} />
-                </div>
-              </>
             ))}
           </div>
           {nextShow < content.length && (
