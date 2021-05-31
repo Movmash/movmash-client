@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import TelegramIcon from "@material-ui/icons/Telegram";
 import ScrollToBottom from "react-scroll-to-bottom";
 import FriendListMessage from "../components/FriendListMessage";
+import SendIcon from "@material-ui/icons/Send";
 import {
   getAllRooms,
   addInChats,
@@ -17,7 +18,7 @@ import ChatUserNamePlate from "../components/ChatUserNamePlate";
 import ChatMessages from "../components/ChatMessages";
 import { useHistory, useParams } from "react-router-dom";
 import { useSocket } from "../contexts/SocketProvider";
-import { Avatar } from "@material-ui/core";
+import { Avatar, IconButton } from "@material-ui/core";
 import { Dialog } from "@material-ui/core";
 import CreateIcon from "@material-ui/icons/Create";
 // let socket;
@@ -133,7 +134,7 @@ function Chat({
             {rooms.map((room) => {
               const userDetails = room.participants.find(
                 (user) => user._id !== userId
-              )
+              );
               return (
                 <div
                   key={room._id}
@@ -149,7 +150,7 @@ function Chat({
                   }`}
                 >
                   <ChatUserNamePlate
-                    name={userDetails.userName}
+                    name={userDetails.fullName}
                     imageUrl={userDetails.profileImageUrl}
                     lastMessage={room.lastMessage}
                     // username={`Iamak47`}
@@ -183,7 +184,7 @@ function Chat({
                     <Avatar src={selectedUser.profileImageUrl} />
                     <div className="chatUserNamePlate__header__userName--info">
                       <div className="chatUserNamePlate__header--name">
-                        <h3>{selectedUser.userName}</h3>
+                        <h3>{selectedUser.fullName}</h3>
                       </div>
                     </div>
                   </div>
@@ -195,7 +196,7 @@ function Chat({
                 </ScrollToBottom>
               </div>
               <form onSubmit={handleSendMessage}>
-                <div className="chat_container__right__input">
+                <div className="chat_container__right__input room__player__right__chat__input">
                   <input
                     value={message}
                     onChange={(e) => {
@@ -207,7 +208,10 @@ function Chat({
                     }}
                     placeholder="send message ..."
                   ></input>
-                  <button type="submit">submit</button>
+                  <IconButton type="submit">
+                    <SendIcon />
+                  </IconButton>
+                  {/* <button type="submit">submit</button> */}
                 </div>
               </form>
             </>

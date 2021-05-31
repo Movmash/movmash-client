@@ -89,7 +89,7 @@ function CommentForm({
   };
   // console.log(postMovie);
   const handlePostComment = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     // console.log(event.which);
     if (type === "review") {
       const postReviewComment = {
@@ -99,7 +99,7 @@ function CommentForm({
       };
       console.log(postReviewComment);
       setComment("");
-      event.target.textcomment.value = "";
+      // event.target.textcomment.value = "";
       if (tag) {
         profileSubmitComment(postReviewComment);
       } else {
@@ -116,7 +116,7 @@ function CommentForm({
         };
         console.log(postSuggestMeCommentWithoutMovie);
         setComment("");
-        event.target.textcomment.value = "";
+        // event.target.textcomment.value = "";
         if (tag) {
           profileSubmitComment(postSuggestMeCommentWithoutMovie);
         } else {
@@ -138,7 +138,7 @@ function CommentForm({
         setPostMovie({});
         setComment("");
         console.log(postSuggestMeCommentWithMovie);
-        event.target.textcomment.value = "";
+        // event.target.textcomment.value = "";
         if (tag) {
           profileSubmitComment(postSuggestMeCommentWithMovie);
         } else {
@@ -226,7 +226,7 @@ function CommentForm({
           )}
         </div>
       )}
-      <form onSubmit={handlePostComment} method="POST">
+      {/* <form onSubmit={handlePostComment} method="POST"> */}
         <div className="commentForm__input">
           <div className="commentForm__inputTextArea">
             {/* <script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script> */}
@@ -240,11 +240,22 @@ function CommentForm({
               onChange={(e) => {
                 setComment(e.target.value);
               }}
+              value={comment}
+              onKeyPress={(e) => { 
+                if(e.key === "Enter"){
+                  e.preventDefault();
+                if (e.target.value !== "") {
+                  
+                  handlePostComment();
+                }
+                }
+              }}
               // style="height: 16px;"
             ></textarea>
           </div>
           <Button
             type="Submit"
+            onClick={handlePostComment}
             disabled={
               comment === "" && Object.keys(postMovie).length === 0
                 ? true
@@ -254,7 +265,7 @@ function CommentForm({
             Post
           </Button>
         </div>
-      </form>
+      {/* </form> */}
     </div>
   );
 }
