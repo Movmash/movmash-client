@@ -14,7 +14,7 @@ import {
   followUser,
   unfollowUser,
 } from "../redux/actions/dataAction";
-import { BounceLoader } from "react-spinners";
+import { MoonLoader } from "react-spinners";
 function UserProfile({
   userName,
   getMashUserDetails,
@@ -219,7 +219,11 @@ function UserProfile({
         </>
       ) : (
         <div className="home__bounceloader">
-          <BounceLoader size={150} color={"#2aa44f"} loading />
+          <MoonLoader
+            size={50}
+            color={"#2aa44f"}
+            loading
+          />
         </div>
       )}
     </div>

@@ -11,6 +11,12 @@ import {
   MARK_NOTIFICATIONS_READ,
   GET_UNREAD_ROOM,
   AUTH_LOADING,
+  UPDATE_USER_INFO,
+  UPDATE_USER_PROFILE_PIC,
+  UPDATE_LOADING,
+  UPDATE_USER_COVER_PIC,
+  REMOVE_FOLLOWER,
+  UNDO_REMOVE_FOLLOWER,
 } from "../types";
 
 export const getUnreadUserRoom = () => (dispatch) => {
@@ -109,6 +115,62 @@ export const getOAuthUserData = () => (dispatch) => {
     });
 }
 
+export const updateUserInfo = (userInfo, history) => (dispatch) => {
+  axios.put("/api/v1/home/update-user-details", userInfo).then(res => {
+    dispatch({ type: UPDATE_USER_INFO , payload: res.data});
+    console.log(res.data)
+    history.replace(`/@${res.data.userName}`)
+  }).catch(e => {
+    console.log(e);
+  });
+};
+
+export const updateProfilePicture = (file) => dispatch => {
+  dispatch({type:UPDATE_LOADING});
+  const formData = new FormData();
+  formData.set("image",file);
+  axios.post("/api/v1/upload-image/profile", formData, {
+    headers: {
+      "content-type": "multipart/form-data", 
+    },
+  }).then(res => {
+    dispatch({type: UPDATE_USER_PROFILE_PIC, payload: res.data})
+  }).catch(e => {
+    console.log(e);
+  });
+}
+export const updateCoverPicture = (file) => (dispatch) => {
+  dispatch({ type: UPDATE_LOADING });
+  const formData = new FormData();
+  formData.set("image", file);
+  axios
+    .post("/api/v1/upload-image/cover", formData, {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    })
+    .then((res) => {
+      dispatch({ type: UPDATE_USER_COVER_PIC, payload: res.data });
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+};
+export const removeFollower = (removeFollowerId) => dispatch => {
+  axios.post("/api/v1/home/remove-follower", { removeFollowerId }).then(res => {
+    dispatch({type: REMOVE_FOLLOWER, payload: res.data});
+    console.log(res.data);
+  }).catch(e => {
+    console.log(e);
+  });
+}
+export const undoRemoveFollower = removeFollowerId => dispatch => {
+  axios.post("/api/v1/home/undo-remove-follower", { removeFollowerId }).then(res => {
+dispatch({ type: UNDO_REMOVE_FOLLOWER, payload: res.data });
+  }).catch(e => {
+    console.log(e);
+  });
+};
 const setAuthorizationHeader = (token) => {
   const mashDBToken = `Bearer ${token}`;
   localStorage.setItem("mashDBToken", mashDBToken);

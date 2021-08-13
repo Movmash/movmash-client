@@ -28,17 +28,14 @@
     width: 126px;
     height: 27px;
     /* background: rgb(226, 226, 226); */
-    border-radius: 3px;
+    border-radius: 5px;
     /* color: rgb(75, 75, 75); */
     color: #499E4C;
     transition: 450ms;
+      cursor: pointer;
 }
-
-.myProfile__profileButton:hover>button {
-    color: whitesmoke;
-    font-weight: 900;
-    background: #499E4C;
-    cursor: pointer;
+.myProfile__profileButton>button:active {
+  transform: scale(0.98);
 }
 
 .myProfile__coverPhoto {
@@ -59,10 +56,7 @@
     position: absolute;
     top: 22rem;
     left: 3rem;
-    height: 168px;
-    width: 168px;
-    border-radius: 40%;
-    border: 2px solid white;
+      z-index: 3;
     /* border-radius: 40%; */
 
 }
@@ -73,13 +67,43 @@
     width: 45rem;
     min-height: 13rem;
 }
+.myProfile__displayPhoto>input{
+    display: none;
+}
+.myProfile__displayPhoto>.upload{
+         position: absolute;
+     z-index: 4;
+       height: 168px;
+       width: 168px;
+       border-radius: 40%;
+       cursor: pointer;
+       transition: 450ms;
+       top: 2px;
+       left: 2px;
+       color: transparent;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       flex-direction: column;
+       font-family: Arial, Helvetica, sans-serif;
 
-.myProfile__displayPhoto>img {
+}
+.myProfile__displayPhoto>.upload>*{
+    margin-bottom:9px
+}
+.myProfile__displayPhoto>.upload:hover {
+    background: rgb(0, 0, 0);
+    opacity: 0.6;
+    color: white;
+
+}
+.myProfile__displayPhoto>.MuiAvatar-root {
     object-fit: contain;
     height: 168px;
-    width: 168px;
-    border-radius: 40%;
-    /* border: 2px solid lightgray; */
+     width: 168px;
+     border-radius: 40%;
+     /* border: 2px solid white; */
+    border: 2px solid lightgray;
 }
 
 .myProfile__userInfo--name>h1 {
@@ -240,4 +264,35 @@
 
 .myProfile__allPostButton.selected>.MuiSvgIcon-root {
     color: greenyellow;
+}
+
+.myProfile__coverPhoto>input {
+    display: none;
+}
+
+.myProfile__coverPhoto>.upload {
+    position: absolute;
+    z-index: 2;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    transition: 450ms;
+    color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: Arial, Helvetica, sans-serif;
+border-radius: 10px;
+}
+
+.myProfile__coverPhoto>.upload>* {
+    margin-bottom: 9px
+}
+
+.myProfile__coverPhoto>.upload:hover {
+    background: rgb(0, 0, 0);
+    opacity: 0.6;
+    color: white;
+
 }

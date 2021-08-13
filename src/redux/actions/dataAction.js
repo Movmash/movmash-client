@@ -144,7 +144,7 @@ export const followUser = (id) => (dispatch) => {
     .put(`/api/v1/home/user/follow`, { followId: id })
     .then((res) => {
       dispatch({ type: FOLLOW_USER, payload: res.data });
-      console.log(res.data);
+      // console.log(res.data);
     })
     .catch((e) => {
       console.log(e);

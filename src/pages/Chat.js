@@ -122,6 +122,7 @@ function Chat({
   };
   return (
     <div className="chat">
+    {console.log(rooms)}
       <div className="chat_container">
         <div className="chat_container__left">
           <div className="chat_container__left__header">
@@ -135,6 +136,7 @@ function Chat({
               const userDetails = room.participants.find(
                 (user) => user._id !== userId
               );
+              console.log(userDetails);
               return (
                 <div
                   key={room._id}

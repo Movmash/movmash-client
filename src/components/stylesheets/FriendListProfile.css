@@ -1,0 +1,4 @@
+.peopleMatchCard__content__button.unhighlighted>button {
+    background: transparent;
+    color: var(--green);
+}
