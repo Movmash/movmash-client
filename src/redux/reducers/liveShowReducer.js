@@ -207,7 +207,7 @@ const liveShowReducer = (state = intialState, action) => {
         loadingCreateLiveShow: false,
       };
     case  UPDATE_VIDEO_SOURCE:
-      console.log(action.payload);
+      // console.log(action.payload);
       // state
       return {
         ...state,

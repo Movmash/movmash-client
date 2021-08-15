@@ -201,7 +201,7 @@ function PostSuggestMePost({ closeSuggestMe, sendPost, postType }) {
         break;
 
       default:
-        console.log("default");
+        // console.log("default");
         break;
     }
   };
@@ -232,7 +232,7 @@ function PostSuggestMePost({ closeSuggestMe, sendPost, postType }) {
       rating: ratingPreference,
       postType: postType,
     };
-    console.log(suggestMePost);
+    // console.log(suggestMePost);
     sendPost(suggestMePost);
     closeSuggestMe();
   };

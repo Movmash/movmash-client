@@ -53,7 +53,7 @@ function LeftSideBar({
   useEffect(() => {
     if (socket !== undefined) {
       socket.on("notification", (data) => {
-        console.log(data);
+        // console.log(data);
         addNewNotification(data);
       });
     }
@@ -62,7 +62,7 @@ function LeftSideBar({
   useEffect(() => {
     if (socket !== undefined) {
       socket.on("message-room", (roomData) => {
-        console.log(roomData);
+        // console.log(roomData);
         updateRooms(roomData);
       });
     }
@@ -115,15 +115,16 @@ function LeftSideBar({
         }
         return notification._id;
       });
-      console.log(markReadNotification);
+      // console.log(markReadNotification);
       markNotificationRead(markReadNotification);
     }
   };
   return (
     <div className="leftSideBar">
       <div className="leftSideBar__container">
-        {" "}
-        <div
+        <div className="leftSideBar__container__upmargin"></div>
+        <div className="leftSideBar__container__iconList">
+            <div
           onClick={() => history.push(`/@${userName}`)}
           className="leftSideBar__container__icon hover"
         >
@@ -244,23 +245,45 @@ function LeftSideBar({
               {openNotification ? (
                 <div className="notificationClickAway">
                   {notifications.map(
-                    (notification) =>
-                      notification.type === "like" &&
-                      (<NotificationListCard
-                        key={notification._id}
-                        imageUrl={notification.senderId.profileImageUrl}
-                        type={notification.type}
-                        message="liked your post"
-                        userName={notification.senderId.userName}
-                      />)(notification.type === "comment") && (
-                        <NotificationListCard
-                          key={notification._id}
-                          imageUrl={notification.senderId.profileImageUrl}
-                          type={notification.type}
-                          message="commented on your post"
-                          userName={notification.senderId.userName}
-                        />
-                      )
+                    (notification) => {
+                      if (notification.type === "like")
+                        return (
+                          <NotificationListCard
+                            key={notification._id}
+                            imageUrl={notification.senderId.profileImageUrl}
+                            type={notification.type}
+                            message="liked your post"
+                            userName={notification.senderId.userName}
+                            postId={notification.postId}
+                          />
+                        );
+                      else if (notification.type === "comment")
+                        return (
+                          <NotificationListCard
+                            key={notification._id}
+                            imageUrl={notification.senderId.profileImageUrl}
+                            type={notification.type}
+                            message="commented on your post"
+                            userName={notification.senderId.userName}
+                            postId={notification.postId}
+                          />
+                        );
+                      else if (notification.type === "following")
+                        return (
+                          <NotificationListCard
+                            key={notification._id}
+                            imageUrl={notification.senderId.profileImageUrl}
+                            type={notification.type}
+                            message="started following you"
+                            userName={notification.senderId.userName}
+                            postId={notification.postId}
+                          />
+                        );
+                      else {
+                        return null;
+                      }
+                    }
+                      
                   )}
                 </div>
               ) : null}
@@ -271,6 +294,8 @@ function LeftSideBar({
           <IconButton onClick={() => logoutUser()}>
             <PowerSettingsNewIcon />
           </IconButton>
+        </div>
+      
         </div>
       </div>
     </div>

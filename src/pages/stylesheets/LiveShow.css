@@ -43,7 +43,7 @@
         sans-serif;
     font-size: 5rem;
     letter-spacing: 0.09ch;
-    width: 59rem;
+    /* width: 59rem; */
 }
 
 .liveShow__banner__content>button {
@@ -115,6 +115,8 @@ transition: 450ms;
         Arial,
         sans-serif;
     ; */
+        max-width: 85rem;
+
     font-size: 50px;
     margin-top: 60px;
     margin-bottom: 20px;
@@ -124,4 +126,16 @@ transition: 450ms;
 
 .liveShow__content__items>hr {
     border: 1px solid rgb(99, 98, 98);
+}
+
+@media only screen and (max-width:750px) {
+  
+.liveShow__banner__content>h1 {
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 4rem;
+    letter-spacing: 0.09ch;
+    /* width: 59rem; */
+}
+
 }

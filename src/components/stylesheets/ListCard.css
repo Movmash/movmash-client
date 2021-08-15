@@ -19,7 +19,9 @@
     margin-top: 15px;
     margin-bottom: 15px;
 }
-
+.listCardHeader>*{
+    cursor: pointer;
+}
 
 
 .listCard__banner {

@@ -1,8 +1,8 @@
 .peopleRoomTab {
     display: flex;
-    justify-content: center;
     height: 100%;
     overflow-y: auto;
+    flex-direction: column;
     font-family: Arial, Helvetica, sans-serif;
     color: var(--boldText);
 }

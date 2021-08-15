@@ -28,3 +28,11 @@
 margin-top: 0;
 width: 100%;
 }
+
+@media only screen and (max-width:900px) {
+    .ticketBrowse__ticketList {
+
+        grid-template-columns: repeat(1, 1fr);
+
+    }
+}

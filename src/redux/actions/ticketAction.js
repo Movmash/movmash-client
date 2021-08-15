@@ -24,14 +24,14 @@ export const getRequestedTicket = () => (dispatch) => {
 
 export const sendBookingRequest = (requestData) => (dispatch) => {
   dispatch({ type: LOADING_REQUESTED_TICKET });
-  console.log(requestData);
+  // console.log(requestData);
   axios
     .post(
       "/api/v1/bookingTicket/send-booking-request",
       requestData
     )
     .then((res) => {
-      console.log(res)
+      // console.log(res)
       dispatch({ type: SEND_BOOKING_REQUEST, payload: res.data });
       addNewReminder(res.data);
     })

@@ -31,10 +31,10 @@ function FriendListProfile({
       .then((res) => {
         setFollowers(res.data);
         setFilteredFollowers(res.data);
-        console.log(res.data);
+        // console.log(res.data);
       })
       .catch((e) => {
-        console.log(e);
+        // console.log(e);
       });
   }, [selectedTab, userId]);
   useEffect(() => {
@@ -43,10 +43,10 @@ function FriendListProfile({
       .then((res) => {
         setFollowings(res.data);
         setFilteredFollowings(res.data);
-        console.log(res.data);
+        // console.log(res.data);
       })
       .catch((e) => {
-        console.log(e);
+        // console.log(e);
       });
   }, [selectedTab, userId]);
   useEffect(() => {

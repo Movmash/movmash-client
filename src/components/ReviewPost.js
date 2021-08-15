@@ -104,7 +104,11 @@ function ReviewPost({ isProfile, details, postId, type, postPage }) {
           />
         </div>
         <div className="reviewPost__commentRepresentation">
-          <CommentList comments={comments} postPage={postPage} />
+          <CommentList
+            postId={postId}
+            comments={comments}
+            postPage={postPage}
+          />
         </div>
         <div className="commentForm">
           <CommentForm tag={isProfile} postId={postId} type={type} />

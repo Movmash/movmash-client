@@ -3,7 +3,7 @@ import "./stylesheets/ReviewChatCard.css";
 import { Avatar } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
 function ReviewChatCard({ postData }) {
-  console.log(postData);
+  // console.log(postData);
   return (
     <div className="reviewChatCard">
       {postData && (

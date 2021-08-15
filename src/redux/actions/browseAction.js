@@ -13,7 +13,7 @@ export const getBrowsePeople = () => (dispatch) => {
   axios
     .get("/api/v1/search-get-people")
     .then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       dispatch({ type: GET_BROWSE_PEOPLE, payload: res.data });
     })
     .catch((e) => console.log(e));;
@@ -30,7 +30,7 @@ export const getBrowseList = () => (dispatch) => {
 export const getBrowseGenre = (genreName,pageNumber) => (dispatch) => {
   dispatch({ type: LOADING_BROWSE });
     axios.get(`/api/v1/movie/genre/${genreName}/${pageNumber}`).then((res) => {
-      console.log(res.data)
+      // console.log(res.data)
       if (res.data.validGenre === false){
         return dispatch({ type: INVALID_GENRE});
       }else{

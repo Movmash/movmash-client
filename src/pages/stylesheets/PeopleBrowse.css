@@ -58,3 +58,13 @@
 .peopleBrowse__peopleCard>button:active{
     transform: scale(0.95);
 }
+
+.unFollow {
+    background-color: transparent !important;
+    color: var(--green) !important;
+}
+
+.unFollow:hover {
+    /* background-color: transparent; */
+    color: var(--boldText);
+}

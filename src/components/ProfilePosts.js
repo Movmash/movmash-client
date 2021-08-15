@@ -23,7 +23,7 @@ function ProfilePosts({
       getUserPost();
     } else {
       getMashUserPost(userName);
-      console.log(userName);
+      // console.log(userName);
     }
     return () => {
       resetState();

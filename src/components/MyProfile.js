@@ -53,7 +53,9 @@ function MyProfile({
     };
   }, [fullName]);
   const uploadProfilePicture = (file) => {
+    // console.log("heloo this is prifl;");
     updateProfilePicture(file);
+    
   };
   const uploadCoverPicture = (file) => {
     updateCoverPicture(file);
@@ -91,14 +93,15 @@ function MyProfile({
             <div className="myProfile__displayPhoto">
               <input
                 accept="image/*"
-                id="icon-button-file"
+                id="icon-button-file-1"
                 type="file"
                 onChange={(e) => uploadProfilePicture(e.target.files[0])}
               />
-              <label className="upload" htmlFor="icon-button-file">
+              <label className="upload" htmlFor="icon-button-file-1">
                 <PhotoCamera />
                 <span>Choose Photo</span>
               </label>
+              
               <Avatar src={profileImageUrl} />
             </div>
             <div className="myProfile__profileButton">
@@ -159,12 +162,14 @@ function MyProfile({
                 </div>
                 <span>{watchHour}h</span>
               </div>
+{/* 
               <div className="myProfile__userData__rowItem">
                 <div className="myProfile__userData__rowItem--heading">
                   <h3>User Rating</h3>
                 </div>
                 <span>2.8</span>
               </div>
+             */}
             </div>
             {/* <div className="myProfile__userData__row"></div> */}
             <Dialog onClose={handleCloseFriendList} open={openFriendList}>

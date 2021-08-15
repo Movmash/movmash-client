@@ -18,6 +18,8 @@ import ListCard from "../components/ListCard";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import MashCarousel from "../components/MashCarousel";
 import SearchSkeleton from "../loadingSkeletons/SearchSkeleton";
+import { followUser, unfollowUser } from "../redux/actions/dataAction";
+// import Footer from "../components/Footer";
 function Search({
   getSearchedPeople,
   getSearchedMovie,
@@ -43,6 +45,9 @@ function Search({
   loadingTicket,
   loadingList,
   resetSearchPage,
+  unfollowUser,
+  followUser,
+  followings,
 }) {
   const [searchQuery, setSearchQuery] = useState("");
   const history = useHistory();
@@ -83,6 +88,12 @@ function Search({
     getTicket,
     resetSearchPage,
   ]);
+  const handleFollowUser = (id) => {
+    followUser(id);
+  };
+  const handleUnfollowUser = (id) => {
+    unfollowUser(id);
+  };
   return (
     <div className="search">
       <div className="search__searchBar__input">
@@ -247,17 +258,37 @@ function Search({
                       >
                         {peopleList.map((person) => (
                           <div key={person._id} className="search__peopleCard">
-                            <div className="search__avatar">
+                            <div
+                              onClick={() =>
+                                history.push(`/@${person.userName}`)
+                              }
+                              className="search__avatar"
+                            >
                               <img
                                 src={person.profileImageUrl}
                                 alt={person.fullName}
                               />
                               <span>{person.fullName}</span>
                             </div>
-
-                            <div className="peopleMatchCard__content__button widthButton">
-                              <button>Follow</button>
-                            </div>
+                            {followings.includes(person._id)?<div className="peopleMatchCard__content__button widthButton unFollowButton">
+                              <button
+                                onClick={() => {
+                                  handleUnfollowUser(person._id);
+                                }}
+                              >
+                                following
+                              </button>
+                            </div>: <div className="peopleMatchCard__content__button widthButton">
+                              <button
+                                onClick={() => {
+                                  handleFollowUser(person._id);
+                                }}
+                              >
+                                Follow
+                              </button>
+                            </div>}
+                            
+                            
                           </div>
                         ))}
                       </MashCarousel>
@@ -478,6 +509,7 @@ const mapStateToProps = (state) => {
     loadingPeople: state.search.loadingPeople,
     loadingTicket: state.search.loadingTicket,
     loadingList: state.search.loadingList,
+    followings: state.user.followings
   };
 };
 export default connect(mapStateToProps, {
@@ -489,6 +521,8 @@ export default connect(mapStateToProps, {
   getList,
   getTicket,
   resetSearchPage,
+  followUser,
+  unfollowUser,
 })(Search);
 
 

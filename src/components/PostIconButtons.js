@@ -42,7 +42,7 @@ function PostIconButtons({
 }) {
   const handleLikePost = (id) => {
     if (tag) {
-      console.log(id);
+      // console.log(id);
       profileLikePost(id);
     } else {
       likePost(id);

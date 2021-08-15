@@ -58,7 +58,7 @@ function PostTicketPost({ closeTicket, sendPost, postType }) {
       });
     }
 
-    console.log(timeRangeValue);
+    // console.log(timeRangeValue);
   };
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -99,16 +99,16 @@ function PostTicketPost({ closeTicket, sendPost, postType }) {
 
   const handleOnChange = (event) => {
     if (event.target.value === "") {
-      console.log("heelloo");
+      // console.log("heelloo");
       setOpen((prev) => (prev = false));
     } else setOpen(true);
   };
 
   const handleOnClickSearchCard = (result) => {
     setOpen((prev) => (prev = false));
-    console.log(result);
+    // console.log(result);
     setPostMovie(result);
-    console.log(genreConverter(result.genre_ids));
+    // console.log(genreConverter(result.genre_ids));
   };
 
   const handleSubmit = (movie) => {
@@ -125,7 +125,7 @@ function PostTicketPost({ closeTicket, sendPost, postType }) {
       overview: movie.overview,
       postType: postType,
     };
-    console.log(ticketPost);
+    // console.log(ticketPost);
     sendPost(ticketPost);
     closeTicket();
   };

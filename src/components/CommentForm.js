@@ -42,7 +42,7 @@ function CommentForm({
           })
           .catch((e) => {
             setSearchResult([]);
-            console.log(e);
+            // console.log(e);
           });
       }
     };
@@ -74,15 +74,15 @@ function CommentForm({
   // }, [handleUserEvents]);
   const handleOnChange = (event) => {
     if (event.target.value === "") {
-      console.log("heelloo");
+      // console.log("heelloo");
       setOpen((prev) => (prev = false));
     } else setOpen(true);
   };
   const handleOnClickSearchCard = (result) => {
     setOpen((prev) => (prev = false));
-    console.log(result);
+    // console.log(result);
     setPostMovie(result);
-    console.log(genreConverter(result.genre_ids));
+    // console.log(genreConverter(result.genre_ids));
   };
   const handleClickAway = () => {
     setOpen(false);
@@ -97,7 +97,7 @@ function CommentForm({
         comment: comment,
         postType: type,
       };
-      console.log(postReviewComment);
+      // console.log(postReviewComment);
       setComment("");
       // event.target.textcomment.value = "";
       if (tag) {
@@ -114,7 +114,7 @@ function CommentForm({
 
           postType: type,
         };
-        console.log(postSuggestMeCommentWithoutMovie);
+        // console.log(postSuggestMeCommentWithoutMovie);
         setComment("");
         // event.target.textcomment.value = "";
         if (tag) {
@@ -137,7 +137,7 @@ function CommentForm({
         };
         setPostMovie({});
         setComment("");
-        console.log(postSuggestMeCommentWithMovie);
+        // console.log(postSuggestMeCommentWithMovie);
         // event.target.textcomment.value = "";
         if (tag) {
           profileSubmitComment(postSuggestMeCommentWithMovie);

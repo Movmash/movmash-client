@@ -45,9 +45,9 @@ useEffect(() => {
     });
   }
 }, [socket]);
-useEffect(() => {
-  console.log(userList);
-}, [userList]);
+// useEffect(() => {
+//   // console.log(userList);
+// }, [userList]);
   return (
     <div className="roomInfoDialog">
       <div className="roomInfoDialog__header">

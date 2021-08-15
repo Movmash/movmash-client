@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import ListCard from "./ListCard";
 import AddIcon from "@material-ui/icons/Add";
-import { genreConverter } from "../util/genreConverter";
+// import { genreConverter } from "../util/genreConverter";
 import { connect } from "react-redux";
 import stringLimiter from "../util/stringLimiter";
 import Axios from "../util/axios";
@@ -82,12 +82,12 @@ function ProfileList({
     setOpen((prev) => (prev = false));
     // console.log(result);
     setMovieList((prev) => [...prev, result]);
-    console.log(movieList);
-    console.log(genreConverter(result.genre_ids));
+    // console.log(movieList);
+    // console.log(genreConverter(result.genre_ids));
   };
   const handleOnChange = (event) => {
     if (event.target.value === "") {
-      console.log("heelloo");
+      // console.log("heelloo");
       setOpen((prev) => (prev = false));
     } else setOpen(true);
   };
@@ -122,7 +122,7 @@ function ProfileList({
       getUserList();
     } else {
       getMashUserList(userName);
-      console.log(userName);
+      // console.log(userName);
     }
     return () => {
       resetState();
@@ -144,7 +144,6 @@ function ProfileList({
 
           <div className="profileList__content">
             {profileList.map((list) => {
-              console.log(list);
               return (
                   <div key={list._id} className="profileList__container">
                     <ListCard
@@ -312,7 +311,7 @@ function ProfileList({
                       onChange={(e) => {
                         setTagsInText(e.target.value);
                         setTags(tagsInText.split(","));
-                        console.log(tags);
+                        // console.log(tags);
                       }}
                       fullWidth
                       margin="normal"

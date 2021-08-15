@@ -12,7 +12,7 @@ import Dialog from "@material-ui/core/Dialog";
 import SearchMovieCard from "./SearchMovieCard";
 import Axios from "../util/axios";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
-import { genreConverter } from "../util/genreConverter";
+// import { genreConverter } from "../util/genreConverter";
 import stringLimiter from "../util/stringLimiter";
 import { connect } from "react-redux";
 import { createNewList } from "../redux/actions/dataAction";
@@ -43,7 +43,7 @@ function TabDescriptionInfo({ Icon, info, isButton, createNewList }) {
           })
           .catch((e) => {
             setSearchResult([]);
-            console.log(e);
+            // console.log(e);
           });
       }
     };
@@ -65,13 +65,13 @@ function TabDescriptionInfo({ Icon, info, isButton, createNewList }) {
     setOpen((prev) => (prev = false));
     // console.log(result);
     setMovieList((prev) => [...prev, result]);
-    console.log(movieList);
+    // console.log(movieList);
     setQuery("");
-    console.log(genreConverter(result.genre_ids));
+    // console.log(genreConverter(result.genre_ids));
   };
   const handleOnChange = (event) => {
     if (event.target.value === "") {
-      console.log("heelloo");
+      // console.log("heelloo");
       setOpen((prev) => (prev = false));
     } else setOpen(true);
   };
@@ -268,7 +268,7 @@ function TabDescriptionInfo({ Icon, info, isButton, createNewList }) {
                       onChange={(e) => {
                         setTagsInText(e.target.value);
                         setTags(tagsInText.split(","));
-                        console.log(tags);
+                        // console.log(tags);
                       }}
                       fullWidth
                       margin="normal"

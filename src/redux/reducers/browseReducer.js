@@ -10,7 +10,7 @@ const initialState = {
 }
 
 const browseReducer = (state = initialState, action) => {
-    console.log(action.type);
+    // console.log(action.type);
     switch (action.type) {
         
       case LOADING_BROWSE:

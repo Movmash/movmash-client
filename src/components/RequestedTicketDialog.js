@@ -275,7 +275,7 @@ function RequestedTicketDialog({
                   >
                     <button
                       onClick={() => {
-                        history.push("/live");
+                        history.push("/live/create");
                         closeRequestedDialog();
                       }}
                       disabled={!countdown.includes(ticket._id)}

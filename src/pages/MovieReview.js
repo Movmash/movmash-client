@@ -3,11 +3,11 @@ import "./stylesheets/MovieReview.css";
 import BannerReview from "../components/BannerReview";
 import MovieInfoCard from "../components/MovieInfoCard";
 // import MovieReviewButtons from "../components/MovieReviewButtons";
-import ReviewCard from "../components/ReviewCard";
+// import ReviewCard from "../components/ReviewCard";
 import MovieCrewList from "../components/MovieCrewList";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
+// import Slider from "react-slick";
 import { connect } from "react-redux";
 import { getMovieDetail } from "../redux/actions/movieAction";
 import { useHistory, useLocation } from "react-router-dom";
@@ -19,55 +19,55 @@ function MovieReview({ movieDetails, getMovie, loading, authenticated, authLoadi
     location.pathname.split("/").length - 1
   ];
   console.log(id);
-  const settings = {
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    initialSlide: 0,
-    autoplay: true,
-    // responsive: [
-    //   {
-    //     breakpoint: 1520,
-    //     settings: {
-    //       slidesToShow: 5,
-    //       slidesToScroll: 3,
-    //       infinite: true,
-    //     },
-    //   },
-    //   {
-    //     breakpoint: 1250,
-    //     settings: {
-    //       slidesToShow: 4,
-    //       slidesToScroll: 3,
-    //       //   infinite: true,
-    //     },
-    //   },
-    //   {
-    //     breakpoint: 1075,
-    //     settings: {
-    //       slidesToShow: 3,
-    //       slidesToScroll: 3,
-    //       //   infinite: true,
-    //     },
-    //   },
-    //   {
-    //     breakpoint: 835,
-    //     settings: {
-    //       slidesToShow: 2,
-    //       slidesToScroll: 2,
-    //       initialSlide: 2,
-    //     },
-    //   },
-    //   {
-    //     breakpoint: 670,
-    //     settings: {
-    //       slidesToShow: 1,
-    //       slidesToScroll: 1,
-    //     },
-    //   },
-    // ],
-  };
+  // const settings = {
+  //   infinite: true,
+  //   speed: 500,
+  //   slidesToShow: 1,
+  //   slidesToScroll: 1,
+  //   initialSlide: 0,
+  //   autoplay: true,
+  //   // responsive: [
+  //   //   {
+  //   //     breakpoint: 1520,
+  //   //     settings: {
+  //   //       slidesToShow: 5,
+  //   //       slidesToScroll: 3,
+  //   //       infinite: true,
+  //   //     },
+  //   //   },
+  //   //   {
+  //   //     breakpoint: 1250,
+  //   //     settings: {
+  //   //       slidesToShow: 4,
+  //   //       slidesToScroll: 3,
+  //   //       //   infinite: true,
+  //   //     },
+  //   //   },
+  //   //   {
+  //   //     breakpoint: 1075,
+  //   //     settings: {
+  //   //       slidesToShow: 3,
+  //   //       slidesToScroll: 3,
+  //   //       //   infinite: true,
+  //   //     },
+  //   //   },
+  //   //   {
+  //   //     breakpoint: 835,
+  //   //     settings: {
+  //   //       slidesToShow: 2,
+  //   //       slidesToScroll: 2,
+  //   //       initialSlide: 2,
+  //   //     },
+  //   //   },
+  //   //   {
+  //   //     breakpoint: 670,
+  //   //     settings: {
+  //   //       slidesToShow: 1,
+  //   //       slidesToScroll: 1,
+  //   //     },
+  //   //   },
+  //   // ],
+  // };
   useEffect(() => {
     if (!authLoading) {
       if (authenticated) {
@@ -112,20 +112,20 @@ function MovieReview({ movieDetails, getMovie, loading, authenticated, authLoadi
             {/* <div className="movieReview__content--buttons">
               <MovieReviewButtons />
             </div> */}
-            <div className="movieReview__content--highlyRated">
+            {/* <div className="movieReview__content--highlyRated">
               <ReviewCard />
-            </div>
+            </div> */}
             <div className="movieReview__content--movieCrew">
               <MovieCrewList casts={movieDetails.credits.cast} />
             </div>
 
-            <div className="movieReview__content--allreview">
+            {/* <div className="movieReview__content--allreview">
               <Slider {...settings}>
                 <ReviewCard />
                 <ReviewCard />
                 <ReviewCard />
               </Slider>
-            </div>
+            </div> */}
           </div>
         </>
       ) : (

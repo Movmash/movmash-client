@@ -16,11 +16,12 @@ import CloseOutlinedIcon from "@material-ui/icons/CloseOutlined";
 import { connect } from "react-redux";
 import { deleteList, updateList } from "../redux/actions/dataAction";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
-import { genreConverter } from "../util/genreConverter";
+// import { genreConverter } from "../util/genreConverter";
 import Axios from "../util/axios";
 
 import SearchMovieCard from "./SearchMovieCard";
 import DialogHeader from "./DialogHeader";
+import { useHistory } from "react-router-dom";
 function ListCard({
   createdBy,
   description,
@@ -33,6 +34,7 @@ function ListCard({
   updateList,
   isMyProfile,
 }) {
+  const history = useHistory();
   const [info, setShowInfo] = useState(false);
   const [openDialog, setDailogOpen] = useState(false);
   const [movieListInDialog, setMovieList] = useState(movieList);
@@ -58,7 +60,7 @@ function ListCard({
           })
           .catch((e) => {
             setSearchResult([]);
-            console.log(e);
+            // console.log(e);
           });
       }
     };
@@ -80,13 +82,13 @@ function ListCard({
     setOpen((prev) => (prev = false));
     // console.log(result);
     setMovieList((prev) => [...prev, result]);
-    console.log(movieList);
+    // console.log(movieList);
     setQuery("");
-    console.log(genreConverter(result.genre_ids));
+    // console.log(genreConverter(result.genre_ids));
   };
   const handleOnChange = (event) => {
     if (event.target.value === "") {
-      console.log("heelloo");
+      // console.log("heelloo");
       setOpen((prev) => (prev = false));
     } else setOpen(true);
   };
@@ -126,9 +128,12 @@ function ListCard({
   return (
     <div className="listCard">
       <div className="listCard__header">
-        <div className="search__content__avatar listCardHeader">
+        <div
+          onClick={() => history.push(`/@${createdBy.userName}`)}
+          className="search__content__avatar listCardHeader"
+        >
           <Avatar src={createdBy.profileImageUrl} />
-          <span>{createdBy.userName}</span>
+          <span>{createdBy.fullName}</span>
         </div>
         {isMyProfile && (
           <div className="listCard__headerButtons">
@@ -291,7 +296,7 @@ function ListCard({
                     onChange={(e) => {
                       setTagsInText(e.target.value);
                       setTags(tagsInText.split(","));
-                      console.log(tags);
+                      // console.log(tags);
                     }}
                     fullWidth
                     margin="normal"
@@ -379,7 +384,11 @@ function ListCard({
         <>
           <div className="listCard__movieList">
             {movieList.map((movie) => (
-              <div key={movie.id} className="listCard__movieItem">
+              <div
+                onClick={() => history.push(`/movie/${movie.id}`)}
+                key={movie.id}
+                className="listCard__movieItem"
+              >
                 {movie.poster_path !== null ? (
                   <img
                     className="listCard__moviePoster"

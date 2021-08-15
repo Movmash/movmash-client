@@ -37,7 +37,7 @@ function UserProfile({
     watchHour,
     profileImageUrl,
   } = userDetails;
-  console.log(userName);
+  // console.log(userName);
   useEffect(() => {
     getMashUserDetails(userName);
     document.title = fullName;
@@ -51,8 +51,8 @@ function UserProfile({
     }
   }, [userId, followingList]);
   
-  console.log(userId);
-  console.log(isFollow);
+  // console.log(userId);
+  // console.log(isFollow);
   const [selected, setSelection] = useState("posts");
   // console.log(_id);
   const handleFollowClick = (userId) => {
@@ -142,12 +142,14 @@ function UserProfile({
                   </div>
                   <span>{watchHour}h</span>
                 </div>
-                <div className="userProfile__userData__rowItem">
+
+                {/* <div className="userProfile__userData__rowItem">
                   <div className="userProfile__userData__rowItem--heading">
                     <h3>User Rating</h3>
                   </div>
                   <span>2.8</span>
                 </div>
+               */}
               </div>
               {/* <div className="userProfile__userData__row"></div> */}
             </div>

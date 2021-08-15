@@ -8,7 +8,7 @@ localStorage.setItem("mashReminder", JSON.stringify([]));
 let completedNumberReminders = JSON.parse(
   localStorage.getItem("mashCompletedReminder")
 ).length;
-console.log(completedNumberReminders);
+// console.log(completedNumberReminders);
 store.dispatch({
   type: GET_COMPLETED_REMINDERS,
   payload: completedNumberReminders,
@@ -33,7 +33,7 @@ for (let i = 0; i < reminder.length; i++) {
 }
 if (completedNumberReminders !== completedReminderId.length) {
   //........
-  console.log("Send notification");
+  // console.log("Send notification");
   store.dispatch({
     type: CHANGE_REMINDERS,
     payload: completedReminderId.length,

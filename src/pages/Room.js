@@ -1053,7 +1053,7 @@ function Room({
             >
               <FriendListMessage
                 closeDialog={() => setOpenInviteFriendsDialog(false)}
-                type="text"
+                type="roomText"
                 room={true}
                 link={window.location.href}
               />

@@ -122,7 +122,7 @@ function Chat({
   };
   return (
     <div className="chat">
-    {console.log(rooms)}
+      {console.log(rooms)}
       <div className="chat_container">
         <div className="chat_container__left">
           <div className="chat_container__left__header">
@@ -182,7 +182,10 @@ function Chat({
                   username={`Iamak47`}
                 /> */}
                 <div className="chatUserNamePlate__header__container">
-                  <div className="chatUserNamePlate__header__userInfo chatHeader">
+                  <div
+                    onClick={() => history.push(`/@${selectedUser.userName}`)}
+                    className="chatUserNamePlate__header__userInfo chatHeader"
+                  >
                     <Avatar src={selectedUser.profileImageUrl} />
                     <div className="chatUserNamePlate__header__userName--info">
                       <div className="chatUserNamePlate__header--name">

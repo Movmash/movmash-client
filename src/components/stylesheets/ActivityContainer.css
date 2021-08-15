@@ -43,3 +43,11 @@ grid-gap: 2em;
 .more_content>.MuiSvgIcon-root {
     color: lightgray;
 }
+
+@media only screen and (max-width:750px) {
+ .activityContainer__containers {
+    
+     grid-template-columns: repeat(2, 50%);
+     /* grid-gap: 2em; */
+ }
+  }

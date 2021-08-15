@@ -18,7 +18,7 @@ function MashCarousel({children,compenentSize, componentRightMargin, backButtonM
         }
     }
     const goForward = () => {
-        console.log(children)
+        // console.log(children)
         setTicker((prev) => ++prev);
         if (
           xPixel ===

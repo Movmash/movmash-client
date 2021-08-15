@@ -248,3 +248,11 @@
     background: #499E4C;
     cursor: pointer;
 }
+@media only screen and (max-width:900px) {
+
+    .userProfile__container {
+        width: 45rem;
+    }
+
+
+}

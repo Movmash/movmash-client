@@ -7,6 +7,7 @@ import LiveShowCard from "../components/LiveShowCard";
 import { connect } from "react-redux";
 import { MoonLoader } from "react-spinners";
 import { useHistory } from "react-router-dom";
+// import Footer from "../components/Footer";
 // import liveShowCoverImage from "../images/live_show_cover_image_1.jpeg"
 import liveShowCoverImage from "../images/live_show_cover_image_2.jpg";
 // import liveShowCoverImage from "../images/live_show_cover_image_3.jpg";
@@ -180,6 +181,7 @@ function LiveShow({
             </div>
           </div>
         </>
+        
       ) : (
         <div className="home__bounceloader">
           <MoonLoader size={50} color={"#2aa44f"} loading />

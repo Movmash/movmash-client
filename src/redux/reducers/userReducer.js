@@ -105,7 +105,7 @@ export default function (state = initialState, action) {
         messageRoom: action.payload,
       };
     case UPDATE_ROOM:
-      console.log(action.payload);
+      // console.log(action.payload);
       const oldRoom =
         state.messageRoom !== undefined
           ? state.messageRoom.filter((room) => room._id !== action.payload._id)

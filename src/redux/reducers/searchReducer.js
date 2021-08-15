@@ -71,7 +71,7 @@ const searchReducer = (state = initialState, action) => {
         loadingTicket: true,
       };
     case GET_PEOPLE:
-      console.log(action.payload)
+      // console.log(action.payload)
       return {
         ...state,
         people: action.payload,

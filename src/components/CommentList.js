@@ -1,11 +1,16 @@
 import React from "react";
 import "./stylesheets/CommentList.css";
 import CommentCard from "./CommentCard";
-function CommentList({ comments, postPage }) {
+import { useHistory } from "react-router-dom";
+function CommentList({ comments, postPage, postId }) {
+  const history = useHistory();
   return (
     <div className="commentList">
       {!postPage && (
-        <div className="commentList__viewFullPost">
+        <div
+          onClick={() => history.push(`/post/${postId}`)}
+          className="commentList__viewFullPost"
+        >
           <p>view full post</p>
         </div>
       )}

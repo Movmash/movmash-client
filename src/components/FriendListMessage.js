@@ -31,10 +31,10 @@ function FriendListMessage({
       .then((res) => {
         setFollowers(res.data);
         setFilteredFollowers(res.data);
-        console.log(res.data);
+        // console.log(res.data);
       })
       .catch((e) => {
-        console.log(e);
+        // console.log(e);
       });
     // return () => {
     //   setFollowers([]);
@@ -49,10 +49,10 @@ function FriendListMessage({
       .then((res) => {
         setFollowings(res.data);
         setFilteredFollowings(res.data);
-        console.log(res.data);
+        // console.log(res.data);
       })
       .catch((e) => {
-        console.log(e);
+        // console.log(e);
       });
     // return () => {
     //   setFollowings([]);
@@ -76,7 +76,8 @@ function FriendListMessage({
     );
   }, [followings, filterQuery]);
   const handleCreateChat = (userId) => {
-    createRoomChat(userId, history, closeDialog, type, movieData, postData);
+    const message = link;
+    createRoomChat(userId, history, closeDialog, type, movieData, postData, message);
   };
   //   const handleSendMoviePost = (userId) => {
   // if(socket !== undefined){

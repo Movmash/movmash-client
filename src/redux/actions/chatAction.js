@@ -57,7 +57,8 @@ export const createRoomChat = (
   closeDialog,
   type,
   movieData,
-  postData
+  postData,
+  message
 ) => (dispatch) => {
   axios
     .post("/api/v1/home/create-chat-room", {
@@ -65,6 +66,7 @@ export const createRoomChat = (
       type,
       movieData,
       postData,
+      message
     })
     .then((res) => {
       if (!type) {

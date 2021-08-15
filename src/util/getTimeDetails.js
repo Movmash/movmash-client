@@ -56,7 +56,7 @@ const getTimeDetails = (givenDateInfo, detail) => {
       break;
 
     default:
-      console.log(month);
+      // console.log(month);
       break;
   }
 
@@ -75,7 +75,7 @@ const getTimeDetails = (givenDateInfo, detail) => {
       else if (Math.floor(minutes / 10) === 0) return `0${minutes}`;
       else return minutes;
     default:
-      console.log(detail);
+      // console.log(detail);
       break;
   }
 };

@@ -23,7 +23,7 @@ export const getUnreadUserRoom = () => (dispatch) => {
   axios
     .get("/api/v1/home/get-unread-rooms")
     .then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       dispatch({ type: GET_UNREAD_ROOM, payload: res.data });
     })
     .catch((e) => {
@@ -36,6 +36,7 @@ export const getAllNotification = () => (dispatch) => {
     .get("/api/v1/home/get-notification")
     .then((res) => {
       dispatch({ type: GET_ALL_NOTIFICATION, payload: res.data });
+      // console.log(res.data);
     })
     .catch((e) => {
       console.log(e);
@@ -51,7 +52,7 @@ export const markNotificationRead = (notificationId) => (dispatch) => {
       notificationId
     )
     .then((doc) => {
-      console.log(doc);
+      // console.log(doc);
       dispatch({ type: MARK_NOTIFICATIONS_READ, payload: notificationId });
     })
     .catch((e) => {
@@ -105,7 +106,7 @@ export const getOAuthUserData = () => (dispatch) => {
   axios
     .get("/current_user")
     .then((res) => {
-      console.log(res)
+      // console.log(res)
       if(res.data==="") return dispatch({ type: SET_UNAUTHENTICATED });
       dispatch({ type: SET_USER, payload: res.data });
     })
@@ -118,7 +119,7 @@ export const getOAuthUserData = () => (dispatch) => {
 export const updateUserInfo = (userInfo, history) => (dispatch) => {
   axios.put("/api/v1/home/update-user-details", userInfo).then(res => {
     dispatch({ type: UPDATE_USER_INFO , payload: res.data});
-    console.log(res.data)
+    // console.log(res.data)
     history.replace(`/@${res.data.userName}`)
   }).catch(e => {
     console.log(e);
@@ -134,7 +135,8 @@ export const updateProfilePicture = (file) => dispatch => {
       "content-type": "multipart/form-data", 
     },
   }).then(res => {
-    dispatch({type: UPDATE_USER_PROFILE_PIC, payload: res.data})
+    dispatch({type: UPDATE_USER_PROFILE_PIC, payload: res.data});
+    // console.log(res.data,1);
   }).catch(e => {
     console.log(e);
   });
@@ -151,6 +153,7 @@ export const updateCoverPicture = (file) => (dispatch) => {
     })
     .then((res) => {
       dispatch({ type: UPDATE_USER_COVER_PIC, payload: res.data });
+      // console.log(res.data, 2);
     })
     .catch((e) => {
       console.log(e);
@@ -159,7 +162,7 @@ export const updateCoverPicture = (file) => (dispatch) => {
 export const removeFollower = (removeFollowerId) => dispatch => {
   axios.post("/api/v1/home/remove-follower", { removeFollowerId }).then(res => {
     dispatch({type: REMOVE_FOLLOWER, payload: res.data});
-    console.log(res.data);
+    // console.log(res.data);
   }).catch(e => {
     console.log(e);
   });

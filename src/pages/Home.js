@@ -39,10 +39,13 @@ function Home({
     <>
       {!loading ? (
         <div className="home">
-          <div className="home__left--part">
+          
+        {/* <div className="home__sidebars">
+          
+        </div> */}
+        <div className="home__left--part">
             <LeftSideBar postType="home" />
           </div>
-
           <div className="home__middle--part">
             <div className="home__story--part"></div>
             {postLoading ? (

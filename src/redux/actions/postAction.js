@@ -55,7 +55,7 @@ export const likePost = (postId) => (dispatch) => {
   axios
     .put(`/api/v1/home/like-post`, { postId: postId })
     .then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       dispatch({
         type: LIKE_POST,
         payload: res.data,
@@ -70,7 +70,7 @@ export const unlikePost = (postId) => (dispatch) => {
   axios
     .put("/api/v1/home/unlike-post", { postId: postId })
     .then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       dispatch({ type: UNLIKE_POST, payload: res.data });
     })
     .catch((e) => {

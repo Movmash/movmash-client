@@ -33,6 +33,9 @@
 .chatHeader {
   margin-left: 20px;
 }
+.chatHeader>* {
+  cursor: pointer;
+}
 
 
 .chat_container__left {

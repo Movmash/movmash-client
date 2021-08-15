@@ -219,7 +219,7 @@ function PeopleRoomTab({
     if (socket) {
       socket.on("user-list-inside-the-room", (data) => {
         setUserList(data);
-        console.log(data);
+        // console.log(data);
       });
     }
   }, [socket]);

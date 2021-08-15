@@ -1,12 +1,13 @@
 import React from "react";
 import "./stylesheets/CommentCard.css";
-import { Avatar, IconButton } from "@material-ui/core";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import { Avatar } from "@material-ui/core";
+// import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import urls from "../util/urls";
 import { genreConverter } from "../util/genreConverter";
+import { useHistory } from "react-router-dom";
 function CommentCard({ commentDetail }) {
   const { commentedBy, comment } = commentDetail;
-
+  const history = useHistory();
   return (
     <div className="commentCard">
       <div
@@ -18,11 +19,14 @@ function CommentCard({ commentDetail }) {
           <Avatar src={commentedBy.profileImageUrl} />
         </div>
         <div className="commentCard___comments">
-          <div className="commentCard__userInfo">
+          <div
+            onClick={() => history.push(`/@${commentedBy.userName}`)}
+            className="commentCard__userInfo"
+          >
             <h5>{commentedBy.userName}</h5>
-            <IconButton>
+            {/* <IconButton>
               <FavoriteBorderIcon />
-            </IconButton>
+            </IconButton> */}
           </div>
           <div className="commentCard__CommentMessage">
             <p>{comment}</p>

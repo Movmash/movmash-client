@@ -47,11 +47,11 @@ function EditProfile({ close, user, updateUserInfo }) {
       if (userName.split(" ").length === 1) {
         Axios.get(`/api/v1/home/check-username-availability/${userName}`)
           .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             setUserNameAvailable(res.data.availability);
           })
           .catch((e) => {
-            console.log(e);
+            // console.log(e);
           });
       } else {
         setUserNameAvailable("");
@@ -217,7 +217,7 @@ function EditProfile({ close, user, updateUserInfo }) {
         break;
 
       default:
-        console.log("default");
+        // console.log("default");
         break;
     }
   };

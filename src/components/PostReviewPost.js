@@ -45,16 +45,16 @@ function PostReviewPost({ closeReview, sendPost, postType }) {
 
   const handleOnChange = (event) => {
     if (event.target.value === "") {
-      console.log("heelloo");
+      // console.log("heelloo");
       setOpen((prev) => (prev = false));
     } else setOpen(true);
   };
 
   const handleOnClickSearchCard = (result) => {
     setOpen((prev) => (prev = false));
-    console.log(result);
+    // console.log(result);
     setPostMovie(result);
-    console.log(genreConverter(result.genre_ids));
+    // console.log(genreConverter(result.genre_ids));
   };
 
   const handleSubmit = (event, movieDetail) => {
@@ -70,7 +70,7 @@ function PostReviewPost({ closeReview, sendPost, postType }) {
       movieTitle: movieDetail.title ? movieDetail.title : movieDetail.name,
       postType: postType,
     };
-    console.log(postDetails);
+    // console.log(postDetails);
     sendPost(postDetails);
     closeReview();
   };

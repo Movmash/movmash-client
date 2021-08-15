@@ -32,7 +32,7 @@ function MoviePoster({ posterUrl, id, getMovieDetail, detail }) {
     genreId: detail.genre_ids,
   };
   const handleLikeMovie = () => {
-    console.log("liked");
+    // console.log("liked");
     setSelectedLike(true);
     setSelectedDislike(false);
 
@@ -104,7 +104,7 @@ function MoviePoster({ posterUrl, id, getMovieDetail, detail }) {
       .catch((e) => console.log(e));
   };
   const handleAddToWatchlist = () => {
-    console.log("Add to WatchList");
+    // console.log("Add to WatchList");
     setSelectedWatchList(true);
     axios
       .post("/api/v1/movie/add-to-watchlist", movieDetails)
@@ -131,7 +131,7 @@ function MoviePoster({ posterUrl, id, getMovieDetail, detail }) {
       });
   };
   const handleHoverEnd = () => {
-    console.log("hell ye");
+    // console.log("hell ye");
 
     setButtonAvailabe(false);
   };

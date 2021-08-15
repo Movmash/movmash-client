@@ -2,7 +2,7 @@ import React from "react";
 import "./stylesheets/MovieCrewList.css";
 import noCeleb from "../images/no_celeb.jpg"
 function MovieCrewList({ casts }) {
-  console.log(casts);
+  // console.log(casts);
   return (
     <div className="movieCrewList">
       {casts.map((cast) =>(

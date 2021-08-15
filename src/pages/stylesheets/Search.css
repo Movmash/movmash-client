@@ -202,7 +202,6 @@
 .search__browse {
     display: flex;
     justify-content: center;
-
 }
 
 
@@ -211,6 +210,9 @@
     display: flex;
     flex-flow: column;
     align-items: center;
+}
+.search__avatar>*{
+    cursor: pointer;
 }
 
 .search__peopleCardList {
@@ -262,6 +264,14 @@ overflow: hidden;
 .peopleMatchCard__content__button.widthButton>button {
     width: 170px;
     margin: 0 10px 0 10px;
+}
+.unFollowButton>button {
+   background-color: transparent;
+   color: var(--green);
+}
+.unFollowButton>button:hover {
+    /* background-color: transparent; */
+    color: var(--boldText);
 }
 .search__browse__people,
 .search__browse__ticket,
