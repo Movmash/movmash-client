@@ -7,11 +7,8 @@ function CommentList({ comments, postPage, postId }) {
   return (
     <div className="commentList">
       {!postPage && (
-        <div
-          onClick={() => history.push(`/post/${postId}`)}
-          className="commentList__viewFullPost"
-        >
-          <p>view full post</p>
+        <div className="commentList__viewFullPost">
+          <p onClick={() => history.push(`/post/${postId}`)}>view full post</p>
         </div>
       )}
       {postPage ? (

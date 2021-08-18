@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./stylesheets/peopleRoomTab.css";
 import { Avatar } from "@material-ui/core";
 // import MicIcon from "@material-ui/icons/Mic";
@@ -6,7 +6,6 @@ import { Avatar } from "@material-ui/core";
 // import VideocamOffIcon from "@material-ui/icons/VideocamOff";
 // import MicOffIcon from "@material-ui/icons/MicOff";
 // import VideoCallIcon from "@material-ui/icons/VideoCall";
-import { useSocket } from "../contexts/SocketProvider";
 import { connect } from "react-redux";
 // import {ReactComponent as HostCrown} from "../icons/host_crown.svg";
 import { ReactComponent as HostCrown } from "../icons/host_crown_2.svg";
@@ -36,12 +35,16 @@ import { ReactComponent as HostCrown } from "../icons/host_crown_2.svg";
 // }
 function PeopleRoomTab({
   roomCode,
-  userName,userId,hostId,
+  userName,
+  userId,
+  hostId,
+  socket,
   handleVideoChat,
   stream,
   peers,
   startVideoChat,
   userVideo,
+  userList,
 }) {
   // peer.on("error", console.log);
 
@@ -49,10 +52,12 @@ function PeopleRoomTab({
   //......
   // const [videoStream, setVideoStream] = useState({});
   // const [peers, setPeers] = useState([]);
-  const socket = useSocket();
+  // const socket = useSocket();
   // const userVideo = useRef();
   // const peersRef = useRef([]);
-  const [userList, setUserList] = useState([]);
+  //..........................--------------[]
+  // const [userList, setUserList] = useState([]);
+  //---------------------------------------[]
   // const [startVideoChat, setStartVideoChat] = useState(false);
   // useEffect(() => {
   //   if (userVideo.current) userVideo.current.srcObject = stream;
@@ -210,25 +215,27 @@ function PeopleRoomTab({
   //     socket.emit("get-user-in-the-room", { roomId: `${roomCode}10` });
   //   }
   // }, [socket, roomCode]);
-  useEffect(() => {
-    if (socket) {
-      socket.emit("get-user-in-the-room", { roomId: roomCode });
-    }
-    // return () => {
-    //   if (socket === undefined) return;
-    //   if (hostId === userId) {
-    //     socket.off();
-    //   }
-    // };
-  }, [socket, roomCode, hostId, userId]);
-  useEffect(() => {
-    if (socket) {
-      socket.on("user-list-inside-the-room", (data) => {
-        setUserList(data);
-        // console.log(data);
-      });
-    }  
-  }, [socket]);
+  //............................[]............
+  // useEffect(() => {
+  //   if (socket) {
+  //     socket.emit("get-user-in-the-room", { roomId: roomCode });
+  //   }
+  //   // return () => {
+  //   //   if (socket === undefined) return;
+  //   //   if (hostId === userId) {
+  //   //     socket.off();
+  //   //   }
+  //   // };
+  // }, [socket, roomCode, hostId, userId]);
+  // useEffect(() => {
+  //   if (socket) {
+  //     socket.on("user-list-inside-the-room", (data) => {
+  //       setUserList(data);
+  //       // console.log(data);
+  //     });
+  //   }
+  // }, [socket]);
+  //...............[].........................
   //.....................................................
   // useEffect(() => {
   //   console.log("hell");

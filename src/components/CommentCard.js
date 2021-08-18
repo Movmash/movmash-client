@@ -19,11 +19,10 @@ function CommentCard({ commentDetail }) {
           <Avatar src={commentedBy.profileImageUrl} />
         </div>
         <div className="commentCard___comments">
-          <div
-            onClick={() => history.push(`/@${commentedBy.userName}`)}
-            className="commentCard__userInfo"
-          >
-            <h5>{commentedBy.userName}</h5>
+          <div className="commentCard__userInfo">
+            <h5 onClick={() => history.push(`/@${commentedBy.userName}`)}>
+              {commentedBy.userName}
+            </h5>
             {/* <IconButton>
               <FavoriteBorderIcon />
             </IconButton> */}

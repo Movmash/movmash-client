@@ -101,7 +101,7 @@ function MyProfile({
                 <PhotoCamera />
                 <span>Choose Photo</span>
               </label>
-              
+
               <Avatar src={profileImageUrl} />
             </div>
             <div className="myProfile__profileButton">
@@ -160,9 +160,9 @@ function MyProfile({
                 <div className="myProfile__userData__rowItem--heading">
                   <h3>Watch Hour</h3>
                 </div>
-                <span>{watchHour}h</span>
+                <span>{(watchHour / 3600).toFixed(2)}h</span>
               </div>
-{/* 
+              {/* 
               <div className="myProfile__userData__rowItem">
                 <div className="myProfile__userData__rowItem--heading">
                   <h3>User Rating</h3>

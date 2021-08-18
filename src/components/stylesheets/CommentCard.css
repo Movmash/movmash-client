@@ -36,9 +36,10 @@
     /* margin-top: -10px; */
     margin-bottom: 10px;
     width: 90%;
+}
+.commentCard__userInfo>* {
     cursor: pointer;
 }
-
 .commentCard__profilePic>.MuiAvatar-root>img {
     width: 32px !important;
     height: 32px !important;

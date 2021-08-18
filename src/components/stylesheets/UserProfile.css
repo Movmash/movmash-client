@@ -180,6 +180,12 @@
     height: 70px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: sticky;
+    z-index: 50;
+    top: 70px;
 }
 
 
@@ -188,14 +194,6 @@
 
 }
 
-.userProfile__allPostButtons {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    position: sticky;
-    z-index: 100;
-    top: 70px;
-}
 
 .userProfile__allPostButton {
     display: flex;

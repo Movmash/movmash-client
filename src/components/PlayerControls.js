@@ -9,7 +9,7 @@ import FullscreenIcon from "@material-ui/icons/Fullscreen";
 import FullscreenExitIcon from "@material-ui/icons/FullscreenExit";
 import { IconButton } from "@material-ui/core";
 import VolumeOffIcon from "@material-ui/icons/VolumeOff";
-import { Link } from "react-router-dom";
+import {  useHistory } from "react-router-dom";
 import { MoonLoader } from "react-spinners";
 function PlayerControls({
   onPlayPause, //
@@ -37,6 +37,7 @@ function PlayerControls({
   host,
   isProgress,
 }) {
+  const history = useHistory();
   // var elem = document.getElementById("playPauseButton"),
   //   fadeInInterval,
   //   fadeOutInterval;
@@ -83,13 +84,13 @@ function PlayerControls({
   return (
     <div className="playerControls">
       {" "}
-      <Link to="/live">
+      {/* <Link to="/live"> */}
         <div className="playerControls__topControls medium">
-          <IconButton>
+          <IconButton onClick={() => history.replace("/live")}>
             <CloseIcon />
           </IconButton>
         </div>
-      </Link>
+      {/* </Link> */}
       <div
         // onClick={handleFadedAnimation}
         className={`playerControls__middleControls large ${

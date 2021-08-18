@@ -140,7 +140,7 @@ function UserProfile({
                   <div className="userProfile__userData__rowItem--heading">
                     <h3>Watch Hour</h3>
                   </div>
-                  <span>{watchHour}h</span>
+                  <span>{(watchHour / 3600).toFixed(2)}h</span>
                 </div>
 
                 {/* <div className="userProfile__userData__rowItem">
@@ -221,11 +221,7 @@ function UserProfile({
         </>
       ) : (
         <div className="home__bounceloader">
-          <MoonLoader
-            size={50}
-            color={"#2aa44f"}
-            loading
-          />
+          <MoonLoader size={50} color={"#2aa44f"} loading />
         </div>
       )}
     </div>

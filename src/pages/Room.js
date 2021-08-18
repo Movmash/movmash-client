@@ -884,6 +884,28 @@ function Room({
     });
     }
   }, [socket, updateLiveShowInfo]);
+  //people tabs ..................
+
+  const [userList, setUserList] = useState([]);
+    useEffect(() => {
+      if (socket) {
+        socket.emit("get-user-in-the-room", { roomId: roomCode });
+      }
+      // return () => {
+      //   if (socket === undefined) return;
+      //   if (hostId === userId) {
+      //     socket.off();
+      //   }
+      // };
+    }, [socket, roomCode, userId]);
+    useEffect(() => {
+      if (socket) {
+        socket.on("user-list-inside-the-room", (data) => {
+          setUserList(data);
+          // console.log(data);
+        });
+      }
+    }, [socket]);
   return (
     <div
       onMouseMove={handleMouseMove}
@@ -1148,6 +1170,7 @@ function Room({
               // userVideo={userVideo}
               // peers={peers}
               // stream={videoStream}
+              userList={userList}
             />
           )}
           {selectedTab === "setting" && <SettingRoomTab />}

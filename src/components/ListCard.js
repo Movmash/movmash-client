@@ -129,7 +129,7 @@ function ListCard({
     <div className="listCard">
       <div className="listCard__header">
         <div
-          onClick={() => history.push(`/@${createdBy.userName}`)}
+          onClick={() => history.replace(`/@${createdBy.userName}`)}
           className="search__content__avatar listCardHeader"
         >
           <Avatar src={createdBy.profileImageUrl} />
