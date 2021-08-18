@@ -204,7 +204,7 @@ function Room({
           // }
         }
 
-        console.log("1");
+        // console.log("1");
       } else {
         history.push("/login");
       }
@@ -254,7 +254,7 @@ function Room({
       // console.log(ReactPlayer.canPlay(liveShowDetail.videoUrl));
 
       socket.on("party-message", (data) => {
-        console.log(data);
+        // console.log(data);
         setAllMessages((prev) => [...prev, data]);
       });
     }
@@ -273,7 +273,7 @@ function Room({
     if (socket === undefined || sendMessage === "") return;
 
     socket.emit("send-party-message", chatData);
-    console.log(allMessages);
+    // console.log(allMessages);
     setSendMessage("");
   };
   //......................................................................................
@@ -282,7 +282,7 @@ function Room({
     count = 0;
   };
   const handlePlayPause = () => {
-    console.log("play or pause");
+    // console.log("play or pause");
     if (!playing) {
       setPlayerState((prev) => {
         return {
@@ -346,7 +346,7 @@ function Room({
     // setPlayerState({ ...playerState, ...changeState });
   };
   const handleOnStart = (e) => {
-    console.log("start");
+    // console.log("start");
     setProgress(false);
   };
   const handleSeekChange = (e) => {
@@ -408,7 +408,7 @@ function Room({
     // setPlayerState({ ...playerState, seeking: true });
   };
   const handleSeekMouseUp = (e) => {
-    console.log(e.target.value / 1000);
+    // console.log(e.target.value / 1000);
     setPlayerState((prev) => {
       return {
         ...prev,
@@ -477,7 +477,7 @@ function Room({
     if (socket !== undefined) {
       socket.emit("new-room", roomCode, (data) => {
         if (data) {
-          console.log("Host is syncing the new socket! ");
+          // console.log("Host is syncing the new socket! ");
           syncVideo(roomCode);
         }
       });
@@ -491,7 +491,7 @@ function Room({
   //   });
   // };
   const getHostData = (roomCode) => {
-    console.log("host data");
+    // console.log("host data");
     socket.emit("get-host-data", {
       room: roomCode,
     });
@@ -582,8 +582,8 @@ function Room({
       socket.on("sync-video-client", (data) => {
         let currTime = data.time;
         let state = data.state;
-        console.log(`current time is: ${currTime}`);
-        console.log(`state ${state}`);
+        // console.log(`current time is: ${currTime}`);
+        // console.log(`state ${state}`);
         playerRef.current.seekTo(currTime);
         // setPlayerState((prev) => {
         //   return {
@@ -639,11 +639,11 @@ function Room({
   useEffect(() => {
     if (socket !== undefined) {
       socket.on("just-seek", (data) => {
-        console.log("heyyyyyy");
-        let clientTime =
-          playerRef.current.getCurrentTime() / playerRef.current.getDuration();
+        // console.log("heyyyyyy");
+        // let clientTime =
+        //   playerRef.current.getCurrentTime() / playerRef.current.getDuration();
         let currTime = data.time;
-        console.log(clientTime, currTime);
+        // console.log(clientTime, currTime);
         playerRef.current.seekTo(currTime);
         // if (clientTime < currTime - 2 || clientTime > currTime + 2) {
 
@@ -662,10 +662,10 @@ function Room({
 
   useEffect(() => {
     if (socket !== undefined) {
-      console.log("gte-data");
+      // console.log("gte-data");
       // if (host) {
       socket.on("get-data", (data) => {
-        console.log("hi im the host , you called ?");
+        // console.log("hi im the host , you called ?");
         // socket.emit("sync-host", { roomCode: roomCode });
         //.....
         let currTime =
@@ -703,7 +703,7 @@ function Room({
   useEffect(() => {
     if (socket !== undefined) {
       socket.on("sync-host-server", (data) => {
-        console.log("sync-host-server");
+        // console.log("sync-host-server");
         syncVideo(roomCode);
       });
     }
@@ -714,8 +714,8 @@ function Room({
       socket.on("sync-the-video-with-host", (data) => {
         let currTime = data.time;
         let state = data.state;
-        console.log(`current time is: ${currTime}`);
-        console.log(`state ${state}`);
+        // console.log(`current time is: ${currTime}`);
+        // console.log(`state ${state}`);
         playerRef.current.seekTo(currTime);
         // setPlayerState((prev) => {
         //   return {
@@ -747,7 +747,7 @@ function Room({
       socket.on("sync-the-video-with-host-button", (data) => {
         let currTime = data.time;
         let state = data.state;
-        console.log(`current time is: ${currTime}`);
+        // console.log(`current time is: ${currTime}`);
         // console.log("state" + state);
         playerRef.current.seekTo(currTime);
         // setPlayerState((prev) => {
@@ -803,10 +803,10 @@ function Room({
       socket.on("compareHost", (data) => {
         var hostTime = data.currTime;
         // var hostState = data.state;
-        var currTime =
-          playerRef.current.getCurrentTime() / playerRef.current.getDuration();
+        // var currTime =
+        //   playerRef.current.getCurrentTime() / playerRef.current.getDuration();
         // var state = playing;
-        console.log("curr: " + currTime + " Host: " + hostTime);
+        // console.log("curr: " + currTime + " Host: " + hostTime);
         playerRef.current.seekTo(hostTime);
         // if (currTime < hostTime - 2 || currTime > hostTime + 2) {
         //   disconnected();
@@ -870,7 +870,7 @@ function Room({
   useEffect(() => {
     if (socket !== undefined) {
     socket.on("new-room-video-source", (payload) => {
-      console.log(payload);
+      // console.log(payload);
       updateVideoUrl(payload);
     });
     }
@@ -879,7 +879,7 @@ function Room({
   useEffect(() => {
     if (socket !== undefined) {
     socket.on("new-room-info", (payload) => {
-      console.log(payload);
+      // console.log(payload);
       updateLiveShowInfo(payload);
     });
     }

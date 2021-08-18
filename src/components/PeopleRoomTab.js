@@ -36,7 +36,7 @@ import { ReactComponent as HostCrown } from "../icons/host_crown_2.svg";
 // }
 function PeopleRoomTab({
   roomCode,
-  userName,
+  userName,userId,hostId,
   handleVideoChat,
   stream,
   peers,
@@ -214,14 +214,20 @@ function PeopleRoomTab({
     if (socket) {
       socket.emit("get-user-in-the-room", { roomId: roomCode });
     }
-  }, [socket, roomCode]);
+    // return () => {
+    //   if (socket === undefined) return;
+    //   if (hostId === userId) {
+    //     socket.off();
+    //   }
+    // };
+  }, [socket, roomCode, hostId, userId]);
   useEffect(() => {
     if (socket) {
       socket.on("user-list-inside-the-room", (data) => {
         setUserList(data);
         // console.log(data);
       });
-    }
+    }  
   }, [socket]);
   //.....................................................
   // useEffect(() => {
@@ -440,6 +446,8 @@ function PeopleRoomTab({
 const mapStateToProps = (state) => {
   return {
     userName: state.user.userName,
+    // userId: state.user._id,
+    // hostId: state.liveShow.liveShowDetail.host._id,
   };
 };
 

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import io from "socket.io-client";
-
+import baseURL from "../util/constantConfig";
 const SocketContext = React.createContext();
 
 export function useSocket() {
@@ -12,7 +12,7 @@ export function SocketProvider({ id, children }) {
 
   useEffect(() => {
     if (id !== null) {
-      const newSocket = io("http://localhost:8000", { query: { id } });
+      const newSocket = io(baseURL, { query: { id } });
       setSocket(newSocket);
 
       return () => {

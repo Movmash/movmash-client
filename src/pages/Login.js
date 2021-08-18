@@ -12,6 +12,7 @@ import coverPoster from "../images/login_cover_pic_5.jpg";
 // import coverPoster from "../images/login_cover_pic_6.jpg";
 // import coverPoster from "../images/login_cover_pic_7.jpg";
 import MovmashLogo from "../images/Movmash_logo.png";
+import baseURL from "../util/constantConfig";
 function Login({ user, loginUser }) {
   const history = useHistory();
 
@@ -41,15 +42,15 @@ function Login({ user, loginUser }) {
               <div className="login-box">
                 <img src={MovmashLogo} alt="logo" />
                 <h2>Log in to your account</h2>
-                <a
-                  href="http://localhost:8000/auth/facebook"
+                {/* <a
+                  href="/auth/facebook"
                   className="social-button"
                   id="facebook-connect"
                 >
                   <span>Login with Facebook</span>
-                </a>
+                </a> */}
                 <a
-                  href="http://localhost:8000/auth/google"
+                  href={`${baseURL}/auth/google`}
                   className="social-button"
                   id="google-connect"
                 >

@@ -18,7 +18,7 @@ import {
   REMOVE_FOLLOWER,
   UNDO_REMOVE_FOLLOWER,
 } from "../types";
-
+import baseURL from "../../util/constantConfig"
 export const getUnreadUserRoom = () => (dispatch) => {
   axios
     .get("/api/v1/home/get-unread-rooms")
@@ -90,7 +90,7 @@ export const logoutUser = () => (dispatch) => {
   // localStorage.removeItem("mashDBToken");
   // delete axios.defaults.headers.common["Authorization"];
   dispatch({ type: SET_UNAUTHENTICATED });
-  window.location.href="http://localhost:8000/logout"
+  window.location.href=`${baseURL}/logout`;
   // axios
   //   .get("/logout")
   //   .then((res) => {

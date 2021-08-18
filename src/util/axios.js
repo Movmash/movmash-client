@@ -1,8 +1,10 @@
 import axios from "axios";
 // const URL = "http://localhost:8000";
-
-const URL = "/";
+import baseURL from "./constantConfig";
+// const URL = "/";
 axios.defaults.withCredentials = true;
 export default axios.create({
-  baseURL: URL,
+  baseURL: baseURL,
 });
+
+// export default axios;

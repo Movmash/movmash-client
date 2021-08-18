@@ -50,7 +50,7 @@ function SettingRoomTab({ liveShowDetail, userId }) {
     };
     socket.emit("change-room-info", roomChangeData);
   };
-  const isHost = host === userId;
+  const isHost = host._id === userId;
   return (
     <div className="settingRoomTab">
       <div className="settingRoomTab__changeVideoSrc">
