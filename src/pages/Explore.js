@@ -9,16 +9,25 @@ import ReviewPost from "../components/ReviewPost.js";
 import { BounceLoader } from "react-spinners";
 import TicketPost from "../components/TicketPost.js";
 import SuggestMePost from "../components/SuggestMePost.js";
+import {useHistory} from "react-router-dom";
 function Explore({
   getExplorePost,
   authenticated,
   loading,
   posts,
   postLoading,
+  authLoading
 }) {
+  const history = useHistory();
   useEffect(() => {
-    getExplorePost();
-  }, [getExplorePost]);
+    if (!authLoading) {
+      if (authenticated) {
+        getExplorePost();
+      } else {
+        history.push("/login");
+      }
+    }
+  }, [authLoading, getExplorePost, authenticated, history]);
   return (
     <div className="explore">
       {" "}
@@ -89,6 +98,7 @@ const mapStateTopProps = (state) => {
     loading: state.user.loading,
     posts: state.post.posts,
     postLoading: state.post.loading,
+    authLoading: state.user.authLoading
   };
 };
 export default connect(mapStateTopProps, { getExplorePost })(Explore);

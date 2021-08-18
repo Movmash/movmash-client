@@ -1,0 +1,21 @@
+.search__avatar>.searchLoadingSkeleton {
+    /* object-fit: contain; */
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    background: #3d3d3d;
+    /* border: 1px solid var(--border); */
+
+}
+.searchLoadingSkeletonSpan {
+     width: 139px;
+     height: 23px;
+     border-radius: 7px;
+    background: #3d3d3d;
+}
+.search__peopleCardListHeading {
+      width: 139px;
+      height: 23px;
+      border-radius: 7px;
+      background: #3d3d3d;
+}

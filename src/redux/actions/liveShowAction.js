@@ -2,12 +2,14 @@ import axios from "../../util/axios";
 import {
   // LOADING_ALL_LIVESHOW,
   // GET_ALL_LIVESHOW,
-  LOADING_LIVESHOW_DETAIL,
+  // LOADING_LIVESHOW_DETAIL,
   GET_LIVESHOW_DETAIL,
   LOADING_CREATE_LIVESHOW,
   CREATE_LIVESHOW,
   LOADING_MY_FAMILY_SHOW,
   MY_FAMILY_SHOW,
+  UPDATE_VIDEO_SOURCE,
+  UPDATE_LIVE_SHOW_INFO,
 } from "../types";
 
 // export const getAllLiveShow = () => (dispatch) => {
@@ -72,3 +74,11 @@ export const createLiveShow = (showDetail, history) => (dispatch) => {
       console.log(e);
     });
 };
+
+export const updateVideoUrl = (showDetail) => (dispatch) => {
+  dispatch({type: UPDATE_VIDEO_SOURCE, payload: showDetail});
+}
+
+export const updateLiveShowInfo = (showDetail) => dispatch => {
+  dispatch({type: UPDATE_LIVE_SHOW_INFO, payload: showDetail});
+}

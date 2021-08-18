@@ -16,7 +16,9 @@ function RatingFrom({ closeRatingForm, movieId }) {
     };
     axios
       .post("/api/v1/movie/post-user-review", reviewData)
-      .then((res) => console.log(res.data))
+      .then((res) => {
+        // console.log(res.data)
+      })
       .catch((e) => console.log(e));
   };
   return (

@@ -21,7 +21,7 @@ export const getBannerUpcomingMovies = () => {
     axios
       .get("/api/v1/movie/upcoming-cover")
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         dispatch({ type: GET_UPCOMINGMOVIE, payload: res.data });
       })
       .catch((e) => {
@@ -45,7 +45,7 @@ export const getMovieDetail = (movieId) => {
           .then((status) => {
             let movie_status = {};
             movie_status = { ...status.data };
-            console.log(payload);
+            // console.log(payload);
             axios
               .get(
                 `/api/v1/movie/movie-rated-status/${movieId}`

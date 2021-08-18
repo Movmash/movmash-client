@@ -1,0 +1,186 @@
+.roomInfoDialog{
+    width: 600px;
+    height: 678px;
+    border-radius: 7px ;
+    border: 1px solid var(--border);
+}
+.roomInfoDialog__content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.roomInfoDialog__content__banner{
+    width: 555px;
+    margin-top: 20px;
+}
+.roomInfoDialog__content__tabs{
+     width: 555px;
+     margin-top: 20px;
+     background: var(--palletes);
+     border-radius: 5px;
+     display: flex;
+     height: 45px;
+}
+.roomInfoDialog__content__tab{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 5px;  
+}
+.roomInfoDialog__content__tab>span {
+     cursor: pointer;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     font-weight: 600;
+     border-radius: 5px;
+     width: 95%;
+     height: 35px;
+     transition: 200ms;
+}
+.roomInfoDialog__content__tab.active>span {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    border-radius: 5px;
+    width: 95%;
+    height: 35px;
+    color: var(--green);
+}
+.roomInfoDialog__content__tab.active>span:hover {
+    background: transparent;
+}
+
+.roomInfoDialog__content__tab>span:hover {
+    background: rgb(87, 87, 87);
+}
+.roomInfoDialog__content__tabContent{
+    width: 555px;
+    overflow-y: auto;
+    height: 27ch;
+}
+.roomInfoDialog__content__banner>img{
+    width: 100%;
+    height: 25ch;
+    object-fit: cover;
+    border-radius: 5px;
+}
+.roomInfoDialog__content__tabContent__userInfo{
+    position: relative;
+    display: flex;
+    align-items: center;
+    /* background: red; */
+    padding: 10px 0 10px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 0 10px;
+    /* transition: 250ms; */
+}
+.roomInfoDialog__content__tabContent__userInfo>span{
+    margin-left: 20px;
+    font-weight: 600;
+}
+.roomInfoDialog__content__tabContent__userInfo:hover {
+    background:var(--palletes);
+}
+.roomInfoDialog_hostCrownIcon>*{
+     bottom: 40px;
+     width: 1rem;
+     position: absolute;
+     left: 4px;
+     /* font-size: 36px; */
+     height: 1rem;
+     transform: rotate(-45deg);
+}
+.roomInfoDialog__button{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+}
+.roomInfoDialog__button>button {
+    width:555px;
+    height: 36px;
+    border-radius: 7px;
+    outline: none;
+    color: var(--boldText);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: var(--primaryFontSize);
+    border: none;
+    background-color: var(--green);
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.roomInfoDialog__button.disabled>button {
+    background-color: rgb(102, 102, 102);
+    cursor: not-allowed;
+}
+
+.roomInfoDialog__button.disabled>button:hover {
+    background-color: rgb(102, 102, 102);
+    cursor: not-allowed;
+}
+
+.roomInfoDialog__button>button:hover {
+    background-color: #3fbd64
+}
+
+.roomInfoDialog__button>button:active {
+    transform: scale(0.98);
+    transition: 200ms;
+}
+.roomInfoDialog__content__tabContent.details>*{
+    margin: 20px 0 0 10px;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.roomInfoDialog__content__tabContent__description>.italic,
+.roomInfoDialog__content__tabContent__privacy>.italic,
+.roomInfoDialog__content__tabContent__roomTitle>.italic {
+font-style: italic;
+color: rgb(255, 255, 255);
+margin-top: 10px;
+letter-spacing: 0.1px;
+}
+
+.roomInfoDialog__content__tabContent__genre>.italic {
+font-style: italic;
+color: white;
+}
+
+.roomInfoDialog__content__tabContent__genre{
+       display: flex;
+       flex-direction: row !important;
+       align-items: center;
+       margin-right:10px;
+}
+
+.roomInfoDialog__content__tabContent__genre>* {
+    margin-right: 50px;
+}
+.privacy__icon{
+    display: flex;
+    align-items: center;
+   
+}
+.privacy__icon>*{
+    margin-right:5px;
+}
+.roomInfoDialog__content__tabContent__privacy{
+    display: flex;
+    flex-direction: row !important;
+    align-items: center;
+    margin-right:10px;
+}
+
+.roomInfoDialog__content__tabContent__privacy>*{
+      margin-right:20px;
+}

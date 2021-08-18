@@ -5,12 +5,12 @@ import SearchMovieCard from "./SearchMovieCard";
 import Rating from "@material-ui/lab/Rating";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
 import axios from "../util/axios";
 import { CircularProgress } from "@material-ui/core";
 import { genreConverter } from "../util/genreConverter";
 import { sendPost } from "../redux/actions/postAction";
 import { connect } from "react-redux";
+import DialogHeader from "./DialogHeader";
 function PostReviewPost({ closeReview, sendPost, postType }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -45,16 +45,16 @@ function PostReviewPost({ closeReview, sendPost, postType }) {
 
   const handleOnChange = (event) => {
     if (event.target.value === "") {
-      console.log("heelloo");
+      // console.log("heelloo");
       setOpen((prev) => (prev = false));
     } else setOpen(true);
   };
 
   const handleOnClickSearchCard = (result) => {
     setOpen((prev) => (prev = false));
-    console.log(result);
+    // console.log(result);
     setPostMovie(result);
-    console.log(genreConverter(result.genre_ids));
+    // console.log(genreConverter(result.genre_ids));
   };
 
   const handleSubmit = (event, movieDetail) => {
@@ -70,7 +70,7 @@ function PostReviewPost({ closeReview, sendPost, postType }) {
       movieTitle: movieDetail.title ? movieDetail.title : movieDetail.name,
       postType: postType,
     };
-    console.log(postDetails);
+    // console.log(postDetails);
     sendPost(postDetails);
     closeReview();
   };
@@ -78,6 +78,9 @@ function PostReviewPost({ closeReview, sendPost, postType }) {
   return (
     <div className="postReviewPost">
       <div className="postReviewPost__container">
+        <div className="postReviewPost__DialogHeader">
+          <DialogHeader heading="Make your review" close={closeReview} />
+        </div>
         <div className="postReviewPost__header">
           <ClickAwayListener onClickAway={handleClickAway}>
             <div>
@@ -88,6 +91,8 @@ function PostReviewPost({ closeReview, sendPost, postType }) {
                 }}
                 id="standard-basic"
                 label="Search Your Movie"
+                variant="filled"
+                autoComplete="off"
               />
               {open &&
                 (loading ? (
@@ -117,7 +122,7 @@ function PostReviewPost({ closeReview, sendPost, postType }) {
         </div>
         <form onSubmit={(event) => handleSubmit(event, postMovie)}>
           <div className="postReviewPost__mainPost">
-            {Object.keys(postMovie).length !== 0 && (
+            {/* {Object.keys(postMovie).length !== 0 && (
               <div className="postReviewPost__contentPoster">
                 <img
                   alt={postMovie.title}
@@ -128,7 +133,7 @@ function PostReviewPost({ closeReview, sendPost, postType }) {
                   }
                 />
               </div>
-            )}
+            )} */}
 
             <div
               className={
@@ -138,48 +143,61 @@ function PostReviewPost({ closeReview, sendPost, postType }) {
               }
             >
               {Object.keys(postMovie).length !== 0 && (
-                <>
-                  <div className="postReviewPost__contentInfo--heading">
-                    <div className="postReviewPost__contentInfo--heading--movieName">
-                      <h2>
-                        {postMovie.title ? postMovie.title : postMovie.name}
-                      </h2>
-                    </div>
-                    {/* <div className="postReviewPost__contentInfo--heading--ReleaseYear">
-                    <h3>(2009)</h3>
-                  </div> */}
-                  </div>
-                  <div className="postReviewPost__contentInfo--durationGenre">
-                    <div className="postReviewPost__contentInfo--durationGenre--duration">
-                      <h4>{postMovie.release_date.split("-")[0]}</h4>
-                    </div>
-                    <div className="postReviewPost__contentInfo--durationGenre--genre">
-                      <h4>{genreConverter(postMovie.genre_ids)}</h4>
-                    </div>
-                  </div>
-                  <div className="postReviewPost__contentInfo--starRating">
-                    <Rating
-                      // onChangeActive={(e, value) => {
-                      //   setRating(value);
-                      // }}
-                      name="ratings"
-                      onChange={(e, value) => {
-                        setRating(value);
-                      }}
-                      defaultValue={0}
-                      precision={0.1}
-                      emptyIcon={<StarBorderIcon fontSize="inherit" />}
+                <div className="postReviewPost__contentMovie">
+                  <div className="postReviewPost__contentPoster">
+                    <img
+                      alt={postMovie.title}
+                      src={
+                        postMovie.poster_path !== null
+                          ? `https://image.tmdb.org/t/p/w92${postMovie.poster_path}`
+                          : "https://streaming.tvseries-movies.com/themes/vstripe/images/no-cover.png"
+                      }
                     />
                   </div>
-                  <div className="postReviewPost__contentInfo--numericRating">
-                    <div className="postReviewPost__contentInfo--numericRating--rateValue">
-                      <h2>{rating === null ? "0" : rating}</h2>
+
+                  <div>
+                    <div className="postReviewPost__contentInfo--heading">
+                      <div className="postReviewPost__contentInfo--heading--movieName">
+                        <h2>
+                          {postMovie.title ? postMovie.title : postMovie.name}
+                        </h2>
+                      </div>
+                      {/* <div className="postReviewPost__contentInfo--heading--ReleaseYear">
+                    <h3>(2009)</h3>
+                  </div> */}
                     </div>
-                    <div className="postReviewPost__contentInfo--numericRating--outOff">
-                      <h3>/ 5</h3>
+                    <div className="postReviewPost__contentInfo--durationGenre">
+                      <div className="postReviewPost__contentInfo--durationGenre--duration">
+                        <h4>{postMovie.release_date.split("-")[0]}</h4>
+                      </div>
+                      <div className="postReviewPost__contentInfo--durationGenre--genre">
+                        <h4>{genreConverter(postMovie.genre_ids)}</h4>
+                      </div>
                     </div>
-                  </div>{" "}
-                </>
+                    <div className="postReviewPost__contentInfo--starRating">
+                      <Rating
+                        // onChangeActive={(e, value) => {
+                        //   setRating(value);
+                        // }}
+                        name="ratings"
+                        onChange={(e, value) => {
+                          setRating(value);
+                        }}
+                        defaultValue={0}
+                        precision={0.1}
+                        emptyIcon={<StarBorderIcon fontSize="inherit" />}
+                      />
+                    </div>
+                    <div className="postReviewPost__contentInfo--numericRating">
+                      <div className="postReviewPost__contentInfo--numericRating--rateValue">
+                        <h2>{rating === null ? "0" : rating}</h2>
+                      </div>
+                      <div className="postReviewPost__contentInfo--numericRating--outOff">
+                        <h3>/ 5</h3>
+                      </div>
+                    </div>{" "}
+                  </div>
+                </div>
               )}
 
               <div className="postReviewPost__contentInfo--reviewContent">
@@ -199,31 +217,15 @@ function PostReviewPost({ closeReview, sendPost, postType }) {
                   label="Your Review"
                   multiline
                   rows={5}
-                  variant="outlined"
+                  variant="filled"
                   inputProps={{ maxLength: 300 }}
                 />
               </div>
             </div>
           </div>
           <div className="postReviewPost__bottomIcons">
-            <div className="postReviewPost__bottomIcon">
-              <Button
-                onClick={closeReview}
-                variant="outlined"
-                color="secondary"
-              >
-                Cancel
-              </Button>
-            </div>
-            <div className="postReviewPost__bottomIcon">
-              <Button
-                disabled={disableButton}
-                variant="contained"
-                color="primary"
-                type="submit"
-              >
-                Post
-              </Button>
+            <div className={`postReviewPost__bottomIcon ${disableButton && "disabled"}`}>
+              <button disabled={disableButton} type="submit">Post</button>
             </div>
           </div>
         </form>

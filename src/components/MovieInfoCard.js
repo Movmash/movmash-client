@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./stylesheets/MovieInfoCard.css";
 import { IconButton } from "@material-ui/core";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
-import StarBorderIcon from "@material-ui/icons/StarBorder";
+// import StarBorderIcon from "@material-ui/icons/StarBorder";
 import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
-import StarIcon from "@material-ui/icons/Star";
-import ListIcon from "@material-ui/icons/List";
+// import StarIcon from "@material-ui/icons/Star";
+// import ListIcon from "@material-ui/icons/List";
 import NearMeIcon from "@material-ui/icons/NearMe";
 import { genreConverter } from "../util/genreConverter";
 import axios from "../util/axios";
 import Dialog from "@material-ui/core/Dialog";
-import RatingFrom from "./RatingFrom";
+// import RatingFrom from "./RatingFrom";
 import FriendListMessage from "./FriendListMessage";
 
 function MovieInfoCard({
@@ -28,7 +28,7 @@ function MovieInfoCard({
 }) {
   const movieGenresId = [];
   if (releaseDate !== undefined && genres !== undefined) {
-    console.log(genres);
+    // console.log(genres);
     for (let i = 0; i < genres.length; i++) {
       movieGenresId.push(genres[i].id);
     }
@@ -40,8 +40,9 @@ function MovieInfoCard({
     movieStatus.inWatchlist
   );
 
-  const [selectedRated, setRated] = useState(movieStatus.isRated);
-  const [openRatingDialog, setOpenRatingDialog] = useState(false);
+  // const [selectedRated, setRated] = useState(movieStatus.isRated);
+  // const selectedRated = movieStatus.isRated;
+  // const [openRatingDialog, setOpenRatingDialog] = useState(false);
   // useEffect(() => {
   //   const fetchMovieStatus = () => {
   //     axios
@@ -71,7 +72,7 @@ function MovieInfoCard({
   };
 
   const handleLikeMovie = () => {
-    console.log("liked");
+    // console.log("liked");
     setSelectedLike(true);
     setSelectedDislike(false);
     axios
@@ -84,7 +85,7 @@ function MovieInfoCard({
       });
   };
   const handleUnlikeMovie = () => {
-    console.log("unlike");
+    // console.log("unlike");
     setSelectedLike(false);
     axios
       .post("/api/v1/movie/undo-like-movie", movieDetails)
@@ -97,7 +98,7 @@ function MovieInfoCard({
       });
   };
   const handleDisLikeMovie = () => {
-    console.log("disliked");
+    // console.log("disliked");
     setSelectedLike(false);
     setSelectedDislike(true);
     axios
@@ -111,7 +112,7 @@ function MovieInfoCard({
       });
   };
   const handleUndoDislikeMovie = () => {
-    console.log("undoDislike");
+    // console.log("undoDislike");
     setSelectedDislike(false);
     axios
       .post(
@@ -128,7 +129,7 @@ function MovieInfoCard({
   };
 
   const handleAddToWatchlist = () => {
-    console.log("added to watchlist");
+    // console.log("added to watchlist");
     setSelectedWatchList(true);
     axios
       .post("/api/v1/movie/add-to-watchlist", movieDetails)
@@ -142,7 +143,7 @@ function MovieInfoCard({
   };
 
   const handleRemoveFromWatchlist = () => {
-    console.log("remove from watchlist");
+    // console.log("remove from watchlist");
     setSelectedWatchList(false);
     axios
       .post(
@@ -161,12 +162,12 @@ function MovieInfoCard({
   const handleOpenSendMovieDialog = () => {
     setSendMovieDialog(true);
   };
-  const handleOpenRatingDialog = () => {
-    setOpenRatingDialog(true);
-  };
-  const handleCloseRatindDialog = () => {
-    setOpenRatingDialog(false);
-  };
+  // const handleOpenRatingDialog = () => {
+  //   setOpenRatingDialog(true);
+  // };
+  // const handleCloseRatindDialog = () => {
+  //   setOpenRatingDialog(false);
+  // };
   return (
     <div className="movieInfoCard">
       <div className="movieInfoCard__poster">
@@ -231,7 +232,7 @@ function MovieInfoCard({
                 <ThumbDownIcon />
               </IconButton>
             </div>
-            {!selectedRated ? (
+            {/* {!selectedRated ? (
               <div className="movieInfoCard__info--subHeading--tagButton">
                 <IconButton onClick={handleOpenRatingDialog}>
                   <StarBorderIcon />
@@ -243,13 +244,13 @@ function MovieInfoCard({
                   <StarIcon />
                 </IconButton>
               </div>
-            )}
-            <Dialog onClose={handleCloseRatindDialog} open={openRatingDialog}>
+            )} */}
+            {/* <Dialog onClose={handleCloseRatindDialog} open={openRatingDialog}>
               <RatingFrom
                 movieId={id}
                 closeRatingForm={handleCloseRatindDialog}
               />
-            </Dialog>
+            </Dialog> */}
 
             {!selectedWatchList ? (
               <div className="movieInfoCard__info--subHeading--tagButton ">
@@ -265,11 +266,11 @@ function MovieInfoCard({
               </div>
             )}
 
-            <div className="movieInfoCard__info--subHeading--tagButton">
+            {/* <div className="movieInfoCard__info--subHeading--tagButton">
               <IconButton>
                 <ListIcon />
               </IconButton>
-            </div>
+            </div> */}
             <div className="movieInfoCard__info--subHeading--tagButton">
               <IconButton onClick={handleOpenSendMovieDialog}>
                 <NearMeIcon />
@@ -297,7 +298,8 @@ function MovieInfoCard({
             <h5>{overview}</h5>
           </div>
         </div>
-        <div className="movieInfoCard__info--crewMembers">
+
+        {/* <div className="movieInfoCard__info--crewMembers">
           <div className="movieInfoCard__info--crewMember">
             <div className="movieInfoCard__info--crewMember-name">
               <h4>Elon</h4>
@@ -307,6 +309,7 @@ function MovieInfoCard({
             </div>
           </div>
         </div>
+       */}
       </div>
     </div>
   );

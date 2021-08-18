@@ -8,7 +8,7 @@ import urls from "../util/urls";
 import PostDetails from "./PostDetails";
 import CommentForm from "./CommentForm";
 import CommentList from "./CommentList";
-function ReviewPost({ isProfile, details, postId, type }) {
+function ReviewPost({ isProfile, details, postId, type, postPage }) {
   const {
     moviePoster,
     movieTitle,
@@ -104,7 +104,11 @@ function ReviewPost({ isProfile, details, postId, type }) {
           />
         </div>
         <div className="reviewPost__commentRepresentation">
-          <CommentList comments={comments} />
+          <CommentList
+            postId={postId}
+            comments={comments}
+            postPage={postPage}
+          />
         </div>
         <div className="commentForm">
           <CommentForm tag={isProfile} postId={postId} type={type} />

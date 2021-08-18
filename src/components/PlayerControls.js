@@ -9,8 +9,8 @@ import FullscreenIcon from "@material-ui/icons/Fullscreen";
 import FullscreenExitIcon from "@material-ui/icons/FullscreenExit";
 import { IconButton } from "@material-ui/core";
 import VolumeOffIcon from "@material-ui/icons/VolumeOff";
-import { Link } from "react-router-dom";
-import { ClipLoader } from "react-spinners";
+import {  useHistory } from "react-router-dom";
+import { MoonLoader } from "react-spinners";
 function PlayerControls({
   onPlayPause, //
   playing, //
@@ -37,27 +37,77 @@ function PlayerControls({
   host,
   isProgress,
 }) {
+  const history = useHistory();
+  // var elem = document.getElementById("playPauseButton"),
+  //   fadeInInterval,
+  //   fadeOutInterval;
+  // const handleFadedAnimation =() => {
+  //   clearInterval(fadeInInterval);
+  //   clearInterval(fadeOutInterval);
+
+  //   elem.fadeIn = function (timing) {
+  //     var newValue = 0;
+
+  //     elem.style.display = "block";
+  //     elem.style.opacity = 0;
+
+  //     fadeInInterval = setInterval(function () {
+  //       if (newValue < 1) {
+  //         newValue += 0.01;
+  //       } else if (newValue === 1) {
+  //         clearInterval(fadeInInterval);
+  //       }
+
+  //       elem.style.opacity = newValue;
+  //     }, timing);
+  //   };
+  //   elem.fadeOut = function (timing) {
+  //     var newValue = 1;
+  //     elem.style.opacity = 1;
+
+  //     fadeOutInterval = setInterval(function () {
+  //       if (newValue > 0) {
+  //         newValue -= 0.01;
+  //       } else if (newValue < 0) {
+  //         elem.style.opacity = 0;
+  //         elem.style.display = "none";
+  //         clearInterval(fadeOutInterval);
+  //       }
+
+  //       elem.style.opacity = newValue;
+  //     }, timing);
+  //   };
+
+  //   elem.fadeIn(10);
+  //   elem.fadeOut(10);
+  // };
   return (
     <div className="playerControls">
       {" "}
-      <Link to="/live">
+      {/* <Link to="/live"> */}
         <div className="playerControls__topControls medium">
-          <IconButton>
+          <IconButton onClick={() => history.replace("/live")}>
             <CloseIcon />
           </IconButton>
         </div>
-      </Link>
+      {/* </Link> */}
       <div
+        // onClick={handleFadedAnimation}
         className={`playerControls__middleControls large ${
           !host && "disableControl"
         }`}
       >
         {isProgress ? (
-          <ClipLoader color={"white"} size={"60px"} />
+          <MoonLoader color={"white"} size={"50px"} />
+        ) : playing ? (
+
+            <IconButton onClick={onPlayPause}>
+              <PauseIcon />
+            </IconButton>
         ) : (
-          <IconButton onClick={onPlayPause}>
-            {playing ? <PauseIcon /> : <PlayArrowIcon />}
-          </IconButton>
+            <IconButton onClick={onPlayPause}>
+              <PlayArrowIcon />
+            </IconButton>
         )}
       </div>
       <div className="playerControls__bottomControls">

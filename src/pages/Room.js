@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import "./stylesheets/Room.css";
 import ReactPlayer from "react-player";
 import SendIcon from "@material-ui/icons/Send";
-import { IconButton } from "@material-ui/core";
+import { Avatar, IconButton } from "@material-ui/core";
 import { connect } from "react-redux";
 import { useSocket } from "../contexts/SocketProvider";
 import { useParams, useHistory, Link } from "react-router-dom";
@@ -22,11 +22,30 @@ import GroupIcon from "@material-ui/icons/Group";
 import SettingsIcon from "@material-ui/icons/Settings";
 import PeopleRoomTab from "../components/PeopleRoomTab";
 import SettingRoomTab from "../components/SettingRoomTab";
-import Peer from "simple-peer";
+import {Dialog} from "@material-ui/core";
+import FriendListMessage from "../components/FriendListMessage";
+import InfoIcon from "@material-ui/icons/Info";
+import {
+  updateVideoUrl,
+  updateLiveShowInfo,
+} from "../redux/actions/liveShowAction";
+// import Peer from "simple-peer";
 // import axios from "axios";
 let count = 0;
 
-function Room({ userName, userId, liveShowDetail, getLiveShowDetail }) {
+function Room({
+  userName,
+  userId,
+  fullName,
+  liveShowDetail,
+  getLiveShowDetail,
+  authenticated,
+  authLoading,
+  profileImageUrl,
+  updateVideoUrl,
+  updateLiveShowInfo,
+}) {
+  const [openInviteFriendsDialog, setOpenInviteFriendsDialog] = useState(false);
   const [selectedTab, setSelectedTab] = useState("chat");
   const [host, setHost] = useState(false);
   const [isRoomFound, setIsRoomFound] = useState(true);
@@ -42,6 +61,7 @@ function Room({ userName, userId, liveShowDetail, getLiveShowDetail }) {
   // const [isVideoValid, setVideoValid] = useState(
 
   // );
+  const [watchTime, setWatchTime] = useState(0);
   const [isProgress, setProgress] = useState(true);
   const [isHostAvailble, setIsHostAvailable] = useState(true);
   const [hideControls, setHideControls] = useState(false);
@@ -175,22 +195,29 @@ function Room({ userName, userId, liveShowDetail, getLiveShowDetail }) {
   } = playerState;
 
   useEffect(() => {
-    // axios.get(
-    //   `http://localhost:8000/api/v1/live/get-live-show-details/${roomCode}`
-    // ).then(res => {
+    document.body.style.overflowY = "auto";
+    if (!authLoading) {
+      if (authenticated) {
+        if (Object.keys(liveShowDetail).length === 0 && isRoomFound) {
+          // if (isRoomFound) {
+          getLiveShowDetail(roomCode, history);
+          // }
+        }
 
-    // });
-    // console.log("1");
-    if (Object.keys(liveShowDetail).length === 0) {
-      if (isRoomFound) {
-        getLiveShowDetail(roomCode, history);
+        // console.log("1");
       } else {
-        return;
+        history.push("/login");
       }
-
-      console.log("1");
     }
-  }, [getLiveShowDetail, liveShowDetail, isRoomFound, roomCode, history]);
+  }, [
+    getLiveShowDetail,
+    liveShowDetail,
+    isRoomFound,
+    roomCode,
+    history,
+    authenticated,
+    authLoading,
+  ]);
   //...............................................................................
 
   //.........................
@@ -198,7 +225,13 @@ function Room({ userName, userId, liveShowDetail, getLiveShowDetail }) {
     if (socket !== undefined) {
       socket.emit(
         "join-party",
-        { roomCode: roomCode, userName: userName, userId }
+        {
+          roomCode,
+          userName,
+          userId,
+          fullName,
+          profileImageUrl,
+        }
         // (data) => {
         //   if (data) {
         //     console.log("Host is syncing the new socket! ");
@@ -215,13 +248,13 @@ function Room({ userName, userId, liveShowDetail, getLiveShowDetail }) {
       socket.emit("leaving-party");
       socket.off();
     };
-  }, [socket, roomCode, userName, userId]);
+  }, [socket, roomCode, userName, userId, fullName, profileImageUrl]);
   useEffect(() => {
     if (socket !== undefined) {
       // console.log(ReactPlayer.canPlay(liveShowDetail.videoUrl));
 
       socket.on("party-message", (data) => {
-        console.log(data);
+        // console.log(data);
         setAllMessages((prev) => [...prev, data]);
       });
     }
@@ -234,11 +267,13 @@ function Room({ userName, userId, liveShowDetail, getLiveShowDetail }) {
       roomCode: roomCode,
       userName: userName,
       message: sendMessage,
+      fullName: fullName,
+      profileImageUrl: profileImageUrl,
     };
     if (socket === undefined || sendMessage === "") return;
 
     socket.emit("send-party-message", chatData);
-    console.log(allMessages);
+    // console.log(allMessages);
     setSendMessage("");
   };
   //......................................................................................
@@ -247,7 +282,7 @@ function Room({ userName, userId, liveShowDetail, getLiveShowDetail }) {
     count = 0;
   };
   const handlePlayPause = () => {
-    console.log("play or pause");
+    // console.log("play or pause");
     if (!playing) {
       setPlayerState((prev) => {
         return {
@@ -293,6 +328,8 @@ function Room({ userName, userId, liveShowDetail, getLiveShowDetail }) {
     });
   };
   const handleProgress = (changeState) => {
+    setWatchTime((prev) => ++prev);
+    socket.emit("update-watch-second", {watchSecond: watchTime});
     if (count > 2) {
       setHideControls(true);
       count = 0;
@@ -309,7 +346,7 @@ function Room({ userName, userId, liveShowDetail, getLiveShowDetail }) {
     // setPlayerState({ ...playerState, ...changeState });
   };
   const handleOnStart = (e) => {
-    console.log("start");
+    // console.log("start");
     setProgress(false);
   };
   const handleSeekChange = (e) => {
@@ -371,7 +408,7 @@ function Room({ userName, userId, liveShowDetail, getLiveShowDetail }) {
     // setPlayerState({ ...playerState, seeking: true });
   };
   const handleSeekMouseUp = (e) => {
-    console.log(e.target.value / 1000);
+    // console.log(e.target.value / 1000);
     setPlayerState((prev) => {
       return {
         ...prev,
@@ -440,7 +477,7 @@ function Room({ userName, userId, liveShowDetail, getLiveShowDetail }) {
     if (socket !== undefined) {
       socket.emit("new-room", roomCode, (data) => {
         if (data) {
-          console.log("Host is syncing the new socket! ");
+          // console.log("Host is syncing the new socket! ");
           syncVideo(roomCode);
         }
       });
@@ -454,7 +491,7 @@ function Room({ userName, userId, liveShowDetail, getLiveShowDetail }) {
   //   });
   // };
   const getHostData = (roomCode) => {
-    console.log("host data");
+    // console.log("host data");
     socket.emit("get-host-data", {
       room: roomCode,
     });
@@ -545,8 +582,8 @@ function Room({ userName, userId, liveShowDetail, getLiveShowDetail }) {
       socket.on("sync-video-client", (data) => {
         let currTime = data.time;
         let state = data.state;
-        console.log(`current time is: ${currTime}`);
-        console.log(`state ${state}`);
+        // console.log(`current time is: ${currTime}`);
+        // console.log(`state ${state}`);
         playerRef.current.seekTo(currTime);
         // setPlayerState((prev) => {
         //   return {
@@ -602,11 +639,11 @@ function Room({ userName, userId, liveShowDetail, getLiveShowDetail }) {
   useEffect(() => {
     if (socket !== undefined) {
       socket.on("just-seek", (data) => {
-        console.log("heyyyyyy");
-        let clientTime =
-          playerRef.current.getCurrentTime() / playerRef.current.getDuration();
+        // console.log("heyyyyyy");
+        // let clientTime =
+        //   playerRef.current.getCurrentTime() / playerRef.current.getDuration();
         let currTime = data.time;
-        console.log(clientTime, currTime);
+        // console.log(clientTime, currTime);
         playerRef.current.seekTo(currTime);
         // if (clientTime < currTime - 2 || clientTime > currTime + 2) {
 
@@ -625,10 +662,10 @@ function Room({ userName, userId, liveShowDetail, getLiveShowDetail }) {
 
   useEffect(() => {
     if (socket !== undefined) {
-      console.log("gte-data");
+      // console.log("gte-data");
       // if (host) {
       socket.on("get-data", (data) => {
-        console.log("hi im the host , you called ?");
+        // console.log("hi im the host , you called ?");
         // socket.emit("sync-host", { roomCode: roomCode });
         //.....
         let currTime =
@@ -666,7 +703,7 @@ function Room({ userName, userId, liveShowDetail, getLiveShowDetail }) {
   useEffect(() => {
     if (socket !== undefined) {
       socket.on("sync-host-server", (data) => {
-        console.log("sync-host-server");
+        // console.log("sync-host-server");
         syncVideo(roomCode);
       });
     }
@@ -677,8 +714,8 @@ function Room({ userName, userId, liveShowDetail, getLiveShowDetail }) {
       socket.on("sync-the-video-with-host", (data) => {
         let currTime = data.time;
         let state = data.state;
-        console.log(`current time is: ${currTime}`);
-        console.log(`state ${state}`);
+        // console.log(`current time is: ${currTime}`);
+        // console.log(`state ${state}`);
         playerRef.current.seekTo(currTime);
         // setPlayerState((prev) => {
         //   return {
@@ -710,8 +747,8 @@ function Room({ userName, userId, liveShowDetail, getLiveShowDetail }) {
       socket.on("sync-the-video-with-host-button", (data) => {
         let currTime = data.time;
         let state = data.state;
-        console.log("current time is: " + " " + currTime);
-        console.log("state" + state);
+        // console.log(`current time is: ${currTime}`);
+        // console.log("state" + state);
         playerRef.current.seekTo(currTime);
         // setPlayerState((prev) => {
         //   return {
@@ -766,10 +803,10 @@ function Room({ userName, userId, liveShowDetail, getLiveShowDetail }) {
       socket.on("compareHost", (data) => {
         var hostTime = data.currTime;
         // var hostState = data.state;
-        var currTime =
-          playerRef.current.getCurrentTime() / playerRef.current.getDuration();
+        // var currTime =
+        //   playerRef.current.getCurrentTime() / playerRef.current.getDuration();
         // var state = playing;
-        console.log("curr: " + currTime + " Host: " + hostTime);
+        // console.log("curr: " + currTime + " Host: " + hostTime);
         playerRef.current.seekTo(hostTime);
         // if (currTime < hostTime - 2 || currTime > hostTime + 2) {
         //   disconnected();
@@ -830,7 +867,45 @@ function Room({ userName, userId, liveShowDetail, getLiveShowDetail }) {
   });
 
   //...........................
+  useEffect(() => {
+    if (socket !== undefined) {
+    socket.on("new-room-video-source", (payload) => {
+      // console.log(payload);
+      updateVideoUrl(payload);
+    });
+    }
+  }, [socket, updateVideoUrl]);  
 
+  useEffect(() => {
+    if (socket !== undefined) {
+    socket.on("new-room-info", (payload) => {
+      // console.log(payload);
+      updateLiveShowInfo(payload);
+    });
+    }
+  }, [socket, updateLiveShowInfo]);
+  //people tabs ..................
+
+  const [userList, setUserList] = useState([]);
+    useEffect(() => {
+      if (socket) {
+        socket.emit("get-user-in-the-room", { roomId: roomCode });
+      }
+      // return () => {
+      //   if (socket === undefined) return;
+      //   if (hostId === userId) {
+      //     socket.off();
+      //   }
+      // };
+    }, [socket, roomCode, userId]);
+    useEffect(() => {
+      if (socket) {
+        socket.on("user-list-inside-the-room", (data) => {
+          setUserList(data);
+          // console.log(data);
+        });
+      }
+    }, [socket]);
   return (
     <div
       onMouseMove={handleMouseMove}
@@ -843,7 +918,7 @@ function Room({ userName, userId, liveShowDetail, getLiveShowDetail }) {
             ref={playerRef}
             url={liveShowDetail.videoUrl}
             className="player"
-            width={showRight ? "100%" : "85%"}
+            width={showRight ? "100%" : "80%"}
             height="100%"
             volume={volume}
             muted={muted}
@@ -906,6 +981,15 @@ function Room({ userName, userId, liveShowDetail, getLiveShowDetail }) {
               isProgress={isProgress}
               // onBookmark={addBookmark}
             />
+            <div
+              className={`room__player__right__toggleOpenCloseRight ${
+                hideControls ? "hideControls" : ""
+              }`}
+            >
+              <IconButton onClick={handleOpenRight}>
+                {!showRight ? <ArrowForwardIosIcon /> : <ArrowBackIosIcon />}
+              </IconButton>
+            </div>
           </div>
         ) : (
           <div
@@ -967,22 +1051,35 @@ function Room({ userName, userId, liveShowDetail, getLiveShowDetail }) {
                 </>
               )}
             </div>
+            <div
+              className={`room__player__right__toggleOpenCloseRight ${
+                hideControls ? "hideControls" : ""
+              }`}
+            >
+              <IconButton onClick={handleOpenRight}>
+                {!showRight ? <ArrowForwardIosIcon /> : <ArrowBackIosIcon />}
+              </IconButton>
+            </div>
           </div>
         )}
         <div className={`room__player__right ${showRight ? "hide" : ""}`}>
-          <div
-            className={`room__player__right__toggleOpenCloseRight ${
-              hideControls ? "hideControls" : ""
-            }`}
-          >
-            <IconButton onClick={handleOpenRight}>
-              {!showRight ? <ArrowForwardIosIcon /> : <ArrowBackIosIcon />}
-            </IconButton>
-          </div>
           <div className="room__player__right__buttons">
             <div className="room__player__right__inviteButtom">
-              <button>Invite Friends</button>
+              <button onClick={() => setOpenInviteFriendsDialog(true)}>
+                Invite Friends
+              </button>
             </div>
+            <Dialog
+              open={openInviteFriendsDialog}
+              onClose={() => setOpenInviteFriendsDialog(false)}
+            >
+              <FriendListMessage
+                closeDialog={() => setOpenInviteFriendsDialog(false)}
+                type="roomText"
+                room={true}
+                link={window.location.href}
+              />
+            </Dialog>
             <div className="room__player__right__tabs">
               <div
                 onClick={() => setSelectedTab("chat")}
@@ -1006,7 +1103,11 @@ function Room({ userName, userId, liveShowDetail, getLiveShowDetail }) {
                   selectedTab === "setting" && "selected"
                 }`}
               >
-                <SettingsIcon />
+                {liveShowDetail.host === userId ? (
+                  <SettingsIcon />
+                ) : (
+                  <InfoIcon />
+                )}
               </div>
             </div>
           </div>
@@ -1027,9 +1128,15 @@ function Room({ userName, userId, liveShowDetail, getLiveShowDetail }) {
                       </div>
                     </div>
                   ) : (
-                    <div key={index} className="messageContainer justifyStart">
-                      {/* <Avatar src={chatMessage.sender.profileImageUrl}></Avatar> */}
-                      <div className="messageBox backgroundLight other">
+                    <div
+                      key={index}
+                      className="messageContainer justifyStart alineCenter"
+                    >
+                      <div className="infoUser">
+                        <Avatar src={message.profileImageUrl}></Avatar>
+                      </div>
+
+                      <div className="messageBox backgroundLight other borderRadius">
                         <p className="messageText colorDark">{message.text}</p>
                       </div>
                       {/* <p className="sentText pl-10 ">usersaddasd</p> */}
@@ -1063,6 +1170,7 @@ function Room({ userName, userId, liveShowDetail, getLiveShowDetail }) {
               // userVideo={userVideo}
               // peers={peers}
               // stream={videoStream}
+              userList={userList}
             />
           )}
           {selectedTab === "setting" && <SettingRoomTab />}
@@ -1075,9 +1183,17 @@ function Room({ userName, userId, liveShowDetail, getLiveShowDetail }) {
 const mapStateToProps = (state) => {
   return {
     userName: state.user.userName,
+    fullName: state.user.fullName,
+    profileImageUrl: state.user.profileImageUrl,
     userId: state.user._id,
     liveShowDetail: state.liveShow.liveShowDetail,
+    authenticated: state.user.authenticated,
+    authLoading: state.user.authLoading,
   };
 };
 
-export default connect(mapStateToProps, { getLiveShowDetail })(Room);
+export default connect(mapStateToProps, {
+  getLiveShowDetail,
+  updateVideoUrl,
+  updateLiveShowInfo,
+})(Room);

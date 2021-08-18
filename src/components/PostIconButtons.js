@@ -4,13 +4,13 @@ import "./stylesheets/PostIconButtons.css";
 import { likePost, unlikePost } from "../redux/actions/postAction";
 import { connect } from "react-redux";
 import ChatIcon from "@material-ui/icons/Chat";
-import ShareIcon from "@material-ui/icons/Share";
+// import ShareIcon from "@material-ui/icons/Share";
 import {
   sendBookingRequest,
   cancelRequestedTicket,
 } from "../redux/actions/ticketAction";
 import ConfirmationNumberIcon from "@material-ui/icons/ConfirmationNumber";
-import DateRangeIcon from "@material-ui/icons/DateRange";
+// import DateRangeIcon from "@material-ui/icons/DateRange";
 import { IconButton, Dialog } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
@@ -38,10 +38,11 @@ function PostIconButtons({
   ticketDetails,
   sendBookingRequest,
   cancelRequestedTicket,
+  setTotalRequest,
 }) {
   const handleLikePost = (id) => {
     if (tag) {
-      console.log(id);
+      // console.log(id);
       profileLikePost(id);
     } else {
       likePost(id);
@@ -78,6 +79,7 @@ function PostIconButtons({
       showTimeFrom: new Date(ticketDetails.showTimeFrom),
       showTimeTo: new Date(ticketDetails.showTimeTo),
     });
+    setTotalRequest((prev) => ++prev);
     setBookingSent(true);
   };
   const handleCancelNow = () => {
@@ -85,10 +87,11 @@ function PostIconButtons({
       postId: ticketDetails._id,
       requestedBy: user._id,
     });
+    setTotalRequest((prev) => --prev);
     setBookingSent(false);
   };
   return (
-    <div className="postIconButtons">
+    <div className={`postIconButtons ${type}`}>
       {(type === "review" || type === "suggestMe") && (
         <>
           {/* {likes.includes(user._id) ? (
@@ -170,7 +173,7 @@ function PostIconButtons({
           </div>
         </>
       )}
-      {type === "ticket" && (
+      {type === "ticket" && ticketDetails.postedBy._id !== user._id && (
         <div className="postIconButtons--ticketButtons">
           {!bookingSent ? (
             <div className="postIconButtons--BookNow" onClick={handleBookNow}>

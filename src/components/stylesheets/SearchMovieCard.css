@@ -21,11 +21,13 @@
 }
 
 .searchCard__dropDownInfo>h4 {
-    color: white;
+    color: var(--boldText);
+    font-size: .9375rem;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .searchMovieCard:hover {
-    background-color: #499E4C;
+    background-color: var(--palletes);
     border-radius: 10px;
     cursor: pointer;
 }
@@ -45,4 +47,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    color: var(--secondaryText);
+    font-size: var(--primaryFontSize);
+    font-family: Arial,
+    Helvetica,
+    sans-serif;
+    width:54ch;
 }

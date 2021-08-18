@@ -1,10 +1,16 @@
 .createPartyForm {
-  width: fit-content;
-  padding: 0 70px 0 70px;
-  min-height: 30rem;
+  /* width: fit-content; */
+  /* min-height: ; */
   display: flex;
   flex-flow: column;
   justify-content: center;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--boldText);
+  background-color: var(--lightBlack);
+  border: 1px solid var(--border);
+  width: 57ch;
+  border-radius: 7px;
+  font-weight: 600;
 }
 
 .createPartyForm__heading {
@@ -18,33 +24,36 @@
 .createPartyForm__container {
   max-height: 461px;
   overflow-y: scroll;
-  padding-right: 40px;
+  /* padding-right: 40px; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .createPartyForm__heading>h1 {
-  font-size: 30px;
-  font-weight: 900;
+  /* font-size: 30px; */
+  /* font-weight: 900; */
 }
 
-.createPartyForm__roomTitle {
+/* .createPartyForm__roomTitle {
   margin-top: 10px;
-}
+} */
 
 .createPartyForm__roomDescription {
   margin-top: 10px;
 }
 
-.createPartyForm__contentSelection {
+/* .createPartyForm__contentSelection {
   margin-top: 10px;
-}
+} */
 
 .createPartyForm__privacySelection {
   margin-top: 10px;
 }
 
-.createPartyForm__actionButtons {
-  margin-top: 10px;
-}
+/* .createPartyForm__privacySelection_radioButton__public{
+  font-weight: 600;
+} */
 
 .createPartyForm__contentSelection__question,
 .createPartyForm__privacySelection__question {
@@ -60,10 +69,55 @@
 .createPartyForm__actionButtons {
   display: flex;
   justify-content: space-between;
-  margin: 20px 0 30px 0;
+  padding: 20px 0px 20px 0px;
 }
 
 .createPartyForm__genreSelections__contents {
   display: flex;
   justify-content: space-between;
+}
+.createPartyForm__container>*{
+  width: 52ch;
+}
+
+.createPartyForm__actionButtons {
+  display: flex;
+  justify-content: space-around;
+  /* margin: 10px 0px 10px 0px; */
+}
+
+.createPartyForm__actionButton {
+  /* padding: 0px 30px 0px 30px; */
+}
+.createPartyForm__actionButton>button {
+  width: 56ch;
+  height: 36px;
+  border-radius: 7px;
+  outline: none;
+  color: var(--boldText);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: var(--primaryFontSize);
+  border: none;
+  background-color: var(--green);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.createPartyForm__actionButton.disabled>button {
+  background-color: rgb(102, 102, 102);
+  cursor: not-allowed;
+}
+
+.createPartyForm__actionButton.disabled>button:hover {
+  background-color: rgb(102, 102, 102);
+  cursor: not-allowed;
+}
+
+.createPartyForm__actionButton>button:hover {
+  background-color: #3fbd64
+}
+
+.createPartyForm__actionButton>button:active {
+  transform: scale(0.98);
+  transition: 200ms;
 }

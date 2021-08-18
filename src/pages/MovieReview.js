@@ -1,83 +1,83 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./stylesheets/MovieReview.css";
 import BannerReview from "../components/BannerReview";
 import MovieInfoCard from "../components/MovieInfoCard";
-import MovieReviewButtons from "../components/MovieReviewButtons";
-import ReviewCard from "../components/ReviewCard";
+// import MovieReviewButtons from "../components/MovieReviewButtons";
+// import ReviewCard from "../components/ReviewCard";
 import MovieCrewList from "../components/MovieCrewList";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
+// import Slider from "react-slick";
 import { connect } from "react-redux";
 import { getMovieDetail } from "../redux/actions/movieAction";
-import { useLocation } from "react-router-dom";
-import { BounceLoader } from "react-spinners";
-function MovieReview({ movieDetails, getMovie, loading }) {
+import { useHistory, useLocation } from "react-router-dom";
+import { MoonLoader } from "react-spinners";
+function MovieReview({ movieDetails, getMovie, loading, authenticated, authLoading }) {
   const location = useLocation();
-  const [unmounted, setUnmounted] = useState(false);
+  const history = useHistory();
   const id = location.pathname.split("/")[
     location.pathname.split("/").length - 1
   ];
   console.log(id);
-  const settings = {
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    initialSlide: 0,
-    autoplay: true,
-    // responsive: [
-    //   {
-    //     breakpoint: 1520,
-    //     settings: {
-    //       slidesToShow: 5,
-    //       slidesToScroll: 3,
-    //       infinite: true,
-    //     },
-    //   },
-    //   {
-    //     breakpoint: 1250,
-    //     settings: {
-    //       slidesToShow: 4,
-    //       slidesToScroll: 3,
-    //       //   infinite: true,
-    //     },
-    //   },
-    //   {
-    //     breakpoint: 1075,
-    //     settings: {
-    //       slidesToShow: 3,
-    //       slidesToScroll: 3,
-    //       //   infinite: true,
-    //     },
-    //   },
-    //   {
-    //     breakpoint: 835,
-    //     settings: {
-    //       slidesToShow: 2,
-    //       slidesToScroll: 2,
-    //       initialSlide: 2,
-    //     },
-    //   },
-    //   {
-    //     breakpoint: 670,
-    //     settings: {
-    //       slidesToShow: 1,
-    //       slidesToScroll: 1,
-    //     },
-    //   },
-    // ],
-  };
+  // const settings = {
+  //   infinite: true,
+  //   speed: 500,
+  //   slidesToShow: 1,
+  //   slidesToScroll: 1,
+  //   initialSlide: 0,
+  //   autoplay: true,
+  //   // responsive: [
+  //   //   {
+  //   //     breakpoint: 1520,
+  //   //     settings: {
+  //   //       slidesToShow: 5,
+  //   //       slidesToScroll: 3,
+  //   //       infinite: true,
+  //   //     },
+  //   //   },
+  //   //   {
+  //   //     breakpoint: 1250,
+  //   //     settings: {
+  //   //       slidesToShow: 4,
+  //   //       slidesToScroll: 3,
+  //   //       //   infinite: true,
+  //   //     },
+  //   //   },
+  //   //   {
+  //   //     breakpoint: 1075,
+  //   //     settings: {
+  //   //       slidesToShow: 3,
+  //   //       slidesToScroll: 3,
+  //   //       //   infinite: true,
+  //   //     },
+  //   //   },
+  //   //   {
+  //   //     breakpoint: 835,
+  //   //     settings: {
+  //   //       slidesToShow: 2,
+  //   //       slidesToScroll: 2,
+  //   //       initialSlide: 2,
+  //   //     },
+  //   //   },
+  //   //   {
+  //   //     breakpoint: 670,
+  //   //     settings: {
+  //   //       slidesToShow: 1,
+  //   //       slidesToScroll: 1,
+  //   //     },
+  //   //   },
+  //   // ],
+  // };
   useEffect(() => {
-    if (!unmounted) {
-      getMovie(id);
+    if (!authLoading) {
+      if (authenticated) {
+        console.log("movie details")
+        getMovie(id);
+      } else {
+        history.push("/login");
+      }
     }
-
-    return () => {
-      setUnmounted(true);
-    };
-  });
-  console.log(movieDetails);
+  }, [authLoading, getMovie, authenticated, history, id]);
 
   return (
     <div className="movieReview">
@@ -112,27 +112,27 @@ function MovieReview({ movieDetails, getMovie, loading }) {
             {/* <div className="movieReview__content--buttons">
               <MovieReviewButtons />
             </div> */}
-            <div className="movieReview__content--highlyRated">
+            {/* <div className="movieReview__content--highlyRated">
               <ReviewCard />
-            </div>
+            </div> */}
             <div className="movieReview__content--movieCrew">
               <MovieCrewList casts={movieDetails.credits.cast} />
             </div>
 
-            <div className="movieReview__content--allreview">
+            {/* <div className="movieReview__content--allreview">
               <Slider {...settings}>
                 <ReviewCard />
                 <ReviewCard />
                 <ReviewCard />
               </Slider>
-            </div>
+            </div> */}
           </div>
         </>
       ) : (
         <div className="home__bounceloader">
-          <BounceLoader
+          <MoonLoader
             // css={override}
-            size={150}
+            size={50}
             color={"#499E4C"}
             loading
           />
@@ -145,6 +145,8 @@ const mapStateToProps = (state) => {
   return {
     movieDetails: state.movie.movieDetails,
     loading: state.movie.loading,
+    authenticated: state.user.authenticated,
+    authLoading: state.user.authLoading,
   };
 };
 

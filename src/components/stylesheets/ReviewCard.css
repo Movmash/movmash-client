@@ -1,8 +1,10 @@
 .reviewCard {
     /* width: 1290px; */
     height: fit-content;
-    border: 1px solid #C4C4C4;
+    border: 1px solid var(--border);
     box-sizing: border-box;
+    padding: 2px;
+    background-color: var(--lightBlack);
 }
 
 .reviewCard__heading {

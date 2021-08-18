@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./stylesheets/ListCard.css";
 import {
   Avatar,
-  Button,
   Radio,
   TextField,
   CircularProgress,
@@ -17,10 +16,12 @@ import CloseOutlinedIcon from "@material-ui/icons/CloseOutlined";
 import { connect } from "react-redux";
 import { deleteList, updateList } from "../redux/actions/dataAction";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
-import { genreConverter } from "../util/genreConverter";
+// import { genreConverter } from "../util/genreConverter";
 import Axios from "../util/axios";
 
 import SearchMovieCard from "./SearchMovieCard";
+import DialogHeader from "./DialogHeader";
+import { useHistory } from "react-router-dom";
 function ListCard({
   createdBy,
   description,
@@ -33,6 +34,7 @@ function ListCard({
   updateList,
   isMyProfile,
 }) {
+  const history = useHistory();
   const [info, setShowInfo] = useState(false);
   const [openDialog, setDailogOpen] = useState(false);
   const [movieListInDialog, setMovieList] = useState(movieList);
@@ -58,7 +60,7 @@ function ListCard({
           })
           .catch((e) => {
             setSearchResult([]);
-            console.log(e);
+            // console.log(e);
           });
       }
     };
@@ -80,13 +82,13 @@ function ListCard({
     setOpen((prev) => (prev = false));
     // console.log(result);
     setMovieList((prev) => [...prev, result]);
-    console.log(movieList);
+    // console.log(movieList);
     setQuery("");
-    console.log(genreConverter(result.genre_ids));
+    // console.log(genreConverter(result.genre_ids));
   };
   const handleOnChange = (event) => {
     if (event.target.value === "") {
-      console.log("heelloo");
+      // console.log("heelloo");
       setOpen((prev) => (prev = false));
     } else setOpen(true);
   };
@@ -115,12 +117,23 @@ function ListCard({
       handleClose();
     }
   };
+    // const resetTheState = () => {
+    //   setMovieList([]);
+    //   setListDescription("");
+    //   setPrivacy("");
+    //   setTags([]);
+    //   setListTitle("");
+    //   setTagsInText("");
+    // };
   return (
     <div className="listCard">
       <div className="listCard__header">
-        <div className="search__content__avatar listCardHeader">
+        <div
+          onClick={() => history.replace(`/@${createdBy.userName}`)}
+          className="search__content__avatar listCardHeader"
+        >
           <Avatar src={createdBy.profileImageUrl} />
-          <span>{createdBy.userName}</span>
+          <span>{createdBy.fullName}</span>
         </div>
         {isMyProfile && (
           <div className="listCard__headerButtons">
@@ -131,9 +144,19 @@ function ListCard({
 
         <Dialog onClose={handleClose} open={openDialog}>
           <div className="dialog__list">
-            <div className="createPartyForm__heading">
-              <h1>Create List</h1>
-            </div>
+            <DialogHeader
+              heading="Create list"
+              close={() => {
+                handleClose();
+                setMovieList(movieList);
+                setListTitle(listTitle);
+                setListDescription(description);
+                setTags(tagArray);
+                setTagsInText(tagArray.join(","));
+                setPrivacy(privacyValue);
+              }}
+              left={21.5}
+            />
             <div className="createPartyForm__container">
               <div className="createPartyForm__roomTitle">
                 <div className="createPartyForm__roomTitle__input">
@@ -148,7 +171,8 @@ function ListCard({
                       shrink: true,
                     }}
                     value={listTitleInText}
-                    variant="outlined"
+                    autoComplete="off"
+                    variant="filled"
                   />
                 </div>
               </div>
@@ -167,7 +191,8 @@ function ListCard({
                     }}
                     multiline
                     rows={3}
-                    variant="outlined"
+                    autoComplete="off"
+                    variant="filled"
                     value={listDescription}
                   />
                 </div>
@@ -192,7 +217,8 @@ function ListCard({
                       placeholder="Search ..."
                       id="standard-basic"
                       label="Search Your Movie"
-                      variant="outlined"
+                      autoComplete="off"
+                      variant="filled"
                       value={query}
                     />
                     {open &&
@@ -270,7 +296,7 @@ function ListCard({
                     onChange={(e) => {
                       setTagsInText(e.target.value);
                       setTags(tagsInText.split(","));
-                      console.log(tags);
+                      // console.log(tags);
                     }}
                     fullWidth
                     margin="normal"
@@ -278,7 +304,8 @@ function ListCard({
                       shrink: true,
                     }}
                     value={tagsInText}
-                    variant="outlined"
+                    autoComplete="off"
+                    variant="filled"
                   />
                 </div>
               </div>
@@ -313,26 +340,18 @@ function ListCard({
             </div>
 
             <div className="createPartyForm__actionButtons">
-              <div className="createPartyForm__actionButton">
-                <Button
-                  onClick={() => {
-                    handleClose();
-                  }}
-                  variant="outlined"
-                  color="secondary"
-                >
-                  Cancel
-                </Button>
-              </div>
-              <div className="createPartyForm__actionButton">
-                <Button
+              <div
+                className={`createPartyForm__actionButton ${
+                  !(movieListInDialog.length !== 0 && privacy !== "") &&
+                  "disabled"
+                }`}
+              >
+                <button
+                  disabled={!(movieListInDialog.length !== 0 && privacy !== "")}
                   onClick={handleCreateList}
-                  // disabled={ratingPreference === 0 ? true : false}
-                  variant="contained"
-                  color="primary"
                 >
                   Save
-                </Button>
+                </button>
               </div>
             </div>
           </div>
@@ -365,7 +384,11 @@ function ListCard({
         <>
           <div className="listCard__movieList">
             {movieList.map((movie) => (
-              <div key={movie.id} className="listCard__movieItem">
+              <div
+                onClick={() => history.push(`/movie/${movie.id}`)}
+                key={movie.id}
+                className="listCard__movieItem"
+              >
                 {movie.poster_path !== null ? (
                   <img
                     className="listCard__moviePoster"
@@ -402,7 +425,11 @@ function ListCard({
 }
 
 export default connect(null, { deleteList, updateList })(ListCard);
-{
+
+
+
+
+
   /*{ createdBy, id, listTitle, description, movieList }
   https://cdn.pastemagazine.com/www/articles/2016/01/21/ProphetEW_Main.jpg 
   <div className="liveShowCard__banner__content">
@@ -431,4 +458,4 @@ export default connect(null, { deleteList, updateList })(ListCard);
         </div>
       
        */
-}
+

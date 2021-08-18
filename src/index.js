@@ -3,28 +3,31 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import { logoutUser, getUserData } from "./redux/actions/userAction";
+import {  getOAuthUserData } from "./redux/actions/userAction";
 import { SET_UNAUTHENTICATED } from "./redux/types";
-import jwtDecode from "jwt-decode";
+// import jwtDecode from "jwt-decode";
 import store from "./redux/store";
-import axios from "./util/axios";
+// import axios from "./util/axios";
 import { Provider } from "react-redux";
-const token = localStorage.mashDBToken;
+// const token = localStorage.mashDBToken;
 // console.log(token);
-if (token) {
-  console.log(token);
-  const decodedToken = jwtDecode(token);
-  if (decodedToken.exp * 1000 < Date.now()) {
-    store.dispatch(logoutUser());
-    window.location.href = "/login";
-  } else {
-    store.dispatch({ type: SET_UNAUTHENTICATED });
-    axios.defaults.headers.common["Authorization"] = token;
-    store.dispatch(getUserData());
+// if (token) {
+//   console.log(token);
+//   const decodedToken = jwtDecode(token);
+//   if (decodedToken.exp * 1000 < Date.now()) {
+//     store.dispatch(logoutUser());
+//     window.location.href = "/login";
+//   } else {
+//     store.dispatch({ type: SET_UNAUTHENTICATED });
+//     axios.defaults.headers.common["Authorization"] = token;
+//     store.dispatch(getUserData());
 
-    // window.location.href = "/";
-  }
-}
+//     // window.location.href = "/";
+//   }
+// }
+store.dispatch({ type: SET_UNAUTHENTICATED });
+store.dispatch(getOAuthUserData());
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

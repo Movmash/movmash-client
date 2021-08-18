@@ -1,0 +1,38 @@
+.dialogHeader{
+    display: flex;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--boldText);
+    font-size: 20px;
+    font-weight: 600;
+    border-bottom: 1px solid var(--border);
+    width: 100%;
+    padding: 20px 0 20px 0;
+}
+.dialogHeader__container{
+    display: flex;
+    position: relative;
+    align-items: center;
+    
+}
+.dialogHeader__closeButton{
+    position: absolute;
+    left: 25ch;
+    background-color:var(--palletes);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 36px;
+    width: 36px;
+    cursor: pointer;
+}
+.dialogHeader__closeButton:hover{
+    background-color:rgb(80, 80, 80);
+
+}
+.dialogHeader__closeButton:active{
+    background-color:rgb(66, 66, 66);
+    transform: scale(0.95);
+    transition: 200ms;
+}

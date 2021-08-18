@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { removeItemOnce } from "../util/arrayItemDeleter";
 import "./stylesheets/PostSuggestMePost.css";
+import DialogHeader from "./DialogHeader";
 import {
   Radio,
   IconButton,
   ClickAwayListener,
   Checkbox,
   FormControlLabel,
-  Button,
 } from "@material-ui/core";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import { sendPost } from "../redux/actions/postAction";
@@ -201,7 +201,7 @@ function PostSuggestMePost({ closeSuggestMe, sendPost, postType }) {
         break;
 
       default:
-        console.log("default");
+        // console.log("default");
         break;
     }
   };
@@ -232,455 +232,463 @@ function PostSuggestMePost({ closeSuggestMe, sendPost, postType }) {
       rating: ratingPreference,
       postType: postType,
     };
-    console.log(suggestMePost);
+    // console.log(suggestMePost);
     sendPost(suggestMePost);
     closeSuggestMe();
   };
   return (
     <div className="postSuggestMe">
-      <div className="postSuggestMe__captionInput"></div>
-      <div className="postSuggestMe__ratingStep">
-        <div className="postSuggestMe__ratingStep__heading">
-          <h3 className="postSuggestMe--label">Rating preference :</h3>
-        </div>
-        <div className="postSuggestMe__ratingStep__content">
-          <div className="postSuggestMe__ratingStep__content__input">
-            <div className="postSuggestMe__ratingStep__content__input--slider">
-              <input
-                className="slider-rating"
-                type="range"
-                min="0"
-                max="100"
-                defaultValue="0"
-                onChange={(e) => {
-                  setRatingValue(e.target.value / 10);
-                }}
-              />
-            </div>
-            <div className="postSuggestMe__ratingStep__content__input--radioInput">
-              <div className="postSuggestMe__ratingStep__content__input--radioInput_material">
-                <Radio
-                  checked={selectedRatingAbove === "above"}
-                  onChange={handleRatingRadioChange}
-                  value="above"
-                  name="radio-button-demo"
-                  inputProps={{ "aria-label": "A" }}
-                />
-                <h4>Above</h4>
-              </div>
-              <div className="postSuggestMe__ratingStep__content__input--radioInput_material">
-                <Radio
-                  checked={selectedRatingAbove === "below"}
-                  onChange={handleRatingRadioChange}
-                  value="below"
-                  name="radio-button-demo"
-                  inputProps={{ "aria-label": "A" }}
-                />
-                <h4>Below</h4>
-              </div>
-            </div>
-          </div>
-          <div className="postSuggestMe__ratingStep__content__text">
-            <div className="postSuggestMe__ratingStep__content__text--heading">
-              <h4>
-                Rating{" "}
-                {selectedRatingAbove !== ""
-                  ? selectedRatingAbove === "above"
-                    ? "Above"
-                    : "Below"
-                  : ""}
-              </h4>
-            </div>
-            <div className="postSuggestMe__ratingStep__content__text--content">
-              <h1>{ratingPreference}</h1>
-            </div>
-          </div>
-        </div>
+      <div className="postReviewPost__DialogHeader">
+        <DialogHeader
+          heading="Movie suggestion"
+          close={closeSuggestMe}
+          left={27}
+        />
       </div>
-      <div className="postSuggestMe__genreStep">
-        <div className="postSuggestMe__genreStep__heading">
-          <h3 className="postSuggestMe--label">Choose genres :</h3>
-        </div>
-        <div className="postSuggestMe__genreStep__content">
-          <div className="postSuggestMe__genreStep__content__heading">
-            <h3>Genre</h3>
+      <div className="postSuggestMe__mainContent">
+        <div className="postSuggestMe__captionInput"></div>
+        <div className="postSuggestMe__ratingStep">
+          <div className="postSuggestMe__ratingStep__heading">
+            <h3 className="postSuggestMe--label">Rating preference :</h3>
           </div>
-          <div className="postSuggestMe__genreStep__content__content">
-            <div className="postSuggestMe__genreStep__content__content--text">
-              <h3>
-                {chooseGenre.length === 0 || chooseGenre.length > 4
-                  ? "Any Genre"
-                  : chooseGenre.join(" | ")}
-              </h3>
-            </div>
-
-            <ClickAwayListener onClickAway={handleClickAway}>
-              <div className="postSuggestMe__genreStep__content__genre-list">
-                <div className="postSuggestMe__genreStep__content__content--iconButton">
-                  <IconButton onClick={handleClick}>
-                    <KeyboardArrowDownIcon />
-                  </IconButton>
+          <div className="postSuggestMe__ratingStep__content">
+            <div className="postSuggestMe__ratingStep__content__input">
+              <div className="postSuggestMe__ratingStep__content__input--slider">
+                <input
+                  className="slider-rating"
+                  type="range"
+                  min="0"
+                  max="100"
+                  defaultValue="0"
+                  onChange={(e) => {
+                    setRatingValue(e.target.value / 10);
+                  }}
+                />
+              </div>
+              <div className="postSuggestMe__ratingStep__content__input--radioInput">
+                <div className="postSuggestMe__ratingStep__content__input--radioInput_material">
+                  <Radio
+                    checked={selectedRatingAbove === "above"}
+                    onChange={handleRatingRadioChange}
+                    value="above"
+                    name="radio-button-demo"
+                    inputProps={{ "aria-label": "A" }}
+                  />
+                  <h4>Above</h4>
                 </div>
-                {open ? (
-                  <div className="postSuggestMe__genreStep__content__genre-menu">
-                    <div className="postSuggestMe__genreStep__content__genre-menuItem">
-                      <div className="postSuggestMe__genreStep__content__genre-menuItem--container">
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={checkAction}
-                              onChange={handleCheckBox}
-                              name="Action"
-                            />
-                          }
-                          label="Action"
-                        />
-                      </div>
-                    </div>
-                    <div className="postSuggestMe__genreStep__content__genre-menuItem">
-                      <div className="postSuggestMe__genreStep__content__genre-menuItem--container">
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={checkComedy}
-                              onChange={handleCheckBox}
-                              name="Comedy"
-                            />
-                          }
-                          label="Comedy"
-                        />
-                      </div>
-                    </div>
-                    <div className="postSuggestMe__genreStep__content__genre-menuItem">
-                      <div className="postSuggestMe__genreStep__content__genre-menuItem--container">
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={checkHorror}
-                              onChange={handleCheckBox}
-                              name="Horror"
-                            />
-                          }
-                          label="Horror"
-                        />
-                      </div>
-                    </div>
-                    <div className="postSuggestMe__genreStep__content__genre-menuItem">
-                      <div className="postSuggestMe__genreStep__content__genre-menuItem--container">
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={checkRomance}
-                              onChange={handleCheckBox}
-                              name="Romance"
-                            />
-                          }
-                          label="Romance"
-                        />
-                      </div>
-                    </div>
-                    <div className="postSuggestMe__genreStep__content__genre-menuItem">
-                      <div className="postSuggestMe__genreStep__content__genre-menuItem--container">
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={checkDocumentary}
-                              onChange={handleCheckBox}
-                              name="Documentary"
-                            />
-                          }
-                          label="Documentary"
-                        />
-                      </div>
-                    </div>
-                    <div className="postSuggestMe__genreStep__content__genre-menuItem">
-                      <div className="postSuggestMe__genreStep__content__genre-menuItem--container">
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={checkAdventure}
-                              onChange={handleCheckBox}
-                              name="Adventure"
-                            />
-                          }
-                          label="Adventure"
-                        />
-                      </div>
-                    </div>
-                    <div className="postSuggestMe__genreStep__content__genre-menuItem">
-                      <div className="postSuggestMe__genreStep__content__genre-menuItem--container">
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={checkAnimation}
-                              onChange={handleCheckBox}
-                              name="Animation"
-                            />
-                          }
-                          label="Animation"
-                        />
-                      </div>
-                    </div>
-                    <div className="postSuggestMe__genreStep__content__genre-menuItem">
-                      <div className="postSuggestMe__genreStep__content__genre-menuItem--container">
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={checkDrama}
-                              onChange={handleCheckBox}
-                              name="Drama"
-                            />
-                          }
-                          label="Drama"
-                        />
-                      </div>
-                    </div>
-                    <div className="postSuggestMe__genreStep__content__genre-menuItem">
-                      <div className="postSuggestMe__genreStep__content__genre-menuItem--container">
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={checkCrime}
-                              onChange={handleCheckBox}
-                              name="Crime"
-                            />
-                          }
-                          label="Crime"
-                        />
-                      </div>
-                    </div>
-                    <div className="postSuggestMe__genreStep__content__genre-menuItem">
-                      <div className="postSuggestMe__genreStep__content__genre-menuItem--container">
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={checkFamily}
-                              onChange={handleCheckBox}
-                              name="Family"
-                            />
-                          }
-                          label="Family"
-                        />
-                      </div>
-                    </div>
-                    <div className="postSuggestMe__genreStep__content__genre-menuItem">
-                      <div className="postSuggestMe__genreStep__content__genre-menuItem--container">
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={checkFantasy}
-                              onChange={handleCheckBox}
-                              name="Fantasy"
-                            />
-                          }
-                          label="Fantasy"
-                        />
-                      </div>
-                    </div>
-                    <div className="postSuggestMe__genreStep__content__genre-menuItem">
-                      <div className="postSuggestMe__genreStep__content__genre-menuItem--container">
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={checkHistory}
-                              onChange={handleCheckBox}
-                              name="History"
-                            />
-                          }
-                          label="History"
-                        />
-                      </div>
-                    </div>
-                    <div className="postSuggestMe__genreStep__content__genre-menuItem">
-                      <div className="postSuggestMe__genreStep__content__genre-menuItem--container">
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={checkMusic}
-                              onChange={handleCheckBox}
-                              name="Music"
-                            />
-                          }
-                          label="Music"
-                        />
-                      </div>
-                    </div>
-                    <div className="postSuggestMe__genreStep__content__genre-menuItem">
-                      <div className="postSuggestMe__genreStep__content__genre-menuItem--container">
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={checkMystery}
-                              onChange={handleCheckBox}
-                              name="Mystery"
-                            />
-                          }
-                          label="Mystery"
-                        />
-                      </div>
-                    </div>
-                    <div className="postSuggestMe__genreStep__content__genre-menuItem">
-                      <div className="postSuggestMe__genreStep__content__genre-menuItem--container">
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={checkSciFi}
-                              onChange={handleCheckBox}
-                              name="SciFi"
-                            />
-                          }
-                          label="Sci-Fi"
-                        />
-                      </div>
-                    </div>
-                    <div className="postSuggestMe__genreStep__content__genre-menuItem">
-                      <div className="postSuggestMe__genreStep__content__genre-menuItem--container">
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={checkTV}
-                              onChange={handleCheckBox}
-                              name="TV"
-                            />
-                          }
-                          label="TV"
-                        />
-                      </div>
-                    </div>
-                    <div className="postSuggestMe__genreStep__content__genre-menuItem">
-                      <div className="postSuggestMe__genreStep__content__genre-menuItem--container">
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={checkThriller}
-                              onChange={handleCheckBox}
-                              name="Thriller"
-                            />
-                          }
-                          label="Thriller"
-                        />
-                      </div>
-                    </div>
-                    <div className="postSuggestMe__genreStep__content__genre-menuItem">
-                      <div className="postSuggestMe__genreStep__content__genre-menuItem--container">
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={checkWar}
-                              onChange={handleCheckBox}
-                              name="War"
-                            />
-                          }
-                          label="War"
-                        />
-                      </div>
-                    </div>
-                    <div className="postSuggestMe__genreStep__content__genre-menuItem">
-                      <div className="postSuggestMe__genreStep__content__genre-menuItem--container">
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={checkWestern}
-                              onChange={handleCheckBox}
-                              name="Western"
-                            />
-                          }
-                          label="Western"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                ) : null}
+                <div className="postSuggestMe__ratingStep__content__input--radioInput_material">
+                  <Radio
+                    checked={selectedRatingAbove === "below"}
+                    onChange={handleRatingRadioChange}
+                    value="below"
+                    name="radio-button-demo"
+                    inputProps={{ "aria-label": "A" }}
+                  />
+                  <h4>Below</h4>
+                </div>
               </div>
-            </ClickAwayListener>
-          </div>
-        </div>
-      </div>
-      <div className="postSuggestMe__languageNgenreStep">
-        <div className="postSuggestMe__runtimeRange">
-          <div className="postSuggestMe__runtimeRange__heading">
-            <h3>Runtime range :</h3>
-          </div>
-          <div className="postSuggestMe__runtimeRange__content">
-            <div className="postSuggestMe__runtimeRange__content__input">
-              <div className="postSuggestMe__ratingStep__content__input--radioInput_material">
-                <Radio
-                  checked={durationPreference === "Any duration"}
-                  onChange={handleDurationPreference}
-                  value="Any duration"
-                  name="radio-button-demo"
-                  inputProps={{ "aria-label": "A" }}
-                />
-                <h4>Any duration</h4>
+            </div>
+            <div className="postSuggestMe__ratingStep__content__text">
+              <div className="postSuggestMe__ratingStep__content__text--heading">
+                <h4>
+                  Rating{" "}
+                  {selectedRatingAbove !== ""
+                    ? selectedRatingAbove === "above"
+                      ? "Above"
+                      : "Below"
+                    : ""}
+                </h4>
               </div>
-              <div className="postSuggestMe__ratingStep__content__input--radioInput_material">
-                <Radio
-                  checked={durationPreference === "Under 2 hr"}
-                  onChange={handleDurationPreference}
-                  value="Under 2 hr"
-                  name="radio-button-demo"
-                  inputProps={{ "aria-label": "A" }}
-                />
-                <h4>Under 2 hr</h4>
-              </div>
-              <div className="postSuggestMe__ratingStep__content__input--radioInput_material">
-                <Radio
-                  checked={durationPreference === "Above 2 hr"}
-                  onChange={handleDurationPreference}
-                  value="Above 2 hr"
-                  name="radio-button-demo"
-                  inputProps={{ "aria-label": "A" }}
-                />
-                <h4>Above 2 hr</h4>
+              <div className="postSuggestMe__ratingStep__content__text--content">
+                <h1>{ratingPreference}</h1>
               </div>
             </div>
           </div>
         </div>
-        <div className="postSuggestMe__languageStep">
-          <div className="postSuggestMe__languageStep__heading">
-            <h3>Language :</h3>
+        <div className="postSuggestMe__genreStep">
+          <div className="postSuggestMe__genreStep__heading">
+            <h3 className="postSuggestMe--label">Choose genres :</h3>
           </div>
-          <div className="postSuggestMe__languageStep__content">
-            <div className="postSuggestMe__languageStep__content__input">
-              <div className="postSuggestMe__ratingStep__content__input--radioInput_material">
-                <Radio
-                  checked={languagePrefered === "Any Language"}
-                  onChange={handleLanguagePreference}
-                  value="Any Language"
-                  name="radio-button-demo"
-                  inputProps={{ "aria-label": "A" }}
-                />
-                <h4>Any Language</h4>
+          <div className="postSuggestMe__genreStep__content">
+            <div className="postSuggestMe__genreStep__content__heading">
+              <h3>Genre</h3>
+            </div>
+            <div className="postSuggestMe__genreStep__content__content">
+              <div className="postSuggestMe__genreStep__content__content--text">
+                <h3>
+                  {chooseGenre.length === 0 || chooseGenre.length > 4
+                    ? "Any Genre"
+                    : chooseGenre.join(" | ")}
+                </h3>
               </div>
-              <div className="postSuggestMe__ratingStep__content__input--radioInput_material">
-                <Radio
-                  checked={languagePrefered === "English"}
-                  onChange={handleLanguagePreference}
-                  value="English"
-                  name="radio-button-demo"
-                  inputProps={{ "aria-label": "A" }}
-                />
-                <h4>English</h4>
+
+              <ClickAwayListener onClickAway={handleClickAway}>
+                <div className="postSuggestMe__genreStep__content__genre-list">
+                  <div className="postSuggestMe__genreStep__content__content--iconButton">
+                    <IconButton onClick={handleClick}>
+                      <KeyboardArrowDownIcon />
+                    </IconButton>
+                  </div>
+                  {open ? (
+                    <div className="postSuggestMe__genreStep__content__genre-menu">
+                      <div className="postSuggestMe__genreStep__content__genre-menuItem">
+                        <div className="postSuggestMe__genreStep__content__genre-menuItem--container">
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                checked={checkAction}
+                                onChange={handleCheckBox}
+                                name="Action"
+                              />
+                            }
+                            label="Action"
+                          />
+                        </div>
+                      </div>
+                      <div className="postSuggestMe__genreStep__content__genre-menuItem">
+                        <div className="postSuggestMe__genreStep__content__genre-menuItem--container">
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                checked={checkComedy}
+                                onChange={handleCheckBox}
+                                name="Comedy"
+                              />
+                            }
+                            label="Comedy"
+                          />
+                        </div>
+                      </div>
+                      <div className="postSuggestMe__genreStep__content__genre-menuItem">
+                        <div className="postSuggestMe__genreStep__content__genre-menuItem--container">
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                checked={checkHorror}
+                                onChange={handleCheckBox}
+                                name="Horror"
+                              />
+                            }
+                            label="Horror"
+                          />
+                        </div>
+                      </div>
+                      <div className="postSuggestMe__genreStep__content__genre-menuItem">
+                        <div className="postSuggestMe__genreStep__content__genre-menuItem--container">
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                checked={checkRomance}
+                                onChange={handleCheckBox}
+                                name="Romance"
+                              />
+                            }
+                            label="Romance"
+                          />
+                        </div>
+                      </div>
+                      <div className="postSuggestMe__genreStep__content__genre-menuItem">
+                        <div className="postSuggestMe__genreStep__content__genre-menuItem--container">
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                checked={checkDocumentary}
+                                onChange={handleCheckBox}
+                                name="Documentary"
+                              />
+                            }
+                            label="Documentary"
+                          />
+                        </div>
+                      </div>
+                      <div className="postSuggestMe__genreStep__content__genre-menuItem">
+                        <div className="postSuggestMe__genreStep__content__genre-menuItem--container">
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                checked={checkAdventure}
+                                onChange={handleCheckBox}
+                                name="Adventure"
+                              />
+                            }
+                            label="Adventure"
+                          />
+                        </div>
+                      </div>
+                      <div className="postSuggestMe__genreStep__content__genre-menuItem">
+                        <div className="postSuggestMe__genreStep__content__genre-menuItem--container">
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                checked={checkAnimation}
+                                onChange={handleCheckBox}
+                                name="Animation"
+                              />
+                            }
+                            label="Animation"
+                          />
+                        </div>
+                      </div>
+                      <div className="postSuggestMe__genreStep__content__genre-menuItem">
+                        <div className="postSuggestMe__genreStep__content__genre-menuItem--container">
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                checked={checkDrama}
+                                onChange={handleCheckBox}
+                                name="Drama"
+                              />
+                            }
+                            label="Drama"
+                          />
+                        </div>
+                      </div>
+                      <div className="postSuggestMe__genreStep__content__genre-menuItem">
+                        <div className="postSuggestMe__genreStep__content__genre-menuItem--container">
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                checked={checkCrime}
+                                onChange={handleCheckBox}
+                                name="Crime"
+                              />
+                            }
+                            label="Crime"
+                          />
+                        </div>
+                      </div>
+                      <div className="postSuggestMe__genreStep__content__genre-menuItem">
+                        <div className="postSuggestMe__genreStep__content__genre-menuItem--container">
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                checked={checkFamily}
+                                onChange={handleCheckBox}
+                                name="Family"
+                              />
+                            }
+                            label="Family"
+                          />
+                        </div>
+                      </div>
+                      <div className="postSuggestMe__genreStep__content__genre-menuItem">
+                        <div className="postSuggestMe__genreStep__content__genre-menuItem--container">
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                checked={checkFantasy}
+                                onChange={handleCheckBox}
+                                name="Fantasy"
+                              />
+                            }
+                            label="Fantasy"
+                          />
+                        </div>
+                      </div>
+                      <div className="postSuggestMe__genreStep__content__genre-menuItem">
+                        <div className="postSuggestMe__genreStep__content__genre-menuItem--container">
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                checked={checkHistory}
+                                onChange={handleCheckBox}
+                                name="History"
+                              />
+                            }
+                            label="History"
+                          />
+                        </div>
+                      </div>
+                      <div className="postSuggestMe__genreStep__content__genre-menuItem">
+                        <div className="postSuggestMe__genreStep__content__genre-menuItem--container">
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                checked={checkMusic}
+                                onChange={handleCheckBox}
+                                name="Music"
+                              />
+                            }
+                            label="Music"
+                          />
+                        </div>
+                      </div>
+                      <div className="postSuggestMe__genreStep__content__genre-menuItem">
+                        <div className="postSuggestMe__genreStep__content__genre-menuItem--container">
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                checked={checkMystery}
+                                onChange={handleCheckBox}
+                                name="Mystery"
+                              />
+                            }
+                            label="Mystery"
+                          />
+                        </div>
+                      </div>
+                      <div className="postSuggestMe__genreStep__content__genre-menuItem">
+                        <div className="postSuggestMe__genreStep__content__genre-menuItem--container">
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                checked={checkSciFi}
+                                onChange={handleCheckBox}
+                                name="SciFi"
+                              />
+                            }
+                            label="Sci-Fi"
+                          />
+                        </div>
+                      </div>
+                      <div className="postSuggestMe__genreStep__content__genre-menuItem">
+                        <div className="postSuggestMe__genreStep__content__genre-menuItem--container">
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                checked={checkTV}
+                                onChange={handleCheckBox}
+                                name="TV"
+                              />
+                            }
+                            label="TV"
+                          />
+                        </div>
+                      </div>
+                      <div className="postSuggestMe__genreStep__content__genre-menuItem">
+                        <div className="postSuggestMe__genreStep__content__genre-menuItem--container">
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                checked={checkThriller}
+                                onChange={handleCheckBox}
+                                name="Thriller"
+                              />
+                            }
+                            label="Thriller"
+                          />
+                        </div>
+                      </div>
+                      <div className="postSuggestMe__genreStep__content__genre-menuItem">
+                        <div className="postSuggestMe__genreStep__content__genre-menuItem--container">
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                checked={checkWar}
+                                onChange={handleCheckBox}
+                                name="War"
+                              />
+                            }
+                            label="War"
+                          />
+                        </div>
+                      </div>
+                      <div className="postSuggestMe__genreStep__content__genre-menuItem">
+                        <div className="postSuggestMe__genreStep__content__genre-menuItem--container">
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                checked={checkWestern}
+                                onChange={handleCheckBox}
+                                name="Western"
+                              />
+                            }
+                            label="Western"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  ) : null}
+                </div>
+              </ClickAwayListener>
+            </div>
+          </div>
+        </div>
+        <div className="postSuggestMe__languageNgenreStep">
+          <div className="postSuggestMe__runtimeRange">
+            <div className="postSuggestMe__runtimeRange__heading">
+              <h3>Runtime range :</h3>
+            </div>
+            <div className="postSuggestMe__runtimeRange__content">
+              <div className="postSuggestMe__runtimeRange__content__input">
+                <div className="postSuggestMe__ratingStep__content__input--radioInput_material">
+                  <Radio
+                    checked={durationPreference === "Any duration"}
+                    onChange={handleDurationPreference}
+                    value="Any duration"
+                    name="radio-button-demo"
+                    inputProps={{ "aria-label": "A" }}
+                  />
+                  <h4>Any duration</h4>
+                </div>
+                <div className="postSuggestMe__ratingStep__content__input--radioInput_material">
+                  <Radio
+                    checked={durationPreference === "Under 2 hr"}
+                    onChange={handleDurationPreference}
+                    value="Under 2 hr"
+                    name="radio-button-demo"
+                    inputProps={{ "aria-label": "A" }}
+                  />
+                  <h4>Under 2 hr</h4>
+                </div>
+                <div className="postSuggestMe__ratingStep__content__input--radioInput_material">
+                  <Radio
+                    checked={durationPreference === "Above 2 hr"}
+                    onChange={handleDurationPreference}
+                    value="Above 2 hr"
+                    name="radio-button-demo"
+                    inputProps={{ "aria-label": "A" }}
+                  />
+                  <h4>Above 2 hr</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="postSuggestMe__languageStep">
+            <div className="postSuggestMe__languageStep__heading">
+              <h3>Language :</h3>
+            </div>
+            <div className="postSuggestMe__languageStep__content">
+              <div className="postSuggestMe__languageStep__content__input">
+                <div className="postSuggestMe__ratingStep__content__input--radioInput_material">
+                  <Radio
+                    checked={languagePrefered === "Any Language"}
+                    onChange={handleLanguagePreference}
+                    value="Any Language"
+                    name="radio-button-demo"
+                    inputProps={{ "aria-label": "A" }}
+                  />
+                  <h4>Any Language</h4>
+                </div>
+                <div className="postSuggestMe__ratingStep__content__input--radioInput_material">
+                  <Radio
+                    checked={languagePrefered === "English"}
+                    onChange={handleLanguagePreference}
+                    value="English"
+                    name="radio-button-demo"
+                    inputProps={{ "aria-label": "A" }}
+                  />
+                  <h4>English</h4>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div className="postSuggestMe__buttons">
-        <div className="postReviewPost__bottomIcon">
-          <Button onClick={closeSuggestMe} variant="outlined" color="secondary">
-            Cancel
-          </Button>
-        </div>
-        <div className="postReviewPost__bottomIcon">
-          <Button
-            onClick={handleSubmit}
+        <div
+          className={`postReviewPost__bottomIcon ${
+            ratingPreference === 0 && "disabled"
+          }`}
+        >
+          <button
+            onClick={() => handleSubmit()}
             disabled={ratingPreference === 0 ? true : false}
-            variant="contained"
-            color="primary"
+            type="submit"
+            style={{ width: "63.5ch" }}
           >
             Post
-          </Button>
+          </button>
         </div>
       </div>
     </div>

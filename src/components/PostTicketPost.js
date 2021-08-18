@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./stylesheets/PostTicketPost.css";
 import SearchMovieCard from "./SearchMovieCard";
+import DialogHeader from "./DialogHeader";
 import {
   CircularProgress,
   TextField,
   ClickAwayListener,
   Radio,
-  Button,
 } from "@material-ui/core";
 //........................................picker
 import {
@@ -58,7 +58,7 @@ function PostTicketPost({ closeTicket, sendPost, postType }) {
       });
     }
 
-    console.log(timeRangeValue);
+    // console.log(timeRangeValue);
   };
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -99,16 +99,16 @@ function PostTicketPost({ closeTicket, sendPost, postType }) {
 
   const handleOnChange = (event) => {
     if (event.target.value === "") {
-      console.log("heelloo");
+      // console.log("heelloo");
       setOpen((prev) => (prev = false));
     } else setOpen(true);
   };
 
   const handleOnClickSearchCard = (result) => {
     setOpen((prev) => (prev = false));
-    console.log(result);
+    // console.log(result);
     setPostMovie(result);
-    console.log(genreConverter(result.genre_ids));
+    // console.log(genreConverter(result.genre_ids));
   };
 
   const handleSubmit = (movie) => {
@@ -125,13 +125,16 @@ function PostTicketPost({ closeTicket, sendPost, postType }) {
       overview: movie.overview,
       postType: postType,
     };
-    console.log(ticketPost);
+    // console.log(ticketPost);
     sendPost(ticketPost);
     closeTicket();
   };
 
   return (
     <div className="postTicketPost">
+      <div className="postReviewPost__DialogHeader">
+        <DialogHeader heading="Create ticket" left={23} close={closeTicket} />
+      </div>
       <div className="postTicketPost__searchMovie">
         <div className="postTicketPost__header">
           <ClickAwayListener onClickAway={handleClickAway}>
@@ -143,6 +146,8 @@ function PostTicketPost({ closeTicket, sendPost, postType }) {
                 }}
                 id="standard-basic"
                 label="Search Your Movie"
+                variant="filled"
+                autoComplete="off"
               />
               {open &&
                 (loading ? (
@@ -171,158 +176,164 @@ function PostTicketPost({ closeTicket, sendPost, postType }) {
           </ClickAwayListener>
         </div>
       </div>
-      <div className="postTicketPost__movieContent">
-        <div className="postTicketPost__movieContent-subContainer">
-          {Object.keys(postMovie).length !== 0 && (
-            <div className="postTicketPost__contentPoster">
-              <img
-                alt={postMovie.title}
-                src={
-                  postMovie.poster_path !== null
-                    ? `https://image.tmdb.org/t/p/w92${postMovie.poster_path}`
-                    : "https://streaming.tvseries-movies.com/themes/vstripe/images/no-cover.png"
-                }
-              />
-            </div>
-          )}
-          <div className="postTicketPost__contentInfo">
+      <div className="postTicket__mainContent">
+        <div className="postTicketPost__movieContent">
+          <div
+            className={`postTicketPost__movieContent-subContainer ${
+              Object.keys(postMovie).length === 0 && "margin"
+            }`}
+          >
             {Object.keys(postMovie).length !== 0 && (
-              <>
-                <div className="postTicketPost__contentInfo--heading">
-                  <div className="postTicketPost__contentInfo--heading--movieName">
-                    <h2>
-                      {postMovie.title ? postMovie.title : postMovie.name}
-                    </h2>
-                  </div>
-                </div>
-                <div className="postTicketPost__contentInfo--durationGenre">
-                  <div className="postTicketPost__contentInfo--durationGenre--duration">
-                    <h4>{postMovie.release_date.split("-")[0]}</h4>
-                  </div>
-                  <div className="postTicketPost__contentInfo--durationGenre--genre">
-                    <h4>{genreConverter(postMovie.genre_ids)}</h4>
-                  </div>
-                </div>
-                <div className="postTicketPost__contentInfo--overview">
-                  <p>{stringLimiter(postMovie.overview, 100)}</p>
-                </div>
-              </>
+              <div className="postTicketPost__contentPoster">
+                <img
+                  alt={postMovie.title}
+                  src={
+                    postMovie.poster_path !== null
+                      ? `https://image.tmdb.org/t/p/w92${postMovie.poster_path}`
+                      : "https://streaming.tvseries-movies.com/themes/vstripe/images/no-cover.png"
+                  }
+                />
+              </div>
             )}
-          </div>
-        </div>
-      </div>
-      <div
-        className={`postTicketPost__schedule ${
-          Object.keys(postMovie).length === 0 && "margin"
-        }`}
-      >
-        <div className="postTicketPost__schedule__heading">
-          <h4>Make your schedule</h4>
-        </div>
-        <div className="postTicketPost__scheduleContent-uppercontainer">
-          <div className="postTicketPost__scheduleContent-container">
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <div className="postTicketPost__scheduleContent">
-                <div className="postTicketPost__scheduleContent__picker">
-                  <KeyboardDatePicker
-                    variant="inline"
-                    margin="normal"
-                    id="date-picker-dialog"
-                    label="Select your date"
-                    format="MM/dd/yyyy"
-                    value={selectedDate}
-                    onChange={handleDateChange}
-                    KeyboardButtonProps={{
-                      "aria-label": "change date",
-                    }}
-                    minDate={new Date()}
-                    maxDate={new Date(year, month, day)}
-                  />
-                </div>
-                <div className="postTicketPost__scheduleContent__picker">
-                  <KeyboardTimePicker
-                    variant="inline"
-                    margin="normal"
-                    id="time-picker"
-                    label="Select your time"
-                    value={selectedDate}
-                    onChange={handleDateChange}
-                    KeyboardButtonProps={{
-                      "aria-label": "change time",
-                    }}
-                  />
-                </div>
-              </div>
-            </MuiPickersUtilsProvider>
-          </div>
-          <div className="postTicket__container__showDetails--showTiming">
-            <div className="postTicket__container__showDetails--time-range">
-              <h2>
-                {getTimeDetails(selectedDate, "h")}:
-                {getTimeDetails(selectedDate, "min")}
-                {timeRange !== "exact" &&
-                  ` to ${getTimeDetails(selectedDate, "h")}`}
-                {timeRange !== "exact" &&
-                  `:${getTimeDetails(selectedDate, "min")}`}
-              </h2>
-            </div>
-            <div className="postTicket__container__showDetails--dateRange">
-              <div className="postTicket__container__showDetails--dateRange--from">
-                <div className="postTicket__container__showDetails--dateRange-from--date">
-                  <h1>{getTimeDetails(selectedDate, "d")}</h1>
-                </div>
-                <div className="postTicket__container__showDetails--dateRange-from--month">
-                  <h2>{getTimeDetails(selectedDate, "m")}</h2>
-                </div>
-              </div>
-              {timeRange !== "exact" && (
+            <div className="postTicketPost__contentInfo">
+              {Object.keys(postMovie).length !== 0 && (
                 <>
-                  <h1> - </h1>
-                  <div className="postTicket__container__showDetails--dateRange--to">
-                    <div className="postTicket__container__showDetails--dateRange-from--date">
-                      <h1>{getTimeDetails(timeRangeValue, "d")}</h1>
+                  <div className="postTicketPost__contentInfo--heading">
+                    <div className="postTicketPost__contentInfo--heading--movieName">
+                      <h2>
+                        {postMovie.title ? postMovie.title : postMovie.name}
+                      </h2>
                     </div>
-                    <div className="postTicket__container__showDetails--dateRange-from--month">
-                      <h2>{getTimeDetails(timeRangeValue, "m")}</h2>
+                  </div>
+                  <div className="postTicketPost__contentInfo--durationGenre">
+                    <div className="postTicketPost__contentInfo--durationGenre--duration">
+                      <h4>{postMovie.release_date.split("-")[0]}</h4>
                     </div>
+                    <div className="postTicketPost__contentInfo--durationGenre--genre">
+                      <h4>{genreConverter(postMovie.genre_ids)}</h4>
+                    </div>
+                  </div>
+                  <div className="postTicketPost__contentInfo--overview">
+                    <p>{stringLimiter(postMovie.overview, 100)}</p>
                   </div>
                 </>
               )}
             </div>
           </div>
         </div>
-      </div>
-      <div className="postTicketPost__radioInput">
-        <div className="postTicket__runtimeRange__content__input">
-          <div className="postTicket__ratingStep__content__input--radioInput_material">
-            <Radio
-              checked={timeRange === "exact"}
-              onChange={handleTimeRange}
-              value="exact"
-              name="radio-button-demo"
-              inputProps={{ "aria-label": "A" }}
-            />
-            <h4>Exact</h4>
+        <div
+          className={`postTicketPost__schedule ${
+            Object.keys(postMovie).length === 0 && "margin"
+          }`}
+        >
+          <div className="postTicketPost__schedule__heading">
+            <h4>Make your schedule</h4>
           </div>
-          <div className="postTicket__ratingStep__content__input--radioInput_material">
-            <Radio
-              checked={timeRange === "next2days"}
-              onChange={handleTimeRange}
-              value="next2days"
-              name="radio-button-demo"
-              inputProps={{ "aria-label": "A" }}
-            />
-            <h4>Next 2 Days</h4>
+          <div className="postTicketPost__scheduleContent-uppercontainer">
+            <div className="postTicketPost__scheduleContent-container">
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <div className="postTicketPost__scheduleContent">
+                  <div className="postTicketPost__scheduleContent__picker">
+                    <KeyboardDatePicker
+                      variant="inline"
+                      margin="normal"
+                      id="date-picker-dialog"
+                      label="Select your date"
+                      format="MM/dd/yyyy"
+                      value={selectedDate}
+                      onChange={handleDateChange}
+                      KeyboardButtonProps={{
+                        "aria-label": "change date",
+                      }}
+                      minDate={new Date()}
+                      maxDate={new Date(year, month, day)}
+                    />
+                  </div>
+                  <div className="postTicketPost__scheduleContent__picker">
+                    <KeyboardTimePicker
+                      variant="inline"
+                      margin="normal"
+                      id="time-picker"
+                      label="Select your time"
+                      value={selectedDate}
+                      onChange={handleDateChange}
+                      KeyboardButtonProps={{
+                        "aria-label": "change time",
+                      }}
+                    />
+                  </div>
+                </div>
+              </MuiPickersUtilsProvider>
+            </div>
+            <div className="postTicket__container__showDetails--showTiming">
+              <div className="postTicket__container__showDetails--time-range">
+                <h2>
+                  {getTimeDetails(selectedDate, "h")}:
+                  {getTimeDetails(selectedDate, "min")}
+                  {timeRange !== "exact" &&
+                    ` to ${getTimeDetails(selectedDate, "h")}`}
+                  {timeRange !== "exact" &&
+                    `:${getTimeDetails(selectedDate, "min")}`}
+                </h2>
+              </div>
+              <div className="postTicket__container__showDetails--dateRange">
+                <div className="postTicket__container__showDetails--dateRange--from">
+                  <div className="postTicket__container__showDetails--dateRange-from--date">
+                    <h1>{getTimeDetails(selectedDate, "d")}</h1>
+                  </div>
+                  <div className="postTicket__container__showDetails--dateRange-from--month">
+                    <h2>{getTimeDetails(selectedDate, "m")}</h2>
+                  </div>
+                </div>
+                {timeRange !== "exact" && (
+                  <>
+                    <h1> - </h1>
+                    <div className="postTicket__container__showDetails--dateRange--to">
+                      <div className="postTicket__container__showDetails--dateRange-from--date">
+                        <h1>{getTimeDetails(timeRangeValue, "d")}</h1>
+                      </div>
+                      <div className="postTicket__container__showDetails--dateRange-from--month">
+                        <h2>{getTimeDetails(timeRangeValue, "m")}</h2>
+                      </div>
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
           </div>
-          <div className="postTicket__ratingStep__content__input--radioInput_material">
-            <Radio
-              checked={timeRange === "next4Days"}
-              onChange={handleTimeRange}
-              value="next4Days"
-              name="radio-button-demo"
-              inputProps={{ "aria-label": "A" }}
-            />
-            <h4>Next 4 Days</h4>
+        </div>
+        <div className="postTicketPost__radioInput">
+          <div className="postTicket__runtimeRange__content__input">
+            <div className="postTicket__ratingStep__content__input--radioInput_material">
+              <Radio
+                checked={timeRange === "exact"}
+                onChange={handleTimeRange}
+                value="exact"
+                name="radio-button-demo"
+                inputProps={{ "aria-label": "A" }}
+              />
+              <h4>Exact</h4>
+            </div>
+            <div className="postTicket__ratingStep__content__input--radioInput_material">
+              <Radio
+                checked={timeRange === "next2days"}
+                onChange={handleTimeRange}
+                value="next2days"
+                name="radio-button-demo"
+                inputProps={{ "aria-label": "A" }}
+              />
+              <h4>Next 2 Days</h4>
+            </div>
+            <div className="postTicket__ratingStep__content__input--radioInput_material">
+              <Radio
+                checked={timeRange === "next4Days"}
+                onChange={handleTimeRange}
+                value="next4Days"
+                name="radio-button-demo"
+                inputProps={{ "aria-label": "A" }}
+              />
+              <h4>Next 4 Days</h4>
+            </div>
           </div>
         </div>
       </div>
@@ -339,6 +350,8 @@ function PostTicketPost({ closeTicket, sendPost, postType }) {
             InputLabelProps={{
               shrink: true,
             }}
+            variant="filled"
+            autoComplete="off"
             onChange={(e) => {
               setCaption(e.target.value);
             }}
@@ -347,22 +360,18 @@ function PostTicketPost({ closeTicket, sendPost, postType }) {
         </div>
       </div>
       <div className="postTicketPost__buttons">
-        <div className="postReviewPost__bottomIcon">
-          <Button onClick={closeTicket} variant="outlined" color="secondary">
-            Cancel
-          </Button>
-        </div>
-        <div className="postReviewPost__bottomIcon">
-          <Button
+        <div
+          className={`postReviewPost__bottomIcon ${
+            Object.keys(postMovie).length === 0 && "disabled"
+          }`}
+        >
+          <button
+            onClick={() => handleSubmit(postMovie)}
             disabled={Object.keys(postMovie).length === 0 ? true : false}
-            variant="contained"
-            color="primary"
-            onClick={() => {
-              handleSubmit(postMovie);
-            }}
+            type="submit"
           >
-            Create Ticket
-          </Button>
+            Post
+          </button>
         </div>
       </div>
     </div>

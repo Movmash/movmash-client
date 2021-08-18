@@ -1,8 +1,13 @@
 .suggestMePost {
     width: 627px;
-    border: 1px solid lightgray;
+    /* border: 1px solid var(--border); */
+    padding: 2px;
     border-radius: 7px;
-    margin-top: 100px;
+    margin-top: 18px;
+    background-color: var(--lightBlack);
+    font-family: Arial,
+    Helvetica,
+    sans-serif;
 }
 
 .suggestMePost__container__paragraph {
@@ -11,15 +16,17 @@
 }
 
 .suggestMePost__container__paragraph>p {
-    color: lightgray;
+    color: var(--boldText);
     line-height: 25px;
     letter-spacing: 0.01em;
+    font-size: .9375rem;
+    line-height: 1.3333;
 }
 
 .suggestMePost__container__suggestionDetailes--rating {
     width: 203px;
     height: 197px;
-    background: #3F414A;
+    background: var(--palletes);
     border-radius: 10px;
     margin: 15px;
     display: flex;
@@ -31,7 +38,7 @@
 .suggestMePost__container__suggestionDetailes--genre {
     width: 310px;
     height: 81px;
-    background: #3F414A;
+    background: var(--palletes);
     border-radius: 10px;
     margin: 15px;
     display: flex;
@@ -41,7 +48,7 @@
 .suggestMePost__container__suggestionDetailes--language {
     width: 138px;
     height: 81px;
-    background: #3F414A;
+    background: var(--palletes);
     border-radius: 10px;
     margin: 15px;
 
@@ -50,7 +57,7 @@
 .suggestMePost__container__suggestionDetailes--duration {
     width: 138px;
     height: 81px;
-    background: #3F414A;
+    background: var(--palletes);
     border-radius: 10px;
     margin: 15px;
 }

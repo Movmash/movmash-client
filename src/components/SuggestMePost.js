@@ -5,7 +5,7 @@ import PostIconButtons from "./PostIconButtons";
 import PostDetails from "./PostDetails";
 import CommentForm from "./CommentForm";
 import CommentList from "./CommentList";
-function SuggestMePost({ isProfile, details, type, postId }) {
+function SuggestMePost({ isProfile, details, type, postId, postPage }) {
   const {
     duration,
     genreName,
@@ -104,7 +104,7 @@ function SuggestMePost({ isProfile, details, type, postId }) {
           />
         </div>
         <div className="suggestMePost__commentList">
-          <CommentList comments={comments} />
+          <CommentList comments={comments} postPage={postPage} />
         </div>
         <div className="commentForm">
           <CommentForm

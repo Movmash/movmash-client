@@ -42,7 +42,7 @@ function CommentForm({
           })
           .catch((e) => {
             setSearchResult([]);
-            console.log(e);
+            // console.log(e);
           });
       }
     };
@@ -74,22 +74,22 @@ function CommentForm({
   // }, [handleUserEvents]);
   const handleOnChange = (event) => {
     if (event.target.value === "") {
-      console.log("heelloo");
+      // console.log("heelloo");
       setOpen((prev) => (prev = false));
     } else setOpen(true);
   };
   const handleOnClickSearchCard = (result) => {
     setOpen((prev) => (prev = false));
-    console.log(result);
+    // console.log(result);
     setPostMovie(result);
-    console.log(genreConverter(result.genre_ids));
+    // console.log(genreConverter(result.genre_ids));
   };
   const handleClickAway = () => {
     setOpen(false);
   };
   // console.log(postMovie);
   const handlePostComment = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     // console.log(event.which);
     if (type === "review") {
       const postReviewComment = {
@@ -97,9 +97,9 @@ function CommentForm({
         comment: comment,
         postType: type,
       };
-      console.log(postReviewComment);
+      // console.log(postReviewComment);
       setComment("");
-      event.target.textcomment.value = "";
+      // event.target.textcomment.value = "";
       if (tag) {
         profileSubmitComment(postReviewComment);
       } else {
@@ -114,9 +114,9 @@ function CommentForm({
 
           postType: type,
         };
-        console.log(postSuggestMeCommentWithoutMovie);
+        // console.log(postSuggestMeCommentWithoutMovie);
         setComment("");
-        event.target.textcomment.value = "";
+        // event.target.textcomment.value = "";
         if (tag) {
           profileSubmitComment(postSuggestMeCommentWithoutMovie);
         } else {
@@ -137,8 +137,8 @@ function CommentForm({
         };
         setPostMovie({});
         setComment("");
-        console.log(postSuggestMeCommentWithMovie);
-        event.target.textcomment.value = "";
+        // console.log(postSuggestMeCommentWithMovie);
+        // event.target.textcomment.value = "";
         if (tag) {
           profileSubmitComment(postSuggestMeCommentWithMovie);
         } else {
@@ -162,6 +162,8 @@ function CommentForm({
                   id={postId}
                   name="commentForm"
                   label="Search Your Movie"
+                  variant="filled"
+                  autoComplete="off"
                 />
                 {open &&
                   (loading ? (
@@ -224,7 +226,7 @@ function CommentForm({
           )}
         </div>
       )}
-      <form onSubmit={handlePostComment} method="POST">
+      {/* <form onSubmit={handlePostComment} method="POST"> */}
         <div className="commentForm__input">
           <div className="commentForm__inputTextArea">
             {/* <script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script> */}
@@ -238,11 +240,22 @@ function CommentForm({
               onChange={(e) => {
                 setComment(e.target.value);
               }}
+              value={comment}
+              onKeyPress={(e) => { 
+                if(e.key === "Enter"){
+                  e.preventDefault();
+                if (e.target.value !== "") {
+                  
+                  handlePostComment();
+                }
+                }
+              }}
               // style="height: 16px;"
             ></textarea>
           </div>
           <Button
             type="Submit"
+            onClick={handlePostComment}
             disabled={
               comment === "" && Object.keys(postMovie).length === 0
                 ? true
@@ -252,7 +265,7 @@ function CommentForm({
             Post
           </Button>
         </div>
-      </form>
+      {/* </form> */}
     </div>
   );
 }

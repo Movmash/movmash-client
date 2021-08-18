@@ -14,7 +14,7 @@ import {
   followUser,
   unfollowUser,
 } from "../redux/actions/dataAction";
-import { BounceLoader } from "react-spinners";
+import { MoonLoader } from "react-spinners";
 function UserProfile({
   userName,
   getMashUserDetails,
@@ -26,16 +26,6 @@ function UserProfile({
   unfollowUser,
 }) {
   const [isFollow, setFollow] = useState(true);
-
-  console.log(userName);
-  useEffect(() => {
-    getMashUserDetails(userName);
-  }, [getMashUserDetails, userName]);
-  useEffect(() => {
-    if (userId !== undefined && followingList !== undefined) {
-      setFollow(followingList.includes(userId));
-    }
-  }, [userId, followingList]);
   const {
     bio,
     coverImageUrl,
@@ -47,8 +37,22 @@ function UserProfile({
     watchHour,
     profileImageUrl,
   } = userDetails;
-  console.log(userId);
-  console.log(isFollow);
+  // console.log(userName);
+  useEffect(() => {
+    getMashUserDetails(userName);
+    document.title = fullName;
+    return () => {
+      document.title = "Movmash";
+    };
+  }, [getMashUserDetails, userName, fullName]);
+  useEffect(() => {
+    if (userId !== undefined && followingList !== undefined) {
+      setFollow(followingList.includes(userId));
+    }
+  }, [userId, followingList]);
+  
+  // console.log(userId);
+  // console.log(isFollow);
   const [selected, setSelection] = useState("posts");
   // console.log(_id);
   const handleFollowClick = (userId) => {
@@ -136,14 +140,16 @@ function UserProfile({
                   <div className="userProfile__userData__rowItem--heading">
                     <h3>Watch Hour</h3>
                   </div>
-                  <span>{watchHour}h</span>
+                  <span>{(watchHour / 3600).toFixed(2)}h</span>
                 </div>
-                <div className="userProfile__userData__rowItem">
+
+                {/* <div className="userProfile__userData__rowItem">
                   <div className="userProfile__userData__rowItem--heading">
                     <h3>User Rating</h3>
                   </div>
                   <span>2.8</span>
                 </div>
+               */}
               </div>
               {/* <div className="userProfile__userData__row"></div> */}
             </div>
@@ -215,7 +221,7 @@ function UserProfile({
         </>
       ) : (
         <div className="home__bounceloader">
-          <BounceLoader size={150} color={"#2aa44f"} loading />
+          <MoonLoader size={50} color={"#2aa44f"} loading />
         </div>
       )}
     </div>

@@ -2,7 +2,7 @@ import React from "react";
 import "./stylesheets/MovieChatCard.css";
 import { useHistory } from "react-router-dom";
 function MovieChatCard({ movieData }) {
-  console.log(movieData);
+  // console.log(movieData);
   const history = useHistory();
   return (
     <div

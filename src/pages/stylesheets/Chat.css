@@ -1,15 +1,17 @@
 .chat {
   height: 91.5vh;
-
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--boldText);
 
   display: flex;
   justify-content: center;
   align-items: center;
+
 }
 
 .chat_container {
-  background: #2e2b3b;
-  border: 1px solid rgb(88, 88, 88);
+  background: var(--lightBlack);
+  border: 1px solid var(--border);
   width: 60rem;
   height: 80vh;
   border-radius: 2px;
@@ -20,7 +22,7 @@
 
 .chatUserNamePlate__header__container {
 
-  background: #3f414a;
+  background: var(--palletes);
   height: 4rem;
   width: 100%;
   display: flex;
@@ -30,6 +32,9 @@
 
 .chatHeader {
   margin-left: 20px;
+}
+.chatHeader>* {
+  cursor: pointer;
 }
 
 
@@ -48,7 +53,7 @@
 }
 
 .chat_container__left__header {
-  background: #3f414a;
+  background: var(--palletes);
   height: 4rem;
   width: 100%;
   display: flex;
@@ -83,8 +88,9 @@
 
 .chat_container__left__user__list:hover {
   cursor: pointer;
-  background: #272531 !important;
+  background: var(--palletes) !important;
   padding: 0.5px 0 0.5px 0;
+  /* border-radius:9px ; */
 }
 
 .chat_container__left__user__list.selected:hover {
@@ -94,7 +100,7 @@
 }
 
 .chat_container__left__user__list.selected {
-  background: #272531 !important;
+  /* background: rgb(48, 48, 48) !important; */
 }
 
 /* .chat_container__left__userList {
@@ -118,11 +124,14 @@
   top: 0;
   z-index: 100;
 }
+.chat_container__right__input{
+  display: flex;
+}
 
-.chat_container__right__input>input {
+.chat_container__right__input.room__player__right__chat__input>input {
   width: 98.2%;
   background: transparent;
-  border-top: 1px solid rgb(119, 119, 119);
+  /* border-top: 1px solid rgb(119, 119, 119); */
   outline: none;
   color: white;
   height: 40px;
@@ -133,7 +142,7 @@
 }
 
 .chat_container__right__input>button {
-  display: none;
+  /* display: none; */
 }
 
 .chat_container__right__input>input::placeholder {
@@ -205,7 +214,6 @@
 
 .chat_container__right__sendMessageContainer>span {
   color: white;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: 13px;
   margin-bottom: 20px;
 }
@@ -231,6 +239,10 @@
   width: 90px;
   border-radius: 4px;
 
+}
+.chatUserNamePlate__header--name,
+.chatUserNamePlate__header--name {
+  font-weight: 600;
 }
 
 /* .chat_container__right__messages {

@@ -93,7 +93,7 @@ function ProfileWatchlist({
               </div>
             ))}
           </div>
-        </div>
+      </div>
       ) : (
         <TabDescriptionInfo
           info={

@@ -3,7 +3,7 @@ import "./stylesheets/ReviewChatCard.css";
 import { Avatar } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
 function ReviewChatCard({ postData }) {
-  console.log(postData);
+  // console.log(postData);
   return (
     <div className="reviewChatCard">
       {postData && (
@@ -15,6 +15,7 @@ function ReviewChatCard({ postData }) {
           <div className="reviewChatCard__content">
             <img
               src={`https://image.tmdb.org/t/p/w154${postData.moviePoster}`}
+              alt={postData.moviePoster}
             ></img>
           </div>
           <div className="reviewChatCard__bottom">

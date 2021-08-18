@@ -8,7 +8,7 @@ import axios from "../util/axios";
 // import { getMovieDetail } from "../redux/actions/movieAction";
 // import { useHistory } from "react-router-dom";
 import MoviePoster from "./MoviePoster";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 function MovieRow({ title }) {
   const [movies, setMovies] = useState([]);
   const [loading, isLoading] = useState(true);

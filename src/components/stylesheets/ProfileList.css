@@ -5,10 +5,7 @@
     align-items: center;
     margin-top: 50px;
 
-    font-family: 'Franklin Gothic Medium',
-        'Arial Narrow',
-        Arial,
-        sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     cursor: pointer;
     width: fit-content;
 }
@@ -27,14 +24,20 @@
 } */
 
 .profileList__content {
-    display: flex;
+    /* display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: center; */
+    display: grid;
+    /* grid-template-columns: repeat(5, 25ch); */
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 2em;
+    justify-items: stretch;
+    grid-auto-rows: auto;
     margin-top: 50px;
 }
 
 .profileList__container {
 
-    width: 47%;
-    margin: 10px;
+    /* width: 47%; */
+    /* margin: 10px; */
 }

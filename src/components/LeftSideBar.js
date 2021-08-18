@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./stylesheets/LeftSideBar.css";
-import { IconButton, Avatar, Link, Badge } from "@material-ui/core";
+import { IconButton, Avatar, Badge } from "@material-ui/core";
 import TelegramIcon from "@material-ui/icons/Telegram";
 import AddIcon from "@material-ui/icons/Add";
 import NotificationsNoneIcon from "@material-ui/icons/NotificationsNone";
@@ -34,6 +34,7 @@ function LeftSideBar({
   updateRooms,
   getUnreadUserRoom,
   messageRoom,
+  authenticated
 }) {
   const [open, setOpen] = useState(false);
 
@@ -52,7 +53,7 @@ function LeftSideBar({
   useEffect(() => {
     if (socket !== undefined) {
       socket.on("notification", (data) => {
-        console.log(data);
+        // console.log(data);
         addNewNotification(data);
       });
     }
@@ -61,20 +62,25 @@ function LeftSideBar({
   useEffect(() => {
     if (socket !== undefined) {
       socket.on("message-room", (roomData) => {
-        console.log(roomData);
+        // console.log(roomData);
         updateRooms(roomData);
       });
     }
   }, [socket, updateRooms]);
   useEffect(() => {
-    getAllNotification();
-  }, [getAllNotification]);
+    if (authenticated) {
+      getAllNotification();
+    }
+  }, [getAllNotification, authenticated]);
   useEffect(() => {
-    getUnreadUserRoom();
-  }, [getUnreadUserRoom]);
+    if (authenticated) {
+      getUnreadUserRoom();
+    }
+  }, [getUnreadUserRoom, authenticated]);
   //..................................................................................[handle review post]
   const handleClickOpenReview = () => {
     setOpenReviewDialog(true);
+    setOpen(false);
   };
   const handleCloseReview = () => {
     setOpenReviewDialog(false);
@@ -82,6 +88,7 @@ function LeftSideBar({
   //....................................................................................[handle Suggest me post]
   const handleClickOpenSuggestMe = () => {
     setOpenSuggestMeDialog(true);
+    setOpen(false);
   };
   const handleCloseSuggestMe = () => {
     setOpenSuggestMeDialog(false);
@@ -89,6 +96,7 @@ function LeftSideBar({
   //....................................................................................[handle ticket post]
   const handleClickOpenTicket = () => {
     setOpenTicketDialog(true);
+    setOpen(false);
   };
   const handleCloseTicket = () => {
     setOpenTicketDialog(false);
@@ -105,21 +113,26 @@ function LeftSideBar({
           markReadNotification.push(notification._id);
           return notification._id;
         }
+        return notification._id;
       });
-      console.log(markReadNotification);
+      // console.log(markReadNotification);
       markNotificationRead(markReadNotification);
     }
   };
   return (
     <div className="leftSideBar">
       <div className="leftSideBar__container">
-        {" "}
-        <div
+        <div className="leftSideBar__container__upmargin"></div>
+        <div className="leftSideBar__container__iconList">
+            <div
           onClick={() => history.push(`/@${userName}`)}
           className="leftSideBar__container__icon hover"
         >
           {/* <Link to={`/@${userName}`}> */}
-          <Avatar src={userImage} /> {/* </Link> */}
+          <Avatar src={userImage}>
+            <div className="loading_avatar"></div>
+          </Avatar>
+          {/* </Link> */}
         </div>{" "}
         <div className="leftSideBar__container__icon badge">
           <IconButton
@@ -154,18 +167,6 @@ function LeftSideBar({
                   >
                     <h4>Post your review</h4>
                   </div>
-                  <Dialog
-                    onClose={handleCloseReview}
-                    aria-labelledby="customized-dialog-title"
-                    open={openReviewDialog}
-                  >
-                    <div className="dialogBox--ReviewPost">
-                      <PostReviewPost
-                        postType={postType}
-                        closeReview={handleCloseReview}
-                      />
-                    </div>
-                  </Dialog>
                   <div
                     onClick={() => {
                       handleClickOpenSuggestMe();
@@ -174,17 +175,6 @@ function LeftSideBar({
                   >
                     <h4>Want Suggestions</h4>
                   </div>
-                  <Dialog
-                    onClose={handleCloseSuggestMe}
-                    open={openSuggestMeDialog}
-                  >
-                    <div className="dialogBox--SuggestMePost">
-                      <PostSuggestMePost
-                        postType={postType}
-                        closeSuggestMe={handleCloseSuggestMe}
-                      />
-                    </div>
-                  </Dialog>
                   <div
                     onClick={() => {
                       handleClickOpenTicket();
@@ -193,16 +183,38 @@ function LeftSideBar({
                   >
                     <h4>Create ticket</h4>
                   </div>
-                  <Dialog onClose={handleCloseTicket} open={openTicketDialog}>
-                    <div className="dialogBox--TicketPost">
-                      <PostTicketPost
-                        postType={postType}
-                        closeTicket={handleCloseTicket}
-                      />
-                    </div>
-                  </Dialog>
                 </div>
               ) : null}
+              <Dialog
+                onClose={handleCloseReview}
+                aria-labelledby="customized-dialog-title"
+                open={openReviewDialog}
+              >
+                <div className="dialogBox--ReviewPost">
+                  <PostReviewPost
+                    postType={postType}
+                    closeReview={handleCloseReview}
+                  />
+                </div>
+              </Dialog>
+
+              <Dialog onClose={handleCloseSuggestMe} open={openSuggestMeDialog}>
+                <div className="dialogBox--SuggestMePost">
+                  <PostSuggestMePost
+                    postType={postType}
+                    closeSuggestMe={handleCloseSuggestMe}
+                  />
+                </div>
+              </Dialog>
+
+              <Dialog onClose={handleCloseTicket} open={openTicketDialog}>
+                <div className="dialogBox--TicketPost">
+                  <PostTicketPost
+                    postType={postType}
+                    closeTicket={handleCloseTicket}
+                  />
+                </div>
+              </Dialog>
             </div>
           </ClickAwayListener>
         </div>{" "}
@@ -232,30 +244,47 @@ function LeftSideBar({
               </div>
               {openNotification ? (
                 <div className="notificationClickAway">
-                  {notifications.map((notification) => {
-                    if (notification.type === "like") {
-                      return (
-                        <NotificationListCard
-                          key={notification._id}
-                          imageUrl={notification.senderId.profileImageUrl}
-                          type={notification.type}
-                          message="liked your post"
-                          userName={notification.senderId.userName}
-                        />
-                      );
+                  {notifications.map(
+                    (notification) => {
+                      if (notification.type === "like")
+                        return (
+                          <NotificationListCard
+                            key={notification._id}
+                            imageUrl={notification.senderId.profileImageUrl}
+                            type={notification.type}
+                            message="liked your post"
+                            userName={notification.senderId.userName}
+                            postId={notification.postId}
+                          />
+                        );
+                      else if (notification.type === "comment")
+                        return (
+                          <NotificationListCard
+                            key={notification._id}
+                            imageUrl={notification.senderId.profileImageUrl}
+                            type={notification.type}
+                            message="commented on your post"
+                            userName={notification.senderId.userName}
+                            postId={notification.postId}
+                          />
+                        );
+                      else if (notification.type === "following")
+                        return (
+                          <NotificationListCard
+                            key={notification._id}
+                            imageUrl={notification.senderId.profileImageUrl}
+                            type={notification.type}
+                            message="started following you"
+                            userName={notification.senderId.userName}
+                            postId={notification.postId}
+                          />
+                        );
+                      else {
+                        return null;
+                      }
                     }
-                    if (notification.type === "comment") {
-                      return (
-                        <NotificationListCard
-                          key={notification._id}
-                          imageUrl={notification.senderId.profileImageUrl}
-                          type={notification.type}
-                          message="commented on your post"
-                          userName={notification.senderId.userName}
-                        />
-                      );
-                    }
-                  })}
+                      
+                  )}
                 </div>
               ) : null}
             </div>
@@ -266,6 +295,8 @@ function LeftSideBar({
             <PowerSettingsNewIcon />
           </IconButton>
         </div>
+      
+        </div>
       </div>
     </div>
   );
@@ -273,6 +304,7 @@ function LeftSideBar({
 
 const mapStateToProps = (state) => {
   return {
+    authenticated: state.user.authenticated,
     userName: state.user.userName,
     userImage: state.user.profileImageUrl,
     notifications: state.user.notifications,

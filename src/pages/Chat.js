@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import TelegramIcon from "@material-ui/icons/Telegram";
 import ScrollToBottom from "react-scroll-to-bottom";
 import FriendListMessage from "../components/FriendListMessage";
+import SendIcon from "@material-ui/icons/Send";
 import {
   getAllRooms,
   addInChats,
@@ -17,7 +18,7 @@ import ChatUserNamePlate from "../components/ChatUserNamePlate";
 import ChatMessages from "../components/ChatMessages";
 import { useHistory, useParams } from "react-router-dom";
 import { useSocket } from "../contexts/SocketProvider";
-import { Avatar } from "@material-ui/core";
+import { Avatar, IconButton } from "@material-ui/core";
 import { Dialog } from "@material-ui/core";
 import CreateIcon from "@material-ui/icons/Create";
 // let socket;
@@ -29,20 +30,29 @@ function Chat({
   updateRooms,
   markChatRoomRead,
   messages,
+  authenticated,
+  authLoading,
 }) {
   const roomIdParams = useParams();
   const [selectedUser, setSelectedUser] = useState({});
-  const [selectedUserName, setSelectedUserName] = useState("");
+  // const [selectedUserName, setSelectedUserName] = useState("");
   const [message, setMessage] = useState("");
-  const [roomId, setRoomId] = useState("");
+  // const [roomId, setRoomId] = useState("");
   const history = useHistory();
   const socket = useSocket();
   const [openDialog, setOpenDialog] = useState(false);
 
   useEffect(() => {
-    getAllRooms();
+    if (!authLoading){
+      if (authenticated){
+         getAllRooms();
+        }
+    else{ 
+      history.push("/login");
+      }   
+    } 
     // return () => {};
-  }, [getAllRooms]);
+  }, [getAllRooms, authLoading, history, authenticated]);
   useEffect(() => {
     if (messages[0] !== undefined) {
       if (userId === messages[0].sender._id) {
@@ -51,7 +61,7 @@ function Chat({
         setSelectedUser(messages[0].sender);
       }
     }
-  }, [messages[0]]);
+  }, [userId,messages]);
   // useEffect(() => {
   //   if (userId !== undefined && socket !== undefined) {
   //     socket.emit("join-chat", { userId: userId });
@@ -87,9 +97,9 @@ function Chat({
   };
   const handleClickOnUserList = (userDetails, room_Id, lastMessage) => {
     history.push(`/messages/inbox/${room_Id}`);
-    setSelectedUserName(userDetails.userName);
+    // setSelectedUserName(userDetails.userName);
     setSelectedUser({ ...userDetails });
-    setRoomId(room_Id);
+    // setRoomId(room_Id);
     if (lastMessage !== undefined && userId !== lastMessage.sender) {
       markChatRoomRead(room_Id);
     }
@@ -112,6 +122,7 @@ function Chat({
   };
   return (
     <div className="chat">
+      {console.log(rooms)}
       <div className="chat_container">
         <div className="chat_container__left">
           <div className="chat_container__left__header">
@@ -125,9 +136,7 @@ function Chat({
               const userDetails = room.participants.find(
                 (user) => user._id !== userId
               );
-              {
-                /* setSelectedUser(userDetails); */
-              }
+              console.log(userDetails);
               return (
                 <div
                   key={room._id}
@@ -143,7 +152,7 @@ function Chat({
                   }`}
                 >
                   <ChatUserNamePlate
-                    name={userDetails.userName}
+                    name={userDetails.fullName}
                     imageUrl={userDetails.profileImageUrl}
                     lastMessage={room.lastMessage}
                     // username={`Iamak47`}
@@ -173,11 +182,14 @@ function Chat({
                   username={`Iamak47`}
                 /> */}
                 <div className="chatUserNamePlate__header__container">
-                  <div className="chatUserNamePlate__header__userInfo chatHeader">
+                  <div
+                    onClick={() => history.push(`/@${selectedUser.userName}`)}
+                    className="chatUserNamePlate__header__userInfo chatHeader"
+                  >
                     <Avatar src={selectedUser.profileImageUrl} />
                     <div className="chatUserNamePlate__header__userName--info">
                       <div className="chatUserNamePlate__header--name">
-                        <h3>{selectedUser.userName}</h3>
+                        <h3>{selectedUser.fullName}</h3>
                       </div>
                     </div>
                   </div>
@@ -189,7 +201,7 @@ function Chat({
                 </ScrollToBottom>
               </div>
               <form onSubmit={handleSendMessage}>
-                <div className="chat_container__right__input">
+                <div className="chat_container__right__input room__player__right__chat__input">
                   <input
                     value={message}
                     onChange={(e) => {
@@ -201,7 +213,10 @@ function Chat({
                     }}
                     placeholder="send message ..."
                   ></input>
-                  <button type="submit">submit</button>
+                  <IconButton type="submit">
+                    <SendIcon />
+                  </IconButton>
+                  {/* <button type="submit">submit</button> */}
                 </div>
               </form>
             </>
@@ -232,6 +247,8 @@ const mapStateToProps = (state) => {
     rooms: state.chat.rooms,
     userId: state.user._id,
     messages: state.chat.messages,
+    authenticated: state.user.authenticated,
+    authLoading: state.user.authLoading,
   };
 };
 export default connect(mapStateToProps, {

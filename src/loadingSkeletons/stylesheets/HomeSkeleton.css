@@ -1,0 +1,53 @@
+.homeSkeleton__avatar{
+    height: 46px;
+    width: 46px;
+    border-radius: 50%;
+    background:var(--palletes);
+}
+.homeSkeleton__h2,
+.homeSkeleton__h1,
+.homeSkehomeSkeleton__p,
+.homeSkeleton__h3
+/* .homeSkeleton__h4 */
+{
+   width: 135px;
+   height: 24px;
+   border-radius: 8px;
+   background:var(--palletes);
+   margin-bottom: 10px;
+   margin-right: 10px;
+}
+.homeSkeleton__h4{
+    margin-bottom: 20px;
+    width: 100px;
+    height: 24px;
+    border-radius: 8px;
+    background:var(--palletes);
+}
+.homeSkeletonButton{
+    margin-bottom: 20px;
+    width: 600px;
+    height: 24px;
+    border-radius: 8px;
+    background:var(--palletes);
+    justify-content: center;
+    display: flex;
+margin-left: auto;
+margin-right: auto;
+}
+.homeSkeleton__poster {
+        width: 120px;
+        height: 177.57px;
+        border-radius: 10px;
+        background:var(--palletes);
+}
+
+/* <div className="home__bounceloader"><MoonLoader size= {
+    50
+}
+
+color= {
+    "#2aa44f"
+}
+
+loading /></div> */

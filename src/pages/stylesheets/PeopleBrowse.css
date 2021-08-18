@@ -1,0 +1,70 @@
+.peopleBrowse {
+    display: flex;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--boldText);
+    margin-top: 60px;
+}
+.peopleBrowse__heading{
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+    padding-bottom:20px ;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 20px;
+}
+.peopleBrowse__container{
+    width: 50%;
+}
+.peopleBrowse__peopleCard{
+
+    background: var(--lightBlack);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 10px;
+}
+.peopleBrowse__avatarInfo{
+    display: flex;
+    align-items: center;
+}
+.peopleBrowse__avatarInfo>span{
+    margin-left: 15px;
+    font-weight: 600;
+}
+.peopleBrowse__peopleCard>button{
+    background: none;
+    border: none;
+    font-family: Arial,
+    Helvetica,
+    sans-serif;
+    font-weight: 600;
+    outline: none;
+    border: 1px solid #499E4C;
+    /* padding: 5px 30px 5px 30px; */
+    width: 100px;
+    height: 30px;
+    /* background: rgb(226, 226, 226); */
+    border-radius: 6px;
+    /* color: rgb(75, 75, 75); */
+    color: #499E4C;
+    transition: 200ms;
+    cursor: pointer;
+    color: whitesmoke;
+    background: var(--green);
+}
+.peopleBrowse__peopleCard>button:active{
+    transform: scale(0.95);
+}
+
+.unFollow {
+    background-color: transparent !important;
+    color: var(--green) !important;
+}
+
+.unFollow:hover {
+    /* background-color: transparent; */
+    color: var(--boldText);
+}

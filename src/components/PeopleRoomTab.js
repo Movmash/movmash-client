@@ -1,45 +1,50 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React from "react";
 import "./stylesheets/peopleRoomTab.css";
 import { Avatar } from "@material-ui/core";
-import MicIcon from "@material-ui/icons/Mic";
-import VideocamIcon from "@material-ui/icons/Videocam";
-import VideocamOffIcon from "@material-ui/icons/VideocamOff";
-import MicOffIcon from "@material-ui/icons/MicOff";
-import VideoCallIcon from "@material-ui/icons/VideoCall";
-import { useSocket } from "../contexts/SocketProvider";
+// import MicIcon from "@material-ui/icons/Mic";
+// import VideocamIcon from "@material-ui/icons/Videocam";
+// import VideocamOffIcon from "@material-ui/icons/VideocamOff";
+// import MicOffIcon from "@material-ui/icons/MicOff";
+// import VideoCallIcon from "@material-ui/icons/VideoCall";
 import { connect } from "react-redux";
-import Peer from "simple-peer";
-import styled from "styled-components";
-const StyledVideo = styled.video`
-  transform: scaleX(-1);
-  object-fit: cover;
-  height: 200px;
-  width: 200px;
-  border-radius: 40px;
-`;
-function Video(props) {
-  const ref = useRef();
-  useEffect(() => {
-    props.peer.on("stream", (stream) => {
-      console.log(stream);
-      ref.current.srcObject = stream;
-    });
-  }, [props]);
+// import {ReactComponent as HostCrown} from "../icons/host_crown.svg";
+import { ReactComponent as HostCrown } from "../icons/host_crown_2.svg";
+// import Peer from "simple-peer";
+// import styled from "styled-components";
+// const StyledVideo = styled.video`
+//   transform: scaleX(-1);
+//   object-fit: cover;
+//   height: 200px;
+//   width: 200px;
+//   border-radius: 40px;
+// `;
+// function Video(props) {
+//   const ref = useRef();
+//   useEffect(() => {
+//     props.peer.on("stream", (stream) => {
+//       console.log(stream);
+//       ref.current.srcObject = stream;
+//     });
+//   }, [props]);
 
-  return (
-    <>
-      <StyledVideo playsInline autoPlay ref={ref} />
-    </>
-  );
-}
+//   return (
+//     <>
+//       <StyledVideo playsInline autoPlay ref={ref} />
+//     </>
+//   );
+// }
 function PeopleRoomTab({
   roomCode,
   userName,
+  userId,
+  hostId,
+  socket,
   handleVideoChat,
   stream,
   peers,
   startVideoChat,
   userVideo,
+  userList,
 }) {
   // peer.on("error", console.log);
 
@@ -47,10 +52,12 @@ function PeopleRoomTab({
   //......
   // const [videoStream, setVideoStream] = useState({});
   // const [peers, setPeers] = useState([]);
-  const socket = useSocket();
+  // const socket = useSocket();
   // const userVideo = useRef();
   // const peersRef = useRef([]);
-  const [userList, setUserList] = useState([]);
+  //..........................--------------[]
+  // const [userList, setUserList] = useState([]);
+  //---------------------------------------[]
   // const [startVideoChat, setStartVideoChat] = useState(false);
   // useEffect(() => {
   //   if (userVideo.current) userVideo.current.srcObject = stream;
@@ -208,19 +215,27 @@ function PeopleRoomTab({
   //     socket.emit("get-user-in-the-room", { roomId: `${roomCode}10` });
   //   }
   // }, [socket, roomCode]);
-  useEffect(() => {
-    if (socket) {
-      socket.emit("get-user-in-the-room", { roomId: roomCode });
-    }
-  }, [socket]);
-  useEffect(() => {
-    if (socket) {
-      socket.on("user-list-inside-the-room", (data) => {
-        setUserList(data);
-        console.log(data);
-      });
-    }
-  }, [socket]);
+  //............................[]............
+  // useEffect(() => {
+  //   if (socket) {
+  //     socket.emit("get-user-in-the-room", { roomId: roomCode });
+  //   }
+  //   // return () => {
+  //   //   if (socket === undefined) return;
+  //   //   if (hostId === userId) {
+  //   //     socket.off();
+  //   //   }
+  //   // };
+  // }, [socket, roomCode, hostId, userId]);
+  // useEffect(() => {
+  //   if (socket) {
+  //     socket.on("user-list-inside-the-room", (data) => {
+  //       setUserList(data);
+  //       // console.log(data);
+  //     });
+  //   }
+  // }, [socket]);
+  //...............[].........................
   //.....................................................
   // useEffect(() => {
   //   console.log("hell");
@@ -301,15 +316,20 @@ function PeopleRoomTab({
     <div className="peopleRoomTab">
       <div id="videoGrid" className="peopleRoomTab__memberList">
         {userList
-          .filter((user) => user.name === userName)
+          .filter((user) => user.userName === userName)
           .map((user) => (
             <div key={user.id} className="peopleRoomTab__memberListCard">
               <div className="peopleRoomTab__memberList__header">
                 <div className="infoUser">
-                  <Avatar src="https://i.pinimg.com/236x/3c/f5/7f/3cf57f5504727d17df4ea776c80b8c8a.jpg" />
-                  <span>{user.name}</span>
+                  <Avatar src={user.profileImageUrl} alt={user.fullName} />
+                  {user.host && (
+                    <div className="hostCrownIcon">
+                      <HostCrown />
+                    </div>
+                  )}
+
+                  <span>{user.fullName}</span>
                 </div>
-                {user.host && <span className="tagHost">Host</span>}
               </div>
               {/* <div className="peopleRoomTab__memberList__videoContent">
                 <div className="poepleRoomTab__memberList__videoContainer">
@@ -380,16 +400,19 @@ function PeopleRoomTab({
             </div>
           ))}
         {userList
-          .filter((user) => user.name !== userName)
+          .filter((user) => user.userName !== userName)
           .map((user) => (
             <div key={user.id} className="peopleRoomTab__memberListCard">
               <div className="peopleRoomTab__memberList__header">
                 <div className="infoUser">
-                  <Avatar src="https://i.pinimg.com/236x/3c/f5/7f/3cf57f5504727d17df4ea776c80b8c8a.jpg" />
-                  <span>{user.name}</span>
+                  <Avatar src={user.profileImageUrl} alt={user.fullName} />
+                  {user.host && (
+                    <div className="hostCrownIcon">
+                      <HostCrown />
+                    </div>
+                  )}
+                  <span>{user.fullName}</span>
                 </div>
-
-                {user.host && <span className="tagHost">Host</span>}
               </div>
               {/* <div className="peopleRoomTab__memberList__videoContent">
                 <div className="poepleRoomTab__memberList__videoContainer">
@@ -430,6 +453,8 @@ function PeopleRoomTab({
 const mapStateToProps = (state) => {
   return {
     userName: state.user.userName,
+    // userId: state.user._id,
+    // hostId: state.liveShow.liveShowDetail.host._id,
   };
 };
 

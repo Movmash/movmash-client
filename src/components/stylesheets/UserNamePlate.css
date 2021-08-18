@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+
 
 
 
@@ -6,7 +6,8 @@
     max-width: 600px;
     display: flex;
     margin: 20px;
-    justify-content: space-between
+    justify-content: space-between;
+    align-items: center;
 }
 
 .userNamePlate__header__userInfo {
@@ -14,16 +15,21 @@
 }
 
 .userNamePlate__header__userName--info {
-    margin-left: 20px;
+    margin-left: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .userNamePlate__header--name>h3 {
     font-style: normal;
     font-weight: normal;
-    font-size: 18px;
-    line-height: 21px;
-    letter-spacing: 0.05em;
-    color: lightGray;
+    font-size: 15px;
+    /* letter-spacing: 0.05em; */
+    color: var(--boldText);
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    cursor: pointer;
 
 }
 

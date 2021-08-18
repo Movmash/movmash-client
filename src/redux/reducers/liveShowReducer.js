@@ -25,6 +25,8 @@ const {
   LOADING_Thriller,
   MY_FAMILY_SHOW,
   LOADING_MY_FAMILY_SHOW,
+  UPDATE_VIDEO_SOURCE,
+  UPDATE_LIVE_SHOW_INFO,
 } = require("../types");
 
 const intialState = {
@@ -204,6 +206,24 @@ const liveShowReducer = (state = intialState, action) => {
         liveShowDetail: action.payload,
         loadingCreateLiveShow: false,
       };
+    case  UPDATE_VIDEO_SOURCE:
+      // console.log(action.payload);
+      // state
+      return {
+        ...state,
+        liveShowDetail:{ ...state.liveShowDetail, videoUrl: action.payload.videoUrl},
+      }; 
+    case UPDATE_LIVE_SHOW_INFO:
+      return {
+        ...state,
+        liveShowDetail: {
+          ...state.liveShowDetail,
+          genre: action.payload.genre,
+          privacy: action.payload.privacy,
+          roomTitle: action.payload.roomTitle,
+          description: action.payload.description,
+        },
+      };  
     default:
       break;
   }

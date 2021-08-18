@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./stylesheets/ChatMessages.css";
 import { Avatar } from "@material-ui/core";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import { getRoomChats, clearChat } from "../redux/actions/chatAction";
 import MovieChatCard from "./MovieChatCard";
@@ -11,16 +11,16 @@ import SuggestMeChatCard from "./SuggestMeChatCard";
 function ChatMessages({ getRoomChats, messages, userId, clearChat }) {
   const { roomId } = useParams();
   //   console.log(params);
-
+  const history = useHistory();
   useEffect(() => {
-    console.log(roomId);
+    // console.log(roomId);
     if (roomId !== undefined) {
       getRoomChats(roomId);
     }
     return () => {
       clearChat();
     };
-  }, [roomId, getRoomChats]);
+  }, [roomId, getRoomChats, clearChat]);
   return (
     <div>
       {messages.map((chatMessage) =>
@@ -33,11 +33,22 @@ function ChatMessages({ getRoomChats, messages, userId, clearChat }) {
                   <MovieChatCard movieData={chatMessage.movieData} />
                 </div>
               ) : chatMessage.type === "review" ? (
-                <div className="messageBox backgroundBlue mine">
+                <div
+                  onClick={() =>
+                    history.push(`/post/${chatMessage.postData._id}`)
+                  }
+                  className="messageBox backgroundBlue mine"
+                >
                   <ReviewChatCard postData={chatMessage.postData} />
+                  {/* {console.log(chatMessage)} */}
                 </div>
               ) : chatMessage.type === "suggestMe" ? (
-                <div className="messageBox backgroundBlue mine ">
+                <div
+                  onClick={() =>
+                    history.push(`/post/${chatMessage.postData._id}`)
+                  }
+                  className="messageBox backgroundBlue mine "
+                >
                   <SuggestMeChatCard postData={chatMessage.postData} />
                 </div>
               ) : (
@@ -61,21 +72,29 @@ function ChatMessages({ getRoomChats, messages, userId, clearChat }) {
                 </div>
               </>
             ) : chatMessage.type === "review" ? (
-              <>
+              <div
+                onClick={() =>
+                  history.push(`/post/${chatMessage.postData._id}`)
+                }
+              >
                 {" "}
                 <Avatar src={chatMessage.sender.profileImageUrl}></Avatar>
                 <div className="messageBox backgroundLight other">
                   <ReviewChatCard postData={chatMessage.postData} />
                 </div>
-              </>
+              </div>
             ) : chatMessage.type === "suggestMe" ? (
-              <>
+              <div
+                onClick={() =>
+                  history.push(`/post/${chatMessage.postData._id}`)
+                }
+              >
                 {" "}
                 <Avatar src={chatMessage.sender.profileImageUrl}></Avatar>
                 <div className="messageBox backgroundLight other">
                   <SuggestMeChatCard postData={chatMessage.postData} />
                 </div>
-              </>
+              </div>
             ) : (
               chatMessage.message && (
                 <>

@@ -48,11 +48,11 @@ export const getUserPost = () => (dispatch) => {
 };
 export const getMashUserPost = (userName) => (dispatch) => {
   dispatch({ type: SET_INFO_LOADING });
-  console.log(userName);
+  // console.log(userName);
   axios
     .get(`/api/v1/home/mash-user-post/${userName}`)
     .then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       dispatch({ type: SET_PROFILE_POSTS, payload: res.data });
     })
     .catch((e) => {
@@ -106,7 +106,7 @@ export const profileLikePost = (postId) => (dispatch) => {
   axios
     .put(`/api/v1/home/like-post`, { postId: postId })
     .then((res) => {
-      console.log(res);
+      // console.log(res);
       dispatch({
         type: PROFILE_LIKE_POST,
         payload: res.data,
@@ -144,7 +144,7 @@ export const followUser = (id) => (dispatch) => {
     .put(`/api/v1/home/user/follow`, { followId: id })
     .then((res) => {
       dispatch({ type: FOLLOW_USER, payload: res.data });
-      console.log(res.data);
+      // console.log(res.data);
     })
     .catch((e) => {
       console.log(e);
@@ -152,13 +152,13 @@ export const followUser = (id) => (dispatch) => {
 };
 
 export const unfollowUser = (id) => (dispatch) => {
-  console.log("unfollow");
+  // console.log("unfollow");
   axios
     .put(`/api/v1/home/user/unfollow`, {
       unfollowId: id,
     })
     .then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       dispatch({ type: UNFOLLOW_USER, payload: res.data });
     })
     .catch((e) => {

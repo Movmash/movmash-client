@@ -7,7 +7,14 @@
 .postIconButtons--ticketButtons{
     width: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
+}
+
+.postIconButtons--ticketButtons>* {
+    width: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
 }
 .postIconButtons--BookNow {
     color: #499E4C;
@@ -15,14 +22,14 @@
     align-items: center;
     cursor: pointer;
     border-radius: 10px;
-    background-color:#353242;
+    background-color: var(--palletes);
     padding: 0 20px 0 10px;
 }
 .postIconButtons--BookNow:hover{
-    background-color: #413d50;
+    background-color: #444444;
 }
 .postIconButtons--BookNow:active{
-    background-color: #383544;
+    background-color: #333333;
 }
 .postIconButtons--CancelBooking{
      color:grey;
@@ -30,14 +37,14 @@
      align-items: center;
      cursor: pointer;
      border-radius: 10px;
-     background-color:#353242;
+     background-color:var(--palletes);
      padding: 0 20px 0 10px;
 }
 .postIconButtons--CancelBooking:hover {
-    background-color: #413d50;
+    background-color: #444444;
 }
 .postIconButtons--CancelBooking:active {
-    background-color: #383544;
+    background-color: #333333;
 }
 .postIconButtons--schedule {
     display: flex;
@@ -60,4 +67,8 @@
 .postIconButtons--comment>.MuiButtonBase-root>.MuiIconButton-label>.MuiSvgIcon-root {
     color: lightgray;
     font-size: 30px;
+}
+.postIconButtons.ticket {
+    justify-content: center;
+    margin: 0px 19px 4px;
 }

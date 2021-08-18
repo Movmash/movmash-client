@@ -1,41 +1,59 @@
 .requestedTicketDialog {
-  padding: 0 70px 0 70px;
-  min-height: 40rem;
+  /* padding: 0 70px 0 70px; */
+  max-height: 85vh;
+  width: 65ch;
   display: flex;
   flex-flow: column;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--lightBlack);
+  border: 1px solid var(--border);
 }
 .requestedTicketDialog__content{
-    margin-top: 20px;
-    width: 500px;
+    width: 100%;
     max-height: 35rem;
     overflow-y: auto;
 
 }
 .requestedTicketDialog__heading{
-    margin-top: 20px;
+    /* margin-top: 20px; */
+    width: 100%;
 
 }
 .requestedTicketDialog__content__showcard__heading{
     display: flex;
     align-items: center;
+    margin-bottom: 15px;
+    position: relative;
 }
 
-.requestedTicketDialog__content__showcard__heading>span{
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    margin-left: 20px;
+.requestedTicketDialog__content__showcard__heading>h4{
+    color: var(--boldText);
+    margin-left: 15px;
+    font-weight: normal;
+    font-size: var(--primaryFontSize);
+    width: 47ch;
+}
+.requestedTicketDialog__content__showcard__heading>h4>span {
+    font-weight: 600;
 }
 .requestedTicketDialog__content__showcard{
-    background-color:#3F414A;
+    background-color:var(--palletes);
     border-radius: 10px;
-    padding: 20px 30px 10px 30px;
-    margin-bottom: 20px;
+    padding: 15px;
+    margin:20px;
+    width: 57ch;
 }
 
 .requestedTicketDialog__content__showcard__content{
     margin-top: 20px;
     display: flex;
 }
-
+.RequestedTicketDialod__img>img {
+    width: 80px;
+    object-fit: contain;
+    border-radius:10px;
+}
 .requestedTicketDialog__content__showcard__content__movieposter>img{
     width: 80px;
     object-fit: contain;
@@ -48,9 +66,107 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 0 0 20px;
 }
 
 .requestedTicketDialog__content__showcard__content__countdown>span{
-    font-family: Righteous;
-    font-size: 50px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--boldText);
+    font-size: 40px;
 }
+
+.requestedTicketDialog__buttons{
+    display: flex;
+    justify-content: space-between;
+}
+
+.requestedTicketDialog__button>button{
+        width: 33.5ch;
+        height: 36px;
+        outline: none;
+        border-radius: 6px;
+        color:var(--boldText);
+        font-family: Helvetica,
+        Arial,
+        sans-serif;
+        border:0;
+        cursor: pointer;
+        font-weight: 600;
+}
+
+.requestedTicketDialog__button.cancelRequestedTicket>button{
+    /* background:rgb(92, 92, 92); */
+    background: rgb(75, 75, 75);
+    color: var(--textRed);
+}
+
+.requestedTicketDialog__button.cancelRequestedTicket.pendingRequestedTicket>button {
+    width: 68ch;
+}
+.requestedTicketDialog__button.cancelRequestedTicket>button:hover{
+    background: var(--textRed);
+    color: var(--boldText) ;
+    transition: 300ms;
+}
+.requestedTicketDialog__button.pendingRequestedTicket>button {
+    background: rgb(75, 75, 75);
+    color: var(--boldText);
+    width: 68ch;
+}
+.requestedTicketDialog__button.pendingRequestedTicket>button {
+ 
+    transition: 300ms;
+}
+.requestedTicketDialog__button.createTheatre>button {
+    /* background:rgb(92, 92, 92); */
+    background: var(--green);
+    color: var(--boldText);
+}
+.requestedTicketDialog__button.createTheatre.disabled>button {
+    /* background:rgb(92, 92, 92); */
+    background: rgb(102, 102, 102);
+    cursor: not-allowed;
+    color: var(--boldText);
+}
+
+.requestedTicketDialog__button.createTheatre.disabled>button:hover {
+    /* background:rgb(92, 92, 92); */
+    background: rgb(102, 102, 102);
+    cursor: not-allowed;
+    color: var(--boldText);
+}
+.requestedTicketDialog__button.createTheatre>button:hover {
+    background: #3fbd64;
+    transition: 300ms;
+}
+.requestedTicketDialog__button>button:active{
+    transform: scale(0.98);
+    transition: 200ms;
+}
+.dialogHeader__closeButton.expandButton:hover{
+    background:rgb(121, 120, 120) !important;
+
+}
+    /* .expand {
+        position: absolute;
+        left: 25ch;
+        background-color: var(--palletes);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 36px;
+        width: 36px;
+        cursor: pointer;
+    }
+
+    .expand:hover {
+        background-color: rgb(80, 80, 80);
+
+    }
+
+    .expand:active {
+        background-color: rgb(66, 66, 66);
+        transform: scale(0.95);
+        transition: 200ms;
+    } */

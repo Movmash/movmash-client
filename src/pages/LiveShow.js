@@ -1,11 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./stylesheets/LiveShow.css";
 import { Dialog } from "@material-ui/core";
 import CreatePartyForm from "../components/CreatePartyForm";
 import ActivityContainer from "../components/ActivityContainer";
 import LiveShowCard from "../components/LiveShowCard";
 import { connect } from "react-redux";
-import { BounceLoader } from "react-spinners";
+import { MoonLoader } from "react-spinners";
+import { useHistory } from "react-router-dom";
+// import Footer from "../components/Footer";
+// import liveShowCoverImage from "../images/live_show_cover_image_1.jpeg"
+import liveShowCoverImage from "../images/live_show_cover_image_2.jpg";
+// import liveShowCoverImage from "../images/live_show_cover_image_3.jpg";
+// import liveShowCoverImage from "../images/live_show_cover_image_4.jpg";
+// import liveShowCoverImage from "../images/live_show_cover_image_5.jpg";
+// import liveShowCoverImage from "../images/live_show_cover_image_6.jpg";
+// import liveShowCoverImage from "../images/live_show_cover_image_7.jpg";
+// import liveShowCoverImage from "../images/live_show_cover_image_8.jpg";
+// import liveShowCoverImage from "../images/live_show_cover_image_9.jpg";
 // import { getAllLiveShow } from "../redux/actions/liveShowAction";
 function LiveShow({
   action,
@@ -19,12 +30,18 @@ function LiveShow({
   thriller,
   myFamily,
   loadingCreateLiveShow,
+  authenticated,
+  authLoading
 }) {
   const [openDialog, isDialogOpen] = useState(false);
-
-  // useEffect(() => {
-  //   getAllLiveShow();
-  // }, [getAllLiveShow]);
+  const history = useHistory();
+  useEffect(() => {
+    if (!authLoading) {
+      if (!authenticated)  {
+        history.push("/login");
+      }
+    }
+  }, [authLoading, authenticated, history]);
   const handleOpenDialog = () => {
     isDialogOpen(true);
   };
@@ -38,10 +55,7 @@ function LiveShow({
           {" "}
           <div className="liveShow__banner">
             <div className="liveShow__banner__skin">
-              <img
-                src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1867&q=80"
-                alt="banner"
-              ></img>
+              <img src={liveShowCoverImage} alt="banner"></img>
             </div>
             <div className="liveShow__banner__content">
               <h1>Show and watch your videos with the world</h1>
@@ -167,9 +181,10 @@ function LiveShow({
             </div>
           </div>
         </>
+        
       ) : (
         <div className="home__bounceloader">
-          <BounceLoader size={150} color={"#2aa44f"} loading />
+          <MoonLoader size={50} color={"#2aa44f"} loading />
         </div>
       )}
     </div>
@@ -189,6 +204,8 @@ const mapStateToProps = (state) => {
     thriller: state.liveShow.thrillerShow,
     myFamily: state.liveShow.myFamilyShow,
     loadingCreateLiveShow: state.liveShow.loadingCreateLiveShow,
+    authenticated: state.user.authenticated,
+    authLoading: state.user.authLoading,
   };
 };
 

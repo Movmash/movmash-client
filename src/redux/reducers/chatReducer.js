@@ -41,7 +41,7 @@ const chatReducer = (state = initialState, action) => {
         loadingRoom: false,
       };
     case ADD_CHAT:
-      console.log(action.payload);
+      // console.log(action.payload);
       return {
         ...state,
         messages: [...state.messages, ...action.payload],
@@ -61,7 +61,7 @@ const chatReducer = (state = initialState, action) => {
       const roomIndex = state.rooms.findIndex(
         (room) => room._id === action.payload
       );
-      console.log(state.rooms[roomIndex]);
+      // console.log(state.rooms[roomIndex]);
       state.rooms[roomIndex].lastMessage = {
         ...state.rooms[roomIndex].lastMessage,
         read: true,
